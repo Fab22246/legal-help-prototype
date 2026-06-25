@@ -2258,61 +2258,14 @@
 </style>
     <style>
       /* Page-specific layout only — built from design-system tokens, no new colours */
-      .skip-link {
-        position: absolute;
-        left: -9999px;
-        top: auto;
-        width: 1px;
-        height: 1px;
-        overflow: hidden;
-        z-index: 999;
-      }
-      .skip-link:focus {
-        position: static;
-        width: auto;
-        height: auto;
-        overflow: visible;
-        padding: var(--spacing-xs) var(--spacing-s);
-        background: var(--color-yellow-100);
-        color: var(--color-black-00);
-        font-weight: var(--font-weight-bold);
-        text-decoration: none;
-      }
-      .content {
-        padding-block: var(--spacing-l);
-        display: flex;
-        flex-direction: column;
-        gap: var(--spacing-m);
-        max-width: 44rem;
-      }
-      .back-link {
-        display: inline-block;
-        margin-bottom: var(--spacing-s);
-      }
-      .back-link::before {
-        content: "\2039";
-        margin-right: var(--spacing-xxs);
-      }
-      .content__text {
-        display: flex;
-        flex-direction: column;
-        gap: var(--spacing-s);
-      }
-      .content__actions {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--spacing-s);
-        margin-top: var(--spacing-s);
-      }
-      .task-card {
-        display: flex;
-        flex-direction: column;
-        gap: var(--spacing-xs);
-        padding: var(--spacing-m);
-        border: var(--border-width-form) solid var(--color-grey-00);
-        border-radius: var(--radius-sm);
-      }
+      .skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; z-index: 999; }
+      .skip-link:focus { position: static; width: auto; height: auto; overflow: visible; padding: var(--spacing-xs) var(--spacing-s); background: var(--color-yellow-100); color: var(--color-black-00); font-weight: var(--font-weight-bold); text-decoration: none; }
+      .content { padding-block: var(--spacing-l); display: flex; flex-direction: column; gap: var(--spacing-m); max-width: 44rem; }
+      .back-link { display: inline-block; margin-bottom: var(--spacing-s); }
+      .back-link::before { content: "\2039"; margin-right: var(--spacing-xxs); }
+      .content__text { display: flex; flex-direction: column; gap: var(--spacing-s); }
+      .content__actions { display: flex; flex-direction: column; align-items: flex-start; gap: var(--spacing-s); margin-top: var(--spacing-s); }
+      .option { display: flex; flex-direction: column; gap: var(--spacing-s); padding: var(--spacing-m); border: var(--border-width-form) solid var(--color-grey-00); border-radius: var(--radius-sm); }
       .govbb-official-banner__icon, .govbb-footer__coat {
         aspect-ratio: 887.20001 / 953.52502;
         width: auto;
@@ -2329,9 +2282,7 @@
           <div class="govbb-official-banner__crest">
             <svg class="govbb-official-banner__icon" aria-hidden="true" focusable="false"><use href="#govbb-crest"></use></svg>
           </div>
-          <div class="govbb-official-banner__text">
-            <span>Official government website</span>
-          </div>
+          <div class="govbb-official-banner__text"><span>Official government website</span></div>
         </div>
       </div>
 
@@ -2345,18 +2296,8 @@
     </div>
 
     <main class="govbb-page__main" id="main-content">
-      <div
-        class="govbb-status-banner govbb-status-banner--alpha"
-        role="status"
-        aria-label="alpha status banner"
-        aria-live="polite"
-      >
-        <div class="govbb-container">
-          <p>
-            This page is in
-            <a class="govbb-link govbb-link--secondary" href="#">Alpha</a>.
-          </p>
-        </div>
+      <div class="govbb-status-banner govbb-status-banner--alpha" role="status" aria-label="alpha status banner" aria-live="polite">
+        <div class="govbb-container"><p>This page is in <a class="govbb-link govbb-link--secondary" href="#">Alpha</a>.</p></div>
       </div>
 
       <div class="govbb-container">
@@ -2366,39 +2307,160 @@
           <h1 class="govbb-text-h1">Plan what happens to my money and property</h1>
 
           <div class="content__text">
-            <p class="govbb-text-body">Use this page to think about what should happen to your money, property and belongings later.</p>
+            <p class="govbb-text-body">Use this page to think about what should happen to your money, property and belongings.</p>
+            <p class="govbb-text-body">You can use it to:</p>
           </div>
-
-          <div class="task-card">
-            <h2 class="govbb-text-h3">Make a list of what you own</h2>
-            <p class="govbb-text-body">This can include bank accounts, insurance, land, vehicles, shares, valuable items and debts.</p>
-          </div>
-          <div class="task-card">
-            <h2 class="govbb-text-h3">Choose who should manage your estate</h2>
-            <p class="govbb-text-body">This person is usually called an executor if they are named in a will.</p>
-          </div>
-          <div class="task-card">
-            <h2 class="govbb-text-h3">Store important information safely</h2>
-            <p class="govbb-text-body">Keep your will and important documents somewhere safe. Tell someone you trust where to find them.</p>
-          </div>
-
+          <ul class="govbb-list govbb-list--bullet">
+            <li>make a list of what you own</li>
+            <li>prepare information for a simple will</li>
+            <li>understand the difference between a will and giving property while you are alive</li>
+            <li>think about where important documents are kept</li>
+            <li>prepare before speaking to a lawyer</li>
+          </ul>
           <div class="content__text">
-            <p class="govbb-text-body">The Records Branch provides a free service for storing a will safely.</p>
+            <p class="govbb-text-body">This service gives general information. It does not give legal advice.</p>
           </div>
 
-          <h2 class="govbb-text-h2">Official link</h2>
+          <h2 class="govbb-text-h2">Planning options</h2>
+
+          <div class="option">
+            <h3 class="govbb-text-h3">Prepare a simple will</h3>
+            <p class="govbb-text-body">A will says what should happen to your money, property and belongings after you die.</p>
+            <p class="govbb-text-body">It can also name the person who should manage your estate. This person is called an executor.</p>
+            <div><a class="govbb-btn--secondary" href="will-check.html" role="button" draggable="false">Prepare a simple will</a></div>
+          </div>
+
+          <div class="option">
+            <h3 class="govbb-text-h3">Give property while you are alive</h3>
+            <p class="govbb-text-body">Giving property to someone while you are alive is different from leaving property in a will.</p>
+            <p class="govbb-text-body">A deed of gift may transfer property while you are alive.</p>
+            <p class="govbb-text-body">This can affect what you own, where you live, your future needs and your estate.</p>
+            <div><a class="govbb-btn--secondary" href="give-property.html" role="button" draggable="false">Give property while you are alive</a></div>
+          </div>
+
+          <div class="option">
+            <h3 class="govbb-text-h3">Prepare before speaking to a lawyer</h3>
+            <p class="govbb-text-body">You may want to speak to a lawyer before making decisions about land, a house, business interests, overseas property or family disagreements.</p>
+            <p class="govbb-text-body">You can prepare your questions, documents and information first.</p>
+            <div><a class="govbb-btn--secondary" href="prepare-for-lawyer.html" role="button" draggable="false">Prepare information before speaking to a lawyer</a></div>
+          </div>
+
+          <h2 class="govbb-text-h2">Make a list of what you own</h2>
+          <div class="content__text">
+            <p class="govbb-text-body">Before preparing a will or speaking to a lawyer, it can help to make a list of:</p>
+          </div>
+          <ul class="govbb-list govbb-list--bullet">
+            <li>bank or credit union accounts</li>
+            <li>insurance policies</li>
+            <li>land or a house</li>
+            <li>vehicles</li>
+            <li>shares or investments</li>
+            <li>valuable personal items</li>
+            <li>debts, loans, mortgages or charges</li>
+            <li>business interests</li>
+            <li>property outside Barbados</li>
+          </ul>
+          <div class="content__text">
+            <p class="govbb-text-body">This prototype does not create an asset list yet.</p>
+          </div>
+
+          <h2 class="govbb-text-h2">Choose who should manage your estate</h2>
+          <div class="content__text">
+            <p class="govbb-text-body">The person who manages your estate after you die is called an executor.</p>
+            <p class="govbb-text-body">They may need to:</p>
+          </div>
+          <ul class="govbb-list govbb-list--bullet">
+            <li>collect your money and property</li>
+            <li>pay debts</li>
+            <li>deal with banks, insurers or government offices</li>
+            <li>carry out what the will says</li>
+          </ul>
+          <div class="content__text">
+            <p class="govbb-text-body">Choose someone you trust.</p>
+            <p class="govbb-text-body">You may want to speak to them before naming them.</p>
+          </div>
+
+          <h2 class="govbb-text-h2">Think about who may need to be considered</h2>
+          <div class="content__text">
+            <p class="govbb-text-body">Before preparing a will, think about whether you have:</p>
+          </div>
+          <ul class="govbb-list govbb-list--bullet">
+            <li>a spouse or partner you live with as if married</li>
+            <li>a child under 18</li>
+            <li>a child with a disability who depends on you</li>
+            <li>someone else who depends on you financially</li>
+          </ul>
+          <div class="content__text">
+            <p class="govbb-text-body">If you are not sure, or if you want to leave someone out, you should speak to a lawyer before preparing a will.</p>
+          </div>
+
+          <h2 class="govbb-text-h2">Store important documents safely</h2>
+          <div class="content__text">
+            <p class="govbb-text-body">Keep important documents somewhere safe.</p>
+            <p class="govbb-text-body">This may include:</p>
+          </div>
+          <ul class="govbb-list govbb-list--bullet">
+            <li>your signed will</li>
+            <li>ID documents</li>
+            <li>land or house documents</li>
+            <li>insurance documents</li>
+            <li>bank or credit union information</li>
+            <li>vehicle documents</li>
+            <li>loan, mortgage or debt information</li>
+          </ul>
+          <div class="content__text">
+            <p class="govbb-text-body">Tell someone you trust where to find them.</p>
+          </div>
+
+          <h3 class="govbb-text-h3">Safekeeping of wills</h3>
+          <div class="content__text">
+            <p class="govbb-text-body">The Records Branch is part of the Barbados court system.</p>
+            <p class="govbb-text-body">It provides a free safekeeping service for original signed wills.</p>
+            <p class="govbb-text-body">This means the original will can be stored safely after it has been signed and witnessed.</p>
+            <p class="govbb-text-body">This is different from filing a court application.</p>
+            <p class="govbb-text-body">The official guidance says the original will must be placed in a sealed envelope.</p>
+            <p class="govbb-text-body">The envelope should include:</p>
+          </div>
+          <ul class="govbb-list govbb-list--bullet">
+            <li>the date of the will</li>
+            <li>the name and address of the person making the will</li>
+            <li>the names and addresses of the executors</li>
+          </ul>
+
+          <h2 class="govbb-text-h2">When to speak to a lawyer</h2>
+          <div class="content__text">
+            <p class="govbb-text-body">You should speak to a lawyer before taking action if:</p>
+          </div>
+          <ul class="govbb-list govbb-list--bullet">
+            <li>someone may challenge a will</li>
+            <li>someone is pressuring you to sign or give away property</li>
+            <li>people disagree about money, property or an estate</li>
+            <li>land or a house is owned with someone else</li>
+            <li>a business or part of a business is involved</li>
+            <li>property outside Barbados is involved</li>
+            <li>there is already a court matter</li>
+            <li>you are not sure what a document does</li>
+          </ul>
+
+          <h2 class="govbb-text-h2">Official links</h2>
           <ul class="govbb-list">
+            <li><a class="govbb-link" href="https://www.barbadoslawcourts.gov.bb/assets/content/pdfs/statutes/SuccessionCAP249.pdf" target="_blank" rel="noopener noreferrer">Succession Act</a></li>
             <li><a class="govbb-link" href="https://www.barbadoslawcourts.gov.bb/useful-links/for-public/services/safekeeping-of-wills-of-living-persons" target="_blank" rel="noopener noreferrer">Safekeeping of wills</a></li>
+            <li><a class="govbb-link" href="https://bra.gov.bb/Popular-Topics/Property/Selling-buying-or-transferring-a-Pr" target="_blank" rel="noopener noreferrer">Selling, buying or transferring a property</a></li>
+            <li><a class="govbb-link" href="https://bra.gov.bb/About/Legislation-Regulations/Land-Development-Duty-Act-Cap-78" target="_blank" rel="noopener noreferrer">Land Development Duty Act guidance</a></li>
           </ul>
 
           <h2 class="govbb-text-h2">Prototype note</h2>
           <div class="content__text">
-            <p class="govbb-text-body">This prototype does not create a will, asset list or storage checklist yet.</p>
+            <p class="govbb-text-body">This prototype helps you understand planning options.</p>
+            <p class="govbb-text-body">It does not create a will, deed of gift, asset list or legal document.</p>
+            <p class="govbb-text-body">It does not check that a document is valid, transfer property, file documents or give legal advice.</p>
           </div>
 
           <div class="content__actions">
             <a class="govbb-btn" href="will-check.html" role="button" draggable="false">Prepare a simple will</a>
-            <a class="govbb-btn--secondary" href="prepare-for-lawyer.html" role="button" draggable="false">Prepare information before speaking to a lawyer</a>
+            <a class="govbb-link" href="give-property.html">Give property while you are alive</a>
+            <a class="govbb-link" href="prepare-for-lawyer.html">Prepare information before speaking to a lawyer</a>
             <a class="govbb-link" href="choose-help.html">Back to what you need help with</a>
           </div>
         </div>

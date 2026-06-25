@@ -1,65 +1,90 @@
-# Legal help for common life events — prototype
+# WIP: Legal help for common life events prototype
 
-A clickable HTML prototype for a Government of Barbados public legal-information
-service, built with the **GovBB design system**. It is in **alpha** and is for
-research and team feedback only.
+This work builds a prototype for a public legal information service.
 
-> This is a prototype. It does **not** give legal advice, create wills or other
-> legal documents, transfer property, file anything with a court, or confirm that
-> a will or document is valid.
+The service helps users understand common legal steps, prepare information before acting, and know when they may need legal help.
 
-## What it covers
+Current focus: **Prepare a simple will** branch.
 
-From the main page, "What do you need help with?", users can:
+## What this includes
 
-- **Plan ahead** — organise money, property and belongings
-- **Give property while I am alive** — understand giving vs. leaving in a will
-- **Prepare a simple will** — a suitability check, then guided information capture
-- **Someone has died** — find out what may be needed after a death
-- **Sign, witness or certify a document** — plain-language guidance
-- **Change a name or update a record**
-- **Prepare before speaking to a lawyer**
-- **I am not sure** — a short "help me choose" page
+* Start page for the legal help service
+* Main route selection page
+* Simple will suitability check
+* Simple will information capture
+* Executor details
+* People receiving things in the will
+* Land or house details where the user owns the property by themselves
+* Specific gifts logic
+* Review before continuing page
+* Simple will next steps page
+* Signing, witnessing and safekeeping guidance
+* Signpost branch for giving property while alive
 
-The "Prepare a simple will" route is the most developed: a safety/suitability
-check that routes complex situations to "You may need legal help before making a
-will", then pages to capture details about the person, executor, how they want
-to leave things, beneficiaries, specific gifts, and any land or house — finishing
-with a review and a next-steps summary.
+## Current content approach
+
+The prototype uses plain language and avoids legal advice.
+
+It should not say:
+
+* a will is valid
+* the service creates a legal will
+* the user does not need a lawyer
+* property will legally pass
+* documents are filed or submitted
+
+The prototype should say:
+
+* it helps users prepare information
+* it gives general information
+* users may need legal help in some situations
+* signing and witnessing rules still apply
+* the Records Branch safekeeping service is for storing an original signed will, not making the will valid
+
+## Still being checked
+
+* Routing for the simple will happy path
+* Conditional warnings and stop points
+* Hint text across the will branch
+* Repeatable fields for multiple beneficiaries, gifts and properties
+* Review and next-step summaries
+* Barbados-specific legal wording against official sources
+* Whether the deed of gift signpost should become a fuller route later
+
+## Not in scope for this prototype
+
+* Generating a final will
+* Legal will clauses
+* PDFs or downloads
+* Document upload
+* Payments
+* Appointments
+* Saved accounts
+* Filing or submitting legal documents
+* Legal advice
+
+---
 
 ## How the files are organised
 
-- **`*.relative.html`** — the editable **source** pages (use relative asset
-  paths, e.g. `dist/styles.css`).
-- **`*.html`** — generated **self-contained** pages: CSS, fonts and images are
-  inlined so each page opens correctly on its own. **Do not edit these by hand.**
-- **`prototype.html`** — a single self-contained file that stitches every page
-  into one document and switches between them with JavaScript. This is the
-  easiest file to share or host.
-- **`dist/`** — the GovBB design-system stylesheet, fonts and images.
-- **`*.py`** — build scripts (see below).
-- **`PROTOTYPE-MAP.md`** — a map of the screens and routes.
+* **`*.relative.html`** — the editable **source** pages (relative asset paths).
+* **`*.html`** — generated **self-contained** pages (CSS, fonts and images inlined). Do not edit by hand.
+* **`prototype.html`** — a single self-contained file with every screen in one document.
+* **`dist/`** — the GovBB design-system stylesheet, fonts and images.
+* **`*.py`** — build scripts.
+* **`PROTOTYPE-MAP.md`** — a map of the screens and routes.
 
 ## Building
 
-The build scripts require **Python 3** (no extra packages).
+Requires Python 3 (no extra packages). Run both after editing any `*.relative.html` source:
 
 ```bash
-# 1. Rebuild the self-contained per-page files (*.html) from the *.relative.html sources
-python build_standalone.py
-
-# 2. Rebuild the single-file prototype.html (all screens in one document)
-python gen_prototype.py
+python build_standalone.py   # rebuild the self-contained per-page *.html files
+python gen_prototype.py      # rebuild the single-file prototype.html
 ```
 
-Run both after editing any `*.relative.html` source.
+## Viewing
 
-## Viewing the prototype
-
-- **Single file:** open `prototype.html` in a web browser.
-- **Multi-page site:** open `index.html`, or serve the folder
-  (`python -m http.server`) and visit `http://localhost:8000/`.
-
-## Status
-
-Alpha prototype for internal review. Content and routing are still changing.
+* **Single file:** open `prototype.html` in a browser.
+* **Multi-page site:** open `index.html`, or serve the folder (`python -m http.server`).
+* **Live (GitHub Pages):** the published site link is shown in the repository's About panel.

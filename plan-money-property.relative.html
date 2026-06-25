@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plan what happens to my money and property — The Government of Barbados</title>
+    <link rel="icon" href="dist/assets/images/favicon.ico" />
+    <link rel="stylesheet" href="dist/styles.css" />
+    <style>
+      /* Page-specific layout only — built from design-system tokens, no new colours */
+      .skip-link {
+        position: absolute;
+        left: -9999px;
+        top: auto;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        z-index: 999;
+      }
+      .skip-link:focus {
+        position: static;
+        width: auto;
+        height: auto;
+        overflow: visible;
+        padding: var(--spacing-xs) var(--spacing-s);
+        background: var(--color-yellow-100);
+        color: var(--color-black-00);
+        font-weight: var(--font-weight-bold);
+        text-decoration: none;
+      }
+      .content {
+        padding-block: var(--spacing-l);
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-m);
+        max-width: 44rem;
+      }
+      .back-link {
+        display: inline-block;
+        margin-bottom: var(--spacing-s);
+      }
+      .back-link::before {
+        content: "\2039";
+        margin-right: var(--spacing-xxs);
+      }
+      .content__text {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-s);
+      }
+      .content__actions {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-s);
+        margin-top: var(--spacing-s);
+      }
+      .task-card {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-xs);
+        padding: var(--spacing-m);
+        border: var(--border-width-form) solid var(--color-grey-00);
+        border-radius: var(--radius-sm);
+      }
+    </style>
+  </head>
+  <body class="govbb-page">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <div>
+      <div class="govbb-official-banner">
+        <div class="govbb-container govbb-official-banner__inner">
+          <div class="govbb-official-banner__crest">
+            <img
+              class="govbb-official-banner__icon"
+              src="dist/assets/images/govbb-creast.svg"
+              alt=""
+            />
+          </div>
+          <div class="govbb-official-banner__text">
+            <span>Official government website</span>
+          </div>
+        </div>
+      </div>
+
+      <header class="govbb-header">
+        <div class="govbb-container govbb-header__inner">
+          <a href="/" aria-label="Go to the alpha.gov.bb homepage">
+            <img class="govbb-header__logo" src="dist/assets/images/govbb-logo.svg" alt="GOVBB" />
+          </a>
+        </div>
+      </header>
+    </div>
+
+    <main class="govbb-page__main" id="main-content">
+      <div
+        class="govbb-status-banner govbb-status-banner--alpha"
+        role="status"
+        aria-label="alpha status banner"
+        aria-live="polite"
+      >
+        <div class="govbb-container">
+          <p>
+            This page is in
+            <a class="govbb-link govbb-link--secondary" href="#">Alpha</a>.
+          </p>
+        </div>
+      </div>
+
+      <div class="govbb-container">
+        <a class="govbb-link back-link" href="choose-help.html">Back</a>
+
+        <div class="content">
+          <h1 class="govbb-text-h1">Plan what happens to my money and property</h1>
+
+          <div class="content__text">
+            <p class="govbb-text-body">Use this page to think about what should happen to your money, property and belongings later.</p>
+          </div>
+
+          <div class="task-card">
+            <h2 class="govbb-text-h3">Make a list of what you own</h2>
+            <p class="govbb-text-body">This can include bank accounts, insurance, land, vehicles, shares, valuable items and debts.</p>
+          </div>
+          <div class="task-card">
+            <h2 class="govbb-text-h3">Choose who should manage your estate</h2>
+            <p class="govbb-text-body">This person is usually called an executor if they are named in a will.</p>
+          </div>
+          <div class="task-card">
+            <h2 class="govbb-text-h3">Store important information safely</h2>
+            <p class="govbb-text-body">Keep your will and important documents somewhere safe. Tell someone you trust where to find them.</p>
+          </div>
+
+          <div class="content__text">
+            <p class="govbb-text-body">The Records Branch provides a free service for storing a will safely.</p>
+          </div>
+
+          <h2 class="govbb-text-h2">Official link</h2>
+          <ul class="govbb-list">
+            <li><a class="govbb-link" href="https://www.barbadoslawcourts.gov.bb/useful-links/for-public/services/safekeeping-of-wills-of-living-persons" target="_blank" rel="noopener noreferrer">Safekeeping of wills</a></li>
+          </ul>
+
+          <h2 class="govbb-text-h2">Prototype note</h2>
+          <div class="content__text">
+            <p class="govbb-text-body">This prototype does not create a will, asset list or storage checklist yet.</p>
+          </div>
+
+          <div class="content__actions">
+            <a class="govbb-btn" href="will-check.html" role="button" draggable="false">Prepare a simple will</a>
+            <a class="govbb-btn--secondary" href="prepare-for-lawyer.html" role="button" draggable="false">Prepare information before speaking to a lawyer</a>
+            <a class="govbb-link" href="choose-help.html">Back to what you need help with</a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="govbb-footer">
+      <div class="govbb-container govbb-footer__inner">
+        <nav class="govbb-footer__nav" aria-label="Footer">
+          <a class="govbb-footer__link" href="#">Home</a>
+          <a class="govbb-footer__link" href="#">Cookie Policy</a>
+          <a class="govbb-footer__link" href="#">Terms &amp; Conditions</a>
+          <a class="govbb-footer__link" href="#">Sitemap</a>
+        </nav>
+        <hr class="govbb-footer__divider" aria-hidden="true" />
+        <div class="govbb-footer__end">
+          <img
+            class="govbb-footer__coat"
+            src="dist/assets/images/govbb-creast.svg"
+            alt="Government of Barbados Coat of Arms"
+          />
+          <p class="govbb-footer__copy">© 2026 Government of Barbados</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

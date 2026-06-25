@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Land or house details — The Government of Barbados</title>
+    <link rel="icon" href="dist/assets/images/favicon.ico" />
+    <link rel="stylesheet" href="dist/styles.css" />
+    <style>
+      .skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; z-index: 999; }
+      .skip-link:focus { position: static; width: auto; height: auto; overflow: visible; padding: var(--spacing-xs) var(--spacing-s); background: var(--color-yellow-100); color: var(--color-black-00); font-weight: var(--font-weight-bold); text-decoration: none; }
+      .form-page { padding-block: var(--spacing-l); display: flex; flex-direction: column; gap: var(--spacing-l); max-width: 44rem; }
+      .back-link { display: inline-block; margin-bottom: var(--spacing-s); }
+      .back-link::before { content: "\2039"; margin-right: var(--spacing-xxs); }
+      .form-page__heading { display: flex; flex-direction: column; gap: var(--spacing-s); }
+      .will-q { display: flex; flex-direction: column; gap: var(--spacing-s); }
+      .will-q[hidden] { display: none; }
+      .help-options { display: flex; flex-direction: column; gap: var(--spacing-s); margin-top: var(--spacing-xs); }
+      .property { display: flex; flex-direction: column; gap: var(--spacing-m); padding: var(--spacing-m); border: var(--border-width-form) solid var(--color-grey-00); border-radius: var(--radius-sm); }
+    </style>
+  </head>
+  <body class="govbb-page">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <div>
+      <div class="govbb-official-banner">
+        <div class="govbb-container govbb-official-banner__inner">
+          <div class="govbb-official-banner__crest"><img class="govbb-official-banner__icon" src="dist/assets/images/govbb-creast.svg" alt="" /></div>
+          <div class="govbb-official-banner__text"><span>Official government website</span></div>
+        </div>
+      </div>
+      <header class="govbb-header">
+        <div class="govbb-container govbb-header__inner">
+          <a href="/" aria-label="Go to the alpha.gov.bb homepage"><img class="govbb-header__logo" src="dist/assets/images/govbb-logo.svg" alt="GOVBB" /></a>
+        </div>
+      </header>
+    </div>
+    <main class="govbb-page__main" id="main-content">
+      <div class="govbb-status-banner govbb-status-banner--alpha" role="status" aria-label="alpha status banner" aria-live="polite">
+        <div class="govbb-container"><p>This page is in <a class="govbb-link govbb-link--secondary" href="#">Alpha</a>.</p></div>
+      </div>
+      <div class="govbb-container">
+        <a class="govbb-link back-link" href="will-beneficiaries.html">Back</a>
+        <form class="form-page" action="#" novalidate>
+          <div class="form-page__heading">
+            <h1 class="govbb-text-h1">Land or house details</h1>
+            <p class="govbb-text-body">Give basic details about any land or house you want this simple will to cover.</p>
+            <p class="govbb-text-body">This helps identify the property.</p>
+            <p class="govbb-text-body">It does not confirm that the will can deal with the property.</p>
+          </div>
+
+          <div id="properties"></div>
+
+          <div><button class="govbb-btn--secondary" type="button" id="add-property">Add another property</button></div>
+
+          <div class="govbb-btn-group"><button class="govbb-btn" type="submit">Continue</button></div>
+        </form>
+      </div>
+    </main>
+    <footer class="govbb-footer">
+      <div class="govbb-container govbb-footer__inner">
+        <nav class="govbb-footer__nav" aria-label="Footer">
+          <a class="govbb-footer__link" href="#">Home</a>
+          <a class="govbb-footer__link" href="#">Cookie Policy</a>
+          <a class="govbb-footer__link" href="#">Terms &amp; Conditions</a>
+          <a class="govbb-footer__link" href="#">Sitemap</a>
+        </nav>
+        <hr class="govbb-footer__divider" aria-hidden="true" />
+        <div class="govbb-footer__end">
+          <img class="govbb-footer__coat" src="dist/assets/images/govbb-creast.svg" alt="Government of Barbados Coat of Arms" />
+          <p class="govbb-footer__copy">© 2026 Government of Barbados</p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      (function () {
+        var form = document.querySelector(".form-page");
+        var propsEl = document.getElementById("properties");
+        var addBtn = document.getElementById("add-property");
+        var parishes = ["Christ Church","St. Andrew","St. George","St. James","St. John","St. Joseph","St. Lucy","St. Michael","St. Peter","St. Philip","St. Thomas"];
+        function parishOptions(i) {
+          var o = '<option value="">Select a parish</option>';
+          for (var k = 0; k < parishes.length; k++) o += '<option>' + parishes[k] + '</option>';
+          return o;
+        }
+        function rowHtml(i) {
+          return '' +
+            '<h2 class="govbb-text-h2">Property ' + (i + 1) + '</h2>' +
+            '<div class="govbb-form-group will-q"><fieldset class="govbb-fieldset">' +
+              '<legend class="govbb-fieldset__legend"><h3 class="govbb-text-h3">What type of property is it?</h3></legend>' +
+              '<div class="help-options">' +
+                '<div class="govbb-radio-item"><input class="govbb-radio" id="land-type-land-' + i + '" type="radio" name="land-type-' + i + '" value="land" /><label class="govbb-radio-item__label" for="land-type-land-' + i + '">land</label></div>' +
+                '<div class="govbb-radio-item"><input class="govbb-radio" id="land-type-house-' + i + '" type="radio" name="land-type-' + i + '" value="house" /><label class="govbb-radio-item__label" for="land-type-house-' + i + '">house</label></div>' +
+                '<div class="govbb-radio-item"><input class="govbb-radio" id="land-type-apartment-' + i + '" type="radio" name="land-type-' + i + '" value="apartment" /><label class="govbb-radio-item__label" for="land-type-apartment-' + i + '">apartment</label></div>' +
+                '<div class="govbb-radio-item"><input class="govbb-radio" id="land-type-other-' + i + '" type="radio" name="land-type-' + i + '" value="other" /><label class="govbb-radio-item__label" for="land-type-other-' + i + '">other</label></div>' +
+              '</div></fieldset></div>' +
+            '<div class="govbb-form-group will-q land-type-other-section" hidden><label class="govbb-label" for="land-type-desc-' + i + '">Describe the property</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="land-type-desc-' + i + '" name="land-type-desc-' + i + '" /></div></div>' +
+            '<h3 class="govbb-text-h3">Property address or location</h3>' +
+            '<div class="govbb-form-group"><label class="govbb-label" for="land-addr-' + i + '">Address or location</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="land-addr-' + i + '" name="land-addr-' + i + '" /></div></div>' +
+            '<div class="govbb-form-group"><label class="govbb-label" for="land-parish-' + i + '">Parish</label><div class="govbb-input-wrapper"><select class="govbb-input" id="land-parish-' + i + '" name="land-parish-' + i + '">' + parishOptions(i) + '</select></div></div>' +
+            '<div class="govbb-form-group will-q"><fieldset class="govbb-fieldset">' +
+              '<legend class="govbb-fieldset__legend"><h3 class="govbb-text-h3">Are you the only owner of this property?</h3></legend>' +
+              '<div class="help-options">' +
+                '<div class="govbb-radio-item"><input class="govbb-radio" id="land-owner-yes-' + i + '" type="radio" name="land-owner-' + i + '" value="yes" /><label class="govbb-radio-item__label" for="land-owner-yes-' + i + '">Yes</label></div>' +
+                '<div class="govbb-radio-item"><input class="govbb-radio" id="land-owner-no-' + i + '" type="radio" name="land-owner-' + i + '" value="no" /><label class="govbb-radio-item__label" for="land-owner-no-' + i + '">No</label></div>' +
+                '<div class="govbb-radio-item"><input class="govbb-radio" id="land-owner-unsure-' + i + '" type="radio" name="land-owner-' + i + '" value="unsure" /><label class="govbb-radio-item__label" for="land-owner-unsure-' + i + '">I am not sure</label></div>' +
+              '</div></fieldset></div>' +
+            '<div class="govbb-form-group will-q"><fieldset class="govbb-fieldset">' +
+              '<legend class="govbb-fieldset__legend"><h3 class="govbb-text-h3">Is there a mortgage, charge or loan attached to this property?</h3></legend>' +
+              '<div class="help-options">' +
+                '<div class="govbb-radio-item"><input class="govbb-radio" id="land-mortgage-yes-' + i + '" type="radio" name="land-mortgage-' + i + '" value="yes" /><label class="govbb-radio-item__label" for="land-mortgage-yes-' + i + '">Yes</label></div>' +
+                '<div class="govbb-radio-item"><input class="govbb-radio" id="land-mortgage-no-' + i + '" type="radio" name="land-mortgage-' + i + '" value="no" /><label class="govbb-radio-item__label" for="land-mortgage-no-' + i + '">No</label></div>' +
+                '<div class="govbb-radio-item"><input class="govbb-radio" id="land-mortgage-unsure-' + i + '" type="radio" name="land-mortgage-' + i + '" value="unsure" /><label class="govbb-radio-item__label" for="land-mortgage-unsure-' + i + '">I am not sure</label></div>' +
+              '</div></fieldset></div>' +
+            '<div class="govbb-form-group will-q"><fieldset class="govbb-fieldset">' +
+              '<legend class="govbb-fieldset__legend"><h3 class="govbb-text-h3">Who should receive this property?</h3></legend>' +
+              '<div class="help-options">' +
+                '<div class="govbb-radio-item"><input class="govbb-radio" id="land-receive-same-' + i + '" type="radio" name="land-receive-' + i + '" value="same" /><label class="govbb-radio-item__label" for="land-receive-same-' + i + '">The same person or people receiving everything else in this will</label></div>' +
+                '<div class="govbb-radio-item"><input class="govbb-radio" id="land-receive-else-' + i + '" type="radio" name="land-receive-' + i + '" value="else" /><label class="govbb-radio-item__label" for="land-receive-else-' + i + '">Someone else</label></div>' +
+                '<div class="govbb-radio-item"><input class="govbb-radio" id="land-receive-unsure-' + i + '" type="radio" name="land-receive-' + i + '" value="unsure" /><label class="govbb-radio-item__label" for="land-receive-unsure-' + i + '">I am not sure</label></div>' +
+              '</div></fieldset></div>' +
+            '<div class="land-receive-else-section" hidden style="display:flex;flex-direction:column;gap:var(--spacing-m);">' +
+              '<h3 class="govbb-text-h3">Who should receive this property?</h3>' +
+              '<div class="govbb-form-group"><label class="govbb-label" for="land-else-first-' + i + '">First name</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="land-else-first-' + i + '" name="land-else-first-' + i + '" /></div></div>' +
+              '<div class="govbb-form-group"><label class="govbb-label" for="land-else-middle-' + i + '">Middle names (optional)</label><p class="govbb-hint" id="land-else-middle-hint-' + i + '">Include all middle names shown on official documents.</p><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="land-else-middle-' + i + '" name="land-else-middle-' + i + '" aria-describedby="land-else-middle-hint-' + i + '" /></div></div>' +
+              '<div class="govbb-form-group"><label class="govbb-label" for="land-else-last-' + i + '">Last name</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="land-else-last-' + i + '" name="land-else-last-' + i + '" /></div></div>' +
+              '<div class="govbb-form-group"><label class="govbb-label" for="land-else-rel-' + i + '">Relationship to you</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="land-else-rel-' + i + '" name="land-else-rel-' + i + '" /></div></div>' +
+              '<div class="govbb-form-group"><label class="govbb-label" for="land-else-addr-' + i + '">Address, if known (optional)</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="land-else-addr-' + i + '" name="land-else-addr-' + i + '" /></div></div>' +
+              '<div class="govbb-form-group"><label class="govbb-label" for="land-else-email-' + i + '">Email address, if known (optional)</label><div class="govbb-input-wrapper"><input class="govbb-input" type="email" id="land-else-email-' + i + '" name="land-else-email-' + i + '" /></div></div>' +
+              '<div class="govbb-form-group"><label class="govbb-label" for="land-else-phone-' + i + '">Phone number, if known (optional)</label><div class="govbb-input-wrapper"><input class="govbb-input" type="tel" id="land-else-phone-' + i + '" name="land-else-phone-' + i + '" /></div></div>' +
+            '</div>';
+        }
+
+        var count = 0;
+        function addRow() {
+          var i = count++;
+          var row = document.createElement("div");
+          row.className = "property";
+          row.setAttribute("data-property", i);
+          row.innerHTML = rowHtml(i);
+          propsEl.appendChild(row);
+          var otherSec = row.querySelector(".land-type-other-section");
+          [].slice.call(row.querySelectorAll('input[name="land-type-' + i + '"]')).forEach(function (r) {
+            r.addEventListener("change", function () {
+              var c = row.querySelector('input[name="land-type-' + i + '"]:checked');
+              otherSec.hidden = !(c && c.value === "other");
+            });
+          });
+          var elseSec = row.querySelector(".land-receive-else-section");
+          [].slice.call(row.querySelectorAll('input[name="land-receive-' + i + '"]')).forEach(function (r) {
+            r.addEventListener("change", function () {
+              var c = row.querySelector('input[name="land-receive-' + i + '"]:checked');
+              elseSec.hidden = !(c && c.value === "else");
+            });
+          });
+        }
+        addRow();
+        addBtn.addEventListener("click", addRow);
+
+        function save() {
+          var data = {};
+          try { data = JSON.parse(sessionStorage.getItem("willData") || "{}"); } catch (e) {}
+          [].slice.call(form.querySelectorAll("input[type=text], input[type=email], input[type=tel], select")).forEach(function (el) { if (el.name) data[el.name] = el.value; });
+          [].slice.call(form.querySelectorAll("input[type=radio]:checked")).forEach(function (el) { data[el.name] = el.value; });
+          data["land-count"] = propsEl.querySelectorAll(".property").length;
+          try { sessionStorage.setItem("willData", JSON.stringify(data)); } catch (e) {}
+        }
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          save();
+          // Any property that may be owned with someone else needs legal advice.
+          var rows = [].slice.call(propsEl.querySelectorAll(".property"));
+          var needsLawyer = rows.some(function (row) {
+            var c = row.querySelector('input[name^="land-owner-"]:checked');
+            return c && (c.value === "no" || c.value === "unsure");
+          });
+          if (needsLawyer) {
+            try { sessionStorage.setItem("willLawyerReasons", JSON.stringify(["land-owner"])); } catch (e2) {}
+            if (window.applyWillLawyerReasons) window.applyWillLawyerReasons(["land-owner"]);
+            window.location.href = "speak-to-a-lawyer.html";
+            return;
+          }
+          window.location.href = "will-documents.html";
+        });
+      })();
+    </script>
+  </body>
+</html>

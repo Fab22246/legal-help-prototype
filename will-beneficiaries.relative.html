@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Who should receive what is included in this will? — The Government of Barbados</title>
+    <link rel="icon" href="dist/assets/images/favicon.ico" />
+    <link rel="stylesheet" href="dist/styles.css" />
+    <style>
+      .skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; z-index: 999; }
+      .skip-link:focus { position: static; width: auto; height: auto; overflow: visible; padding: var(--spacing-xs) var(--spacing-s); background: var(--color-yellow-100); color: var(--color-black-00); font-weight: var(--font-weight-bold); text-decoration: none; }
+      .form-page { padding-block: var(--spacing-l); display: flex; flex-direction: column; gap: var(--spacing-l); max-width: 44rem; }
+      .back-link { display: inline-block; margin-bottom: var(--spacing-s); }
+      .back-link::before { content: "\2039"; margin-right: var(--spacing-xxs); }
+      .form-page__heading { display: flex; flex-direction: column; gap: var(--spacing-s); }
+      .fieldgroup { display: flex; flex-direction: column; gap: var(--spacing-m); }
+      .will-q { display: flex; flex-direction: column; gap: var(--spacing-s); }
+      .will-q[hidden], .variant[hidden] { display: none; }
+      .variant { display: flex; flex-direction: column; gap: var(--spacing-l); }
+      .help-options { display: flex; flex-direction: column; gap: var(--spacing-s); margin-top: var(--spacing-xs); }
+      .person { display: flex; flex-direction: column; gap: var(--spacing-s); padding: var(--spacing-m); border: var(--border-width-form) solid var(--color-grey-00); border-radius: var(--radius-sm); }
+    </style>
+  </head>
+  <body class="govbb-page">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <div>
+      <div class="govbb-official-banner">
+        <div class="govbb-container govbb-official-banner__inner">
+          <div class="govbb-official-banner__crest"><img class="govbb-official-banner__icon" src="dist/assets/images/govbb-creast.svg" alt="" /></div>
+          <div class="govbb-official-banner__text"><span>Official government website</span></div>
+        </div>
+      </div>
+      <header class="govbb-header">
+        <div class="govbb-container govbb-header__inner">
+          <a href="/" aria-label="Go to the alpha.gov.bb homepage"><img class="govbb-header__logo" src="dist/assets/images/govbb-logo.svg" alt="GOVBB" /></a>
+        </div>
+      </header>
+    </div>
+    <main class="govbb-page__main" id="main-content">
+      <div class="govbb-status-banner govbb-status-banner--alpha" role="status" aria-label="alpha status banner" aria-live="polite">
+        <div class="govbb-container"><p>This page is in <a class="govbb-link govbb-link--secondary" href="#">Alpha</a>.</p></div>
+      </div>
+      <div class="govbb-container">
+        <a class="govbb-link back-link" href="will-executor.html">Back</a>
+        <form class="form-page" action="#" novalidate>
+          <div class="form-page__heading" id="ben-heading-one" hidden>
+            <h1 class="govbb-text-h1">Who should receive everything?</h1>
+            <p class="govbb-text-body">Tell us who should receive everything included in this simple will.</p>
+          </div>
+
+          <div class="form-page__heading" id="ben-heading-equal" hidden>
+            <h1 class="govbb-text-h1">Who should share everything equally?</h1>
+            <p class="govbb-text-body">Tell us who should share everything included in this simple will.</p>
+          </div>
+
+          <div class="form-page__heading" id="ben-heading-gifts" hidden>
+            <h1 class="govbb-text-h1">Who should receive everything else?</h1>
+            <p class="govbb-text-body">You have listed specific gifts.</p>
+            <p class="govbb-text-body">Now choose who should receive everything else included in this simple will.</p>
+          </div>
+
+          <div class="govbb-form-group will-q" id="elsewho-section" hidden>
+            <fieldset class="govbb-fieldset">
+              <legend class="govbb-fieldset__legend"><h2 class="govbb-text-h2">Who should receive everything else included in this will?</h2></legend>
+              <div class="help-options">
+                <div class="govbb-radio-item"><input class="govbb-radio" id="elsewho-one" type="radio" name="elsewho" value="one" /><label class="govbb-radio-item__label" for="elsewho-one">One person</label></div>
+                <div class="govbb-radio-item"><input class="govbb-radio" id="elsewho-equal" type="radio" name="elsewho" value="equal" /><label class="govbb-radio-item__label" for="elsewho-equal">More than one person equally</label></div>
+                <div class="govbb-radio-item"><input class="govbb-radio" id="elsewho-unsure" type="radio" name="elsewho" value="unsure" /><label class="govbb-radio-item__label" for="elsewho-unsure">I am not sure</label></div>
+              </div>
+            </fieldset>
+          </div>
+
+          <!-- Variant: leave everything to one person -->
+          <div class="variant" id="variant-one" hidden>
+            <div class="fieldgroup">
+              <h2 class="govbb-text-h2">Who should receive everything included in this will?</h2>
+              <div class="govbb-form-group"><label class="govbb-label" for="ben-first">First name</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="ben-first" name="ben-first" /></div></div>
+              <div class="govbb-form-group"><label class="govbb-label" for="ben-middle">Middle names (optional)</label><p class="govbb-hint" id="ben-middle-hint">Include all middle names shown on official documents.</p><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="ben-middle" name="ben-middle" aria-describedby="ben-middle-hint" /></div></div>
+              <div class="govbb-form-group"><label class="govbb-label" for="ben-last">Last name</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="ben-last" name="ben-last" /></div></div>
+              <div class="govbb-form-group"><label class="govbb-label" for="ben-rel">Relationship to you</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="ben-rel" name="ben-rel" /></div></div>
+              <div class="govbb-form-group"><label class="govbb-label" for="ben-addr">Address, if known (optional)</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="ben-addr" name="ben-addr" /></div></div>
+              <div class="govbb-form-group"><label class="govbb-label" for="ben-email">Email address, if known (optional)</label><p class="govbb-hint" id="ben-contact-hint">These details can help the executor contact this person later. They do not need to appear in a will.</p><div class="govbb-input-wrapper"><input class="govbb-input" type="email" id="ben-email" name="ben-email" aria-describedby="ben-contact-hint" /></div></div>
+              <div class="govbb-form-group"><label class="govbb-label" for="ben-phone">Phone number, if known (optional)</label><div class="govbb-input-wrapper"><input class="govbb-input" type="tel" id="ben-phone" name="ben-phone" /></div></div>
+            </div>
+
+            <div class="govbb-form-group will-q">
+              <fieldset class="govbb-fieldset">
+                <legend class="govbb-fieldset__legend"><h2 class="govbb-text-h2">Do you want to name someone else to receive it if this person dies before you?</h2></legend>
+                <div class="help-options">
+                  <div class="govbb-radio-item"><input class="govbb-radio" id="ben-backup-yes" type="radio" name="ben-backup" value="yes" /><label class="govbb-radio-item__label" for="ben-backup-yes">Yes</label></div>
+                  <div class="govbb-radio-item"><input class="govbb-radio" id="ben-backup-no" type="radio" name="ben-backup" value="no" /><label class="govbb-radio-item__label" for="ben-backup-no">No</label></div>
+                  <div class="govbb-radio-item"><input class="govbb-radio" id="ben-backup-unsure" type="radio" name="ben-backup" value="unsure" /><label class="govbb-radio-item__label" for="ben-backup-unsure">I am not sure</label></div>
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="fieldgroup will-q" id="ben-backup-section" hidden>
+              <h2 class="govbb-text-h2">Backup person</h2>
+              <div class="govbb-form-group"><label class="govbb-label" for="ben-backup-first">First name</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="ben-backup-first" name="ben-backup-first" /></div></div>
+              <div class="govbb-form-group"><label class="govbb-label" for="ben-backup-middle">Middle names (optional)</label><p class="govbb-hint" id="ben-backup-middle-hint">Include all middle names shown on official documents.</p><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="ben-backup-middle" name="ben-backup-middle" aria-describedby="ben-backup-middle-hint" /></div></div>
+              <div class="govbb-form-group"><label class="govbb-label" for="ben-backup-last">Last name</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="ben-backup-last" name="ben-backup-last" /></div></div>
+              <div class="govbb-form-group"><label class="govbb-label" for="ben-backup-rel">Relationship to you</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="ben-backup-rel" name="ben-backup-rel" /></div></div>
+              <div class="govbb-form-group"><label class="govbb-label" for="ben-backup-addr">Address, if known (optional)</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="ben-backup-addr" name="ben-backup-addr" /></div></div>
+              <div class="govbb-form-group"><label class="govbb-label" for="ben-backup-email">Email address, if known (optional)</label><div class="govbb-input-wrapper"><input class="govbb-input" type="email" id="ben-backup-email" name="ben-backup-email" /></div></div>
+              <div class="govbb-form-group"><label class="govbb-label" for="ben-backup-phone">Phone number, if known (optional)</label><div class="govbb-input-wrapper"><input class="govbb-input" type="tel" id="ben-backup-phone" name="ben-backup-phone" /></div></div>
+            </div>
+          </div>
+
+          <!-- Variant: share equally between more than one person -->
+          <div class="variant" id="variant-equal" hidden>
+            <div class="fieldgroup">
+              <h2 class="govbb-text-h2">Who should share everything included in this will?</h2>
+              <p class="govbb-hint">Add at least 2 people.</p>
+              <div id="share-people">
+                <div class="person" data-row="0">
+                  <div class="govbb-form-group"><label class="govbb-label" for="share-first-0">First name</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="share-first-0" name="share-first-0" /></div></div>
+                  <div class="govbb-form-group"><label class="govbb-label" for="share-middle-0">Middle names (optional)</label><p class="govbb-hint" id="share-middle-hint-0">Include all middle names shown on official documents.</p><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="share-middle-0" name="share-middle-0" aria-describedby="share-middle-hint-0" /></div></div>
+                  <div class="govbb-form-group"><label class="govbb-label" for="share-last-0">Last name</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="share-last-0" name="share-last-0" /></div></div>
+                  <div class="govbb-form-group"><label class="govbb-label" for="share-rel-0">Relationship to you</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="share-rel-0" name="share-rel-0" /></div></div>
+                  <div class="govbb-form-group"><label class="govbb-label" for="share-addr-0">Address, if known (optional)</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="share-addr-0" name="share-addr-0" /></div></div>
+                  <div class="govbb-form-group"><label class="govbb-label" for="share-email-0">Email address, if known (optional)</label><div class="govbb-input-wrapper"><input class="govbb-input" type="email" id="share-email-0" name="share-email-0" /></div></div>
+                  <div class="govbb-form-group"><label class="govbb-label" for="share-phone-0">Phone number, if known (optional)</label><div class="govbb-input-wrapper"><input class="govbb-input" type="tel" id="share-phone-0" name="share-phone-0" /></div></div>
+                </div>
+                <div class="person" data-row="1">
+                  <div class="govbb-form-group"><label class="govbb-label" for="share-first-1">First name</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="share-first-1" name="share-first-1" /></div></div>
+                  <div class="govbb-form-group"><label class="govbb-label" for="share-middle-1">Middle names (optional)</label><p class="govbb-hint" id="share-middle-hint-1">Include all middle names shown on official documents.</p><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="share-middle-1" name="share-middle-1" aria-describedby="share-middle-hint-1" /></div></div>
+                  <div class="govbb-form-group"><label class="govbb-label" for="share-last-1">Last name</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="share-last-1" name="share-last-1" /></div></div>
+                  <div class="govbb-form-group"><label class="govbb-label" for="share-rel-1">Relationship to you</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="share-rel-1" name="share-rel-1" /></div></div>
+                  <div class="govbb-form-group"><label class="govbb-label" for="share-addr-1">Address, if known (optional)</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="share-addr-1" name="share-addr-1" /></div></div>
+                  <div class="govbb-form-group"><label class="govbb-label" for="share-email-1">Email address, if known (optional)</label><div class="govbb-input-wrapper"><input class="govbb-input" type="email" id="share-email-1" name="share-email-1" /></div></div>
+                  <div class="govbb-form-group"><label class="govbb-label" for="share-phone-1">Phone number, if known (optional)</label><div class="govbb-input-wrapper"><input class="govbb-input" type="tel" id="share-phone-1" name="share-phone-1" /></div></div>
+                </div>
+              </div>
+              <button class="govbb-btn--secondary" type="button" id="add-person">Add another person</button>
+            </div>
+
+            <div class="govbb-form-group will-q">
+              <fieldset class="govbb-fieldset">
+                <legend class="govbb-fieldset__legend"><h2 class="govbb-text-h2">If one of these people dies before you, what should happen to their share?</h2></legend>
+                <div class="help-options">
+                  <div class="govbb-radio-item"><input class="govbb-radio" id="share-dies-share" type="radio" name="share-dies" value="share" /><label class="govbb-radio-item__label" for="share-dies-share">Share it equally between the people who are still living</label></div>
+                  <div class="govbb-radio-item"><input class="govbb-radio" id="share-dies-else" type="radio" name="share-dies" value="else" /><label class="govbb-radio-item__label" for="share-dies-else">Give it to someone else</label></div>
+                  <div class="govbb-radio-item"><input class="govbb-radio" id="share-dies-unsure" type="radio" name="share-dies" value="unsure" /><label class="govbb-radio-item__label" for="share-dies-unsure">I am not sure</label></div>
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="fieldgroup will-q" id="share-else-section" hidden>
+              <h2 class="govbb-text-h2">Who should receive that share?</h2>
+              <div class="govbb-form-group"><label class="govbb-label" for="share-else-first">First name</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="share-else-first" name="share-else-first" /></div></div>
+              <div class="govbb-form-group"><label class="govbb-label" for="share-else-middle">Middle names (optional)</label><p class="govbb-hint" id="share-else-middle-hint">Include all middle names shown on official documents.</p><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="share-else-middle" name="share-else-middle" aria-describedby="share-else-middle-hint" /></div></div>
+              <div class="govbb-form-group"><label class="govbb-label" for="share-else-last">Last name</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="share-else-last" name="share-else-last" /></div></div>
+              <div class="govbb-form-group"><label class="govbb-label" for="share-else-rel">Relationship to you</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="share-else-rel" name="share-else-rel" /></div></div>
+              <div class="govbb-form-group"><label class="govbb-label" for="share-else-addr">Address, if known (optional)</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="share-else-addr" name="share-else-addr" /></div></div>
+              <div class="govbb-form-group"><label class="govbb-label" for="share-else-email">Email address, if known (optional)</label><div class="govbb-input-wrapper"><input class="govbb-input" type="email" id="share-else-email" name="share-else-email" /></div></div>
+              <div class="govbb-form-group"><label class="govbb-label" for="share-else-phone">Phone number, if known (optional)</label><div class="govbb-input-wrapper"><input class="govbb-input" type="tel" id="share-else-phone" name="share-else-phone" /></div></div>
+            </div>
+          </div>
+
+          <div class="govbb-btn-group"><button class="govbb-btn" type="submit">Continue</button></div>
+        </form>
+      </div>
+    </main>
+    <footer class="govbb-footer">
+      <div class="govbb-container govbb-footer__inner">
+        <nav class="govbb-footer__nav" aria-label="Footer">
+          <a class="govbb-footer__link" href="#">Home</a>
+          <a class="govbb-footer__link" href="#">Cookie Policy</a>
+          <a class="govbb-footer__link" href="#">Terms &amp; Conditions</a>
+          <a class="govbb-footer__link" href="#">Sitemap</a>
+        </nav>
+        <hr class="govbb-footer__divider" aria-hidden="true" />
+        <div class="govbb-footer__end">
+          <img class="govbb-footer__coat" src="dist/assets/images/govbb-creast.svg" alt="Government of Barbados Coat of Arms" />
+          <p class="govbb-footer__copy">© 2026 Government of Barbados</p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      (function () {
+        var form = document.querySelector(".form-page");
+
+        function flag(k) {
+          try { return JSON.parse(sessionStorage.getItem("willData") || "{}")[k]; } catch (e) { return null; }
+        }
+        var vOne = document.getElementById("variant-one");
+        var vEqual = document.getElementById("variant-equal");
+        var elseSection = document.getElementById("elsewho-section");
+        var headOne = document.getElementById("ben-heading-one");
+        var headEqual = document.getElementById("ben-heading-equal");
+        var headGifts = document.getElementById("ben-heading-gifts");
+
+        // Show the right variant for the "how do you want to leave" choice.
+        // In "gifts mode" the user first chooses how everything else is shared.
+        // Exposed so the prototype can refresh it before showing this screen.
+        function applyVariant() {
+          var hasGifts = !!flag("hasGifts");
+          if (hasGifts) {
+            headOne.hidden = true;
+            headEqual.hidden = true;
+            headGifts.hidden = false;
+            elseSection.hidden = false;
+            var chosen = form.querySelector('input[name="elsewho"]:checked');
+            var ew = chosen ? chosen.value : "";
+            vOne.hidden = ew !== "one";
+            vEqual.hidden = ew !== "equal";
+          } else {
+            headGifts.hidden = true;
+            elseSection.hidden = true;
+            var wishes = "one";
+            try { wishes = sessionStorage.getItem("willWishes") || "one"; } catch (e) {}
+            var equal = wishes === "equal";
+            headOne.hidden = equal;
+            headEqual.hidden = !equal;
+            vEqual.hidden = !equal;
+            vOne.hidden = equal;
+          }
+        }
+        window.applyWillVariant = applyVariant;
+        [].slice.call(form.querySelectorAll('input[name="elsewho"]')).forEach(function (r) { r.addEventListener("change", applyVariant); });
+        applyVariant();
+
+        // Conditional reveals within each variant.
+        function reveal(name, value, sectionId) {
+          var sec = document.getElementById(sectionId);
+          function sync() { var r = form.querySelector('input[name="' + name + '"]:checked'); sec.hidden = !(r && r.value === value); }
+          [].slice.call(form.querySelectorAll('input[name="' + name + '"]')).forEach(function (r) { r.addEventListener("change", sync); });
+          sync();
+        }
+        reveal("ben-backup", "yes", "ben-backup-section");
+        reveal("share-dies", "else", "share-else-section");
+
+        // Repeatable "share equally" people.
+        var people = document.getElementById("share-people");
+        var addBtn = document.getElementById("add-person");
+        var count = 2;
+        addBtn.addEventListener("click", function () {
+          var i = count++;
+          var row = document.createElement("div");
+          row.className = "person";
+          row.setAttribute("data-row", i);
+          row.innerHTML =
+            '<div class="govbb-form-group"><label class="govbb-label" for="share-first-' + i + '">First name</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="share-first-' + i + '" name="share-first-' + i + '" /></div></div>' +
+            '<div class="govbb-form-group"><label class="govbb-label" for="share-middle-' + i + '">Middle names (optional)</label><p class="govbb-hint" id="share-middle-hint-' + i + '">Include all middle names shown on official documents.</p><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="share-middle-' + i + '" name="share-middle-' + i + '" aria-describedby="share-middle-hint-' + i + '" /></div></div>' +
+            '<div class="govbb-form-group"><label class="govbb-label" for="share-last-' + i + '">Last name</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="share-last-' + i + '" name="share-last-' + i + '" /></div></div>' +
+            '<div class="govbb-form-group"><label class="govbb-label" for="share-rel-' + i + '">Relationship to you</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="share-rel-' + i + '" name="share-rel-' + i + '" /></div></div>' +
+            '<div class="govbb-form-group"><label class="govbb-label" for="share-addr-' + i + '">Address, if known (optional)</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="share-addr-' + i + '" name="share-addr-' + i + '" /></div></div>' +
+            '<div class="govbb-form-group"><label class="govbb-label" for="share-email-' + i + '">Email address, if known (optional)</label><div class="govbb-input-wrapper"><input class="govbb-input" type="email" id="share-email-' + i + '" name="share-email-' + i + '" /></div></div>' +
+            '<div class="govbb-form-group"><label class="govbb-label" for="share-phone-' + i + '">Phone number, if known (optional)</label><div class="govbb-input-wrapper"><input class="govbb-input" type="tel" id="share-phone-' + i + '" name="share-phone-' + i + '" /></div></div>';
+          people.appendChild(row);
+        });
+
+        function save() {
+          var data = {};
+          try { data = JSON.parse(sessionStorage.getItem("willData") || "{}"); } catch (e) {}
+          [].slice.call(form.querySelectorAll("input[type=text], input[type=email], input[type=tel]")).forEach(function (el) { if (el.name) data[el.name] = el.value; });
+          [].slice.call(form.querySelectorAll("input[type=radio]:checked")).forEach(function (el) { data[el.name] = el.value; });
+          data["share-count"] = people.querySelectorAll(".person").length;
+          try { sessionStorage.setItem("willData", JSON.stringify(data)); } catch (e) {}
+        }
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          save();
+          // Gifts mode: if the user is not sure how to share everything else,
+          // they should speak to a lawyer.
+          if (flag("hasGifts")) {
+            var chosen = form.querySelector('input[name="elsewho"]:checked');
+            if (chosen && chosen.value === "unsure") {
+              try { sessionStorage.setItem("willLawyerReasons", JSON.stringify(["elsewho-unsure"])); } catch (e2) {}
+              if (window.applyWillLawyerReasons) window.applyWillLawyerReasons(["elsewho-unsure"]);
+              window.location.href = "speak-to-a-lawyer.html";
+              return;
+            }
+          }
+          // Land or house details (if any) are collected next, then review.
+          window.location.href = flag("hasLand") ? "will-land.html" : "will-documents.html";
+        });
+      })();
+    </script>
+  </body>
+</html>

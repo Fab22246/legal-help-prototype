@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Review before continuing — The Government of Barbados</title>
+    <link rel="icon" href="dist/assets/images/favicon.ico" />
+    <link rel="stylesheet" href="dist/styles.css" />
+    <style>
+      .skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; z-index: 999; }
+      .skip-link:focus { position: static; width: auto; height: auto; overflow: visible; padding: var(--spacing-xs) var(--spacing-s); background: var(--color-yellow-100); color: var(--color-black-00); font-weight: var(--font-weight-bold); text-decoration: none; }
+      .content { padding-block: var(--spacing-l); display: flex; flex-direction: column; gap: var(--spacing-m); max-width: 44rem; }
+      .back-link { display: inline-block; margin-bottom: var(--spacing-s); }
+      .back-link::before { content: "\2039"; margin-right: var(--spacing-xxs); }
+      .content__text { display: flex; flex-direction: column; gap: var(--spacing-s); }
+      .review__section { display: flex; flex-direction: column; gap: var(--spacing-xs); padding-bottom: var(--spacing-s); border-bottom: 1px solid var(--color-grey-00); }
+      .review__head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--spacing-s); }
+      .review__warning { padding: var(--spacing-s) var(--spacing-m); border-left: var(--spacing-xxs) solid var(--color-blue-40); background: var(--color-blue-10); display: flex; flex-direction: column; gap: var(--spacing-xs); }
+      .content__actions { display: flex; flex-direction: column; align-items: flex-start; gap: var(--spacing-s); margin-top: var(--spacing-s); }
+    </style>
+  </head>
+  <body class="govbb-page">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <div>
+      <div class="govbb-official-banner">
+        <div class="govbb-container govbb-official-banner__inner">
+          <div class="govbb-official-banner__crest"><img class="govbb-official-banner__icon" src="dist/assets/images/govbb-creast.svg" alt="" /></div>
+          <div class="govbb-official-banner__text"><span>Official government website</span></div>
+        </div>
+      </div>
+      <header class="govbb-header">
+        <div class="govbb-container govbb-header__inner">
+          <a href="/" aria-label="Go to the alpha.gov.bb homepage"><img class="govbb-header__logo" src="dist/assets/images/govbb-logo.svg" alt="GOVBB" /></a>
+        </div>
+      </header>
+    </div>
+    <main class="govbb-page__main" id="main-content">
+      <div class="govbb-status-banner govbb-status-banner--alpha" role="status" aria-label="alpha status banner" aria-live="polite">
+        <div class="govbb-container"><p>This page is in <a class="govbb-link govbb-link--secondary" href="#">Alpha</a>.</p></div>
+      </div>
+      <div class="govbb-container">
+        <a class="govbb-link back-link" href="will-documents.html">Back</a>
+        <div class="content">
+          <h1 class="govbb-text-h1">Review before continuing</h1>
+          <p class="govbb-text-body">Check that the information you entered is correct.</p>
+
+          <div class="review__section">
+            <div class="review__head"><h2 class="govbb-text-h2">About you</h2><a class="govbb-link" href="will-about-you.html">Change</a></div>
+            <div id="rev-about" class="content__text"></div>
+          </div>
+          <div class="review__section">
+            <div class="review__head"><h2 class="govbb-text-h2">Executor</h2><a class="govbb-link" href="will-executor.html">Change</a></div>
+            <div id="rev-exec" class="content__text"></div>
+          </div>
+          <div class="review__section">
+            <div class="review__head"><h2 class="govbb-text-h2">People who may need to be considered</h2><a class="govbb-link" href="will-check.html">Change</a></div>
+            <div id="rev-people" class="content__text"></div>
+          </div>
+          <div class="review__section" id="rev-land-section" hidden>
+            <div class="review__head"><h2 class="govbb-text-h2">Land or house</h2><a class="govbb-link" href="will-land.html">Change</a></div>
+            <div id="rev-land" class="content__text"></div>
+          </div>
+          <div class="review__section" id="rev-gifts-section" hidden>
+            <div class="review__head"><h2 class="govbb-text-h2">Specific gifts</h2><a class="govbb-link" href="will-gifts.html">Change</a></div>
+            <div id="rev-gifts" class="content__text"></div>
+          </div>
+          <div class="review__section">
+            <div class="review__head"><h2 class="govbb-text-h2">People receiving things in the will</h2><a class="govbb-link" href="will-beneficiaries.html">Change</a></div>
+            <div id="rev-named" class="content__text"></div>
+          </div>
+          <div class="review__section">
+            <div class="review__head"><h2 class="govbb-text-h2">Important documents and information</h2><a class="govbb-link" href="will-documents.html">Change</a></div>
+            <div id="rev-docs" class="content__text"></div>
+          </div>
+
+          <div class="review__warning" role="note" id="rev-notcov" hidden>
+            <p class="govbb-text-body">You said you own something that this simple will is not meant to cover.</p>
+            <p class="govbb-text-body">Anything not included in this will may not pass under this will.</p>
+            <p class="govbb-text-body">You may want to speak to a lawyer before preparing or signing a will.</p>
+          </div>
+
+          <div class="review__warning" role="note">
+            <p class="govbb-text-body">This information has not been checked by a lawyer.</p>
+            <p class="govbb-text-body">This prototype does not create a will and does not say that a will is valid.</p>
+          </div>
+
+          <div class="content__actions">
+            <a class="govbb-btn" id="rev-continue" href="will-next-steps.html" role="button" draggable="false">Continue to next steps</a>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="govbb-footer">
+      <div class="govbb-container govbb-footer__inner">
+        <nav class="govbb-footer__nav" aria-label="Footer">
+          <a class="govbb-footer__link" href="#">Home</a>
+          <a class="govbb-footer__link" href="#">Cookie Policy</a>
+          <a class="govbb-footer__link" href="#">Terms &amp; Conditions</a>
+          <a class="govbb-footer__link" href="#">Sitemap</a>
+        </nav>
+        <hr class="govbb-footer__divider" aria-hidden="true" />
+        <div class="govbb-footer__end">
+          <img class="govbb-footer__coat" src="dist/assets/images/govbb-creast.svg" alt="Government of Barbados Coat of Arms" />
+          <p class="govbb-footer__copy">© 2026 Government of Barbados</p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      (function () {
+        function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+        function root() { return document.getElementById("screen-will-review") || document; }
+        function setHtml(id, html) { var el = root().querySelector("#" + id); if (el) el.innerHTML = html || '<p class="govbb-text-body">Not answered yet.</p>'; }
+
+        function populate() {
+          var d = {};
+          try { d = JSON.parse(sessionStorage.getItem("willData") || "{}"); } catch (e) {}
+          function v(k) { return (d[k] || "").toString().trim(); }
+          function row(label, value) { return value ? '<p class="govbb-text-body"><strong>' + label + ':</strong> ' + esc(value) + "</p>" : ""; }
+          function note(t) { return '<p class="govbb-text-body"><em>' + esc(t) + "</em></p>"; }
+          // Compose a name from the GovTech first / middle / last fields.
+          function joinName(f, m, l) { return [f, m, l].filter(Boolean).join(" "); }
+          function nm(prefix) { return joinName(v(prefix + "first"), v(prefix + "middle"), v(prefix + "last")); }
+          function nmIdx(prefix, i) { return joinName(v(prefix + "first-" + i), v(prefix + "middle-" + i), v(prefix + "last-" + i)); }
+
+          // About you
+          var addr = [v("addr1"), v("addr2"), v("parish"), v("country")].filter(Boolean).join(", ");
+          var about = row("Name", nm("")) + row("Other names", v("othernames")) + row("Address", addr) + row("Email address", v("email")) + row("Phone number", v("phone"));
+          setHtml("rev-about", about);
+
+          // Executor
+          var exec = row("Executor name", nm("exec-")) + row("Relationship", v("exec-rel")) + row("Address", v("exec-addr")) + row("Email address", v("exec-email")) + row("Phone number", v("exec-phone"));
+          if (d["backup"] === "yes") {
+            exec += row("Backup executor", nm("backup-")) + row("Backup relationship", v("backup-rel")) + row("Backup address", v("backup-addr")) + row("Backup email address", v("backup-email")) + row("Backup phone number", v("backup-phone"));
+          } else if (d["backup"] === "no") {
+            exec += row("Backup executor", "None");
+          } else if (d["backup"] === "unsure") {
+            exec += note("You said you are not sure if you want to name a backup executor. You may want to decide this before preparing a will.");
+          }
+          setHtml("rev-exec", exec);
+
+          // People who may need to be considered
+          var pl = { spouse: "spouse or partner I live with as if married", child18: "child under 18", childdis: "child with a disability who depends on me", dependant: "someone else who depends on me financially" };
+          var ppl = (d["people"] || []).filter(function (x) { return pl[x]; }).map(function (x) { return pl[x]; });
+          var people = "";
+          if (ppl.length) {
+            people = row("People", ppl.join(", ")) + row("Will the will include them", d["include"] === "yes" ? "Yes" : (d["include"] || ""));
+          } else {
+            people = '<p class="govbb-text-body">You did not select anyone who may need to be considered.</p>';
+          }
+          setHtml("rev-people", people);
+
+          // People named in the will (everything else, in gifts mode)
+          var named = "";
+          var dist = d["hasGifts"] ? (d["elsewho"] || "") : (d["wishes"] || "");
+          if (dist === "equal") {
+            var n = parseInt(d["share-count"] || "0", 10), got = "";
+            for (var i = 0; i < n; i++) {
+              var snm = nmIdx("share-", i);
+              if (snm) got += row("Name", snm) + row("Relationship", v("share-rel-" + i)) + row("Email address", v("share-email-" + i)) + row("Phone number", v("share-phone-" + i));
+            }
+            named = got || '<p class="govbb-text-body">No people added yet.</p>';
+            if (d["share-dies"] === "share") named += row("If someone dies before you", "Share equally between the people still living");
+            else if (d["share-dies"] === "else") named += row("If someone dies before you, give their share to", nm("share-else-"));
+            else if (d["share-dies"] === "unsure") named += note("You said you are not sure what should happen if someone named in the will dies before you. You may want to decide this before preparing a will.");
+          } else {
+            named = row("Name", nm("ben-")) + row("Relationship", v("ben-rel")) + row("Address", v("ben-addr")) + row("Email address", v("ben-email")) + row("Phone number", v("ben-phone"));
+            if (d["ben-backup"] === "yes") named += row("Backup person", nm("ben-backup-")) + row("Backup relationship", v("ben-backup-rel"));
+            else if (d["ben-backup"] === "no") named += row("Backup person", "None");
+            else if (d["ben-backup"] === "unsure") named += note("You said you are not sure who should receive your money, personal items and belongings if the person you named dies before you. You may want to decide this before preparing a will.");
+          }
+          setHtml("rev-named", named);
+
+          // Important documents and information
+          var dl = { id: "Barbados ID or another official ID", bank: "details of bank or credit union accounts", insurance: "details of insurance policies", vehicles: "details of vehicles", valuables: "details of valuable personal items", debts: "details of debts", execcontact: "address or contact details for the executor", bencontact: "address or contact details for the people named in the will", none: "I do not have these yet" };
+          var docs = d["docs"] || [], dhtml = "";
+          if (docs.length) dhtml = '<ul class="govbb-list govbb-list--bullet">' + docs.map(function (x) { return "<li>" + esc(dl[x] || x) + "</li>"; }).join("") + "</ul>";
+          else dhtml = '<p class="govbb-text-body">No documents or information selected yet.</p>';
+          if (docs.indexOf("none") > -1 || docs.length === 0) dhtml += note("Some information may still be missing. You can gather it before the next step.");
+          setHtml("rev-docs", dhtml);
+
+          // Land or house (repeatable; only if the will should cover land owned alone)
+          var landSection = root().querySelector("#rev-land-section");
+          if (d["hasLand"]) {
+            var typeLabel = { land: "land", house: "house", apartment: "apartment", other: "other" };
+            var ownLabel = { yes: "Yes", no: "No", unsure: "I am not sure" };
+            var recLabel = { same: "The same person or people receiving everything else in this will", "else": "Someone else", unsure: "I am not sure" };
+            var lc = parseInt(d["land-count"] || "0", 10), lhtml = "";
+            for (var li = 0; li < lc; li++) {
+              var ptype = typeLabel[d["land-type-" + li]] || "";
+              if (d["land-type-" + li] === "other" && v("land-type-desc-" + li)) ptype = v("land-type-desc-" + li);
+              var loc = [v("land-addr-" + li), v("land-parish-" + li)].filter(Boolean).join(", ");
+              if (!(ptype || loc || d["land-owner-" + li])) continue;
+              lhtml += row("Property " + (li + 1) + " type", ptype) + row("Address or location", loc) + row("Only owner", ownLabel[d["land-owner-" + li]] || "");
+              if (d["land-mortgage-" + li] === "yes" || d["land-mortgage-" + li] === "unsure") {
+                lhtml += note("You said there may be a mortgage, charge or loan attached to the property. You may want to get legal advice before preparing or signing a will.");
+              } else if (d["land-mortgage-" + li] === "no") {
+                lhtml += row("Mortgage, charge or loan", "No");
+              }
+              lhtml += row("Who should receive the property", recLabel[d["land-receive-" + li]] || "");
+              if (d["land-receive-" + li] === "else") {
+                lhtml += row("Property recipient name", nmIdx("land-else-", li)) + row("Relationship", v("land-else-rel-" + li));
+              } else if (d["land-receive-" + li] === "unsure") {
+                lhtml += note("You said you are not sure who should receive the property. You may want to decide this before preparing a will.");
+              }
+            }
+            setHtml("rev-land", lhtml || "");
+            if (landSection) landSection.hidden = false;
+          } else if (landSection) { landSection.hidden = true; }
+
+          // Specific gifts (only if the user chose to leave specific items or amounts)
+          var giftsSection = root().querySelector("#rev-gifts-section");
+          if (d["hasGifts"]) {
+            var gtypeLabel = { item: "personal item", money: "amount of money", other: "other" };
+            var gn = parseInt(d["gift-count"] || "0", 10), ghtml = "";
+            for (var gi = 0; gi < gn; gi++) {
+              var desc = v("gift-desc-" + gi);
+              var gt = gtypeLabel[d["gift-type-" + gi]] || "";
+              if (d["gift-type-" + gi] === "other" && v("gift-type-desc-" + gi)) gt = v("gift-type-desc-" + gi);
+              var to = nmIdx("gift-", gi);
+              if (desc || to) {
+                ghtml += row("Gift " + (gi + 1) + " type", gt) + row("Gift " + (gi + 1), desc) + row("To", to) + row("Relationship", v("gift-rel-" + gi)) + row("Only owner", (d["gift-owner-" + gi] === "yes" ? "Yes" : (d["gift-owner-" + gi] || "")));
+              }
+            }
+            setHtml("rev-gifts", ghtml || "");
+            if (giftsSection) giftsSection.hidden = false;
+          } else if (giftsSection) { giftsSection.hidden = true; }
+
+          // Property not covered by this will
+          var notcov = root().querySelector("#rev-notcov");
+          if (notcov) notcov.hidden = !d["ownsElse"];
+        }
+
+        window.populateWillReview = populate;
+        populate();
+
+        // Refresh the next-steps page (single-file prototype) before navigating.
+        var cont = root().querySelector("#rev-continue");
+        if (cont) cont.addEventListener("click", function () { if (window.populateWillNextSteps) window.populateWillNextSteps(); });
+      })();
+    </script>
+  </body>
+</html>

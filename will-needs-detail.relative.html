@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>This route needs more detail before continuing — The Government of Barbados</title>
+    <link rel="icon" href="dist/assets/images/favicon.ico" />
+    <link rel="stylesheet" href="dist/styles.css" />
+    <style>
+      /* Page-specific layout only — built from design-system tokens, no new colours */
+      .skip-link {
+        position: absolute;
+        left: -9999px;
+        top: auto;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        z-index: 999;
+      }
+      .skip-link:focus {
+        position: static;
+        width: auto;
+        height: auto;
+        overflow: visible;
+        padding: var(--spacing-xs) var(--spacing-s);
+        background: var(--color-yellow-100);
+        color: var(--color-black-00);
+        font-weight: var(--font-weight-bold);
+        text-decoration: none;
+      }
+      .outcome {
+        padding-block: var(--spacing-l);
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-m);
+        max-width: 44rem;
+      }
+      .back-link {
+        display: inline-block;
+        margin-bottom: var(--spacing-s);
+      }
+      .back-link::before {
+        content: "\2039";
+        margin-right: var(--spacing-xxs);
+      }
+      .outcome__text {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-s);
+      }
+      .reasons {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-m);
+      }
+      .reason {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-s);
+        padding: var(--spacing-s) var(--spacing-m);
+        border-left: var(--spacing-xxs) solid var(--color-blue-40);
+        background: var(--color-blue-10);
+      }
+      .reason[hidden] {
+        display: none;
+      }
+      .outcome__actions {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-s);
+        margin-top: var(--spacing-s);
+      }
+    </style>
+  </head>
+  <body class="govbb-page">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <div>
+      <div class="govbb-official-banner">
+        <div class="govbb-container govbb-official-banner__inner">
+          <div class="govbb-official-banner__crest">
+            <img
+              class="govbb-official-banner__icon"
+              src="dist/assets/images/govbb-creast.svg"
+              alt=""
+            />
+          </div>
+          <div class="govbb-official-banner__text">
+            <span>Official government website</span>
+          </div>
+        </div>
+      </div>
+
+      <header class="govbb-header">
+        <div class="govbb-container govbb-header__inner">
+          <a href="/" aria-label="Go to the alpha.gov.bb homepage">
+            <img class="govbb-header__logo" src="dist/assets/images/govbb-logo.svg" alt="GOVBB" />
+          </a>
+        </div>
+      </header>
+    </div>
+
+    <main class="govbb-page__main" id="main-content">
+      <div
+        class="govbb-status-banner govbb-status-banner--alpha"
+        role="status"
+        aria-label="alpha status banner"
+        aria-live="polite"
+      >
+        <div class="govbb-container">
+          <p>
+            This page is in
+            <a class="govbb-link govbb-link--secondary" href="#">Alpha</a>.
+          </p>
+        </div>
+      </div>
+
+      <div class="govbb-container">
+        <a class="govbb-link back-link" href="will-check.html">Back</a>
+
+        <div class="outcome">
+          <h1 class="govbb-text-h1">This route needs more detail before continuing</h1>
+
+          <div class="outcome__text">
+            <p class="govbb-text-body">Based on your answers, a simple will route may still be possible.</p>
+            <p class="govbb-text-body">But this prototype needs more detail before it can continue safely.</p>
+          </div>
+
+          <h2 class="govbb-text-h2">Why you are seeing this</h2>
+          <div class="reasons">
+            <div class="reason" data-reason="detail-land-solo" hidden>
+              <p class="govbb-text-body">You said you want this simple will to cover land or a house you own by yourself.</p>
+              <p class="govbb-text-body">A will can involve property, but more detail is needed before this prototype can handle that safely.</p>
+            </div>
+            <div class="reason" data-reason="detail-specific" hidden>
+              <p class="govbb-text-body">You said you want to leave specific items or amounts to different people.</p>
+              <p class="govbb-text-body">This can need more detail than the simple route currently collects.</p>
+            </div>
+            <div class="reason" data-reason="detail-owns-else" hidden>
+              <p class="govbb-text-body">You said you own something that may need legal help, but you do not want this simple will to cover it.</p>
+              <p class="govbb-text-body">This does not always stop you from making a will.</p>
+              <p class="govbb-text-body">But you may need legal help to understand what the will can and cannot deal with.</p>
+            </div>
+          </div>
+
+          <h2 class="govbb-text-h2">What this means</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">This does not mean you cannot make a will.</p>
+            <p class="govbb-text-body">It means this prototype is not detailed enough yet to continue safely.</p>
+          </div>
+
+          <h2 class="govbb-text-h2">What you can do next</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">You can prepare information before speaking to a lawyer, or go back to choose another route.</p>
+          </div>
+
+          <div class="outcome__actions">
+            <a class="govbb-btn" href="prepare-for-lawyer.html" role="button" draggable="false">Prepare information before speaking to a lawyer</a>
+            <a class="govbb-link" href="choose-help.html">Back to what you need help with</a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="govbb-footer">
+      <div class="govbb-container govbb-footer__inner">
+        <nav class="govbb-footer__nav" aria-label="Footer">
+          <a class="govbb-footer__link" href="#">Home</a>
+          <a class="govbb-footer__link" href="#">Cookie Policy</a>
+          <a class="govbb-footer__link" href="#">Terms &amp; Conditions</a>
+          <a class="govbb-footer__link" href="#">Sitemap</a>
+        </nav>
+        <hr class="govbb-footer__divider" aria-hidden="true" />
+        <div class="govbb-footer__end">
+          <img
+            class="govbb-footer__coat"
+            src="dist/assets/images/govbb-creast.svg"
+            alt="Government of Barbados Coat of Arms"
+          />
+          <p class="govbb-footer__copy">© 2026 Government of Barbados</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Show the reason block(s) for the answers that sent the user here.
+      (function () {
+        function apply(reasons) {
+          var root = document.getElementById("screen-will-needs-detail") || document;
+          var blocks = root.querySelectorAll(".reason");
+          var shown = false;
+          for (var i = 0; i < blocks.length; i++) {
+            var key = blocks[i].getAttribute("data-reason");
+            var show = reasons.indexOf(key) > -1;
+            blocks[i].hidden = !show;
+            if (show) shown = true;
+          }
+          if (!shown && blocks.length) blocks[0].hidden = false;
+        }
+        window.applyWillDetailReasons = apply;
+        var reasons = [];
+        try { reasons = JSON.parse(sessionStorage.getItem("willDetailReasons") || "[]"); } catch (e) {}
+        apply(reasons);
+      })();
+    </script>
+  </body>
+</html>

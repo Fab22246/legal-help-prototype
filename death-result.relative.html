@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your possible next step — The Government of Barbados</title>
+    <link rel="icon" href="dist/assets/images/favicon.ico" />
+    <link rel="stylesheet" href="dist/styles.css" />
+    <style>
+      /* Page-specific layout only — built from design-system tokens, no new colours */
+      .skip-link {
+        position: absolute;
+        left: -9999px;
+        top: auto;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        z-index: 999;
+      }
+      .skip-link:focus {
+        position: static;
+        width: auto;
+        height: auto;
+        overflow: visible;
+        padding: var(--spacing-xs) var(--spacing-s);
+        background: var(--color-yellow-100);
+        color: var(--color-black-00);
+        font-weight: var(--font-weight-bold);
+        text-decoration: none;
+      }
+      .outcome {
+        padding-block: var(--spacing-l);
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-m);
+        max-width: 44rem;
+      }
+      .back-link {
+        display: inline-block;
+        margin-bottom: var(--spacing-s);
+      }
+      .back-link::before {
+        content: "\2039";
+        margin-right: var(--spacing-xxs);
+      }
+      .outcome__text {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-s);
+      }
+      .result {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-m);
+      }
+      .result[hidden] {
+        display: none;
+      }
+      .result-panel {
+        padding: var(--spacing-s) var(--spacing-m);
+        border-left: var(--spacing-xxs) solid var(--color-blue-40);
+        background: var(--color-blue-10);
+      }
+      .why {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-s);
+      }
+      .why[hidden] {
+        display: none;
+      }
+      .outcome__actions {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-s);
+        margin-top: var(--spacing-s);
+      }
+    </style>
+  </head>
+  <body class="govbb-page">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <div>
+      <div class="govbb-official-banner">
+        <div class="govbb-container govbb-official-banner__inner">
+          <div class="govbb-official-banner__crest">
+            <img
+              class="govbb-official-banner__icon"
+              src="dist/assets/images/govbb-creast.svg"
+              alt=""
+            />
+          </div>
+          <div class="govbb-official-banner__text">
+            <span>Official government website</span>
+          </div>
+        </div>
+      </div>
+
+      <header class="govbb-header">
+        <div class="govbb-container govbb-header__inner">
+          <a href="/" aria-label="Go to the alpha.gov.bb homepage">
+            <img class="govbb-header__logo" src="dist/assets/images/govbb-logo.svg" alt="GOVBB" />
+          </a>
+        </div>
+      </header>
+    </div>
+
+    <main class="govbb-page__main" id="main-content">
+      <div
+        class="govbb-status-banner govbb-status-banner--alpha"
+        role="status"
+        aria-label="alpha status banner"
+        aria-live="polite"
+      >
+        <div class="govbb-container">
+          <p>
+            This page is in
+            <a class="govbb-link govbb-link--secondary" href="#">Alpha</a>.
+          </p>
+        </div>
+      </div>
+
+      <div class="govbb-container">
+        <a class="govbb-link back-link" href="death-check.html">Back</a>
+
+        <div class="outcome">
+          <h1 class="govbb-text-h1">Your possible next step</h1>
+          <div class="outcome__text">
+            <p class="govbb-text-body">Based on your answers, this is the next step that may apply.</p>
+            <p class="govbb-text-body">This is general information. It is not legal advice.</p>
+          </div>
+
+          <section class="result" data-result="lawyer" hidden>
+          <div class="result-panel"><h2 class="govbb-text-h2">You should speak to a lawyer</h2></div>
+          <h2 class="govbb-text-h2">Why you are seeing this</h2>
+          <div class="why" data-why="yes" hidden>
+            <p class="govbb-text-body">You said someone is disagreeing about the will, money, property or who should deal with the estate.</p>
+            <p class="govbb-text-body">This service cannot help where there is a disagreement.</p>
+            <p class="govbb-text-body">You should speak to a lawyer before taking the next step.</p>
+          </div>
+          <div class="why" data-why="unsure" hidden>
+            <p class="govbb-text-body">You said you are not sure if there is a disagreement.</p>
+            <p class="govbb-text-body">This may need legal help before you choose the next step.</p>
+            <p class="govbb-text-body">You should speak to a lawyer if you are unsure.</p>
+          </div>
+          <h2 class="govbb-text-h2">What this means</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">This is important if:</p>
+          </div>
+          <ul class="govbb-list govbb-list--bullet">
+            <li>family members disagree</li>
+            <li>someone may challenge the will</li>
+            <li>there may be more than one will</li>
+            <li>someone is unsure who should apply</li>
+            <li>land, a business or overseas property is involved</li>
+            <li>there is already a court matter</li>
+          </ul>
+          </section>
+
+          <section class="result" data-result="probate" hidden>
+          <div class="result-panel"><h2 class="govbb-text-h2">You may need probate</h2></div>
+          <h2 class="govbb-text-h2">Why you are seeing this</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">You said the person left a will and you are named as executor.</p>
+            <p class="govbb-text-body">Probate may be needed when the executor needs authority to deal with the person’s estate.</p>
+          </div>
+          <h2 class="govbb-text-h2">What this means</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">Probate is an official document from the Supreme Court.</p>
+            <p class="govbb-text-body">It gives the executor authority to deal with the person’s estate.</p>
+            <p class="govbb-text-body">Banks, credit unions, insurance companies or other organisations may ask for probate before they release money or property.</p>
+          </div>
+          <h2 class="govbb-text-h2">What you may need</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">You may need:</p>
+          </div>
+          <ul class="govbb-list govbb-list--bullet">
+            <li>the original will</li>
+            <li>the death certificate</li>
+            <li>details of the person’s money, property and debts</li>
+            <li>names and contact details for banks, credit unions, insurers or other organisations</li>
+            <li>legal help to prepare and file the application</li>
+          </ul>
+          <h2 class="govbb-text-h2">What to do next</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">Check the will and gather the documents you have.</p>
+            <p class="govbb-text-body">You may need to speak to a lawyer before applying for probate.</p>
+          </div>
+          <h2 class="govbb-text-h2">Official link</h2>
+          <ul class="govbb-list">
+            <li><a class="govbb-link" href="https://www.barbadoslawcourts.gov.bb/court-administration/supreme-court-registry/probate-unit" target="_blank" rel="noopener noreferrer">Probate Unit guidance</a></li>
+          </ul>
+          <h2 class="govbb-text-h2">Prototype note</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">This prototype helps you understand if probate may be needed. It does not prepare or file probate documents yet.</p>
+          </div>
+          </section>
+
+          <section class="result" data-result="speak-executor" hidden>
+          <div class="result-panel"><h2 class="govbb-text-h2">You may need to speak to the executor</h2></div>
+          <h2 class="govbb-text-h2">Why you are seeing this</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">You said the person left a will, but you are not named as executor.</p>
+            <p class="govbb-text-body">The executor is usually the person who applies for probate and manages the estate.</p>
+          </div>
+          <h2 class="govbb-text-h2">What this means</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">You may need to speak to the person named as executor in the will.</p>
+            <p class="govbb-text-body">This prototype cannot decide who should manage the estate.</p>
+          </div>
+          <h2 class="govbb-text-h2">Official link</h2>
+          <ul class="govbb-list">
+            <li><a class="govbb-link" href="https://www.barbadoslawcourts.gov.bb/court-administration/supreme-court-registry/probate-unit" target="_blank" rel="noopener noreferrer">Probate Unit guidance</a></li>
+          </ul>
+          <h2 class="govbb-text-h2">Prototype note</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">This prototype does not review wills or decide who should manage the estate.</p>
+          </div>
+          </section>
+
+          <section class="result" data-result="check-will" hidden>
+          <div class="result-panel"><h2 class="govbb-text-h2">Check the will</h2></div>
+          <h2 class="govbb-text-h2">Why you are seeing this</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">You said the person left a will, but you do not know if you are named as executor.</p>
+            <p class="govbb-text-body">The will should say who is named to manage the estate.</p>
+          </div>
+          <h2 class="govbb-text-h2">What this means</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">You may need to check the will before choosing the next step.</p>
+            <p class="govbb-text-body">If you are not named as executor, you may need to speak to the person who is named.</p>
+          </div>
+          <h2 class="govbb-text-h2">Official link</h2>
+          <ul class="govbb-list">
+            <li><a class="govbb-link" href="https://www.barbadoslawcourts.gov.bb/court-administration/supreme-court-registry/probate-unit" target="_blank" rel="noopener noreferrer">Probate Unit guidance</a></li>
+          </ul>
+          <h2 class="govbb-text-h2">Prototype note</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">This prototype does not review wills.</p>
+          </div>
+          </section>
+
+          <section class="result" data-result="letters" hidden>
+          <div class="result-panel"><h2 class="govbb-text-h2">You may need letters of administration</h2></div>
+          <h2 class="govbb-text-h2">Why you are seeing this</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">You said the person did not leave a will and the estate may be worth more than BDS $15,000.</p>
+            <p class="govbb-text-body">Letters of administration may be needed when someone needs authority to deal with the estate of a person who died without a will.</p>
+          </div>
+          <h2 class="govbb-text-h2">What this means</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">Letters of administration are official documents from the Supreme Court.</p>
+            <p class="govbb-text-body">They give an administrator authority to deal with the estate.</p>
+            <p class="govbb-text-body">Banks, credit unions, insurance companies or other organisations may ask for letters of administration before they release money or property.</p>
+          </div>
+          <h2 class="govbb-text-h2">What you may need</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">You may need:</p>
+          </div>
+          <ul class="govbb-list govbb-list--bullet">
+            <li>the death certificate</li>
+            <li>documents that show your relationship to the person who died</li>
+            <li>details of the person’s money, property and debts</li>
+            <li>names and contact details for banks, credit unions, insurers or other organisations</li>
+            <li>legal help to prepare and file the application</li>
+          </ul>
+          <h2 class="govbb-text-h2">What to do next</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">Gather the documents you have.</p>
+            <p class="govbb-text-body">You should speak to a lawyer if you are not sure who should apply.</p>
+          </div>
+          <h2 class="govbb-text-h2">Official link</h2>
+          <ul class="govbb-list">
+            <li><a class="govbb-link" href="https://www.barbadoslawcourts.gov.bb/court-administration/supreme-court-registry/probate-unit" target="_blank" rel="noopener noreferrer">Probate Unit guidance</a></li>
+          </ul>
+          <h2 class="govbb-text-h2">Prototype note</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">This prototype helps you understand if letters of administration may be needed. It does not prepare or file letters of administration documents yet.</p>
+          </div>
+          </section>
+
+          <section class="result" data-result="trustee" hidden>
+          <div class="result-panel"><h2 class="govbb-text-h2">The Public Trustee may be able to help</h2></div>
+          <h2 class="govbb-text-h2">Why you are seeing this</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">You said the estate may be worth BDS $15,000 or less, or that you want to know if the Public Trustee can help.</p>
+            <p class="govbb-text-body">The Public Trustee may be able to help with a small estate.</p>
+          </div>
+          <h2 class="govbb-text-h2">What this means</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">This may apply if the person’s estate is worth BDS $15,000 or less.</p>
+            <p class="govbb-text-body">The person applying usually needs to show their relationship to the person who died.</p>
+          </div>
+          <h2 class="govbb-text-h2">What you may need</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">You may need:</p>
+          </div>
+          <ul class="govbb-list govbb-list--bullet">
+            <li>the death certificate</li>
+            <li>the person’s Barbados ID card</li>
+            <li>the person’s National Insurance number</li>
+            <li>funeral bill or invoice</li>
+            <li>funeral payment receipts</li>
+            <li>documents that show your relationship to the person who died</li>
+            <li>bank, credit union, insurance, share or vehicle documents, if relevant</li>
+          </ul>
+          <h2 class="govbb-text-h2">What to do next</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">Gather the documents you have.</p>
+            <p class="govbb-text-body">A Public Trustee application must include the required documents before it can be processed.</p>
+            <p class="govbb-text-body">The application form must be signed and witnessed by a Justice of the Peace or attorney-at-law.</p>
+            <p class="govbb-text-body">Copies of supporting documents may need to be certified.</p>
+          </div>
+          <h2 class="govbb-text-h2">Official link</h2>
+          <ul class="govbb-list">
+            <li><a class="govbb-link" href="https://oag.gov.bb/Departments/Solicitor-General-s-Chambers/Public-Trustee" target="_blank" rel="noopener noreferrer">Public Trustee guidance</a></li>
+          </ul>
+          <h2 class="govbb-text-h2">Prototype note</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">This prototype helps you understand if the Public Trustee route may apply. It does not prepare or submit a Public Trustee application yet.</p>
+          </div>
+          </section>
+
+          <section class="result" data-result="funeral" hidden>
+          <div class="result-panel"><h2 class="govbb-text-h2">You may be able to apply for funeral expenses</h2></div>
+          <h2 class="govbb-text-h2">Why you are seeing this</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">You said you want to apply to be repaid for funeral expenses.</p>
+            <p class="govbb-text-body">If you paid funeral expenses, you may be able to apply to be repaid from money held for the person who died.</p>
+          </div>
+          <h2 class="govbb-text-h2">What this means</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">This may be possible even if the estate is worth more than BDS $15,000.</p>
+          </div>
+          <h2 class="govbb-text-h2">What you may need</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">You may need:</p>
+          </div>
+          <ul class="govbb-list govbb-list--bullet">
+            <li>the death certificate</li>
+            <li>the funeral bill or invoice</li>
+            <li>receipts showing payment</li>
+            <li>your ID</li>
+            <li>details of where the person’s money is held</li>
+            <li>documents that show your relationship to the person who died, if needed</li>
+          </ul>
+          <h2 class="govbb-text-h2">What to do next</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">Gather the funeral bill, receipts and any documents you have.</p>
+            <p class="govbb-text-body">The Public Trustee guidance explains how to apply.</p>
+          </div>
+          <h2 class="govbb-text-h2">Official link</h2>
+          <ul class="govbb-list">
+            <li><a class="govbb-link" href="https://oag.gov.bb/Departments/Solicitor-General-s-Chambers/Public-Trustee" target="_blank" rel="noopener noreferrer">Public Trustee guidance</a></li>
+          </ul>
+          <h2 class="govbb-text-h2">Prototype note</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">This prototype helps you understand if a funeral expense application may apply. It does not prepare or submit a funeral expense application yet.</p>
+          </div>
+          </section>
+
+          <section class="result" data-result="clearance" hidden>
+          <div class="result-panel"><h2 class="govbb-text-h2">You may need estate clearance</h2></div>
+          <h2 class="govbb-text-h2">Why you are seeing this</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">You said you want to get estate clearance.</p>
+            <p class="govbb-text-body">Estate clearance may be needed before estate assets are distributed.</p>
+          </div>
+          <h2 class="govbb-text-h2">What this means</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">This usually happens after probate or letters of administration has been granted.</p>
+          </div>
+          <h2 class="govbb-text-h2">What you may need</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">You may need:</p>
+          </div>
+          <ul class="govbb-list govbb-list--bullet">
+            <li>a completed and signed estate clearance application</li>
+            <li>the death certificate</li>
+            <li>letters testamentary or letters of administration</li>
+            <li>a certified copy of the will, if there is one</li>
+            <li>a list of assets</li>
+            <li>the map reference number for real property, if land or a house is involved</li>
+          </ul>
+          <h2 class="govbb-text-h2">What to do next</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">Gather the documents you have.</p>
+            <p class="govbb-text-body">Estate clearance applications can be sent to the Barbados Revenue Authority.</p>
+          </div>
+          <h2 class="govbb-text-h2">Official links</h2>
+          <ul class="govbb-list">
+            <li><a class="govbb-link" href="https://bra.gov.bb/Popular-Topics/Tax-Clearances/Applying-for-Estate-Clearance" target="_blank" rel="noopener noreferrer">Estate clearance guidance</a></li>
+            <li><a class="govbb-link" href="https://portal.bra.gov.bb/EstateClearance" target="_blank" rel="noopener noreferrer">Apply for an Estate Clearance Certificate</a></li>
+          </ul>
+          <h2 class="govbb-text-h2">Prototype note</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">This prototype helps you understand if estate clearance may be needed. It does not prepare or submit an estate clearance application yet.</p>
+          </div>
+          </section>
+
+          <section class="result" data-result="check-for-will" hidden>
+          <div class="result-panel"><h2 class="govbb-text-h2">You may need to check for a will</h2></div>
+          <h2 class="govbb-text-h2">Why you are seeing this</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">You said you do not know if the person left a will.</p>
+            <p class="govbb-text-body">A will may name the person who should manage the estate.</p>
+          </div>
+          <h2 class="govbb-text-h2">What you may need to do</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">You may need to:</p>
+          </div>
+          <ul class="govbb-list govbb-list--bullet">
+            <li>ask close family members</li>
+            <li>check the person’s personal papers</li>
+            <li>check with a lawyer who may have prepared the will</li>
+            <li>ask banks or other organisations where important documents may have been kept</li>
+          </ul>
+          <h2 class="govbb-text-h2">Official link</h2>
+          <ul class="govbb-list">
+            <li><a class="govbb-link" href="https://www.barbadoslawcourts.gov.bb/court-administration/supreme-court-registry/probate-unit" target="_blank" rel="noopener noreferrer">Probate Unit guidance</a></li>
+          </ul>
+          <h2 class="govbb-text-h2">Prototype note</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">This prototype does not search for wills.</p>
+          </div>
+          </section>
+
+          <section class="result" data-result="more-info" hidden>
+          <div class="result-panel"><h2 class="govbb-text-h2">You may need more information</h2></div>
+          <h2 class="govbb-text-h2">Why you are seeing this</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">Your answers do not clearly show which next step may apply.</p>
+            <p class="govbb-text-body">You may need to gather more information before choosing the next step.</p>
+          </div>
+          <h2 class="govbb-text-h2">What to check</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">Try to find out:</p>
+          </div>
+          <ul class="govbb-list govbb-list--bullet">
+            <li>if there is a will</li>
+            <li>who is named as executor, if there is a will</li>
+            <li>what money or property the person had</li>
+            <li>if there are debts</li>
+            <li>if anyone has already contacted a lawyer, bank or government office</li>
+          </ul>
+          <h2 class="govbb-text-h2">Prototype note</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">This prototype does not yet create a full document checklist.</p>
+          </div>
+          </section>
+
+          <div class="outcome__actions">
+            <a class="govbb-btn" href="choose-help.html" role="button" draggable="false">Back to what you need help with</a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="govbb-footer">
+      <div class="govbb-container govbb-footer__inner">
+        <nav class="govbb-footer__nav" aria-label="Footer">
+          <a class="govbb-footer__link" href="#">Home</a>
+          <a class="govbb-footer__link" href="#">Cookie Policy</a>
+          <a class="govbb-footer__link" href="#">Terms &amp; Conditions</a>
+          <a class="govbb-footer__link" href="#">Sitemap</a>
+        </nav>
+        <hr class="govbb-footer__divider" aria-hidden="true" />
+        <div class="govbb-footer__end">
+          <img
+            class="govbb-footer__coat"
+            src="dist/assets/images/govbb-creast.svg"
+            alt="Government of Barbados Coat of Arms"
+          />
+          <p class="govbb-footer__copy">© 2026 Government of Barbados</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Show the one result block (and lawyer "why" variant) for the answers.
+      (function () {
+        function apply(key, lawyerReason) {
+          var root = document.getElementById("screen-death-result") || document;
+          var blocks = root.querySelectorAll(".result");
+          var found = false;
+          for (var i = 0; i < blocks.length; i++) {
+            var match = blocks[i].getAttribute("data-result") === key;
+            blocks[i].hidden = !match;
+            if (match) found = true;
+          }
+          if (!found) {
+            var d = root.querySelector('.result[data-result="more-info"]');
+            if (d) d.hidden = false;
+          }
+          var lr = root.querySelector('.result[data-result="lawyer"]');
+          if (lr) {
+            var whys = lr.querySelectorAll(".why");
+            var shown = false;
+            for (var j = 0; j < whys.length; j++) {
+              var m = whys[j].getAttribute("data-why") === lawyerReason;
+              whys[j].hidden = !m;
+              if (m) shown = true;
+            }
+            if (!shown) {
+              var y = lr.querySelector('.why[data-why="yes"]');
+              if (y) y.hidden = false;
+            }
+          }
+        }
+        window.applyDeathResult = apply;
+        var key = "more-info", reason = "yes";
+        try {
+          key = sessionStorage.getItem("deathResult") || "more-info";
+          reason = sessionStorage.getItem("deathLawyerReason") || "yes";
+        } catch (e) {}
+        apply(key, reason);
+      })();
+    </script>
+  </body>
+</html>

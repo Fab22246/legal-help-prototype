@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>What do you need help with? — The Government of Barbados</title>
+    <link rel="icon" href="dist/assets/images/favicon.ico" />
+    <link rel="stylesheet" href="dist/styles.css" />
+    <style>
+      /* Page-specific layout only — built from design-system tokens, no new colours */
+      .skip-link {
+        position: absolute;
+        left: -9999px;
+        top: auto;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        z-index: 999;
+      }
+      .skip-link:focus {
+        position: static;
+        width: auto;
+        height: auto;
+        overflow: visible;
+        padding: var(--spacing-xs) var(--spacing-s);
+        background: var(--color-yellow-100);
+        color: var(--color-black-00);
+        font-weight: var(--font-weight-bold);
+        text-decoration: none;
+      }
+      .choose {
+        padding-block: var(--spacing-l);
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-s);
+        max-width: 44rem;
+      }
+      .back-link {
+        display: inline-block;
+        margin-bottom: var(--spacing-s);
+      }
+      .back-link::before {
+        content: "\2039";
+        margin-right: var(--spacing-xxs);
+      }
+      .choose__intro {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-xs);
+      }
+      .card-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--spacing-s);
+        margin-top: var(--spacing-m);
+      }
+      @media (min-width: 40rem) {
+        .card-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      .card {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-xxs);
+        padding: var(--spacing-m);
+        border: var(--border-width-form) solid var(--color-grey-00);
+        border-radius: var(--radius-sm);
+        background: var(--color-background);
+        text-decoration: none;
+        color: var(--color-text);
+        transition: border-color 0.15s, box-shadow 0.15s;
+      }
+      .card:hover {
+        border-color: var(--color-blue-40);
+        box-shadow: var(--shadow-form-hover);
+      }
+      .card:focus-visible {
+        outline: 3px solid var(--color-yellow-100);
+        outline-offset: 2px;
+      }
+      .card__heading {
+        color: var(--color-blue-40);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+      .card:hover .card__heading {
+        text-decoration: none;
+      }
+      .card__desc {
+        color: var(--color-text-muted);
+      }
+    </style>
+  </head>
+  <body class="govbb-page">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <div>
+      <div class="govbb-official-banner">
+        <div class="govbb-container govbb-official-banner__inner">
+          <div class="govbb-official-banner__crest">
+            <img
+              class="govbb-official-banner__icon"
+              src="dist/assets/images/govbb-creast.svg"
+              alt=""
+            />
+          </div>
+          <div class="govbb-official-banner__text">
+            <span>Official government website</span>
+          </div>
+        </div>
+      </div>
+
+      <header class="govbb-header">
+        <div class="govbb-container govbb-header__inner">
+          <a href="/" aria-label="Go to the alpha.gov.bb homepage">
+            <img class="govbb-header__logo" src="dist/assets/images/govbb-logo.svg" alt="GOVBB" />
+          </a>
+        </div>
+      </header>
+    </div>
+
+    <main class="govbb-page__main" id="main-content">
+      <div
+        class="govbb-status-banner govbb-status-banner--alpha"
+        role="status"
+        aria-label="alpha status banner"
+        aria-live="polite"
+      >
+        <div class="govbb-container">
+          <p>
+            This page is in
+            <a class="govbb-link govbb-link--secondary" href="#">Alpha</a>.
+          </p>
+        </div>
+      </div>
+
+      <div class="govbb-container">
+        <a class="govbb-link back-link" href="index.html">Back</a>
+
+        <div class="choose">
+          <h1 class="govbb-text-h1">What do you need help with?</h1>
+          <div class="choose__intro">
+            <p class="govbb-text-body">Choose the option that best matches what you need.</p>
+            <p class="govbb-text-body">If you are not sure, choose “I am not sure”.</p>
+          </div>
+
+          <div class="card-grid">
+            <a class="card" href="plan-money-property.html">
+              <h2 class="card__heading govbb-text-h3">Plan ahead</h2>
+              <p class="card__desc govbb-text-body">Make a list of what you own, choose who should manage your estate, and store important information safely.</p>
+            </a>
+            <a class="card" href="give-property.html">
+              <h2 class="card__heading govbb-text-h3">Give property while I am alive</h2>
+              <p class="card__desc govbb-text-body">Understand what may be involved if you want to give land, a house or other property to someone now.</p>
+            </a>
+            <a class="card" href="will-check.html">
+              <h2 class="card__heading govbb-text-h3">Prepare a simple will</h2>
+              <p class="card__desc govbb-text-body">Check if a simple will route may be suitable for you.</p>
+            </a>
+            <a class="card" href="death-check.html">
+              <h2 class="card__heading govbb-text-h3">Someone has died</h2>
+              <p class="card__desc govbb-text-body">Find out if you may need probate, letters of administration, Public Trustee help or estate clearance.</p>
+            </a>
+            <a class="card" href="signing-witnessing.html">
+              <h2 class="card__heading govbb-text-h3">Sign, witness or certify a document</h2>
+              <p class="card__desc govbb-text-body">Learn what common legal document terms mean.</p>
+            </a>
+            <a class="card" href="change-record.html">
+              <h2 class="card__heading govbb-text-h3">Change a name or update a record</h2>
+              <p class="card__desc govbb-text-body">Find official information about name changes, certificates and record corrections.</p>
+            </a>
+            <a class="card" href="prepare-for-lawyer.html">
+              <h2 class="card__heading govbb-text-h3">Prepare before speaking to a lawyer</h2>
+              <p class="card__desc govbb-text-body">Organise your documents, questions and concerns before getting legal help.</p>
+            </a>
+            <a class="card" href="help-me-choose.html">
+              <h2 class="card__heading govbb-text-h3">I am not sure</h2>
+              <p class="card__desc govbb-text-body">Get help choosing where to start.</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="govbb-footer">
+      <div class="govbb-container govbb-footer__inner">
+        <nav class="govbb-footer__nav" aria-label="Footer">
+          <a class="govbb-footer__link" href="#">Home</a>
+          <a class="govbb-footer__link" href="#">Cookie Policy</a>
+          <a class="govbb-footer__link" href="#">Terms &amp; Conditions</a>
+          <a class="govbb-footer__link" href="#">Sitemap</a>
+        </nav>
+        <hr class="govbb-footer__divider" aria-hidden="true" />
+        <div class="govbb-footer__end">
+          <img
+            class="govbb-footer__coat"
+            src="dist/assets/images/govbb-creast.svg"
+            alt="Government of Barbados Coat of Arms"
+          />
+          <p class="govbb-footer__copy">© 2026 Government of Barbados</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

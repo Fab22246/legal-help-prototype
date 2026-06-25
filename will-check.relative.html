@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Check if a simple will may be right for you — The Government of Barbados</title>
+    <link rel="icon" href="dist/assets/images/favicon.ico" />
+    <link rel="stylesheet" href="dist/styles.css" />
+    <style>
+      /* Page-specific layout only — built from design-system tokens, no new colours */
+      .skip-link {
+        position: absolute;
+        left: -9999px;
+        top: auto;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        z-index: 999;
+      }
+      .skip-link:focus {
+        position: static;
+        width: auto;
+        height: auto;
+        overflow: visible;
+        padding: var(--spacing-xs) var(--spacing-s);
+        background: var(--color-yellow-100);
+        color: var(--color-black-00);
+        font-weight: var(--font-weight-bold);
+        text-decoration: none;
+      }
+      .form-page {
+        padding-block: var(--spacing-l);
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-l);
+        max-width: 44rem;
+      }
+      .back-link {
+        display: inline-block;
+        margin-bottom: var(--spacing-s);
+      }
+      .back-link::before {
+        content: "\2039";
+        margin-right: var(--spacing-xxs);
+      }
+      .form-page__heading {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-s);
+      }
+      .will-q {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-s);
+      }
+      .will-q[hidden] {
+        display: none;
+      }
+      .help-options {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-s);
+        margin-top: var(--spacing-xs);
+      }
+      .options-or {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-s);
+        color: var(--color-mid-grey-00);
+        font-weight: var(--font-weight-bold);
+      }
+      .options-or::before,
+      .options-or::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--color-grey-00);
+      }
+    </style>
+  </head>
+  <body class="govbb-page">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <div>
+      <div class="govbb-official-banner">
+        <div class="govbb-container govbb-official-banner__inner">
+          <div class="govbb-official-banner__crest">
+            <img
+              class="govbb-official-banner__icon"
+              src="dist/assets/images/govbb-creast.svg"
+              alt=""
+            />
+          </div>
+          <div class="govbb-official-banner__text">
+            <span>Official government website</span>
+          </div>
+        </div>
+      </div>
+
+      <header class="govbb-header">
+        <div class="govbb-container govbb-header__inner">
+          <a href="/" aria-label="Go to the alpha.gov.bb homepage">
+            <img class="govbb-header__logo" src="dist/assets/images/govbb-logo.svg" alt="GOVBB" />
+          </a>
+        </div>
+      </header>
+    </div>
+
+    <main class="govbb-page__main" id="main-content">
+      <div
+        class="govbb-status-banner govbb-status-banner--alpha"
+        role="status"
+        aria-label="alpha status banner"
+        aria-live="polite"
+      >
+        <div class="govbb-container">
+          <p>
+            This page is in
+            <a class="govbb-link govbb-link--secondary" href="#">Alpha</a>.
+          </p>
+        </div>
+      </div>
+
+      <div class="govbb-container">
+        <a class="govbb-link back-link" href="choose-help.html">Back</a>
+
+        <!-- Grouped suitability check. Routing handled by the script below. -->
+        <form class="form-page" action="#" novalidate>
+          <div class="form-page__heading">
+            <h1 class="govbb-text-h1">Check if a simple will may be right for you</h1>
+            <p class="govbb-text-body">A will says what should happen to your money, property and belongings after you die.</p>
+            <p class="govbb-text-body">It can also name the person who should manage your estate. This person is called an executor.</p>
+            <p class="govbb-text-body">This check helps you see if the simple will route may be suitable.</p>
+            <p class="govbb-text-body">This service gives general information. It does not give legal advice. It also does not say that a will is valid.</p>
+          </div>
+
+          <div class="govbb-form-group will-q">
+            <fieldset class="govbb-fieldset">
+              <legend class="govbb-fieldset__legend"><h2 class="govbb-text-h2">Check if you may need legal help first</h2></legend>
+              <p class="govbb-hint">Do any of these apply to you?</p>
+              <div class="help-options">
+                <div class="govbb-checkbox-item">
+                  <input class="govbb-checkbox" id="safety-pressure" type="checkbox" name="safety" value="pressure" />
+                  <label class="govbb-checkbox-item__label" for="safety-pressure">Someone is pressuring me to make this will</label>
+                </div>
+                <div class="govbb-checkbox-item">
+                  <input class="govbb-checkbox" id="safety-understand" type="checkbox" name="safety" value="understand" />
+                  <label class="govbb-checkbox-item__label" for="safety-understand">I do not understand what a will does or what I own</label>
+                </div>
+                <div class="govbb-checkbox-item">
+                  <input class="govbb-checkbox" id="safety-challenge" type="checkbox" name="safety" value="challenge" />
+                  <label class="govbb-checkbox-item__label" for="safety-challenge">Someone may challenge my will</label>
+                </div>
+                <div class="govbb-checkbox-item">
+                  <input class="govbb-checkbox" id="safety-made-before" type="checkbox" name="safety" value="made-before" />
+                  <label class="govbb-checkbox-item__label" for="safety-made-before">I have made a will before and I am not sure what happens to it</label>
+                </div>
+                <div class="govbb-checkbox-item">
+                  <input class="govbb-checkbox" id="safety-married-after" type="checkbox" name="safety" value="married-after" />
+                  <label class="govbb-checkbox-item__label" for="safety-married-after">I have made a will before and got married after making it</label>
+                </div>
+                <div class="govbb-checkbox-item">
+                  <input class="govbb-checkbox" id="safety-marriage" type="checkbox" name="safety" value="marriage" />
+                  <label class="govbb-checkbox-item__label" for="safety-marriage">I am planning to get married soon</label>
+                </div>
+                <div class="options-or" aria-hidden="true">or</div>
+                <div class="govbb-checkbox-item">
+                  <input class="govbb-checkbox" id="safety-none" type="checkbox" name="safety" value="none" />
+                  <label class="govbb-checkbox-item__label" for="safety-none">No, none of these apply to me</label>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="govbb-form-group will-q">
+            <fieldset class="govbb-fieldset">
+              <legend class="govbb-fieldset__legend"><h2 class="govbb-text-h2">Understanding this will</h2></legend>
+              <p class="govbb-hint">Do you feel able to understand and decide what you want this will to say?</p>
+              <div class="help-options">
+                <div class="govbb-radio-item">
+                  <input class="govbb-radio" id="capacity-yes" type="radio" name="capacity" value="yes" />
+                  <label class="govbb-radio-item__label" for="capacity-yes">Yes</label>
+                </div>
+                <div class="govbb-radio-item">
+                  <input class="govbb-radio" id="capacity-no" type="radio" name="capacity" value="no" />
+                  <label class="govbb-radio-item__label" for="capacity-no">No</label>
+                </div>
+                <div class="govbb-radio-item">
+                  <input class="govbb-radio" id="capacity-unsure" type="radio" name="capacity" value="unsure" />
+                  <label class="govbb-radio-item__label" for="capacity-unsure">I am not sure</label>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
+          <p class="govbb-text-body">Next, answer a few questions about what you want this simple will to cover.</p>
+
+          <div class="govbb-form-group will-q">
+            <fieldset class="govbb-fieldset">
+              <legend class="govbb-fieldset__legend"><h2 class="govbb-text-h2">Age</h2></legend>
+              <p class="govbb-hint">Are you 18 or over, or have you been married?</p>
+              <div class="help-options">
+                <div class="govbb-radio-item">
+                  <input class="govbb-radio" id="age-yes" type="radio" name="age" value="yes" />
+                  <label class="govbb-radio-item__label" for="age-yes">Yes</label>
+                </div>
+                <div class="govbb-radio-item">
+                  <input class="govbb-radio" id="age-no" type="radio" name="age" value="no" />
+                  <label class="govbb-radio-item__label" for="age-no">No</label>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="govbb-form-group will-q">
+            <fieldset class="govbb-fieldset">
+              <legend class="govbb-fieldset__legend"><h2 class="govbb-text-h2">What do you want this simple will to cover?</h2></legend>
+              <p class="govbb-hint">Select all that apply.</p>
+              <p class="govbb-hint">Only select what you want this simple will to deal with.</p>
+              <div class="help-options">
+                <div class="govbb-checkbox-item">
+                  <input class="govbb-checkbox" id="cover-belongings" type="checkbox" name="cover" value="belongings" />
+                  <label class="govbb-checkbox-item__label" for="cover-belongings">Money, personal items or belongings in my name</label>
+                </div>
+                <div class="govbb-checkbox-item">
+                  <input class="govbb-checkbox" id="cover-land-solo" type="checkbox" name="cover" value="land-solo" />
+                  <label class="govbb-checkbox-item__label" for="cover-land-solo">Land or a house that I own by myself</label>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="govbb-form-group will-q">
+            <fieldset class="govbb-fieldset">
+              <legend class="govbb-fieldset__legend"><h2 class="govbb-text-h2">Do you own any of these, or do you want this simple will to deal with any of these?</h2></legend>
+              <p class="govbb-hint">These things may need legal help because a simple will may not deal with them properly.</p>
+              <div class="help-options">
+                <div class="govbb-checkbox-item">
+                  <input class="govbb-checkbox" id="else-land-shared" type="checkbox" name="else" value="land-shared" />
+                  <label class="govbb-checkbox-item__label" for="else-land-shared">Land or a house that I own with someone else</label>
+                </div>
+                <div class="govbb-checkbox-item">
+                  <input class="govbb-checkbox" id="else-business" type="checkbox" name="else" value="business" />
+                  <label class="govbb-checkbox-item__label" for="else-business">A business or part of a business</label>
+                </div>
+                <div class="govbb-checkbox-item">
+                  <input class="govbb-checkbox" id="else-overseas" type="checkbox" name="else" value="overseas" />
+                  <label class="govbb-checkbox-item__label" for="else-overseas">Property outside Barbados</label>
+                </div>
+                <div class="govbb-checkbox-item">
+                  <input class="govbb-checkbox" id="else-unsure" type="checkbox" name="else" value="unsure" />
+                  <label class="govbb-checkbox-item__label" for="else-unsure">I am not sure</label>
+                </div>
+                <div class="options-or" aria-hidden="true">or</div>
+                <div class="govbb-checkbox-item">
+                  <input class="govbb-checkbox" id="else-none" type="checkbox" name="else" value="none" />
+                  <label class="govbb-checkbox-item__label" for="else-none">No, none of these</label>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="govbb-form-group will-q">
+            <fieldset class="govbb-fieldset">
+              <legend class="govbb-fieldset__legend"><h2 class="govbb-text-h2">Do you have any of these people in your life?</h2></legend>
+              <p class="govbb-hint">This may include a husband, wife, or someone you have lived with as if married for 5 years or more.</p>
+              <div class="help-options">
+                <div class="govbb-checkbox-item">
+                  <input class="govbb-checkbox" id="people-spouse" type="checkbox" name="people" value="spouse" />
+                  <label class="govbb-checkbox-item__label" for="people-spouse">spouse or partner I live with as if married</label>
+                </div>
+                <div class="govbb-checkbox-item">
+                  <input class="govbb-checkbox" id="people-child18" type="checkbox" name="people" value="child18" />
+                  <label class="govbb-checkbox-item__label" for="people-child18">child under 18</label>
+                </div>
+                <div class="govbb-checkbox-item">
+                  <input class="govbb-checkbox" id="people-childdis" type="checkbox" name="people" value="childdis" />
+                  <label class="govbb-checkbox-item__label" for="people-childdis">child with a disability who depends on me</label>
+                </div>
+                <div class="govbb-checkbox-item">
+                  <input class="govbb-checkbox" id="people-dependant" type="checkbox" name="people" value="dependant" />
+                  <label class="govbb-checkbox-item__label" for="people-dependant">someone else who depends on me financially</label>
+                </div>
+                <div class="options-or" aria-hidden="true">or</div>
+                <div class="govbb-checkbox-item">
+                  <input class="govbb-checkbox" id="people-none" type="checkbox" name="people" value="none" />
+                  <label class="govbb-checkbox-item__label" for="people-none">No, none of these</label>
+                </div>
+                <div class="govbb-checkbox-item">
+                  <input class="govbb-checkbox" id="people-unsure" type="checkbox" name="people" value="unsure" />
+                  <label class="govbb-checkbox-item__label" for="people-unsure">I am not sure</label>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="govbb-form-group will-q" id="include-section" hidden>
+            <fieldset class="govbb-fieldset">
+              <legend class="govbb-fieldset__legend"><h2 class="govbb-text-h2">Including them in the will</h2></legend>
+              <p class="govbb-hint">Will this simple will include the people you selected?</p>
+              <p class="govbb-hint">If you want to leave out someone who may need to be considered, you should speak to a lawyer.</p>
+              <div class="help-options">
+                <div class="govbb-radio-item">
+                  <input class="govbb-radio" id="include-yes" type="radio" name="include" value="yes" />
+                  <label class="govbb-radio-item__label" for="include-yes">Yes</label>
+                </div>
+                <div class="govbb-radio-item">
+                  <input class="govbb-radio" id="include-no" type="radio" name="include" value="no" />
+                  <label class="govbb-radio-item__label" for="include-no">No</label>
+                </div>
+                <div class="govbb-radio-item">
+                  <input class="govbb-radio" id="include-unsure" type="radio" name="include" value="unsure" />
+                  <label class="govbb-radio-item__label" for="include-unsure">I am not sure</label>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="govbb-btn-group">
+            <button class="govbb-btn" type="submit">Continue</button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <footer class="govbb-footer">
+      <div class="govbb-container govbb-footer__inner">
+        <nav class="govbb-footer__nav" aria-label="Footer">
+          <a class="govbb-footer__link" href="#">Home</a>
+          <a class="govbb-footer__link" href="#">Cookie Policy</a>
+          <a class="govbb-footer__link" href="#">Terms &amp; Conditions</a>
+          <a class="govbb-footer__link" href="#">Sitemap</a>
+        </nav>
+        <hr class="govbb-footer__divider" aria-hidden="true" />
+        <div class="govbb-footer__end">
+          <img
+            class="govbb-footer__coat"
+            src="dist/assets/images/govbb-creast.svg"
+            alt="Government of Barbados Coat of Arms"
+          />
+          <p class="govbb-footer__copy">© 2026 Government of Barbados</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Grouped suitability routing for the simple will route.
+      (function () {
+        var form = document.querySelector(".form-page");
+
+        // Mutually exclusive "none" options within a checkbox group.
+        function exclusive(name, exValue) {
+          var boxes = [].slice.call(form.querySelectorAll('input[name="' + name + '"]'));
+          var ex = form.querySelector("#" + name + "-" + exValue);
+          if (!ex) return;
+          boxes.forEach(function (b) {
+            b.addEventListener("change", function () {
+              if (b === ex) {
+                if (ex.checked) boxes.forEach(function (o) { if (o !== ex) o.checked = false; });
+              } else if (b.checked) {
+                ex.checked = false;
+              }
+            });
+          });
+        }
+        exclusive("safety", "none");
+        exclusive("else", "none");
+        exclusive("people", "none");
+
+        function checked(name) {
+          return [].slice.call(form.querySelectorAll('input[name="' + name + '"]:checked')).map(function (b) { return b.value; });
+        }
+        function radio(name) {
+          var x = form.querySelector('input[name="' + name + '"]:checked');
+          return x ? x.value : "";
+        }
+        function has(a, v) { return a.indexOf(v) > -1; }
+        function hasPerson() {
+          var p = checked("people");
+          return has(p, "spouse") || has(p, "child18") || has(p, "childdis") || has(p, "dependant");
+        }
+
+        // "Including them in the will" only shows when a person is selected.
+        var includeSection = document.getElementById("include-section");
+        function syncInclude() {
+          var show = hasPerson();
+          includeSection.hidden = !show;
+          if (!show) {
+            [].slice.call(form.querySelectorAll('input[name="include"]')).forEach(function (r) { r.checked = false; });
+          }
+        }
+        [].slice.call(form.querySelectorAll('input[name="people"]')).forEach(function (r) {
+          r.addEventListener("change", syncInclude);
+        });
+        syncInclude();
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          var safety = checked("safety");
+          var capacity = radio("capacity");
+          var age = radio("age");
+          var cover = checked("cover");
+          var els = checked("else");
+          var people = checked("people");
+          var include = radio("include");
+
+          // Reasons the user may need legal help (shown on the result page).
+          var reasons = [];
+          if (has(safety, "pressure")) reasons.push("pressure");
+          if (has(safety, "understand")) reasons.push("understand");
+          if (has(safety, "challenge")) reasons.push("challenge");
+          if (has(safety, "made-before")) reasons.push("made-before");
+          if (has(safety, "married-after")) reasons.push("married-after");
+          if (has(safety, "marriage")) reasons.push("marriage");
+          if (capacity === "no" || capacity === "unsure") reasons.push("capacity");
+          if (age === "no") reasons.push("age-no");
+          // Things that may need legal help: any selection here needs a lawyer.
+          if (has(els, "land-shared")) reasons.push("cover-land-shared");
+          if (has(els, "business")) reasons.push("cover-business");
+          if (has(els, "overseas")) reasons.push("cover-overseas");
+          if (has(els, "unsure")) reasons.push("else-unsure");
+          // People who may need to be considered.
+          if (has(people, "unsure")) reasons.push("people-unsure");
+          if (hasPerson() && include === "no") reasons.push("people-exclude");
+          if (hasPerson() && include === "unsure") reasons.push("people-unsure-include");
+
+          var needsLawyer = reasons.length > 0;
+          if (needsLawyer) {
+            try { sessionStorage.setItem("willLawyerReasons", JSON.stringify(reasons)); } catch (e2) {}
+            if (window.applyWillLawyerReasons) window.applyWillLawyerReasons(reasons);
+            window.location.href = "speak-to-a-lawyer.html";
+            return;
+          }
+
+          // Flags that decide which extra information-capture pages appear.
+          // Land owned alone is an ordinary simple-will scenario, collected on a
+          // dedicated page. How the user wants to leave things (and therefore
+          // whether specific gifts apply) is asked later, after the executor.
+          // Anything in the "things that may need legal help" question routes to
+          // a lawyer above, so the simple route only continues without it.
+          var hasLand = has(cover, "land-solo");
+
+          // Remember the answers for later pages.
+          try {
+            var wd = {};
+            try { wd = JSON.parse(sessionStorage.getItem("willData") || "{}"); } catch (e5) {}
+            wd.people = people;
+            wd.include = include;
+            wd.cover = cover;
+            wd.els = els;
+            wd.hasLand = hasLand;
+            wd.ownsElse = false;
+            sessionStorage.setItem("willData", JSON.stringify(wd));
+          } catch (e4) {}
+
+          window.location.href = "will-prepare-intro.html";
+        });
+      })();
+    </script>
+  </body>
+</html>

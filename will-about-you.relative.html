@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About you — The Government of Barbados</title>
+    <link rel="icon" href="dist/assets/images/favicon.ico" />
+    <link rel="stylesheet" href="dist/styles.css" />
+    <style>
+      .skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; z-index: 999; }
+      .skip-link:focus { position: static; width: auto; height: auto; overflow: visible; padding: var(--spacing-xs) var(--spacing-s); background: var(--color-yellow-100); color: var(--color-black-00); font-weight: var(--font-weight-bold); text-decoration: none; }
+      .form-page { padding-block: var(--spacing-l); display: flex; flex-direction: column; gap: var(--spacing-l); max-width: 44rem; }
+      .back-link { display: inline-block; margin-bottom: var(--spacing-s); }
+      .back-link::before { content: "\2039"; margin-right: var(--spacing-xxs); }
+      .form-page__heading { display: flex; flex-direction: column; gap: var(--spacing-s); }
+      .fieldgroup { display: flex; flex-direction: column; gap: var(--spacing-m); }
+    </style>
+  </head>
+  <body class="govbb-page">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <div>
+      <div class="govbb-official-banner">
+        <div class="govbb-container govbb-official-banner__inner">
+          <div class="govbb-official-banner__crest"><img class="govbb-official-banner__icon" src="dist/assets/images/govbb-creast.svg" alt="" /></div>
+          <div class="govbb-official-banner__text"><span>Official government website</span></div>
+        </div>
+      </div>
+      <header class="govbb-header">
+        <div class="govbb-container govbb-header__inner">
+          <a href="/" aria-label="Go to the alpha.gov.bb homepage"><img class="govbb-header__logo" src="dist/assets/images/govbb-logo.svg" alt="GOVBB" /></a>
+        </div>
+      </header>
+    </div>
+    <main class="govbb-page__main" id="main-content">
+      <div class="govbb-status-banner govbb-status-banner--alpha" role="status" aria-label="alpha status banner" aria-live="polite">
+        <div class="govbb-container"><p>This page is in <a class="govbb-link govbb-link--secondary" href="#">Alpha</a>.</p></div>
+      </div>
+      <div class="govbb-container">
+        <a class="govbb-link back-link" href="will-prepare-intro.html">Back</a>
+        <form class="form-page" action="#" novalidate>
+          <div class="form-page__heading">
+            <h1 class="govbb-text-h1">About you</h1>
+            <p class="govbb-text-body">Give your details as they should appear in your will information.</p>
+          </div>
+
+          <div class="fieldgroup">
+            <h2 class="govbb-text-h2">Your name</h2>
+            <div class="govbb-form-group">
+              <label class="govbb-label" for="first">First name</label>
+              <div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="first" name="first" /></div>
+            </div>
+            <div class="govbb-form-group">
+              <label class="govbb-label" for="middle">Middle names (optional)</label>
+              <p class="govbb-hint" id="middle-hint">Include all middle names shown on your official documents.</p>
+              <div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="middle" name="middle" aria-describedby="middle-hint" /></div>
+            </div>
+            <div class="govbb-form-group">
+              <label class="govbb-label" for="last">Last name</label>
+              <div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="last" name="last" /></div>
+            </div>
+          </div>
+
+          <div class="fieldgroup">
+            <h2 class="govbb-text-h2">Other names</h2>
+            <div class="govbb-form-group">
+              <label class="govbb-label" for="othernames">Other names you are known by (optional)</label>
+              <p class="govbb-hint" id="othernames-hint">For example, a previous name or a name used on property, bank or insurance records.</p>
+              <div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="othernames" name="othernames" aria-describedby="othernames-hint" /></div>
+            </div>
+          </div>
+
+          <div class="fieldgroup">
+            <h2 class="govbb-text-h2">Address</h2>
+            <div class="govbb-form-group">
+              <label class="govbb-label" for="addr1">Address line 1</label>
+              <div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="addr1" name="addr1" /></div>
+            </div>
+            <div class="govbb-form-group">
+              <label class="govbb-label" for="addr2">Address line 2 (optional)</label>
+              <div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="addr2" name="addr2" /></div>
+            </div>
+            <div class="govbb-form-group">
+              <label class="govbb-label" for="parish">Parish</label>
+              <div class="govbb-input-wrapper">
+                <select class="govbb-input" id="parish" name="parish">
+                  <option value="">Select a parish</option>
+                  <option>Christ Church</option>
+                  <option>St. Andrew</option>
+                  <option>St. George</option>
+                  <option>St. James</option>
+                  <option>St. John</option>
+                  <option>St. Joseph</option>
+                  <option>St. Lucy</option>
+                  <option>St. Michael</option>
+                  <option>St. Peter</option>
+                  <option>St. Philip</option>
+                  <option>St. Thomas</option>
+                </select>
+              </div>
+            </div>
+            <div class="govbb-form-group">
+              <label class="govbb-label" for="country">Country, if outside Barbados (optional)</label>
+              <div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="country" name="country" /></div>
+            </div>
+          </div>
+
+          <div class="fieldgroup">
+            <h2 class="govbb-text-h2">Contact details</h2>
+            <div class="govbb-form-group">
+              <label class="govbb-label" for="email">Email address</label>
+              <p class="govbb-hint" id="email-hint">We may use this to contact you about your information. It does not need to appear in a will.</p>
+              <div class="govbb-input-wrapper"><input class="govbb-input" type="email" id="email" name="email" required aria-describedby="email-hint" /></div>
+            </div>
+            <div class="govbb-form-group">
+              <label class="govbb-label" for="phone">Phone number (optional)</label>
+              <p class="govbb-hint" id="phone-hint">This is for contact only. It does not need to appear in a will.</p>
+              <div class="govbb-input-wrapper"><input class="govbb-input" type="tel" id="phone" name="phone" aria-describedby="phone-hint" /></div>
+            </div>
+          </div>
+
+          <div class="govbb-btn-group"><button class="govbb-btn" type="submit">Continue</button></div>
+        </form>
+      </div>
+    </main>
+    <footer class="govbb-footer">
+      <div class="govbb-container govbb-footer__inner">
+        <nav class="govbb-footer__nav" aria-label="Footer">
+          <a class="govbb-footer__link" href="#">Home</a>
+          <a class="govbb-footer__link" href="#">Cookie Policy</a>
+          <a class="govbb-footer__link" href="#">Terms &amp; Conditions</a>
+          <a class="govbb-footer__link" href="#">Sitemap</a>
+        </nav>
+        <hr class="govbb-footer__divider" aria-hidden="true" />
+        <div class="govbb-footer__end">
+          <img class="govbb-footer__coat" src="dist/assets/images/govbb-creast.svg" alt="Government of Barbados Coat of Arms" />
+          <p class="govbb-footer__copy">© 2026 Government of Barbados</p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      (function () {
+        var form = document.querySelector(".form-page");
+        function save() {
+          var data = {};
+          try { data = JSON.parse(sessionStorage.getItem("willData") || "{}"); } catch (e) {}
+          [].slice.call(form.querySelectorAll("input[type=text], input[type=email], input[type=tel], textarea, select")).forEach(function (el) { if (el.name) data[el.name] = el.value; });
+          try { sessionStorage.setItem("willData", JSON.stringify(data)); } catch (e) {}
+        }
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          save();
+          window.location.href = "will-executor.html";
+        });
+      })();
+    </script>
+  </body>
+</html>

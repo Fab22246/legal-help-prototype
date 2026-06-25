@@ -1,0 +1,11 @@
+# Local Claude Code settings (machine-specific permissions)
+.claude/settings.local.json
+
+# Unrelated leftover file
+start-trading-barbados 99.html
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp

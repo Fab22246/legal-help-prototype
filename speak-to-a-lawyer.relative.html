@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>You may need legal help before making a will — The Government of Barbados</title>
+    <link rel="icon" href="dist/assets/images/favicon.ico" />
+    <link rel="stylesheet" href="dist/styles.css" />
+    <style>
+      /* Page-specific layout only — built from design-system tokens, no new colours */
+      .skip-link {
+        position: absolute;
+        left: -9999px;
+        top: auto;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        z-index: 999;
+      }
+      .skip-link:focus {
+        position: static;
+        width: auto;
+        height: auto;
+        overflow: visible;
+        padding: var(--spacing-xs) var(--spacing-s);
+        background: var(--color-yellow-100);
+        color: var(--color-black-00);
+        font-weight: var(--font-weight-bold);
+        text-decoration: none;
+      }
+      .outcome {
+        padding-block: var(--spacing-l);
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-m);
+        max-width: 44rem;
+      }
+      .back-link {
+        display: inline-block;
+        margin-bottom: var(--spacing-s);
+      }
+      .back-link::before {
+        content: "\2039";
+        margin-right: var(--spacing-xxs);
+      }
+      .outcome__text {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-s);
+      }
+      .reasons {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-m);
+      }
+      .reason {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-s);
+        padding: var(--spacing-s) var(--spacing-m);
+        border-left: var(--spacing-xxs) solid var(--color-blue-40);
+        background: var(--color-blue-10);
+      }
+      .reason[hidden] {
+        display: none;
+      }
+      .outcome__actions {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-s);
+        margin-top: var(--spacing-s);
+      }
+    </style>
+  </head>
+  <body class="govbb-page">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <div>
+      <div class="govbb-official-banner">
+        <div class="govbb-container govbb-official-banner__inner">
+          <div class="govbb-official-banner__crest">
+            <img
+              class="govbb-official-banner__icon"
+              src="dist/assets/images/govbb-creast.svg"
+              alt=""
+            />
+          </div>
+          <div class="govbb-official-banner__text">
+            <span>Official government website</span>
+          </div>
+        </div>
+      </div>
+
+      <header class="govbb-header">
+        <div class="govbb-container govbb-header__inner">
+          <a href="/" aria-label="Go to the alpha.gov.bb homepage">
+            <img class="govbb-header__logo" src="dist/assets/images/govbb-logo.svg" alt="GOVBB" />
+          </a>
+        </div>
+      </header>
+    </div>
+
+    <main class="govbb-page__main" id="main-content">
+      <div
+        class="govbb-status-banner govbb-status-banner--alpha"
+        role="status"
+        aria-label="alpha status banner"
+        aria-live="polite"
+      >
+        <div class="govbb-container">
+          <p>
+            This page is in
+            <a class="govbb-link govbb-link--secondary" href="#">Alpha</a>.
+          </p>
+        </div>
+      </div>
+
+      <div class="govbb-container">
+        <a class="govbb-link back-link" href="will-check.html">Back</a>
+
+        <div class="outcome">
+          <h1 class="govbb-text-h1">You may need legal help before making a will</h1>
+
+          <div class="outcome__text">
+            <p class="govbb-text-body">Based on your answers, this service should not continue with the simple will route.</p>
+            <p class="govbb-text-body">This does not mean you cannot make a will.</p>
+            <p class="govbb-text-body">It means your situation may need legal help before a will is prepared.</p>
+          </div>
+
+          <h2 class="govbb-text-h2">Why you are seeing this</h2>
+          <div class="reasons">
+            <div class="reason" data-reason="pressure" hidden>
+              <p class="govbb-text-body">You said someone is pressuring you to make this will.</p>
+              <p class="govbb-text-body">A will should reflect your own wishes.</p>
+              <p class="govbb-text-body">You should speak to a lawyer before continuing.</p>
+            </div>
+            <div class="reason" data-reason="understand" hidden>
+              <p class="govbb-text-body">You said you do not understand what a will does or what you own.</p>
+              <p class="govbb-text-body">A will is an important legal document.</p>
+              <p class="govbb-text-body">You should speak to a lawyer before continuing.</p>
+            </div>
+            <div class="reason" data-reason="capacity" hidden>
+              <p class="govbb-text-body">You said you may not be able to understand and decide what you want this will to say.</p>
+              <p class="govbb-text-body">A will is an important legal document.</p>
+              <p class="govbb-text-body">You should speak to a lawyer before preparing a simple will.</p>
+            </div>
+            <div class="reason" data-reason="challenge" hidden>
+              <p class="govbb-text-body">You said someone may challenge your will.</p>
+              <p class="govbb-text-body">This service cannot help where a will may be disputed.</p>
+              <p class="govbb-text-body">You should speak to a lawyer before preparing a will.</p>
+            </div>
+            <div class="reason" data-reason="made-before" hidden>
+              <p class="govbb-text-body">You said you have made a will before and are not sure what happens to it.</p>
+              <p class="govbb-text-body">A new will can affect an earlier will.</p>
+              <p class="govbb-text-body">You should speak to a lawyer before preparing a new will.</p>
+            </div>
+            <div class="reason" data-reason="married-after" hidden>
+              <p class="govbb-text-body">You said you have made a will before and got married after making it.</p>
+              <p class="govbb-text-body">Marriage can affect an earlier will.</p>
+              <p class="govbb-text-body">You should speak to a lawyer before preparing a simple will.</p>
+            </div>
+            <div class="reason" data-reason="marriage" hidden>
+              <p class="govbb-text-body">You said you are planning to get married soon.</p>
+              <p class="govbb-text-body">Marriage can affect a will.</p>
+              <p class="govbb-text-body">You should speak to a lawyer before preparing a simple will.</p>
+            </div>
+            <div class="reason" data-reason="age-no" hidden>
+              <p class="govbb-text-body">You said you are not 18 or over and have not been married.</p>
+              <p class="govbb-text-body">This service cannot help you prepare information for a simple will.</p>
+              <p class="govbb-text-body">You should speak to a lawyer if you need advice.</p>
+            </div>
+            <div class="reason" data-reason="cover-land-shared" hidden>
+              <p class="govbb-text-body">You said you want this simple will to cover land or a house owned with someone else.</p>
+              <p class="govbb-text-body">Property owned with someone else may need legal advice.</p>
+              <p class="govbb-text-body">This simple route should not deal with that property.</p>
+            </div>
+            <div class="reason" data-reason="cover-business" hidden>
+              <p class="govbb-text-body">You said you want this simple will to cover a business or part of a business.</p>
+              <p class="govbb-text-body">Business interests can be complex.</p>
+              <p class="govbb-text-body">You should speak to a lawyer before preparing a will.</p>
+            </div>
+            <div class="reason" data-reason="cover-overseas" hidden>
+              <p class="govbb-text-body">You said you want this simple will to cover property outside Barbados.</p>
+              <p class="govbb-text-body">Property in another country may have different rules.</p>
+              <p class="govbb-text-body">You should speak to a lawyer before preparing a will.</p>
+            </div>
+            <div class="reason" data-reason="cover-unsure" hidden>
+              <p class="govbb-text-body">You said you are not sure what this simple will should cover.</p>
+              <p class="govbb-text-body">You should speak to a lawyer before preparing a will.</p>
+            </div>
+            <div class="reason" data-reason="else-unsure" hidden>
+              <p class="govbb-text-body">You said you are not sure if you own anything else that may need legal help.</p>
+              <p class="govbb-text-body">You should speak to a lawyer before preparing a simple will.</p>
+            </div>
+            <div class="reason" data-reason="land-owner" hidden>
+              <p class="govbb-text-body">You said you may not be the only owner of the property.</p>
+              <p class="govbb-text-body">Property owned with someone else may need legal advice.</p>
+              <p class="govbb-text-body">You should speak to a lawyer before preparing a simple will.</p>
+            </div>
+            <div class="reason" data-reason="gift-owner" hidden>
+              <p class="govbb-text-body">You said you may not be the only owner of something you want to leave.</p>
+              <p class="govbb-text-body">Property owned with someone else may need legal advice.</p>
+              <p class="govbb-text-body">You should speak to a lawyer before preparing a simple will.</p>
+            </div>
+            <div class="reason" data-reason="leave-unsure" hidden>
+              <p class="govbb-text-body">You said you are not sure how you want to leave what is included in the will.</p>
+              <p class="govbb-text-body">You should decide this before preparing a simple will.</p>
+            </div>
+            <div class="reason" data-reason="elsewho-unsure" hidden>
+              <p class="govbb-text-body">You said you are not sure who should receive everything else included in the will.</p>
+              <p class="govbb-text-body">You should decide this before preparing a simple will.</p>
+            </div>
+            <div class="reason" data-reason="people-unsure" hidden>
+              <p class="govbb-text-body">You said you are not sure if someone may need to be considered in your will.</p>
+              <p class="govbb-text-body">You should speak to a lawyer before preparing a simple will.</p>
+            </div>
+            <div class="reason" data-reason="people-exclude" hidden>
+              <p class="govbb-text-body">You said there may be someone who should be considered, but you do not want to include them in the will.</p>
+              <p class="govbb-text-body">This may need legal advice.</p>
+              <p class="govbb-text-body">You should speak to a lawyer before preparing a simple will.</p>
+            </div>
+            <div class="reason" data-reason="people-unsure-include" hidden>
+              <p class="govbb-text-body">You said there may be someone who should be considered, but you are not sure if you will include them.</p>
+              <p class="govbb-text-body">This may need legal advice.</p>
+              <p class="govbb-text-body">You should speak to a lawyer before preparing a simple will.</p>
+            </div>
+            <div class="reason" data-reason="wishes-child" hidden>
+              <p class="govbb-text-body">You said you want to leave something to a child under 18.</p>
+              <p class="govbb-text-body">Gifts to children can need extra planning.</p>
+              <p class="govbb-text-body">You should speak to a lawyer before preparing a will.</p>
+            </div>
+            <div class="reason" data-reason="wishes-unsure" hidden>
+              <p class="govbb-text-body">You said you are not sure what you want the will to do.</p>
+              <p class="govbb-text-body">You should speak to a lawyer before preparing a will.</p>
+            </div>
+            <div class="reason" data-reason="general" hidden>
+              <p class="govbb-text-body">Based on your answers, your situation may need legal help before a will is prepared.</p>
+              <p class="govbb-text-body">You should speak to a lawyer before continuing.</p>
+            </div>
+          </div>
+
+          <h2 class="govbb-text-h2">What you can do next</h2>
+          <div class="outcome__text">
+            <p class="govbb-text-body">You can still prepare information before speaking to a lawyer.</p>
+            <p class="govbb-text-body">This can help you organise:</p>
+          </div>
+          <ul class="govbb-list govbb-list--bullet">
+            <li>your questions</li>
+            <li>your documents</li>
+            <li>details of your money, property and belongings</li>
+            <li>who you may want to name as executor</li>
+            <li>who you may want to leave things to</li>
+          </ul>
+
+          <div class="outcome__actions">
+            <a class="govbb-btn" href="prepare-for-lawyer.html" role="button" draggable="false">Prepare information before speaking to a lawyer</a>
+            <a class="govbb-link" href="choose-help.html">Back to what you need help with</a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="govbb-footer">
+      <div class="govbb-container govbb-footer__inner">
+        <nav class="govbb-footer__nav" aria-label="Footer">
+          <a class="govbb-footer__link" href="#">Home</a>
+          <a class="govbb-footer__link" href="#">Cookie Policy</a>
+          <a class="govbb-footer__link" href="#">Terms &amp; Conditions</a>
+          <a class="govbb-footer__link" href="#">Sitemap</a>
+        </nav>
+        <hr class="govbb-footer__divider" aria-hidden="true" />
+        <div class="govbb-footer__end">
+          <img
+            class="govbb-footer__coat"
+            src="dist/assets/images/govbb-creast.svg"
+            alt="Government of Barbados Coat of Arms"
+          />
+          <p class="govbb-footer__copy">© 2026 Government of Barbados</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Show the reason block(s) for the answers that sent the user here.
+      (function () {
+        function apply(reasons) {
+          var root = document.getElementById("screen-speak-to-a-lawyer") || document;
+          var blocks = root.querySelectorAll(".reason");
+          var shown = false;
+          for (var i = 0; i < blocks.length; i++) {
+            var key = blocks[i].getAttribute("data-reason");
+            var show = reasons.indexOf(key) > -1;
+            blocks[i].hidden = !show;
+            if (show) shown = true;
+          }
+          if (!shown) {
+            var g = root.querySelector('.reason[data-reason="general"]');
+            if (g) g.hidden = false;
+          }
+        }
+        window.applyWillLawyerReasons = apply;
+        var reasons = [];
+        try { reasons = JSON.parse(sessionStorage.getItem("willLawyerReasons") || "[]"); } catch (e) {}
+        apply(reasons);
+      })();
+    </script>
+  </body>
+</html>

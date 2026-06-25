@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Legal help for common life events — The Government of Barbados</title>
+    <link rel="icon" href="dist/assets/images/favicon.ico" />
+    <link rel="stylesheet" href="dist/styles.css" />
+    <style>
+      /* Page-specific layout only — design-system service-page layout, no new colours */
+      .skip-link {
+        position: absolute;
+        left: -9999px;
+        top: auto;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        z-index: 999;
+      }
+      .skip-link:focus {
+        position: static;
+        width: auto;
+        height: auto;
+        overflow: visible;
+        padding: var(--spacing-xs) var(--spacing-s);
+        background: var(--color-yellow-100);
+        color: var(--color-black-00);
+        font-weight: var(--font-weight-bold);
+        text-decoration: none;
+      }
+      .service-page {
+        padding-block: var(--spacing-m);
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-m);
+      }
+      .service__grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--spacing-m);
+      }
+      .service__main {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-m);
+      }
+      .service__sections {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-m);
+      }
+      .service__section {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-s);
+      }
+      .service__cta {
+        align-self: flex-start;
+      }
+      @media (width >= 1024px) {
+        .service__grid {
+          grid-template-columns: repeat(3, 1fr);
+          gap: var(--spacing-xl);
+        }
+        .service__main {
+          grid-column: span 2;
+        }
+      }
+    </style>
+  </head>
+  <body class="govbb-page">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <div>
+      <div class="govbb-official-banner">
+        <div class="govbb-container govbb-official-banner__inner">
+          <div class="govbb-official-banner__crest">
+            <img
+              class="govbb-official-banner__icon"
+              src="dist/assets/images/govbb-creast.svg"
+              alt=""
+            />
+          </div>
+          <div class="govbb-official-banner__text">
+            <span>Official government website</span>
+          </div>
+        </div>
+      </div>
+
+      <header class="govbb-header">
+        <div class="govbb-container govbb-header__inner">
+          <a href="/" aria-label="Go to the alpha.gov.bb homepage">
+            <img class="govbb-header__logo" src="dist/assets/images/govbb-logo.svg" alt="GOVBB" />
+          </a>
+        </div>
+      </header>
+    </div>
+
+    <main class="govbb-page__main" id="main-content">
+      <div
+        class="govbb-status-banner govbb-status-banner--alpha"
+        role="status"
+        aria-label="alpha status banner"
+        aria-live="polite"
+      >
+        <div class="govbb-container">
+          <p>
+            This page is in
+            <a class="govbb-link govbb-link--secondary" href="#">Alpha</a>.
+          </p>
+        </div>
+      </div>
+
+      <div class="govbb-container service-page">
+        <div class="service__grid">
+          <div class="service__main">
+            <h1 class="govbb-text-display">Legal help for common life events</h1>
+
+            <div class="service__sections">
+              <section class="service__section">
+                <p class="govbb-text-body-lg">
+                  Use this service to check what legal step may apply, prepare some legal documents,
+                  and find out what to do next.
+                </p>
+                <p class="govbb-text-body">You can use it to:</p>
+                <ul class="govbb-list govbb-list--bullet">
+                  <li>prepare a simple will, if your situation is straightforward</li>
+                  <li>plan what should happen to your money and property</li>
+                  <li>check what may be needed after someone dies</li>
+                  <li>understand how to sign, witness, certify or submit documents</li>
+                  <li>change a name or update a record</li>
+                  <li>prepare questions and information before speaking to a lawyer</li>
+                </ul>
+                <p class="govbb-text-body">
+                  <strong>This service gives general legal information. It does not give legal advice.</strong>
+                </p>
+                <a class="govbb-btn service__cta" href="choose-help.html" role="button" draggable="false">Start now</a>
+              </section>
+
+              <section class="service__section">
+                <h2 class="govbb-text-h2">What this service cannot do</h2>
+                <p class="govbb-text-body">This service cannot:</p>
+                <ul class="govbb-list govbb-list--bullet">
+                  <li>decide who should inherit</li>
+                  <li>say if a will is valid</li>
+                  <li>settle a dispute</li>
+                  <li>replace a lawyer</li>
+                  <li>file documents for you</li>
+                  <li>guarantee that a document will be accepted</li>
+                </ul>
+              </section>
+
+              <section class="service__section">
+                <h2 class="govbb-text-h2">When you cannot use this service</h2>
+                <p class="govbb-text-body">Do not use this service as your only source of help if:</p>
+                <ul class="govbb-list govbb-list--bullet">
+                  <li>people disagree about a will, estate, money, property or document</li>
+                  <li>someone is pressuring you to sign or prepare a document</li>
+                  <li>there is already a court matter about the issue</li>
+                  <li>you need urgent help because of a deadline</li>
+                  <li>your issue is not one of the topics listed on this page</li>
+                </ul>
+                <p class="govbb-text-body">You can still read the general information.</p>
+                <p class="govbb-text-body">But you should speak to a lawyer or contact the relevant office before taking action.</p>
+              </section>
+
+              <section class="service__section">
+                <h2 class="govbb-text-h2">Before you start</h2>
+                <p class="govbb-text-body">You may need:</p>
+                <ul class="govbb-list govbb-list--bullet">
+                  <li>your full name and contact details</li>
+                  <li>details about the issue you need help with</li>
+                  <li>any forms, letters or documents you already have</li>
+                  <li>details of money, property or other assets</li>
+                  <li>documents that show your relationship to another person</li>
+                </ul>
+                <p class="govbb-text-body">You can still continue if you do not have everything.</p>
+              </section>
+
+              <section class="service__section">
+                <h2 class="govbb-text-h2">Prototype note</h2>
+                <p class="govbb-text-body">This is a prototype.</p>
+                <p class="govbb-text-body">
+                  It does not create documents, file applications, take payments, book appointments or
+                  save your information yet.
+                </p>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="govbb-footer">
+      <div class="govbb-container govbb-footer__inner">
+        <nav class="govbb-footer__nav" aria-label="Footer">
+          <a class="govbb-footer__link" href="#">Home</a>
+          <a class="govbb-footer__link" href="#">Cookie Policy</a>
+          <a class="govbb-footer__link" href="#">Terms &amp; Conditions</a>
+          <a class="govbb-footer__link" href="#">Sitemap</a>
+        </nav>
+        <hr class="govbb-footer__divider" aria-hidden="true" />
+        <div class="govbb-footer__end">
+          <img
+            class="govbb-footer__coat"
+            src="dist/assets/images/govbb-creast.svg"
+            alt="Government of Barbados Coat of Arms"
+          />
+          <p class="govbb-footer__copy">© 2026 Government of Barbados</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Specific gifts — The Government of Barbados</title>
+    <link rel="icon" href="dist/assets/images/favicon.ico" />
+    <link rel="stylesheet" href="dist/styles.css" />
+    <style>
+      .skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; z-index: 999; }
+      .skip-link:focus { position: static; width: auto; height: auto; overflow: visible; padding: var(--spacing-xs) var(--spacing-s); background: var(--color-yellow-100); color: var(--color-black-00); font-weight: var(--font-weight-bold); text-decoration: none; }
+      .form-page { padding-block: var(--spacing-l); display: flex; flex-direction: column; gap: var(--spacing-l); max-width: 44rem; }
+      .back-link { display: inline-block; margin-bottom: var(--spacing-s); }
+      .back-link::before { content: "\2039"; margin-right: var(--spacing-xxs); }
+      .form-page__heading { display: flex; flex-direction: column; gap: var(--spacing-s); }
+      .fieldgroup { display: flex; flex-direction: column; gap: var(--spacing-m); }
+      .will-q { display: flex; flex-direction: column; gap: var(--spacing-s); }
+      .will-q[hidden] { display: none; }
+      .help-options { display: flex; flex-direction: column; gap: var(--spacing-s); margin-top: var(--spacing-xs); }
+      .gift { display: flex; flex-direction: column; gap: var(--spacing-m); padding: var(--spacing-m); border: var(--border-width-form) solid var(--color-grey-00); border-radius: var(--radius-sm); }
+    </style>
+  </head>
+  <body class="govbb-page">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <div>
+      <div class="govbb-official-banner">
+        <div class="govbb-container govbb-official-banner__inner">
+          <div class="govbb-official-banner__crest"><img class="govbb-official-banner__icon" src="dist/assets/images/govbb-creast.svg" alt="" /></div>
+          <div class="govbb-official-banner__text"><span>Official government website</span></div>
+        </div>
+      </div>
+      <header class="govbb-header">
+        <div class="govbb-container govbb-header__inner">
+          <a href="/" aria-label="Go to the alpha.gov.bb homepage"><img class="govbb-header__logo" src="dist/assets/images/govbb-logo.svg" alt="GOVBB" /></a>
+        </div>
+      </header>
+    </div>
+    <main class="govbb-page__main" id="main-content">
+      <div class="govbb-status-banner govbb-status-banner--alpha" role="status" aria-label="alpha status banner" aria-live="polite">
+        <div class="govbb-container"><p>This page is in <a class="govbb-link govbb-link--secondary" href="#">Alpha</a>.</p></div>
+      </div>
+      <div class="govbb-container">
+        <a class="govbb-link back-link" href="will-executor.html">Back</a>
+        <form class="form-page" action="#" novalidate>
+          <div class="form-page__heading">
+            <h1 class="govbb-text-h1">Specific gifts</h1>
+            <p class="govbb-text-body">Use this page to list any specific personal items or amounts of money you want to leave to named people.</p>
+            <p class="govbb-text-body">Do not use this page for:</p>
+          </div>
+          <ul class="govbb-list govbb-list--bullet">
+            <li>land or a house</li>
+            <li>a business or part of a business</li>
+            <li>property outside Barbados</li>
+            <li>anything owned with someone else</li>
+          </ul>
+          <p class="govbb-text-body">If you want the will to deal with those things, you should speak to a lawyer.</p>
+
+          <div id="gifts"></div>
+
+          <div><button class="govbb-btn--secondary" type="button" id="add-gift">Add another gift</button></div>
+
+          <div class="govbb-btn-group"><button class="govbb-btn" type="submit">Continue</button></div>
+        </form>
+      </div>
+    </main>
+    <footer class="govbb-footer">
+      <div class="govbb-container govbb-footer__inner">
+        <nav class="govbb-footer__nav" aria-label="Footer">
+          <a class="govbb-footer__link" href="#">Home</a>
+          <a class="govbb-footer__link" href="#">Cookie Policy</a>
+          <a class="govbb-footer__link" href="#">Terms &amp; Conditions</a>
+          <a class="govbb-footer__link" href="#">Sitemap</a>
+        </nav>
+        <hr class="govbb-footer__divider" aria-hidden="true" />
+        <div class="govbb-footer__end">
+          <img class="govbb-footer__coat" src="dist/assets/images/govbb-creast.svg" alt="Government of Barbados Coat of Arms" />
+          <p class="govbb-footer__copy">© 2026 Government of Barbados</p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      (function () {
+        var form = document.querySelector(".form-page");
+        var giftsEl = document.getElementById("gifts");
+        var addBtn = document.getElementById("add-gift");
+
+        function rowHtml(i) {
+          return '' +
+            '<h2 class="govbb-text-h2">Gift ' + (i + 1) + '</h2>' +
+            '<div class="govbb-form-group will-q"><fieldset class="govbb-fieldset">' +
+              '<legend class="govbb-fieldset__legend"><h3 class="govbb-text-h3">What type of gift is it?</h3></legend>' +
+              '<div class="help-options">' +
+                '<div class="govbb-radio-item"><input class="govbb-radio" id="gift-type-item-' + i + '" type="radio" name="gift-type-' + i + '" value="item" /><label class="govbb-radio-item__label" for="gift-type-item-' + i + '">personal item</label></div>' +
+                '<div class="govbb-radio-item"><input class="govbb-radio" id="gift-type-money-' + i + '" type="radio" name="gift-type-' + i + '" value="money" /><label class="govbb-radio-item__label" for="gift-type-money-' + i + '">amount of money</label></div>' +
+                '<div class="govbb-radio-item"><input class="govbb-radio" id="gift-type-other-' + i + '" type="radio" name="gift-type-' + i + '" value="other" /><label class="govbb-radio-item__label" for="gift-type-other-' + i + '">other</label></div>' +
+              '</div></fieldset></div>' +
+            '<div class="govbb-form-group will-q gift-type-other-section" hidden data-row="' + i + '"><label class="govbb-label" for="gift-type-desc-' + i + '">Describe the gift</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="gift-type-desc-' + i + '" name="gift-type-desc-' + i + '" /></div></div>' +
+            '<div class="govbb-form-group"><label class="govbb-label" for="gift-desc-' + i + '">What do you want to leave?</label><p class="govbb-hint" id="gift-desc-hint-' + i + '">For example, &ldquo;my gold watch&rdquo; or &ldquo;BDS $1,000&rdquo;.</p><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="gift-desc-' + i + '" name="gift-desc-' + i + '" aria-describedby="gift-desc-hint-' + i + '" /></div></div>' +
+            '<h3 class="govbb-text-h3">Who should receive this gift?</h3>' +
+            '<div class="govbb-form-group"><label class="govbb-label" for="gift-first-' + i + '">First name</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="gift-first-' + i + '" name="gift-first-' + i + '" /></div></div>' +
+            '<div class="govbb-form-group"><label class="govbb-label" for="gift-middle-' + i + '">Middle names (optional)</label><p class="govbb-hint" id="gift-middle-hint-' + i + '">Include all middle names shown on official documents.</p><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="gift-middle-' + i + '" name="gift-middle-' + i + '" aria-describedby="gift-middle-hint-' + i + '" /></div></div>' +
+            '<div class="govbb-form-group"><label class="govbb-label" for="gift-last-' + i + '">Last name</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="gift-last-' + i + '" name="gift-last-' + i + '" /></div></div>' +
+            '<div class="govbb-form-group"><label class="govbb-label" for="gift-rel-' + i + '">Relationship to you</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="gift-rel-' + i + '" name="gift-rel-' + i + '" /></div></div>' +
+            '<div class="govbb-form-group"><label class="govbb-label" for="gift-addr-' + i + '">Address, if known (optional)</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="gift-addr-' + i + '" name="gift-addr-' + i + '" /></div></div>' +
+            '<div class="govbb-form-group"><label class="govbb-label" for="gift-email-' + i + '">Email address, if known (optional)</label><div class="govbb-input-wrapper"><input class="govbb-input" type="email" id="gift-email-' + i + '" name="gift-email-' + i + '" /></div></div>' +
+            '<div class="govbb-form-group"><label class="govbb-label" for="gift-phone-' + i + '">Phone number, if known (optional)</label><div class="govbb-input-wrapper"><input class="govbb-input" type="tel" id="gift-phone-' + i + '" name="gift-phone-' + i + '" /></div></div>' +
+            '<div class="govbb-form-group will-q"><fieldset class="govbb-fieldset">' +
+              '<legend class="govbb-fieldset__legend"><h3 class="govbb-text-h3">Are you the only owner of this item or money?</h3></legend>' +
+              '<div class="help-options">' +
+                '<div class="govbb-radio-item"><input class="govbb-radio" id="gift-owner-yes-' + i + '" type="radio" name="gift-owner-' + i + '" value="yes" /><label class="govbb-radio-item__label" for="gift-owner-yes-' + i + '">Yes</label></div>' +
+                '<div class="govbb-radio-item"><input class="govbb-radio" id="gift-owner-no-' + i + '" type="radio" name="gift-owner-' + i + '" value="no" /><label class="govbb-radio-item__label" for="gift-owner-no-' + i + '">No</label></div>' +
+                '<div class="govbb-radio-item"><input class="govbb-radio" id="gift-owner-unsure-' + i + '" type="radio" name="gift-owner-' + i + '" value="unsure" /><label class="govbb-radio-item__label" for="gift-owner-unsure-' + i + '">I am not sure</label></div>' +
+              '</div></fieldset></div>';
+        }
+
+        var count = 0;
+        function addRow() {
+          var i = count++;
+          var row = document.createElement("div");
+          row.className = "gift";
+          row.setAttribute("data-gift", i);
+          row.innerHTML = rowHtml(i);
+          giftsEl.appendChild(row);
+          // Wire the "other" describe reveal for this row.
+          var section = row.querySelector(".gift-type-other-section");
+          [].slice.call(row.querySelectorAll('input[name="gift-type-' + i + '"]')).forEach(function (r) {
+            r.addEventListener("change", function () {
+              var c = row.querySelector('input[name="gift-type-' + i + '"]:checked');
+              section.hidden = !(c && c.value === "other");
+            });
+          });
+        }
+        addRow();
+        addBtn.addEventListener("click", addRow);
+
+        function save() {
+          var data = {};
+          try { data = JSON.parse(sessionStorage.getItem("willData") || "{}"); } catch (e) {}
+          [].slice.call(form.querySelectorAll("input[type=text], input[type=email], input[type=tel]")).forEach(function (el) { if (el.name) data[el.name] = el.value; });
+          [].slice.call(form.querySelectorAll("input[type=radio]:checked")).forEach(function (el) { data[el.name] = el.value; });
+          data["gift-count"] = giftsEl.querySelectorAll(".gift").length;
+          try { sessionStorage.setItem("willData", JSON.stringify(data)); } catch (e) {}
+        }
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          save();
+          // If any gift may be owned with someone else, this needs a lawyer.
+          var rows = [].slice.call(giftsEl.querySelectorAll(".gift"));
+          var needsLawyer = rows.some(function (row) {
+            var c = row.querySelector('input[name^="gift-owner-"]:checked');
+            return c && (c.value === "no" || c.value === "unsure");
+          });
+          if (needsLawyer) {
+            try { sessionStorage.setItem("willLawyerReasons", JSON.stringify(["gift-owner"])); } catch (e2) {}
+            if (window.applyWillLawyerReasons) window.applyWillLawyerReasons(["gift-owner"]);
+            window.location.href = "speak-to-a-lawyer.html";
+            return;
+          }
+          // Then ask who should receive everything else included in the will.
+          if (window.applyWillVariant) window.applyWillVariant();
+          window.location.href = "will-beneficiaries.html";
+        });
+      })();
+    </script>
+  </body>
+</html>

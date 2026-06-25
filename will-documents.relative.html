@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Important documents and information — The Government of Barbados</title>
+    <link rel="icon" href="dist/assets/images/favicon.ico" />
+    <link rel="stylesheet" href="dist/styles.css" />
+    <style>
+      .skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; z-index: 999; }
+      .skip-link:focus { position: static; width: auto; height: auto; overflow: visible; padding: var(--spacing-xs) var(--spacing-s); background: var(--color-yellow-100); color: var(--color-black-00); font-weight: var(--font-weight-bold); text-decoration: none; }
+      .form-page { padding-block: var(--spacing-l); display: flex; flex-direction: column; gap: var(--spacing-m); max-width: 44rem; }
+      .back-link { display: inline-block; margin-bottom: var(--spacing-s); }
+      .back-link::before { content: "\2039"; margin-right: var(--spacing-xxs); }
+      .form-page__heading { display: flex; flex-direction: column; gap: var(--spacing-s); }
+      .help-options { display: flex; flex-direction: column; gap: var(--spacing-s); margin-top: var(--spacing-xs); }
+      .options-or { display: flex; align-items: center; gap: var(--spacing-s); color: var(--color-mid-grey-00); font-weight: var(--font-weight-bold); }
+      .options-or::before, .options-or::after { content: ""; flex: 1; height: 1px; background: var(--color-grey-00); }
+    </style>
+  </head>
+  <body class="govbb-page">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <div>
+      <div class="govbb-official-banner">
+        <div class="govbb-container govbb-official-banner__inner">
+          <div class="govbb-official-banner__crest"><img class="govbb-official-banner__icon" src="dist/assets/images/govbb-creast.svg" alt="" /></div>
+          <div class="govbb-official-banner__text"><span>Official government website</span></div>
+        </div>
+      </div>
+      <header class="govbb-header">
+        <div class="govbb-container govbb-header__inner">
+          <a href="/" aria-label="Go to the alpha.gov.bb homepage"><img class="govbb-header__logo" src="dist/assets/images/govbb-logo.svg" alt="GOVBB" /></a>
+        </div>
+      </header>
+    </div>
+    <main class="govbb-page__main" id="main-content">
+      <div class="govbb-status-banner govbb-status-banner--alpha" role="status" aria-label="alpha status banner" aria-live="polite">
+        <div class="govbb-container"><p>This page is in <a class="govbb-link govbb-link--secondary" href="#">Alpha</a>.</p></div>
+      </div>
+      <div class="govbb-container">
+        <a class="govbb-link back-link" href="will-beneficiaries.html">Back</a>
+        <form class="form-page" action="#" novalidate>
+          <div class="govbb-form-group">
+            <fieldset class="govbb-fieldset">
+              <legend class="govbb-fieldset__legend"><h1 class="govbb-text-h1">Important documents and information</h1></legend>
+              <p class="govbb-hint">You may need to check some information before preparing or signing a will.</p>
+              <p class="govbb-hint">Which of these do you have or can you find?</p>
+              <div class="help-options">
+                <div class="govbb-checkbox-item"><input class="govbb-checkbox" id="docs-id" type="checkbox" name="docs" value="id" /><label class="govbb-checkbox-item__label" for="docs-id">Barbados ID or another official ID</label></div>
+                <div class="govbb-checkbox-item"><input class="govbb-checkbox" id="docs-bank" type="checkbox" name="docs" value="bank" /><label class="govbb-checkbox-item__label" for="docs-bank">details of bank or credit union accounts</label></div>
+                <div class="govbb-checkbox-item"><input class="govbb-checkbox" id="docs-insurance" type="checkbox" name="docs" value="insurance" /><label class="govbb-checkbox-item__label" for="docs-insurance">details of insurance policies</label></div>
+                <div class="govbb-checkbox-item"><input class="govbb-checkbox" id="docs-vehicles" type="checkbox" name="docs" value="vehicles" /><label class="govbb-checkbox-item__label" for="docs-vehicles">details of vehicles</label></div>
+                <div class="govbb-checkbox-item"><input class="govbb-checkbox" id="docs-valuables" type="checkbox" name="docs" value="valuables" /><label class="govbb-checkbox-item__label" for="docs-valuables">details of valuable personal items</label></div>
+                <div class="govbb-checkbox-item"><input class="govbb-checkbox" id="docs-debts" type="checkbox" name="docs" value="debts" /><label class="govbb-checkbox-item__label" for="docs-debts">details of debts</label></div>
+                <div class="govbb-checkbox-item"><input class="govbb-checkbox" id="docs-execcontact" type="checkbox" name="docs" value="execcontact" /><label class="govbb-checkbox-item__label" for="docs-execcontact">address or contact details for the executor</label></div>
+                <div class="govbb-checkbox-item"><input class="govbb-checkbox" id="docs-bencontact" type="checkbox" name="docs" value="bencontact" /><label class="govbb-checkbox-item__label" for="docs-bencontact">address or contact details for the people named in the will</label></div>
+                <div class="options-or" aria-hidden="true">or</div>
+                <div class="govbb-checkbox-item"><input class="govbb-checkbox" id="docs-none" type="checkbox" name="docs" value="none" /><label class="govbb-checkbox-item__label" for="docs-none">I do not have these yet</label></div>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="form-page__heading">
+            <p class="govbb-text-body">You can still continue if you do not have everything.</p>
+            <p class="govbb-text-body">This prototype will show what information may be missing before the next step.</p>
+          </div>
+
+          <div class="govbb-btn-group"><button class="govbb-btn" type="submit">Continue</button></div>
+        </form>
+      </div>
+    </main>
+    <footer class="govbb-footer">
+      <div class="govbb-container govbb-footer__inner">
+        <nav class="govbb-footer__nav" aria-label="Footer">
+          <a class="govbb-footer__link" href="#">Home</a>
+          <a class="govbb-footer__link" href="#">Cookie Policy</a>
+          <a class="govbb-footer__link" href="#">Terms &amp; Conditions</a>
+          <a class="govbb-footer__link" href="#">Sitemap</a>
+        </nav>
+        <hr class="govbb-footer__divider" aria-hidden="true" />
+        <div class="govbb-footer__end">
+          <img class="govbb-footer__coat" src="dist/assets/images/govbb-creast.svg" alt="Government of Barbados Coat of Arms" />
+          <p class="govbb-footer__copy">© 2026 Government of Barbados</p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      (function () {
+        var form = document.querySelector(".form-page");
+        // "I do not have these yet" is mutually exclusive with the others.
+        var boxes = [].slice.call(form.querySelectorAll('input[name="docs"]'));
+        var none = document.getElementById("docs-none");
+        boxes.forEach(function (b) {
+          b.addEventListener("change", function () {
+            if (b === none) { if (none.checked) boxes.forEach(function (o) { if (o !== none) o.checked = false; }); }
+            else if (b.checked) { none.checked = false; }
+          });
+        });
+        function save() {
+          var data = {};
+          try { data = JSON.parse(sessionStorage.getItem("willData") || "{}"); } catch (e) {}
+          data["docs"] = boxes.filter(function (b) { return b.checked; }).map(function (b) { return b.value; });
+          try { sessionStorage.setItem("willData", JSON.stringify(data)); } catch (e) {}
+        }
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          save();
+          if (window.populateWillReview) window.populateWillReview();
+          window.location.href = "will-review.html";
+        });
+      })();
+    </script>
+  </body>
+</html>

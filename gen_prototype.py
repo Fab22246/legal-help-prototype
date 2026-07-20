@@ -21,6 +21,11 @@ PAGES = [
     "help-me-choose",
     "give-property",
     "renting-a-home",
+    "tenancy-parties",
+    "tenancy-property-dates",
+    "tenancy-terms",
+    "tenancy-review",
+    "tenancy-template",
     "signing-witnessing",
     "change-record",
     "prepare-for-lawyer",
@@ -164,7 +169,7 @@ doc = f"""<!doctype html>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Legal help for common life events — prototype</title>
+    <title>Prepare for common legal tasks — prototype</title>
     <style>
 {css}
     </style>

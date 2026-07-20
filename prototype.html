@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Legal help for common life events — prototype</title>
+    <title>Prepare for common legal tasks — prototype</title>
     <style>
 /*! tailwindcss v4.2.2 | MIT License | https://tailwindcss.com */
 @layer properties {
@@ -2407,6 +2407,57 @@
       .back-link::before { content: "\2039"; margin-right: var(--spacing-xxs); }
       .content__text { display: flex; flex-direction: column; gap: var(--spacing-s); }
       .content__actions { display: flex; flex-direction: column; align-items: flex-start; gap: var(--spacing-s); margin-top: var(--spacing-s); }
+.skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; z-index: 999; }
+      .skip-link:focus { position: static; width: auto; height: auto; overflow: visible; padding: var(--spacing-xs) var(--spacing-s); background: var(--color-yellow-100); color: var(--color-black-00); font-weight: var(--font-weight-bold); text-decoration: none; }
+      .form-page { padding-block: var(--spacing-l); display: flex; flex-direction: column; gap: var(--spacing-l); max-width: 44rem; }
+      .back-link { display: inline-block; margin-bottom: var(--spacing-s); }
+      .back-link::before { content: "\2039"; margin-right: var(--spacing-xxs); }
+      .form-page__heading { display: flex; flex-direction: column; gap: var(--spacing-s); }
+      .fieldgroup { display: flex; flex-direction: column; gap: var(--spacing-m); }
+      .person { display: flex; flex-direction: column; gap: var(--spacing-m); padding: var(--spacing-m); border: var(--border-width-form) solid var(--color-grey-00); border-radius: var(--radius-sm); }
+.skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; z-index: 999; }
+      .skip-link:focus { position: static; width: auto; height: auto; overflow: visible; padding: var(--spacing-xs) var(--spacing-s); background: var(--color-yellow-100); color: var(--color-black-00); font-weight: var(--font-weight-bold); text-decoration: none; }
+      .form-page { padding-block: var(--spacing-l); display: flex; flex-direction: column; gap: var(--spacing-l); max-width: 44rem; }
+      .back-link { display: inline-block; margin-bottom: var(--spacing-s); }
+      .back-link::before { content: "\2039"; margin-right: var(--spacing-xxs); }
+      .form-page__heading { display: flex; flex-direction: column; gap: var(--spacing-s); }
+      .fieldgroup { display: flex; flex-direction: column; gap: var(--spacing-m); }
+      .will-q { display: flex; flex-direction: column; gap: var(--spacing-s); }
+      .will-q[hidden] { display: none; }
+      .help-options { display: flex; flex-direction: column; gap: var(--spacing-s); margin-top: var(--spacing-xs); }
+.skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; z-index: 999; }
+      .skip-link:focus { position: static; width: auto; height: auto; overflow: visible; padding: var(--spacing-xs) var(--spacing-s); background: var(--color-yellow-100); color: var(--color-black-00); font-weight: var(--font-weight-bold); text-decoration: none; }
+      .form-page { padding-block: var(--spacing-l); display: flex; flex-direction: column; gap: var(--spacing-l); max-width: 44rem; }
+      .back-link { display: inline-block; margin-bottom: var(--spacing-s); }
+      .back-link::before { content: "\2039"; margin-right: var(--spacing-xxs); }
+      .form-page__heading { display: flex; flex-direction: column; gap: var(--spacing-s); }
+      .fieldgroup { display: flex; flex-direction: column; gap: var(--spacing-m); }
+      .will-q { display: flex; flex-direction: column; gap: var(--spacing-s); }
+      .will-q[hidden] { display: none; }
+      .help-options { display: flex; flex-direction: column; gap: var(--spacing-s); margin-top: var(--spacing-xs); }
+      .options-or { display: flex; align-items: center; gap: var(--spacing-s); color: var(--color-mid-grey-00); font-weight: var(--font-weight-bold); }
+      .options-or::before, .options-or::after { content: ""; flex: 1; height: 1px; background: var(--color-grey-00); }
+.skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; z-index: 999; }
+      .skip-link:focus { position: static; width: auto; height: auto; overflow: visible; padding: var(--spacing-xs) var(--spacing-s); background: var(--color-yellow-100); color: var(--color-black-00); font-weight: var(--font-weight-bold); text-decoration: none; }
+      .content { padding-block: var(--spacing-l); display: flex; flex-direction: column; gap: var(--spacing-m); max-width: 44rem; }
+      .back-link { display: inline-block; margin-bottom: var(--spacing-s); }
+      .back-link::before { content: "\2039"; margin-right: var(--spacing-xxs); }
+      .content__text { display: flex; flex-direction: column; gap: var(--spacing-s); }
+      .review__section { display: flex; flex-direction: column; gap: var(--spacing-xs); padding-bottom: var(--spacing-s); border-bottom: 1px solid var(--color-grey-00); }
+      .review__head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--spacing-s); }
+      .review__warning { padding: var(--spacing-s) var(--spacing-m); border-left: var(--spacing-xxs) solid var(--color-blue-40); background: var(--color-blue-10); display: flex; flex-direction: column; gap: var(--spacing-xs); }
+      .content__actions { display: flex; flex-direction: column; align-items: flex-start; gap: var(--spacing-s); margin-top: var(--spacing-s); }
+.skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; z-index: 999; }
+      .skip-link:focus { position: static; width: auto; height: auto; overflow: visible; padding: var(--spacing-xs) var(--spacing-s); background: var(--color-yellow-100); color: var(--color-black-00); font-weight: var(--font-weight-bold); text-decoration: none; }
+      .content { padding-block: var(--spacing-l); display: flex; flex-direction: column; gap: var(--spacing-m); max-width: 44rem; }
+      .back-link { display: inline-block; margin-bottom: var(--spacing-s); }
+      .back-link::before { content: "\2039"; margin-right: var(--spacing-xxs); }
+      .content__text { display: flex; flex-direction: column; gap: var(--spacing-s); }
+      .content__actions { display: flex; flex-direction: column; align-items: flex-start; gap: var(--spacing-s); margin-top: var(--spacing-s); }
+      .notice { padding: var(--spacing-s) var(--spacing-m); border-left: var(--spacing-xxs) solid var(--color-blue-40); background: var(--color-blue-10); display: flex; flex-direction: column; gap: var(--spacing-xs); }
+      .draft { border: var(--border-width-form) solid var(--color-grey-00); border-radius: var(--radius-sm); padding: var(--spacing-m); display: flex; flex-direction: column; gap: var(--spacing-m); }
+      .draft__section { display: flex; flex-direction: column; gap: var(--spacing-xs); }
+      .draft__sig { display: flex; flex-direction: column; gap: var(--spacing-xs); padding: var(--spacing-s) 0; border-top: 1px dashed var(--color-grey-00); }
 /* Page-specific layout only — built from design-system tokens, no new colours */
       .skip-link {
         position: absolute;
@@ -2629,16 +2680,6 @@
       .will-q { display: flex; flex-direction: column; gap: var(--spacing-s); }
       .will-q[hidden] { display: none; }
       .help-options { display: flex; flex-direction: column; gap: var(--spacing-s); margin-top: var(--spacing-xs); }
-.skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; z-index: 999; }
-      .skip-link:focus { position: static; width: auto; height: auto; overflow: visible; padding: var(--spacing-xs) var(--spacing-s); background: var(--color-yellow-100); color: var(--color-black-00); font-weight: var(--font-weight-bold); text-decoration: none; }
-      .form-page { padding-block: var(--spacing-l); display: flex; flex-direction: column; gap: var(--spacing-l); max-width: 44rem; }
-      .back-link { display: inline-block; margin-bottom: var(--spacing-s); }
-      .back-link::before { content: "\2039"; margin-right: var(--spacing-xxs); }
-      .form-page__heading { display: flex; flex-direction: column; gap: var(--spacing-s); }
-      .fieldgroup { display: flex; flex-direction: column; gap: var(--spacing-m); }
-      .will-q { display: flex; flex-direction: column; gap: var(--spacing-s); }
-      .will-q[hidden] { display: none; }
-      .help-options { display: flex; flex-direction: column; gap: var(--spacing-s); margin-top: var(--spacing-xs); }
       .gift { display: flex; flex-direction: column; gap: var(--spacing-m); padding: var(--spacing-m); border: var(--border-width-form) solid var(--color-grey-00); border-radius: var(--radius-sm); }
 .skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; z-index: 999; }
       .skip-link:focus { position: static; width: auto; height: auto; overflow: visible; padding: var(--spacing-xs) var(--spacing-s); background: var(--color-yellow-100); color: var(--color-black-00); font-weight: var(--font-weight-bold); text-decoration: none; }
@@ -2661,16 +2702,6 @@
       .help-options { display: flex; flex-direction: column; gap: var(--spacing-s); margin-top: var(--spacing-xs); }
       .options-or { display: flex; align-items: center; gap: var(--spacing-s); color: var(--color-mid-grey-00); font-weight: var(--font-weight-bold); }
       .options-or::before, .options-or::after { content: ""; flex: 1; height: 1px; background: var(--color-grey-00); }
-.skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; z-index: 999; }
-      .skip-link:focus { position: static; width: auto; height: auto; overflow: visible; padding: var(--spacing-xs) var(--spacing-s); background: var(--color-yellow-100); color: var(--color-black-00); font-weight: var(--font-weight-bold); text-decoration: none; }
-      .content { padding-block: var(--spacing-l); display: flex; flex-direction: column; gap: var(--spacing-m); max-width: 44rem; }
-      .back-link { display: inline-block; margin-bottom: var(--spacing-s); }
-      .back-link::before { content: "\2039"; margin-right: var(--spacing-xxs); }
-      .content__text { display: flex; flex-direction: column; gap: var(--spacing-s); }
-      .review__section { display: flex; flex-direction: column; gap: var(--spacing-xs); padding-bottom: var(--spacing-s); border-bottom: 1px solid var(--color-grey-00); }
-      .review__head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--spacing-s); }
-      .review__warning { padding: var(--spacing-s) var(--spacing-m); border-left: var(--spacing-xxs) solid var(--color-blue-40); background: var(--color-blue-10); display: flex; flex-direction: column; gap: var(--spacing-xs); }
-      .content__actions { display: flex; flex-direction: column; align-items: flex-start; gap: var(--spacing-s); margin-top: var(--spacing-s); }
 .skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; z-index: 999; }
       .skip-link:focus { position: static; width: auto; height: auto; overflow: visible; padding: var(--spacing-xs) var(--spacing-s); background: var(--color-yellow-100); color: var(--color-black-00); font-weight: var(--font-weight-bold); text-decoration: none; }
       .content { padding-block: var(--spacing-l); display: flex; flex-direction: column; gap: var(--spacing-m); max-width: 44rem; }
@@ -2865,20 +2896,20 @@
       <div class="govbb-container service-page">
         <div class="service__grid">
           <div class="service__main">
-            <h1 class="govbb-text-display">Legal help for common life events</h1>
+            <h1 class="govbb-text-display">Prepare for common legal tasks</h1>
 
             <div class="service__sections">
               <section class="service__section">
                 <p class="govbb-text-body-lg">
                   Use this service to get general legal information, check what to do next, and prepare
-                  information for some common legal tasks.
+                  information or draft wording for some common legal tasks.
                 </p>
                 <p class="govbb-text-body">You can use it to:</p>
                 <ul class="govbb-list govbb-list--bullet">
                   <li>prepare information for a simple will, if your situation is straightforward</li>
                   <li>plan what should happen to your money and property</li>
                   <li>understand what to check before giving property to someone while you are alive</li>
-                  <li>understand what to check before renting a home or signing a tenancy agreement</li>
+                  <li>understand what to check before renting a home or prepare a draft tenancy agreement template</li>
                   <li>check what may be needed after someone dies</li>
                   <li>understand signing, witnessing, certified copies and notarising documents</li>
                   <li>find out where to start if you need to change a name or update a record</li>
@@ -2979,7 +3010,7 @@
             </a>
             <a class="card" href="renting-a-home.html">
               <h2 class="card__heading govbb-text-h3">Renting a home</h2>
-              <p class="card__desc govbb-text-body">Understand what a tenancy agreement covers and what to check before you rent a house, apartment or room.</p>
+              <p class="card__desc govbb-text-body">Understand what a tenancy agreement covers, what to check before you rent, and prepare a draft tenancy agreement template.</p>
             </a>
             <a class="card" href="will-check.html">
               <h2 class="card__heading govbb-text-h3">Prepare a simple will</h2>
@@ -3045,7 +3076,7 @@
             </a>
             <a class="card" href="renting-a-home.html">
               <h2 class="card__heading govbb-text-h3">I am renting or thinking about renting</h2>
-              <p class="card__desc govbb-text-body">Use this if you are renting a house, apartment or room, or about to sign a tenancy agreement.</p>
+              <p class="card__desc govbb-text-body">Use this if you are renting a house, apartment or room, or want to prepare a draft tenancy agreement template.</p>
             </a>
             <a class="card" href="death-check.html">
               <h2 class="card__heading govbb-text-h3">Someone has died</h2>
@@ -3283,9 +3314,360 @@
             <p class="govbb-text-body">It does not create legal documents, file applications, take payments, book appointments or save your information yet.</p>
           </div>
 
+          <div class="content__text">
+            <p class="govbb-text-body">This prototype can help you prepare draft tenancy agreement wording.</p>
+            <p class="govbb-text-body">The wording has not been legally checked yet. Do not use it as your only source of advice.</p>
+            <p class="govbb-text-body">You should get the agreement checked before signing.</p>
+          </div>
+
           <div class="content__actions">
-            <a class="govbb-btn" href="prepare-for-lawyer.html" role="button" draggable="false">Prepare information before speaking to a lawyer</a>
+            <a class="govbb-btn" href="tenancy-parties.html" role="button" draggable="false">Prepare a draft tenancy agreement template</a>
             <a class="govbb-link" href="choose-help.html">Back to what you need help with</a>
+          </div>
+        </div>
+      </div>
+          </section>
+      <section class="screen" id="screen-tenancy-parties">
+      <div class="govbb-status-banner govbb-status-banner--alpha" role="status" aria-label="alpha status banner" aria-live="polite">
+        <div class="govbb-container"><p>This page is in <a class="govbb-link govbb-link--secondary" href="#">Alpha</a>.</p></div>
+      </div>
+      <div class="govbb-container">
+        <a class="govbb-link back-link" href="renting-a-home.html">Back to Renting a home</a>
+        <form class="form-page" action="#" novalidate>
+          <div class="form-page__heading">
+            <h1 class="govbb-text-h1">Landlord and tenant details</h1>
+            <p class="govbb-text-body">We will use these details to prepare draft tenancy agreement wording.</p>
+            <p class="govbb-text-body">This prototype does not give legal advice. The draft wording has not been legally checked yet.</p>
+          </div>
+
+          <div class="fieldgroup">
+            <h2 class="govbb-text-h2">Landlord</h2>
+            <div class="govbb-form-group"><label class="govbb-label" for="ll-name">Landlord full name</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="ll-name" name="ll-name" /></div></div>
+            <div class="govbb-form-group"><label class="govbb-label" for="ll-addr">Landlord address</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="ll-addr" name="ll-addr" /></div></div>
+            <div class="govbb-form-group"><label class="govbb-label" for="ll-phone">Landlord phone number</label><div class="govbb-input-wrapper"><input class="govbb-input" type="tel" id="ll-phone" name="ll-phone" /></div></div>
+            <div class="govbb-form-group"><label class="govbb-label" for="ll-email">Landlord email address</label><div class="govbb-input-wrapper"><input class="govbb-input" type="email" id="ll-email" name="ll-email" /></div></div>
+          </div>
+
+          <div class="fieldgroup">
+            <h2 class="govbb-text-h2">Tenants</h2>
+            <p class="govbb-hint">Add every person who will be named as a tenant in the agreement.</p>
+            <div id="tenants">
+              <div class="person" data-tenant="0">
+                <div class="govbb-form-group"><label class="govbb-label" for="t-name-0">Tenant full name</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="t-name-0" name="t-name-0" /></div></div>
+                <div class="govbb-form-group"><label class="govbb-label" for="t-phone-0">Tenant phone number</label><div class="govbb-input-wrapper"><input class="govbb-input" type="tel" id="t-phone-0" name="t-phone-0" /></div></div>
+                <div class="govbb-form-group"><label class="govbb-label" for="t-email-0">Tenant email address</label><div class="govbb-input-wrapper"><input class="govbb-input" type="email" id="t-email-0" name="t-email-0" /></div></div>
+              </div>
+            </div>
+            <button class="govbb-btn--secondary" type="button" id="add-tenant">Add another tenant</button>
+          </div>
+
+          <div class="govbb-btn-group"><button class="govbb-btn" type="submit">Continue</button></div>
+        </form>
+      </div>
+          </section>
+      <section class="screen" id="screen-tenancy-property-dates">
+      <div class="govbb-status-banner govbb-status-banner--alpha" role="status" aria-label="alpha status banner" aria-live="polite">
+        <div class="govbb-container"><p>This page is in <a class="govbb-link govbb-link--secondary" href="#">Alpha</a>.</p></div>
+      </div>
+      <div class="govbb-container">
+        <a class="govbb-link back-link" href="tenancy-parties.html">Back</a>
+        <form class="form-page" action="#" novalidate>
+          <div class="form-page__heading">
+            <h1 class="govbb-text-h1">Property and tenancy details</h1>
+          </div>
+
+          <div class="fieldgroup">
+            <div class="govbb-form-group"><label class="govbb-label" for="prop-addr">Address of the property</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="prop-addr" name="prop-addr" /></div></div>
+            <div class="govbb-form-group">
+              <label class="govbb-label" for="prop-parish">Parish</label>
+              <div class="govbb-input-wrapper">
+                <select class="govbb-input" id="prop-parish" name="prop-parish">
+                  <option value="">Select a parish</option>
+                  <option>Christ Church</option>
+                  <option>St. Andrew</option>
+                  <option>St. George</option>
+                  <option>St. James</option>
+                  <option>St. John</option>
+                  <option>St. Joseph</option>
+                  <option>St. Lucy</option>
+                  <option>St. Michael</option>
+                  <option>St. Peter</option>
+                  <option>St. Philip</option>
+                  <option>St. Thomas</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="govbb-form-group will-q">
+            <fieldset class="govbb-fieldset">
+              <legend class="govbb-fieldset__legend"><h2 class="govbb-text-h2">What type of property is it?</h2></legend>
+              <div class="help-options">
+                <div class="govbb-radio-item"><input class="govbb-radio" id="prop-type-house" type="radio" name="prop-type" value="house" /><label class="govbb-radio-item__label" for="prop-type-house">house</label></div>
+                <div class="govbb-radio-item"><input class="govbb-radio" id="prop-type-apartment" type="radio" name="prop-type" value="apartment" /><label class="govbb-radio-item__label" for="prop-type-apartment">apartment</label></div>
+                <div class="govbb-radio-item"><input class="govbb-radio" id="prop-type-room" type="radio" name="prop-type" value="room" /><label class="govbb-radio-item__label" for="prop-type-room">room</label></div>
+                <div class="govbb-radio-item"><input class="govbb-radio" id="prop-type-other" type="radio" name="prop-type" value="other" /><label class="govbb-radio-item__label" for="prop-type-other">other</label></div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="govbb-form-group will-q" id="prop-type-other-section" hidden>
+            <label class="govbb-label" for="prop-type-desc">Describe the property</label>
+            <div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="prop-type-desc" name="prop-type-desc" /></div>
+          </div>
+
+          <div class="govbb-form-group will-q">
+            <fieldset class="govbb-fieldset">
+              <legend class="govbb-fieldset__legend"><h2 class="govbb-text-h2">Is the property furnished?</h2></legend>
+              <div class="help-options">
+                <div class="govbb-radio-item"><input class="govbb-radio" id="furnished-yes" type="radio" name="furnished" value="yes" /><label class="govbb-radio-item__label" for="furnished-yes">yes</label></div>
+                <div class="govbb-radio-item"><input class="govbb-radio" id="furnished-no" type="radio" name="furnished" value="no" /><label class="govbb-radio-item__label" for="furnished-no">no</label></div>
+                <div class="govbb-radio-item"><input class="govbb-radio" id="furnished-partly" type="radio" name="furnished" value="partly" /><label class="govbb-radio-item__label" for="furnished-partly">partly furnished</label></div>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="fieldgroup">
+            <div class="govbb-form-group"><label class="govbb-label" for="start-date">Tenancy start date</label><div class="govbb-input-wrapper"><input class="govbb-input" type="date" id="start-date" name="start-date" /></div></div>
+            <div class="govbb-form-group"><label class="govbb-label" for="end-date">Tenancy end date, if there is one (optional)</label><div class="govbb-input-wrapper"><input class="govbb-input" type="date" id="end-date" name="end-date" /></div></div>
+          </div>
+
+          <div class="govbb-form-group will-q">
+            <fieldset class="govbb-fieldset">
+              <legend class="govbb-fieldset__legend"><h2 class="govbb-text-h2">Does the tenancy continue month to month after the end date?</h2></legend>
+              <p class="govbb-hint">If there is no end date, the agreement may need to say how either side can end the tenancy.</p>
+              <div class="help-options">
+                <div class="govbb-radio-item"><input class="govbb-radio" id="mtm-yes" type="radio" name="month-to-month" value="yes" /><label class="govbb-radio-item__label" for="mtm-yes">yes</label></div>
+                <div class="govbb-radio-item"><input class="govbb-radio" id="mtm-no" type="radio" name="month-to-month" value="no" /><label class="govbb-radio-item__label" for="mtm-no">no</label></div>
+                <div class="govbb-radio-item"><input class="govbb-radio" id="mtm-unsure" type="radio" name="month-to-month" value="unsure" /><label class="govbb-radio-item__label" for="mtm-unsure">not sure</label></div>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="govbb-btn-group"><button class="govbb-btn" type="submit">Continue</button></div>
+        </form>
+      </div>
+          </section>
+      <section class="screen" id="screen-tenancy-terms">
+      <div class="govbb-status-banner govbb-status-banner--alpha" role="status" aria-label="alpha status banner" aria-live="polite">
+        <div class="govbb-container"><p>This page is in <a class="govbb-link govbb-link--secondary" href="#">Alpha</a>.</p></div>
+      </div>
+      <div class="govbb-container">
+        <a class="govbb-link back-link" href="tenancy-property-dates.html">Back to Property and tenancy details</a>
+        <form class="form-page" action="#" novalidate>
+          <div class="form-page__heading">
+            <h1 class="govbb-text-h1">Rent, deposit and responsibilities</h1>
+            <p class="govbb-hint">Keep proof of rent and deposit payments.</p>
+          </div>
+
+          <div class="fieldgroup">
+            <div class="govbb-form-group"><label class="govbb-label" for="rent-amount">Rent amount</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="rent-amount" name="rent-amount" /></div></div>
+          </div>
+
+          <div class="govbb-form-group will-q">
+            <fieldset class="govbb-fieldset">
+              <legend class="govbb-fieldset__legend"><h2 class="govbb-text-h2">How often is rent paid?</h2></legend>
+              <div class="help-options">
+                <div class="govbb-radio-item"><input class="govbb-radio" id="rent-freq-weekly" type="radio" name="rent-frequency" value="weekly" /><label class="govbb-radio-item__label" for="rent-freq-weekly">weekly</label></div>
+                <div class="govbb-radio-item"><input class="govbb-radio" id="rent-freq-fortnightly" type="radio" name="rent-frequency" value="every 2 weeks" /><label class="govbb-radio-item__label" for="rent-freq-fortnightly">every 2 weeks</label></div>
+                <div class="govbb-radio-item"><input class="govbb-radio" id="rent-freq-monthly" type="radio" name="rent-frequency" value="monthly" /><label class="govbb-radio-item__label" for="rent-freq-monthly">monthly</label></div>
+                <div class="govbb-radio-item"><input class="govbb-radio" id="rent-freq-other" type="radio" name="rent-frequency" value="other" /><label class="govbb-radio-item__label" for="rent-freq-other">other</label></div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="govbb-form-group will-q" id="rent-freq-other-section" hidden>
+            <label class="govbb-label" for="rent-frequency-other">How often is rent paid?</label>
+            <div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="rent-frequency-other" name="rent-frequency-other" /></div>
+          </div>
+
+          <div class="fieldgroup">
+            <div class="govbb-form-group"><label class="govbb-label" for="rent-due">Date rent is due</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="rent-due" name="rent-due" /></div></div>
+          </div>
+
+          <div class="govbb-form-group will-q">
+            <fieldset class="govbb-fieldset">
+              <legend class="govbb-fieldset__legend"><h2 class="govbb-text-h2">How should rent be paid?</h2></legend>
+              <div class="help-options">
+                <div class="govbb-radio-item"><input class="govbb-radio" id="rent-method-bank" type="radio" name="rent-method" value="bank transfer" /><label class="govbb-radio-item__label" for="rent-method-bank">bank transfer</label></div>
+                <div class="govbb-radio-item"><input class="govbb-radio" id="rent-method-cash" type="radio" name="rent-method" value="cash" /><label class="govbb-radio-item__label" for="rent-method-cash">cash</label></div>
+                <div class="govbb-radio-item"><input class="govbb-radio" id="rent-method-cheque" type="radio" name="rent-method" value="cheque" /><label class="govbb-radio-item__label" for="rent-method-cheque">cheque</label></div>
+                <div class="govbb-radio-item"><input class="govbb-radio" id="rent-method-other" type="radio" name="rent-method" value="other" /><label class="govbb-radio-item__label" for="rent-method-other">other</label></div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="govbb-form-group will-q" id="rent-method-other-section" hidden>
+            <label class="govbb-label" for="rent-method-other-text">How should rent be paid?</label>
+            <div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="rent-method-other-text" name="rent-method-other" /></div>
+          </div>
+
+          <div class="govbb-form-group will-q">
+            <fieldset class="govbb-fieldset">
+              <legend class="govbb-fieldset__legend"><h2 class="govbb-text-h2">Is there a deposit?</h2></legend>
+              <div class="help-options">
+                <div class="govbb-radio-item"><input class="govbb-radio" id="deposit-yes" type="radio" name="deposit" value="yes" /><label class="govbb-radio-item__label" for="deposit-yes">yes</label></div>
+                <div class="govbb-radio-item"><input class="govbb-radio" id="deposit-no" type="radio" name="deposit" value="no" /><label class="govbb-radio-item__label" for="deposit-no">no</label></div>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="fieldgroup will-q" id="deposit-section" hidden>
+            <h2 class="govbb-text-h2">Deposit details</h2>
+            <div class="govbb-form-group"><label class="govbb-label" for="deposit-amount">Deposit amount</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="deposit-amount" name="deposit-amount" /></div></div>
+            <div class="govbb-form-group"><label class="govbb-label" for="deposit-use">What the deposit may be used for</label><div class="govbb-input-wrapper"><textarea class="govbb-textarea" id="deposit-use" name="deposit-use" rows="3"></textarea></div></div>
+            <div class="govbb-form-group"><label class="govbb-label" for="deposit-return">When the deposit should be returned</label><div class="govbb-input-wrapper"><textarea class="govbb-textarea" id="deposit-return" name="deposit-return" rows="3"></textarea></div></div>
+          </div>
+
+          <div class="govbb-form-group will-q">
+            <fieldset class="govbb-fieldset">
+              <legend class="govbb-fieldset__legend"><h2 class="govbb-text-h2">Who pays for electricity?</h2></legend>
+              <div class="help-options">
+                <div class="govbb-radio-item"><input class="govbb-radio" id="elec-landlord" type="radio" name="util-electricity" value="landlord" /><label class="govbb-radio-item__label" for="elec-landlord">landlord</label></div>
+                <div class="govbb-radio-item"><input class="govbb-radio" id="elec-tenant" type="radio" name="util-electricity" value="tenant" /><label class="govbb-radio-item__label" for="elec-tenant">tenant</label></div>
+                <div class="govbb-radio-item"><input class="govbb-radio" id="elec-shared" type="radio" name="util-electricity" value="shared" /><label class="govbb-radio-item__label" for="elec-shared">shared</label></div>
+                <div class="govbb-radio-item"><input class="govbb-radio" id="elec-unsure" type="radio" name="util-electricity" value="not sure" /><label class="govbb-radio-item__label" for="elec-unsure">not sure</label></div>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="govbb-form-group will-q">
+            <fieldset class="govbb-fieldset">
+              <legend class="govbb-fieldset__legend"><h2 class="govbb-text-h2">Who pays for water?</h2></legend>
+              <div class="help-options">
+                <div class="govbb-radio-item"><input class="govbb-radio" id="water-landlord" type="radio" name="util-water" value="landlord" /><label class="govbb-radio-item__label" for="water-landlord">landlord</label></div>
+                <div class="govbb-radio-item"><input class="govbb-radio" id="water-tenant" type="radio" name="util-water" value="tenant" /><label class="govbb-radio-item__label" for="water-tenant">tenant</label></div>
+                <div class="govbb-radio-item"><input class="govbb-radio" id="water-shared" type="radio" name="util-water" value="shared" /><label class="govbb-radio-item__label" for="water-shared">shared</label></div>
+                <div class="govbb-radio-item"><input class="govbb-radio" id="water-unsure" type="radio" name="util-water" value="not sure" /><label class="govbb-radio-item__label" for="water-unsure">not sure</label></div>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="govbb-form-group will-q">
+            <fieldset class="govbb-fieldset">
+              <legend class="govbb-fieldset__legend"><h2 class="govbb-text-h2">Who pays for internet?</h2></legend>
+              <div class="help-options">
+                <div class="govbb-radio-item"><input class="govbb-radio" id="net-landlord" type="radio" name="util-internet" value="landlord" /><label class="govbb-radio-item__label" for="net-landlord">landlord</label></div>
+                <div class="govbb-radio-item"><input class="govbb-radio" id="net-tenant" type="radio" name="util-internet" value="tenant" /><label class="govbb-radio-item__label" for="net-tenant">tenant</label></div>
+                <div class="govbb-radio-item"><input class="govbb-radio" id="net-shared" type="radio" name="util-internet" value="shared" /><label class="govbb-radio-item__label" for="net-shared">shared</label></div>
+                <div class="govbb-radio-item"><input class="govbb-radio" id="net-none" type="radio" name="util-internet" value="not included" /><label class="govbb-radio-item__label" for="net-none">not included</label></div>
+                <div class="govbb-radio-item"><input class="govbb-radio" id="net-unsure" type="radio" name="util-internet" value="not sure" /><label class="govbb-radio-item__label" for="net-unsure">not sure</label></div>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="govbb-form-group will-q">
+            <fieldset class="govbb-fieldset">
+              <legend class="govbb-fieldset__legend"><h2 class="govbb-text-h2">Who is responsible for repairs?</h2></legend>
+              <div class="help-options">
+                <div class="govbb-radio-item"><input class="govbb-radio" id="rep-landlord" type="radio" name="repairs" value="landlord" /><label class="govbb-radio-item__label" for="rep-landlord">landlord</label></div>
+                <div class="govbb-radio-item"><input class="govbb-radio" id="rep-tenant" type="radio" name="repairs" value="tenant" /><label class="govbb-radio-item__label" for="rep-tenant">tenant</label></div>
+                <div class="govbb-radio-item"><input class="govbb-radio" id="rep-depends" type="radio" name="repairs" value="depends on the repair" /><label class="govbb-radio-item__label" for="rep-depends">depends on the repair</label></div>
+                <div class="govbb-radio-item"><input class="govbb-radio" id="rep-unsure" type="radio" name="repairs" value="not sure" /><label class="govbb-radio-item__label" for="rep-unsure">not sure</label></div>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="govbb-form-group will-q">
+            <fieldset class="govbb-fieldset">
+              <legend class="govbb-fieldset__legend"><h2 class="govbb-text-h2">Should the agreement include rules about any of these?</h2></legend>
+              <p class="govbb-hint">Only include rules that both sides understand and agree to.</p>
+              <div class="help-options">
+                <div class="govbb-checkbox-item"><input class="govbb-checkbox" id="rule-pets" type="checkbox" name="rules" value="pets" /><label class="govbb-checkbox-item__label" for="rule-pets">pets</label></div>
+                <div class="govbb-checkbox-item"><input class="govbb-checkbox" id="rule-smoking" type="checkbox" name="rules" value="smoking" /><label class="govbb-checkbox-item__label" for="rule-smoking">smoking</label></div>
+                <div class="govbb-checkbox-item"><input class="govbb-checkbox" id="rule-subletting" type="checkbox" name="rules" value="subletting" /><label class="govbb-checkbox-item__label" for="rule-subletting">subletting</label></div>
+                <div class="govbb-checkbox-item"><input class="govbb-checkbox" id="rule-people" type="checkbox" name="rules" value="number of people living at the property" /><label class="govbb-checkbox-item__label" for="rule-people">number of people living at the property</label></div>
+                <div class="govbb-checkbox-item"><input class="govbb-checkbox" id="rule-guests" type="checkbox" name="rules" value="guests" /><label class="govbb-checkbox-item__label" for="rule-guests">guests</label></div>
+                <div class="govbb-checkbox-item"><input class="govbb-checkbox" id="rule-parking" type="checkbox" name="rules" value="parking" /><label class="govbb-checkbox-item__label" for="rule-parking">parking</label></div>
+                <div class="govbb-checkbox-item"><input class="govbb-checkbox" id="rule-noise" type="checkbox" name="rules" value="noise" /><label class="govbb-checkbox-item__label" for="rule-noise">noise</label></div>
+                <div class="govbb-checkbox-item"><input class="govbb-checkbox" id="rule-changes" type="checkbox" name="rules" value="changes to the property" /><label class="govbb-checkbox-item__label" for="rule-changes">changes to the property</label></div>
+                <div class="govbb-checkbox-item"><input class="govbb-checkbox" id="rule-other" type="checkbox" name="rules" value="other rules" /><label class="govbb-checkbox-item__label" for="rule-other">other rules</label></div>
+                <div class="options-or" aria-hidden="true">or</div>
+                <div class="govbb-checkbox-item"><input class="govbb-checkbox" id="rule-none" type="checkbox" name="rules" value="none" /><label class="govbb-checkbox-item__label" for="rule-none">none of these</label></div>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="govbb-form-group will-q" id="rules-other-section" hidden>
+            <label class="govbb-label" for="rules-other">Tell us the other rules you want to include.</label>
+            <div class="govbb-input-wrapper"><textarea class="govbb-textarea" id="rules-other" name="rules-other" rows="3"></textarea></div>
+          </div>
+
+          <div class="govbb-btn-group"><button class="govbb-btn" type="submit">Continue</button></div>
+        </form>
+      </div>
+          </section>
+      <section class="screen" id="screen-tenancy-review">
+      <div class="govbb-status-banner govbb-status-banner--alpha" role="status" aria-label="alpha status banner" aria-live="polite">
+        <div class="govbb-container"><p>This page is in <a class="govbb-link govbb-link--secondary" href="#">Alpha</a>.</p></div>
+      </div>
+      <div class="govbb-container">
+        <a class="govbb-link back-link" href="tenancy-terms.html">Back to Rent, deposit and responsibilities</a>
+        <div class="content">
+          <h1 class="govbb-text-h1">Check your answers</h1>
+          <p class="govbb-text-body">Check that the information you entered is correct.</p>
+
+          <div class="review__section">
+            <div class="review__head"><h2 class="govbb-text-h2">Landlord and tenant</h2><a class="govbb-link" href="tenancy-parties.html">Change</a></div>
+            <div id="rev-parties" class="content__text"></div>
+          </div>
+          <div class="review__section">
+            <div class="review__head"><h2 class="govbb-text-h2">Property and tenancy details</h2><a class="govbb-link" href="tenancy-property-dates.html">Change</a></div>
+            <div id="rev-property" class="content__text"></div>
+          </div>
+          <div class="review__section">
+            <div class="review__head"><h2 class="govbb-text-h2">Rent and deposit</h2><a class="govbb-link" href="tenancy-terms.html">Change</a></div>
+            <div id="rev-rent" class="content__text"></div>
+          </div>
+          <div class="review__section">
+            <div class="review__head"><h2 class="govbb-text-h2">Utilities, repairs and rules</h2><a class="govbb-link" href="tenancy-terms.html">Change</a></div>
+            <div id="rev-utils" class="content__text"></div>
+          </div>
+
+          <div class="review__warning" role="note">
+            <p class="govbb-text-body">This prototype will create draft template wording from your answers.</p>
+            <p class="govbb-text-body">The wording has not been legally checked yet.</p>
+            <p class="govbb-text-body">Do not sign the agreement until both sides understand it and it has been checked if needed.</p>
+          </div>
+
+          <div class="content__actions">
+            <a class="govbb-btn" id="rev-show-template" href="tenancy-template.html" role="button" draggable="false">Show draft template</a>
+            <a class="govbb-link" href="renting-a-home.html">Back to Renting a home</a>
+          </div>
+        </div>
+      </div>
+          </section>
+      <section class="screen" id="screen-tenancy-template">
+      <div class="govbb-status-banner govbb-status-banner--alpha" role="status" aria-label="alpha status banner" aria-live="polite">
+        <div class="govbb-container"><p>This page is in <a class="govbb-link govbb-link--secondary" href="#">Alpha</a>.</p></div>
+      </div>
+      <div class="govbb-container">
+        <a class="govbb-link back-link" href="tenancy-review.html">Back</a>
+        <div class="content">
+          <h1 class="govbb-text-h1">Draft tenancy agreement template</h1>
+          <div class="content__text">
+            <p class="govbb-text-body">This is draft wording based on your answers.</p>
+            <p class="govbb-text-body">It has not been legally checked yet.</p>
+            <p class="govbb-text-body">It does not replace legal advice.</p>
+          </div>
+
+          <div class="notice" role="note">
+            <p class="govbb-text-body"><strong>Important note</strong></p>
+            <p class="govbb-text-body">This is draft template wording.</p>
+            <p class="govbb-text-body">It is not a legally approved agreement.</p>
+            <p class="govbb-text-body">It does not replace legal advice.</p>
+            <p class="govbb-text-body">Both the landlord and tenant should read the full agreement before signing.</p>
+          </div>
+
+          <div class="draft" id="template-body"></div>
+
+          <h2 class="govbb-text-h2">Prototype note</h2>
+          <div class="content__text">
+            <p class="govbb-text-body">This prototype prepares draft wording only.</p>
+            <p class="govbb-text-body">It does not create a legally approved agreement.</p>
+            <p class="govbb-text-body">It does not check the agreement, witness signatures, file documents, take payments, book appointments or save your information.</p>
+          </div>
+
+          <div class="content__actions">
+            <a class="govbb-btn" href="choose-help.html" role="button" draggable="false">Back to what you need help with</a>
+            <a class="govbb-link" href="renting-a-home.html">Back to Renting a home</a>
           </div>
         </div>
       </div>
@@ -5494,6 +5876,275 @@
       });
       showScreen("index");
 
+
+      (function () {
+        var form = document.querySelector("#screen-tenancy-parties .form-page");
+        var tenantsEl = document.getElementById("tenants");
+        var addBtn = document.getElementById("add-tenant");
+        var count = 1;
+        addBtn.addEventListener("click", function () {
+          var i = count++;
+          var row = document.createElement("div");
+          row.className = "person";
+          row.setAttribute("data-tenant", i);
+          row.innerHTML =
+            '<div class="govbb-form-group"><label class="govbb-label" for="t-name-' + i + '">Tenant full name</label><div class="govbb-input-wrapper"><input class="govbb-input" type="text" id="t-name-' + i + '" name="t-name-' + i + '" /></div></div>' +
+            '<div class="govbb-form-group"><label class="govbb-label" for="t-phone-' + i + '">Tenant phone number</label><div class="govbb-input-wrapper"><input class="govbb-input" type="tel" id="t-phone-' + i + '" name="t-phone-' + i + '" /></div></div>' +
+            '<div class="govbb-form-group"><label class="govbb-label" for="t-email-' + i + '">Tenant email address</label><div class="govbb-input-wrapper"><input class="govbb-input" type="email" id="t-email-' + i + '" name="t-email-' + i + '" /></div></div>';
+          tenantsEl.appendChild(row);
+        });
+        function save() {
+          var data = {};
+          try { data = JSON.parse(sessionStorage.getItem("tenancyData") || "{}"); } catch (e) {}
+          [].slice.call(form.querySelectorAll("input[type=text], input[type=email], input[type=tel]")).forEach(function (el) { if (el.name) data[el.name] = el.value; });
+          data["t-count"] = tenantsEl.querySelectorAll(".person").length;
+          try { sessionStorage.setItem("tenancyData", JSON.stringify(data)); } catch (e) {}
+        }
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          save();
+          nav("tenancy-property-dates.html");
+        });
+      })();
+    
+
+      (function () {
+        var form = document.querySelector("#screen-tenancy-property-dates .form-page");
+        var otherSec = document.getElementById("prop-type-other-section");
+        function sync() { var r = form.querySelector('input[name="prop-type"]:checked'); otherSec.hidden = !(r && r.value === "other"); }
+        [].slice.call(form.querySelectorAll('input[name="prop-type"]')).forEach(function (r) { r.addEventListener("change", sync); });
+        sync();
+        function save() {
+          var data = {};
+          try { data = JSON.parse(sessionStorage.getItem("tenancyData") || "{}"); } catch (e) {}
+          [].slice.call(form.querySelectorAll("input[type=text], input[type=date], select")).forEach(function (el) { if (el.name) data[el.name] = el.value; });
+          [].slice.call(form.querySelectorAll("input[type=radio]:checked")).forEach(function (el) { data[el.name] = el.value; });
+          try { sessionStorage.setItem("tenancyData", JSON.stringify(data)); } catch (e) {}
+        }
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          save();
+          nav("tenancy-terms.html");
+        });
+      })();
+    
+
+      (function () {
+        var form = document.querySelector("#screen-tenancy-terms .form-page");
+        function reveal(name, value, sectionId) {
+          var sec = document.getElementById(sectionId);
+          function sync() { var r = form.querySelector('input[name="' + name + '"]:checked'); sec.hidden = !(r && r.value === value); }
+          [].slice.call(form.querySelectorAll('input[name="' + name + '"]')).forEach(function (r) { r.addEventListener("change", sync); });
+          sync();
+        }
+        reveal("rent-frequency", "other", "rent-freq-other-section");
+        reveal("rent-method", "other", "rent-method-other-section");
+        reveal("deposit", "yes", "deposit-section");
+
+        // "none of these" is mutually exclusive; "other rules" reveals a textbox.
+        var boxes = [].slice.call(form.querySelectorAll('input[name="rules"]'));
+        var none = document.getElementById("rule-none");
+        var otherSec = document.getElementById("rules-other-section");
+        function syncOther() { var o = document.getElementById("rule-other"); otherSec.hidden = !o.checked; }
+        boxes.forEach(function (b) {
+          b.addEventListener("change", function () {
+            if (b === none) { if (none.checked) boxes.forEach(function (o) { if (o !== none) o.checked = false; }); }
+            else if (b.checked) { none.checked = false; }
+            syncOther();
+          });
+        });
+        syncOther();
+
+        function save() {
+          var data = {};
+          try { data = JSON.parse(sessionStorage.getItem("tenancyData") || "{}"); } catch (e) {}
+          [].slice.call(form.querySelectorAll("input[type=text], textarea")).forEach(function (el) { if (el.name) data[el.name] = el.value; });
+          [].slice.call(form.querySelectorAll("input[type=radio]:checked")).forEach(function (el) { data[el.name] = el.value; });
+          data["rules"] = boxes.filter(function (b) { return b.checked; }).map(function (b) { return b.value; });
+          try { sessionStorage.setItem("tenancyData", JSON.stringify(data)); } catch (e) {}
+        }
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          save();
+          if (window.populateTenancyReview) window.populateTenancyReview();
+          nav("tenancy-review.html");
+        });
+      })();
+    
+
+      (function () {
+        function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+        function root() { return document.getElementById("screen-tenancy-review") || document; }
+        function setHtml(id, html) { var el = root().querySelector("#" + id); if (el) el.innerHTML = html || '<p class="govbb-text-body">Not answered yet.</p>'; }
+        function populate() {
+          var d = {};
+          try { d = JSON.parse(sessionStorage.getItem("tenancyData") || "{}"); } catch (e) {}
+          function v(k) { return (d[k] || "").toString().trim(); }
+          function row(label, value) { return value ? '<p class="govbb-text-body"><strong>' + label + ':</strong> ' + esc(value) + "</p>" : ""; }
+
+          // Landlord and tenants
+          var parties = row("Landlord", v("ll-name")) + row("Landlord address", v("ll-addr")) + row("Landlord phone", v("ll-phone")) + row("Landlord email", v("ll-email"));
+          var tc = parseInt(d["t-count"] || "0", 10);
+          for (var i = 0; i < tc; i++) {
+            var nm = v("t-name-" + i);
+            if (nm) parties += row("Tenant " + (i + 1), nm) + row("Tenant " + (i + 1) + " phone", v("t-phone-" + i)) + row("Tenant " + (i + 1) + " email", v("t-email-" + i));
+          }
+          setHtml("rev-parties", parties);
+
+          // Property and dates
+          var typeLabel = { house: "house", apartment: "apartment", room: "room", other: "other" };
+          var ptype = typeLabel[d["prop-type"]] || "";
+          if (d["prop-type"] === "other" && v("prop-type-desc")) ptype = v("prop-type-desc");
+          var furnLabel = { yes: "furnished", no: "unfurnished", partly: "partly furnished" };
+          var mtmLabel = { yes: "continues month to month", no: "does not continue month to month", unsure: "not confirmed" };
+          var prop = row("Address", v("prop-addr")) + row("Parish", v("prop-parish")) + row("Property type", ptype) + row("Furniture", furnLabel[d["furnished"]] || "") + row("Start date", v("start-date")) + row("End date", v("end-date") || "No end date entered") + row("After the end date", mtmLabel[d["month-to-month"]] || "");
+          setHtml("rev-property", prop);
+
+          // Rent and deposit
+          var freq = d["rent-frequency"] === "other" ? v("rent-frequency-other") : v("rent-frequency");
+          var method = d["rent-method"] === "other" ? v("rent-method-other") : v("rent-method");
+          var rent = row("Rent amount", v("rent-amount")) + row("How often", freq) + row("Due", v("rent-due")) + row("Payment method", method);
+          if (d["deposit"] === "yes") {
+            rent += row("Deposit", v("deposit-amount")) + row("Deposit may be used for", v("deposit-use")) + row("Deposit returned", v("deposit-return"));
+          } else if (d["deposit"] === "no") {
+            rent += row("Deposit", "No deposit");
+          }
+          setHtml("rev-rent", rent);
+
+          // Utilities, repairs and rules
+          var utils = row("Electricity", v("util-electricity")) + row("Water", v("util-water")) + row("Internet", v("util-internet")) + row("Repairs", v("repairs"));
+          var rules = (d["rules"] || []).filter(function (x) { return x !== "none"; });
+          if (rules.length) {
+            var list = rules.map(function (x) { return x === "other rules" ? "other rules" : x; });
+            utils += row("Rules to include", list.join(", "));
+            if (v("rules-other")) utils += row("Other rules", v("rules-other"));
+          } else {
+            utils += row("Rules to include", "None selected");
+          }
+          setHtml("rev-utils", utils);
+        }
+        window.populateTenancyReview = populate;
+        populate();
+
+        // Build the draft template before navigating (single-file prototype).
+        var show = root().querySelector("#rev-show-template");
+        if (show) show.addEventListener("click", function () { if (window.populateTenancyTemplate) window.populateTenancyTemplate(); });
+      })();
+    
+
+      (function () {
+        function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+        function root() { return document.getElementById("screen-tenancy-template") || document; }
+        function populate() {
+          var d = {};
+          try { d = JSON.parse(sessionStorage.getItem("tenancyData") || "{}"); } catch (e) {}
+          function v(k) { return (d[k] || "").toString().trim(); }
+          function line(text) { return '<p class="govbb-text-body">' + esc(text) + "</p>"; }
+          function field(value, fallback) { var s = (value || "").toString().trim(); return '<p class="govbb-text-body">' + (s ? esc(s) : "<em>" + esc(fallback || "Not entered") + "</em>") + "</p>"; }
+          function sec(n, title, inner) { return '<div class="draft__section"><h2 class="govbb-text-h3">' + n + ". " + esc(title) + "</h2>" + inner + "</div>"; }
+
+          var html = "";
+
+          // 1. Landlord and tenant
+          var llContact = [v("ll-phone"), v("ll-email")].filter(Boolean).join(", ");
+          var s1 = line("This agreement is between:") +
+            "<p class=\"govbb-text-body\"><strong>Landlord:</strong></p>" + field(v("ll-name")) + field(v("ll-addr")) + field(llContact, "No contact details entered") +
+            "<p class=\"govbb-text-body\"><strong>Tenant:</strong></p>";
+          var tc = parseInt(d["t-count"] || "0", 10), anyT = false;
+          for (var i = 0; i < tc; i++) {
+            var nm = v("t-name-" + i);
+            if (!nm) continue;
+            anyT = true;
+            var tContact = [v("t-phone-" + i), v("t-email-" + i)].filter(Boolean).join(", ");
+            s1 += field(nm) + field(tContact, "No contact details entered");
+          }
+          if (!anyT) s1 += field("", "No tenant entered");
+          html += sec(1, "Landlord and tenant", s1);
+
+          // 2. Property
+          var typeLabel = { house: "house", apartment: "apartment", room: "room", other: "other" };
+          var ptype = typeLabel[d["prop-type"]] || "";
+          if (d["prop-type"] === "other" && v("prop-type-desc")) ptype = v("prop-type-desc");
+          var furnLabel = { yes: "Furnished", no: "Unfurnished", partly: "Partly furnished" };
+          var s2 = line("The property is:") + field(v("prop-addr")) + field(v("prop-parish")) +
+            "<p class=\"govbb-text-body\"><strong>Property type:</strong></p>" + field(ptype) +
+            "<p class=\"govbb-text-body\"><strong>Furniture:</strong></p>" + field(furnLabel[d["furnished"]] || "");
+          html += sec(2, "Property", s2);
+
+          // 3. Start and end of tenancy
+          var mtmLabel = { yes: "the tenancy continues month to month", no: "the tenancy does not continue month to month", unsure: "this is not confirmed" };
+          var s3 = line("The tenancy starts on:") + field(v("start-date")) +
+            line("The tenancy ends on:") + field(v("end-date"), "No end date entered") +
+            line("After this:") + field(mtmLabel[d["month-to-month"]] || "", "not confirmed");
+          html += sec(3, "Start and end of tenancy", s3);
+
+          // 4. Rent
+          var freq = d["rent-frequency"] === "other" ? v("rent-frequency-other") : v("rent-frequency");
+          var method = d["rent-method"] === "other" ? v("rent-method-other") : v("rent-method");
+          var s4 = line("The rent is:") + field(v("rent-amount")) +
+            line("The rent is paid:") + field(freq) +
+            line("The rent is due on:") + field(v("rent-due")) +
+            line("The rent should be paid by:") + field(method) +
+            line("The landlord and tenant should keep records of rent payments.");
+          html += sec(4, "Rent", s4);
+
+          // 5. Deposit
+          var s5;
+          if (d["deposit"] === "yes") {
+            s5 = line("Deposit:") + field(v("deposit-amount")) +
+              line("The deposit may be used for:") + field(v("deposit-use")) +
+              line("The deposit should be returned:") + field(v("deposit-return"));
+          } else {
+            s5 = line("Deposit:") + field(d["deposit"] === "no" ? "No deposit" : "");
+          }
+          html += sec(5, "Deposit", s5);
+
+          // 6. Utilities and repairs
+          var s6 = line("Electricity will be paid by:") + field(v("util-electricity")) +
+            line("Water will be paid by:") + field(v("util-water")) +
+            line("Internet will be paid by:") + field(v("util-internet")) +
+            line("Repairs will be handled by:") + field(v("repairs")) +
+            line("The tenant should tell the landlord in writing if something needs to be repaired.");
+          html += sec(6, "Utilities and repairs", s6);
+
+          // 7. Rules about the property
+          var rules = (d["rules"] || []).filter(function (x) { return x !== "none"; });
+          var s7 = line("The landlord and tenant agree to these rules:");
+          if (rules.length) {
+            var items = rules.map(function (x) {
+              if (x === "other rules") { return v("rules-other") ? v("rules-other") : "other rules"; }
+              return x;
+            });
+            s7 += '<ul class="govbb-list govbb-list--bullet">' + items.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>";
+          } else {
+            s7 += field("", "No rules selected");
+          }
+          html += sec(7, "Rules about the property", s7);
+
+          // 8. Ending the tenancy
+          var s8 = line("The landlord and tenant should check the agreement and the law to understand how much notice is needed to end the tenancy.") +
+            line("No specific notice period has been added because this needs legal confirmation.");
+          html += sec(8, "Ending the tenancy", s8);
+
+          // 9. Signatures (one block per tenant)
+          var s9 = '<div class="draft__sig"><p class="govbb-text-body"><strong>Landlord signature</strong></p>' + line("Name:") + line("Signature:") + line("Date:") + "</div>";
+          var added = false;
+          for (var j = 0; j < tc; j++) {
+            var tn = v("t-name-" + j);
+            if (!tn) continue;
+            added = true;
+            s9 += '<div class="draft__sig"><p class="govbb-text-body"><strong>Tenant signature</strong></p>' + field(tn) + line("Signature:") + line("Date:") + "</div>";
+          }
+          if (!added) s9 += '<div class="draft__sig"><p class="govbb-text-body"><strong>Tenant signature</strong></p>' + line("Name:") + line("Signature:") + line("Date:") + "</div>";
+          html += sec(9, "Signatures", s9);
+
+          var el = root().querySelector("#template-body");
+          if (el) el.innerHTML = html;
+        }
+        window.populateTenancyTemplate = populate;
+        populate();
+      })();
+    
 
       // Grouped suitability routing for the simple will route.
       (function () {

@@ -1,4 +1,4 @@
-# Legal help for common life events — Prototype map
+# Prepare for common legal tasks — Prototype map
 
 _Updated after the simplification pass. 33 screens._
 
@@ -20,7 +20,7 @@ _Updated after the simplification pass. 33 screens._
 - **Outcome content order (all routes):** plain-language explanation -> what it may mean / what you may need -> official forms and links -> prototype note (only where it explains a real limitation).
 
 ## 2. Entry and hub
-- **index.html — "Legal help for common life events"** (start page)
+- **index.html — "Prepare for common legal tasks"** (start page)
   - "Start now" -> choose-help.html
 - **choose-help.html — "What do you need help with?"** (main hub; radio + Continue; Back -> index)
   - Plan what happens to my money and property -> plan-money-property.html

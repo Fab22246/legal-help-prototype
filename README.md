@@ -1,4 +1,4 @@
-# WIP: Legal help for common life events prototype
+# WIP: Prepare for common legal tasks prototype
 
 This work builds a prototype for a public legal information service.
 

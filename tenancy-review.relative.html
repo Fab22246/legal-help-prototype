@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Check your answers — The Government of Barbados</title>
+    <link rel="icon" href="dist/assets/images/favicon.ico" />
+    <link rel="stylesheet" href="dist/styles.css" />
+    <style>
+      .skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; z-index: 999; }
+      .skip-link:focus { position: static; width: auto; height: auto; overflow: visible; padding: var(--spacing-xs) var(--spacing-s); background: var(--color-yellow-100); color: var(--color-black-00); font-weight: var(--font-weight-bold); text-decoration: none; }
+      .content { padding-block: var(--spacing-l); display: flex; flex-direction: column; gap: var(--spacing-m); max-width: 44rem; }
+      .back-link { display: inline-block; margin-bottom: var(--spacing-s); }
+      .back-link::before { content: "\2039"; margin-right: var(--spacing-xxs); }
+      .content__text { display: flex; flex-direction: column; gap: var(--spacing-s); }
+      .review__section { display: flex; flex-direction: column; gap: var(--spacing-xs); padding-bottom: var(--spacing-s); border-bottom: 1px solid var(--color-grey-00); }
+      .review__head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--spacing-s); }
+      .review__warning { padding: var(--spacing-s) var(--spacing-m); border-left: var(--spacing-xxs) solid var(--color-blue-40); background: var(--color-blue-10); display: flex; flex-direction: column; gap: var(--spacing-xs); }
+      .content__actions { display: flex; flex-direction: column; align-items: flex-start; gap: var(--spacing-s); margin-top: var(--spacing-s); }
+    </style>
+  </head>
+  <body class="govbb-page">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <div>
+      <div class="govbb-official-banner">
+        <div class="govbb-container govbb-official-banner__inner">
+          <div class="govbb-official-banner__crest"><img class="govbb-official-banner__icon" src="dist/assets/images/govbb-creast.svg" alt="" /></div>
+          <div class="govbb-official-banner__text"><span>Official government website</span></div>
+        </div>
+      </div>
+      <header class="govbb-header">
+        <div class="govbb-container govbb-header__inner">
+          <a href="/" aria-label="Go to the alpha.gov.bb homepage"><img class="govbb-header__logo" src="dist/assets/images/govbb-logo.svg" alt="GOVBB" /></a>
+        </div>
+      </header>
+    </div>
+    <main class="govbb-page__main" id="main-content">
+      <div class="govbb-status-banner govbb-status-banner--alpha" role="status" aria-label="alpha status banner" aria-live="polite">
+        <div class="govbb-container"><p>This page is in <a class="govbb-link govbb-link--secondary" href="#">Alpha</a>.</p></div>
+      </div>
+      <div class="govbb-container">
+        <a class="govbb-link back-link" href="tenancy-terms.html">Back to Rent, deposit and responsibilities</a>
+        <div class="content">
+          <h1 class="govbb-text-h1">Check your answers</h1>
+          <p class="govbb-text-body">Check that the information you entered is correct.</p>
+
+          <div class="review__section">
+            <div class="review__head"><h2 class="govbb-text-h2">Landlord and tenant</h2><a class="govbb-link" href="tenancy-parties.html">Change</a></div>
+            <div id="rev-parties" class="content__text"></div>
+          </div>
+          <div class="review__section">
+            <div class="review__head"><h2 class="govbb-text-h2">Property and tenancy details</h2><a class="govbb-link" href="tenancy-property-dates.html">Change</a></div>
+            <div id="rev-property" class="content__text"></div>
+          </div>
+          <div class="review__section">
+            <div class="review__head"><h2 class="govbb-text-h2">Rent and deposit</h2><a class="govbb-link" href="tenancy-terms.html">Change</a></div>
+            <div id="rev-rent" class="content__text"></div>
+          </div>
+          <div class="review__section">
+            <div class="review__head"><h2 class="govbb-text-h2">Utilities, repairs and rules</h2><a class="govbb-link" href="tenancy-terms.html">Change</a></div>
+            <div id="rev-utils" class="content__text"></div>
+          </div>
+
+          <div class="review__warning" role="note">
+            <p class="govbb-text-body">This prototype will create draft template wording from your answers.</p>
+            <p class="govbb-text-body">The wording has not been legally checked yet.</p>
+            <p class="govbb-text-body">Do not sign the agreement until both sides understand it and it has been checked if needed.</p>
+          </div>
+
+          <div class="content__actions">
+            <a class="govbb-btn" id="rev-show-template" href="tenancy-template.html" role="button" draggable="false">Show draft template</a>
+            <a class="govbb-link" href="renting-a-home.html">Back to Renting a home</a>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="govbb-footer">
+      <div class="govbb-container govbb-footer__inner">
+        <nav class="govbb-footer__nav" aria-label="Footer">
+          <a class="govbb-footer__link" href="#">Home</a>
+          <a class="govbb-footer__link" href="#">Cookie Policy</a>
+          <a class="govbb-footer__link" href="#">Terms &amp; Conditions</a>
+          <a class="govbb-footer__link" href="#">Sitemap</a>
+        </nav>
+        <hr class="govbb-footer__divider" aria-hidden="true" />
+        <div class="govbb-footer__end">
+          <img class="govbb-footer__coat" src="dist/assets/images/govbb-creast.svg" alt="Government of Barbados Coat of Arms" />
+          <p class="govbb-footer__copy">© 2026 Government of Barbados</p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      (function () {
+        function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+        function root() { return document.getElementById("screen-tenancy-review") || document; }
+        function setHtml(id, html) { var el = root().querySelector("#" + id); if (el) el.innerHTML = html || '<p class="govbb-text-body">Not answered yet.</p>'; }
+        function populate() {
+          var d = {};
+          try { d = JSON.parse(sessionStorage.getItem("tenancyData") || "{}"); } catch (e) {}
+          function v(k) { return (d[k] || "").toString().trim(); }
+          function row(label, value) { return value ? '<p class="govbb-text-body"><strong>' + label + ':</strong> ' + esc(value) + "</p>" : ""; }
+
+          // Landlord and tenants
+          var parties = row("Landlord", v("ll-name")) + row("Landlord address", v("ll-addr")) + row("Landlord phone", v("ll-phone")) + row("Landlord email", v("ll-email"));
+          var tc = parseInt(d["t-count"] || "0", 10);
+          for (var i = 0; i < tc; i++) {
+            var nm = v("t-name-" + i);
+            if (nm) parties += row("Tenant " + (i + 1), nm) + row("Tenant " + (i + 1) + " phone", v("t-phone-" + i)) + row("Tenant " + (i + 1) + " email", v("t-email-" + i));
+          }
+          setHtml("rev-parties", parties);
+
+          // Property and dates
+          var typeLabel = { house: "house", apartment: "apartment", room: "room", other: "other" };
+          var ptype = typeLabel[d["prop-type"]] || "";
+          if (d["prop-type"] === "other" && v("prop-type-desc")) ptype = v("prop-type-desc");
+          var furnLabel = { yes: "furnished", no: "unfurnished", partly: "partly furnished" };
+          var mtmLabel = { yes: "continues month to month", no: "does not continue month to month", unsure: "not confirmed" };
+          var prop = row("Address", v("prop-addr")) + row("Parish", v("prop-parish")) + row("Property type", ptype) + row("Furniture", furnLabel[d["furnished"]] || "") + row("Start date", v("start-date")) + row("End date", v("end-date") || "No end date entered") + row("After the end date", mtmLabel[d["month-to-month"]] || "");
+          setHtml("rev-property", prop);
+
+          // Rent and deposit
+          var freq = d["rent-frequency"] === "other" ? v("rent-frequency-other") : v("rent-frequency");
+          var method = d["rent-method"] === "other" ? v("rent-method-other") : v("rent-method");
+          var rent = row("Rent amount", v("rent-amount")) + row("How often", freq) + row("Due", v("rent-due")) + row("Payment method", method);
+          if (d["deposit"] === "yes") {
+            rent += row("Deposit", v("deposit-amount")) + row("Deposit may be used for", v("deposit-use")) + row("Deposit returned", v("deposit-return"));
+          } else if (d["deposit"] === "no") {
+            rent += row("Deposit", "No deposit");
+          }
+          setHtml("rev-rent", rent);
+
+          // Utilities, repairs and rules
+          var utils = row("Electricity", v("util-electricity")) + row("Water", v("util-water")) + row("Internet", v("util-internet")) + row("Repairs", v("repairs"));
+          var rules = (d["rules"] || []).filter(function (x) { return x !== "none"; });
+          if (rules.length) {
+            var list = rules.map(function (x) { return x === "other rules" ? "other rules" : x; });
+            utils += row("Rules to include", list.join(", "));
+            if (v("rules-other")) utils += row("Other rules", v("rules-other"));
+          } else {
+            utils += row("Rules to include", "None selected");
+          }
+          setHtml("rev-utils", utils);
+        }
+        window.populateTenancyReview = populate;
+        populate();
+
+        // Build the draft template before navigating (single-file prototype).
+        var show = root().querySelector("#rev-show-template");
+        if (show) show.addEventListener("click", function () { if (window.populateTenancyTemplate) window.populateTenancyTemplate(); });
+      })();
+    </script>
+  </body>
+</html>

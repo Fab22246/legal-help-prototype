@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Draft tenancy agreement template — The Government of Barbados</title>
+    <link rel="icon" href="dist/assets/images/favicon.ico" />
+    <link rel="stylesheet" href="dist/styles.css" />
+    <style>
+      .skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; z-index: 999; }
+      .skip-link:focus { position: static; width: auto; height: auto; overflow: visible; padding: var(--spacing-xs) var(--spacing-s); background: var(--color-yellow-100); color: var(--color-black-00); font-weight: var(--font-weight-bold); text-decoration: none; }
+      .content { padding-block: var(--spacing-l); display: flex; flex-direction: column; gap: var(--spacing-m); max-width: 44rem; }
+      .back-link { display: inline-block; margin-bottom: var(--spacing-s); }
+      .back-link::before { content: "\2039"; margin-right: var(--spacing-xxs); }
+      .content__text { display: flex; flex-direction: column; gap: var(--spacing-s); }
+      .content__actions { display: flex; flex-direction: column; align-items: flex-start; gap: var(--spacing-s); margin-top: var(--spacing-s); }
+      .notice { padding: var(--spacing-s) var(--spacing-m); border-left: var(--spacing-xxs) solid var(--color-blue-40); background: var(--color-blue-10); display: flex; flex-direction: column; gap: var(--spacing-xs); }
+      .draft { border: var(--border-width-form) solid var(--color-grey-00); border-radius: var(--radius-sm); padding: var(--spacing-m); display: flex; flex-direction: column; gap: var(--spacing-m); }
+      .draft__section { display: flex; flex-direction: column; gap: var(--spacing-xs); }
+      .draft__sig { display: flex; flex-direction: column; gap: var(--spacing-xs); padding: var(--spacing-s) 0; border-top: 1px dashed var(--color-grey-00); }
+    </style>
+  </head>
+  <body class="govbb-page">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <div>
+      <div class="govbb-official-banner">
+        <div class="govbb-container govbb-official-banner__inner">
+          <div class="govbb-official-banner__crest"><img class="govbb-official-banner__icon" src="dist/assets/images/govbb-creast.svg" alt="" /></div>
+          <div class="govbb-official-banner__text"><span>Official government website</span></div>
+        </div>
+      </div>
+      <header class="govbb-header">
+        <div class="govbb-container govbb-header__inner">
+          <a href="/" aria-label="Go to the alpha.gov.bb homepage"><img class="govbb-header__logo" src="dist/assets/images/govbb-logo.svg" alt="GOVBB" /></a>
+        </div>
+      </header>
+    </div>
+    <main class="govbb-page__main" id="main-content">
+      <div class="govbb-status-banner govbb-status-banner--alpha" role="status" aria-label="alpha status banner" aria-live="polite">
+        <div class="govbb-container"><p>This page is in <a class="govbb-link govbb-link--secondary" href="#">Alpha</a>.</p></div>
+      </div>
+      <div class="govbb-container">
+        <a class="govbb-link back-link" href="tenancy-review.html">Back</a>
+        <div class="content">
+          <h1 class="govbb-text-h1">Draft tenancy agreement template</h1>
+          <div class="content__text">
+            <p class="govbb-text-body">This is draft wording based on your answers.</p>
+            <p class="govbb-text-body">It has not been legally checked yet.</p>
+            <p class="govbb-text-body">It does not replace legal advice.</p>
+          </div>
+
+          <div class="notice" role="note">
+            <p class="govbb-text-body"><strong>Important note</strong></p>
+            <p class="govbb-text-body">This is draft template wording.</p>
+            <p class="govbb-text-body">It is not a legally approved agreement.</p>
+            <p class="govbb-text-body">It does not replace legal advice.</p>
+            <p class="govbb-text-body">Both the landlord and tenant should read the full agreement before signing.</p>
+          </div>
+
+          <div class="draft" id="template-body"></div>
+
+          <h2 class="govbb-text-h2">Prototype note</h2>
+          <div class="content__text">
+            <p class="govbb-text-body">This prototype prepares draft wording only.</p>
+            <p class="govbb-text-body">It does not create a legally approved agreement.</p>
+            <p class="govbb-text-body">It does not check the agreement, witness signatures, file documents, take payments, book appointments or save your information.</p>
+          </div>
+
+          <div class="content__actions">
+            <a class="govbb-btn" href="choose-help.html" role="button" draggable="false">Back to what you need help with</a>
+            <a class="govbb-link" href="renting-a-home.html">Back to Renting a home</a>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="govbb-footer">
+      <div class="govbb-container govbb-footer__inner">
+        <nav class="govbb-footer__nav" aria-label="Footer">
+          <a class="govbb-footer__link" href="#">Home</a>
+          <a class="govbb-footer__link" href="#">Cookie Policy</a>
+          <a class="govbb-footer__link" href="#">Terms &amp; Conditions</a>
+          <a class="govbb-footer__link" href="#">Sitemap</a>
+        </nav>
+        <hr class="govbb-footer__divider" aria-hidden="true" />
+        <div class="govbb-footer__end">
+          <img class="govbb-footer__coat" src="dist/assets/images/govbb-creast.svg" alt="Government of Barbados Coat of Arms" />
+          <p class="govbb-footer__copy">© 2026 Government of Barbados</p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      (function () {
+        function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+        function root() { return document.getElementById("screen-tenancy-template") || document; }
+        function populate() {
+          var d = {};
+          try { d = JSON.parse(sessionStorage.getItem("tenancyData") || "{}"); } catch (e) {}
+          function v(k) { return (d[k] || "").toString().trim(); }
+          function line(text) { return '<p class="govbb-text-body">' + esc(text) + "</p>"; }
+          function field(value, fallback) { var s = (value || "").toString().trim(); return '<p class="govbb-text-body">' + (s ? esc(s) : "<em>" + esc(fallback || "Not entered") + "</em>") + "</p>"; }
+          function sec(n, title, inner) { return '<div class="draft__section"><h2 class="govbb-text-h3">' + n + ". " + esc(title) + "</h2>" + inner + "</div>"; }
+
+          var html = "";
+
+          // 1. Landlord and tenant
+          var llContact = [v("ll-phone"), v("ll-email")].filter(Boolean).join(", ");
+          var s1 = line("This agreement is between:") +
+            "<p class=\"govbb-text-body\"><strong>Landlord:</strong></p>" + field(v("ll-name")) + field(v("ll-addr")) + field(llContact, "No contact details entered") +
+            "<p class=\"govbb-text-body\"><strong>Tenant:</strong></p>";
+          var tc = parseInt(d["t-count"] || "0", 10), anyT = false;
+          for (var i = 0; i < tc; i++) {
+            var nm = v("t-name-" + i);
+            if (!nm) continue;
+            anyT = true;
+            var tContact = [v("t-phone-" + i), v("t-email-" + i)].filter(Boolean).join(", ");
+            s1 += field(nm) + field(tContact, "No contact details entered");
+          }
+          if (!anyT) s1 += field("", "No tenant entered");
+          html += sec(1, "Landlord and tenant", s1);
+
+          // 2. Property
+          var typeLabel = { house: "house", apartment: "apartment", room: "room", other: "other" };
+          var ptype = typeLabel[d["prop-type"]] || "";
+          if (d["prop-type"] === "other" && v("prop-type-desc")) ptype = v("prop-type-desc");
+          var furnLabel = { yes: "Furnished", no: "Unfurnished", partly: "Partly furnished" };
+          var s2 = line("The property is:") + field(v("prop-addr")) + field(v("prop-parish")) +
+            "<p class=\"govbb-text-body\"><strong>Property type:</strong></p>" + field(ptype) +
+            "<p class=\"govbb-text-body\"><strong>Furniture:</strong></p>" + field(furnLabel[d["furnished"]] || "");
+          html += sec(2, "Property", s2);
+
+          // 3. Start and end of tenancy
+          var mtmLabel = { yes: "the tenancy continues month to month", no: "the tenancy does not continue month to month", unsure: "this is not confirmed" };
+          var s3 = line("The tenancy starts on:") + field(v("start-date")) +
+            line("The tenancy ends on:") + field(v("end-date"), "No end date entered") +
+            line("After this:") + field(mtmLabel[d["month-to-month"]] || "", "not confirmed");
+          html += sec(3, "Start and end of tenancy", s3);
+
+          // 4. Rent
+          var freq = d["rent-frequency"] === "other" ? v("rent-frequency-other") : v("rent-frequency");
+          var method = d["rent-method"] === "other" ? v("rent-method-other") : v("rent-method");
+          var s4 = line("The rent is:") + field(v("rent-amount")) +
+            line("The rent is paid:") + field(freq) +
+            line("The rent is due on:") + field(v("rent-due")) +
+            line("The rent should be paid by:") + field(method) +
+            line("The landlord and tenant should keep records of rent payments.");
+          html += sec(4, "Rent", s4);
+
+          // 5. Deposit
+          var s5;
+          if (d["deposit"] === "yes") {
+            s5 = line("Deposit:") + field(v("deposit-amount")) +
+              line("The deposit may be used for:") + field(v("deposit-use")) +
+              line("The deposit should be returned:") + field(v("deposit-return"));
+          } else {
+            s5 = line("Deposit:") + field(d["deposit"] === "no" ? "No deposit" : "");
+          }
+          html += sec(5, "Deposit", s5);
+
+          // 6. Utilities and repairs
+          var s6 = line("Electricity will be paid by:") + field(v("util-electricity")) +
+            line("Water will be paid by:") + field(v("util-water")) +
+            line("Internet will be paid by:") + field(v("util-internet")) +
+            line("Repairs will be handled by:") + field(v("repairs")) +
+            line("The tenant should tell the landlord in writing if something needs to be repaired.");
+          html += sec(6, "Utilities and repairs", s6);
+
+          // 7. Rules about the property
+          var rules = (d["rules"] || []).filter(function (x) { return x !== "none"; });
+          var s7 = line("The landlord and tenant agree to these rules:");
+          if (rules.length) {
+            var items = rules.map(function (x) {
+              if (x === "other rules") { return v("rules-other") ? v("rules-other") : "other rules"; }
+              return x;
+            });
+            s7 += '<ul class="govbb-list govbb-list--bullet">' + items.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>";
+          } else {
+            s7 += field("", "No rules selected");
+          }
+          html += sec(7, "Rules about the property", s7);
+
+          // 8. Ending the tenancy
+          var s8 = line("The landlord and tenant should check the agreement and the law to understand how much notice is needed to end the tenancy.") +
+            line("No specific notice period has been added because this needs legal confirmation.");
+          html += sec(8, "Ending the tenancy", s8);
+
+          // 9. Signatures (one block per tenant)
+          var s9 = '<div class="draft__sig"><p class="govbb-text-body"><strong>Landlord signature</strong></p>' + line("Name:") + line("Signature:") + line("Date:") + "</div>";
+          var added = false;
+          for (var j = 0; j < tc; j++) {
+            var tn = v("t-name-" + j);
+            if (!tn) continue;
+            added = true;
+            s9 += '<div class="draft__sig"><p class="govbb-text-body"><strong>Tenant signature</strong></p>' + field(tn) + line("Signature:") + line("Date:") + "</div>";
+          }
+          if (!added) s9 += '<div class="draft__sig"><p class="govbb-text-body"><strong>Tenant signature</strong></p>' + line("Name:") + line("Signature:") + line("Date:") + "</div>";
+          html += sec(9, "Signatures", s9);
+
+          var el = root().querySelector("#template-body");
+          if (el) el.innerHTML = html;
+        }
+        window.populateTenancyTemplate = populate;
+        populate();
+      })();
+    </script>
+  </body>
+</html>

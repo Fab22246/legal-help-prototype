@@ -20,6 +20,7 @@ PAGES = [
     "choose-help",
     "help-me-choose",
     "give-property",
+    "renting-a-home",
     "signing-witnessing",
     "change-record",
     "prepare-for-lawyer",

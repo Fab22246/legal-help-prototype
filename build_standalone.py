@@ -19,6 +19,7 @@ PAGES = [
     "choose-help",              # main hub (hand-written)
     "help-me-choose",           # single-page triage (gen_route.py)
     "give-property",            # guidance: giving property while alive (hand-written)
+    "renting-a-home",           # guidance: renting a home (hand-written)
     "signing-witnessing",       # support page (hand-written)
     "change-record",            # placeholder content page (hand-written)
     "prepare-for-lawyer",       # single preparation page (hand-written)

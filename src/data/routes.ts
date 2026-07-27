@@ -38,6 +38,17 @@ export interface RouteMeta {
   legalRisk: LegalRisk
   /** Whether the route appears as a card on the home page. */
   showOnHome: boolean
+
+  // Optional per-route overrides for page-notice needs. When omitted, sensible
+  // defaults are derived from routeType via getRouteNotices().
+  /** Show the "does not give legal advice" boundary notice on the page. */
+  needsLegalAdviceBoundary?: boolean
+  /** Show the "draft wording has not been legally reviewed" warning. */
+  needsDraftWarning?: boolean
+  /** Show the "needs legal review before testing/publication" warning. */
+  needsLegalReview?: boolean
+  /** Whether a "relevant law and official sources" section may be shown. */
+  showRelevantLaw?: boolean
 }
 
 // Order in which groups render on the home page.
@@ -194,4 +205,35 @@ export const routes: RouteMeta[] = [
 
 export function getRouteByPath(path: string): RouteMeta | undefined {
   return routes.find((r) => r.path === path)
+}
+
+// Resolved set of page-notice needs for a route.
+export interface RouteNotices {
+  legalAdviceBoundary: boolean
+  draftWarning: boolean
+  legalReviewNeeded: boolean
+  relevantLaw: boolean
+}
+
+// Sensible defaults per route type. A route can override any of these via its
+// optional metadata flags. Keeps notice decisions in the data layer, not in
+// presentation components.
+const NOTICE_DEFAULTS: Record<RouteType, RouteNotices> = {
+  guidance: { legalAdviceBoundary: true, draftWarning: false, legalReviewNeeded: true, relevantLaw: true },
+  builder: { legalAdviceBoundary: true, draftWarning: true, legalReviewNeeded: true, relevantLaw: true },
+  checker: { legalAdviceBoundary: true, draftWarning: false, legalReviewNeeded: true, relevantLaw: true },
+  support: { legalAdviceBoundary: true, draftWarning: false, legalReviewNeeded: false, relevantLaw: false },
+  placeholder: { legalAdviceBoundary: true, draftWarning: false, legalReviewNeeded: false, relevantLaw: false },
+}
+
+// Returns the effective notices for a route: explicit metadata flags win,
+// otherwise the routeType defaults apply.
+export function getRouteNotices(route: RouteMeta): RouteNotices {
+  const defaults = NOTICE_DEFAULTS[route.routeType]
+  return {
+    legalAdviceBoundary: route.needsLegalAdviceBoundary ?? defaults.legalAdviceBoundary,
+    draftWarning: route.needsDraftWarning ?? defaults.draftWarning,
+    legalReviewNeeded: route.needsLegalReview ?? defaults.legalReviewNeeded,
+    relevantLaw: route.showRelevantLaw ?? defaults.relevantLaw,
+  }
 }

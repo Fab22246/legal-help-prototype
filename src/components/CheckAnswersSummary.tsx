@@ -27,7 +27,7 @@ export function CheckAnswersSummary({ sections }: CheckAnswersSummaryProps) {
           <h2 className="govbb-summary-section__title">{section.title}</h2>
           {section.changeTo ? (
             <Link className="govbb-summary-section__action" to={section.changeTo}>
-              Change
+              Change<span className="govbb-visually-hidden"> {section.title}</span>
             </Link>
           ) : null}
           <dl className="govbb-summary-list">

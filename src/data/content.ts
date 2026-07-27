@@ -15,3 +15,13 @@ export const PLACEHOLDER_SENTENCE =
 
 // The only legal-boundary wording allowed for now.
 export const LEGAL_BOUNDARY = 'This prototype does not give legal advice.'
+
+// Not-live-service boundary.
+export const NOT_LIVE_SERVICE = 'This is not a live government service.'
+
+// Draft-output warning (for future builder draft pages).
+export const DRAFT_NOT_REVIEWED = 'Draft wording has not been legally reviewed.'
+
+// Legal-review-needed warning (for content still awaiting legal review).
+export const LEGAL_REVIEW_NEEDED =
+  'This content needs legal review before testing or publication.'

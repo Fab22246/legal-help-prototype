@@ -1,6 +1,6 @@
 import { WarningNotice } from './WarningNotice'
 import {
-  LEGAL_BOUNDARY,
+  PAGE_LEGAL_BOUNDARY,
   NOT_LIVE_SERVICE,
   DRAFT_NOT_REVIEWED,
   LEGAL_REVIEW_NEEDED,
@@ -17,7 +17,7 @@ export type NoticeKind =
   | 'legal-review-needed'
 
 const NOTICE_TEXT: Record<NoticeKind, string> = {
-  'legal-advice': LEGAL_BOUNDARY,
+  'legal-advice': PAGE_LEGAL_BOUNDARY,
   'not-live-service': NOT_LIVE_SERVICE,
   'draft-not-reviewed': DRAFT_NOT_REVIEWED,
   'legal-review-needed': LEGAL_REVIEW_NEEDED,

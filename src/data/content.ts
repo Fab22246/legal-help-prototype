@@ -13,8 +13,11 @@ export const PROTOTYPE_NOTICE =
 export const PLACEHOLDER_SENTENCE =
   'This route is planned for the prototype and has not been built yet.'
 
-// The only legal-boundary wording allowed for now.
+// Global legal-boundary wording (used by the app-shell footer).
 export const LEGAL_BOUNDARY = 'This prototype does not give legal advice.'
+
+// Page-level legal-advice boundary wording (used by the reusable Notice).
+export const PAGE_LEGAL_BOUNDARY = 'This page gives general information. It does not give legal advice.'
 
 // Not-live-service boundary.
 export const NOT_LIVE_SERVICE = 'This is not a live government service.'

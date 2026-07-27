@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react'
 import { BackLink } from '../navigation/BackLink'
-import { PrototypeNotice } from '../PrototypeNotice'
 import { Notice } from '../Notice'
 import { RelevantLawSources, type LawSource } from '../RelevantLawSources'
 
@@ -13,6 +12,9 @@ interface GuidancePagePatternProps {
   whatNext?: ReactNode
   /** "What this prototype cannot do" content. */
   whatPrototypeCannotDo?: ReactNode
+  /** Show the page-level legal-advice boundary notice (default true). Global
+   *  prototype / not-live status is handled separately by the app shell. */
+  showLegalAdviceBoundary?: boolean
   /** Show the relevant-law section. */
   showRelevantLaw?: boolean
   lawExplanation?: string
@@ -29,6 +31,7 @@ export function GuidancePagePattern({
   children,
   whatNext,
   whatPrototypeCannotDo,
+  showLegalAdviceBoundary = true,
   showRelevantLaw = false,
   lawExplanation,
   lawSources,
@@ -43,8 +46,7 @@ export function GuidancePagePattern({
         {intro}
       </div>
 
-      <PrototypeNotice />
-      <Notice kind="legal-advice" />
+      {showLegalAdviceBoundary ? <Notice kind="legal-advice" /> : null}
 
       {children}
 

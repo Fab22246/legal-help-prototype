@@ -124,9 +124,13 @@ export const routes: RouteMeta[] = [
     description:
       'Learn what common legal document terms mean before you sign, witness, certify or notarise a document.',
     routeType: 'guidance',
-    status: 'planned',
+    status: 'needsLegalReview',
     legalRisk: 'medium',
     showOnHome: true,
+    needsLegalAdviceBoundary: true,
+    needsDraftWarning: false,
+    needsLegalReview: true,
+    showRelevantLaw: true,
   },
   {
     title: 'Change a name or update a record',

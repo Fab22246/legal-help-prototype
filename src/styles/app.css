@@ -1,0 +1,209 @@
+/* App-specific layout on top of the GovBB design tokens/components (govbb.css).
+   Uses design-system tokens only — no raw hex. Teal is the focus/interactive
+   colour. This is an unbranded prototype: no official logos, crests or banners. */
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  color: var(--color-black-00);
+  background: var(--color-white-00);
+}
+
+/* Page-width container (the design system deliberately ships none). */
+.app-container {
+  width: 100%;
+  max-width: 60rem;
+  margin-inline: auto;
+  padding-inline: var(--spacing-s);
+}
+
+/* Skip link — visible only on keyboard focus. */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  z-index: 999;
+}
+.skip-link:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  display: inline-block;
+  margin: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-s);
+  background: var(--color-teal-40);
+  color: var(--color-black-00);
+  font-weight: var(--font-weight-bold);
+  text-decoration: none;
+}
+
+/* Shared teal focus ring for custom interactive elements. */
+a:focus-visible,
+button:focus-visible,
+.task-card:focus-visible {
+  outline: 3px solid var(--color-teal-40);
+  outline-offset: 2px;
+}
+
+/* Header — GovTech yellow brand strip (design-system govbb-header) with a plain
+   text wordmark. No official logo, crest or "official government" banner. */
+.govbb-header__inner {
+  justify-content: space-between;
+}
+.app-header__title {
+  color: var(--color-text, var(--color-black-00));
+  text-decoration: none;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-h4);
+}
+.app-header__title:hover {
+  text-decoration: underline;
+}
+.app-header__tag {
+  font-size: var(--font-size-caption-sm);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: var(--spacing-xxs) var(--spacing-xs);
+  border: 1px solid var(--color-text, var(--color-black-00));
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+/* Main + page rhythm. */
+.app-main {
+  display: block;
+  padding-block: var(--spacing-m) var(--spacing-l);
+  min-height: 60vh;
+}
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-m);
+  max-width: 44rem;
+}
+.page__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s);
+}
+.page__title {
+  font-size: var(--font-size-h1);
+  line-height: var(--line-height-h1);
+  font-weight: var(--font-weight-bold);
+  margin: 0;
+}
+.page__intro {
+  font-size: var(--font-size-body-lg);
+  line-height: var(--line-height-body-lg);
+  margin: 0;
+}
+.page__text {
+  margin: 0;
+}
+
+/* Prototype / unofficial-service notice. */
+.prototype-notice {
+  border-left: var(--spacing-xxs) solid var(--color-teal-00);
+  background: var(--color-teal-10);
+  padding: var(--spacing-s) var(--spacing-m);
+}
+.prototype-notice p {
+  margin: 0;
+}
+
+/* Warning notice (for later use). */
+.warning-notice {
+  border-left: var(--spacing-xxs) solid var(--color-red-00);
+  background: var(--color-red-10);
+  padding: var(--spacing-s) var(--spacing-m);
+}
+.warning-notice p {
+  margin: 0;
+}
+
+/* Card groups on the home page. */
+.card-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s);
+  margin-top: var(--spacing-m);
+}
+.card-group__title {
+  font-size: var(--font-size-h3);
+  line-height: var(--line-height-h3);
+  font-weight: var(--font-weight-bold);
+  margin: 0;
+}
+.card-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-s);
+}
+@media (min-width: 40rem) {
+  .card-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.task-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xxs);
+  height: 100%;
+  padding: var(--spacing-m);
+  border: 1px solid var(--color-grey-00);
+  border-radius: 4px;
+  background: var(--color-white-00);
+  text-decoration: none;
+  color: var(--color-black-00);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.task-card:hover {
+  border-color: var(--color-teal-00);
+  box-shadow: var(--shadow-form-hover);
+}
+.task-card__title {
+  margin: 0;
+  font-size: var(--font-size-h4);
+  line-height: var(--line-height-h4);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-teal-00);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.task-card:hover .task-card__title {
+  text-decoration: none;
+}
+.task-card__desc {
+  margin: 0;
+  color: var(--color-mid-grey-00);
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-caption);
+}
+
+/* Footer uses the design-system govbb-footer component (no custom styling
+   needed) — see Footer.tsx. No coat of arms / official crest. */
+
+/* Generic vertical stack used by form/placeholder shells. */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-m);
+}
+.stack--tight {
+  gap: var(--spacing-s);
+}

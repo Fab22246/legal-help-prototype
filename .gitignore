@@ -9,3 +9,12 @@ start-trading-barbados 99.html
 Thumbs.db
 desktop.ini
 *.swp
+
+# Node / Vite build
+node_modules/
+dist/
+.vite/
+
+# Local design-system handoff / reference docs (not part of the app)
+govbb-design-system-handoff.md
+interaction-design-evidence-pack.md

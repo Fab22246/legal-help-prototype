@@ -4,12 +4,14 @@ import { AppLayout } from '../components/layout/AppLayout'
 import { HomePage } from '../pages/HomePage'
 import { PlaceholderPage } from '../components/PlaceholderPage'
 import { SigningWitnessingCertifiedCopiesPage } from '../pages/SigningWitnessingCertifiedCopiesPage'
+import { ChangeNameRecordPage } from '../pages/ChangeNameRecordPage'
 import { routes } from '../data/routes'
 
 // Built routes render their own page; every other route still renders the
 // registry-driven placeholder. Added one route at a time in later phases.
 const BUILT_ROUTES: Record<string, ReactNode> = {
   '/signing-witnessing-certified-copies': <SigningWitnessingCertifiedCopiesPage />,
+  '/change-name-record': <ChangeNameRecordPage />,
 }
 
 export function AppRoutes() {

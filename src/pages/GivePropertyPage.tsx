@@ -45,10 +45,10 @@ export function GivePropertyPage() {
       </section>
 
       <section className="stack--tight">
-        <h2 className="card-group__title">What to check</h2>
+        <h2 className="card-group__title">What to prepare</h2>
         <p className="page__text">Write down:</p>
-        <ul>
-          <li>what you want to give</li>
+        <ul className="govbb-list govbb-list--bullet">
+          <li>what you want to give and its location or address</li>
           <li>whose name the land or home is in</li>
           <li>whether anyone else owns part of it</li>
           <li>whether a mortgage or another person&rsquo;s rights may affect it</li>
@@ -56,26 +56,18 @@ export function GivePropertyPage() {
           <li>whether you want to keep living there or using it</li>
         </ul>
         <p className="page__text">
-          These are preparation prompts. They are not a complete list of legal requirements.
-        </p>
-      </section>
-
-      <section className="stack--tight">
-        <h2 className="card-group__title">Information you may need</h2>
-        <p className="page__text">
           Gather any information or documents you already have, such as:
         </p>
-        <ul>
-          <li>the location or address of the land or home</li>
+        <ul className="govbb-list govbb-list--bullet">
           <li>the most recent land tax bill</li>
           <li>a deed, certificate of title or other ownership document</li>
-          <li>the names of everyone shown as an owner</li>
           <li>information about any mortgage</li>
-          <li>the name of the person who may receive the property</li>
         </ul>
         <p className="page__text">
-          A lawyer can help you find out what documents and steps may be needed. The Land Registry
-          provides general information about recording and registering land documents.
+          These are preparation prompts. They are not a complete list of legal requirements.
+        </p>
+        <p className="page__text">
+          A lawyer can help you find out what documents and steps may be needed.
         </p>
       </section>
 
@@ -102,7 +94,7 @@ export function GivePropertyPage() {
       <section className="stack--tight">
         <h2 className="card-group__title">Questions to ask</h2>
         <p className="page__text">You may want to ask:</p>
-        <ul>
+        <ul className="govbb-list govbb-list--bullet">
           <li>what type of document is needed</li>
           <li>when ownership would change</li>
           <li>whether anyone else must agree</li>

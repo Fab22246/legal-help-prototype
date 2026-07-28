@@ -83,7 +83,7 @@ export function LegalAidPage() {
       <section className="stack--tight">
         <h2 className="card-group__title">Before you contact the office</h2>
         <p className="page__text">Before you contact the office, you can:</p>
-        <ul>
+        <ul className="govbb-list govbb-list--bullet">
           <li>write a short description of your matter for your own notes</li>
           <li>note any important dates</li>
           <li>have your contact details ready</li>

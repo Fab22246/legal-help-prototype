@@ -49,7 +49,7 @@ export function SigningWitnessingCertifiedCopiesPage() {
         <p className="page__text">
           The witness may also need to sign and add information such as their:
         </p>
-        <ul>
+        <ul className="govbb-list govbb-list--bullet">
           <li>full name</li>
           <li>address</li>
           <li>occupation</li>
@@ -71,7 +71,7 @@ export function SigningWitnessingCertifiedCopiesPage() {
           original.
         </p>
         <p className="page__text">You may need to show:</p>
-        <ul>
+        <ul className="govbb-list govbb-list--bullet">
           <li>the original document</li>
           <li>the copy that needs to be certified</li>
         </ul>
@@ -135,7 +135,7 @@ export function SigningWitnessingCertifiedCopiesPage() {
 
       <section className="stack--tight">
         <h2 className="card-group__title">Official services</h2>
-        <ul>
+        <ul className="govbb-list govbb-list--bullet">
           <li>
             <a
               className="govbb-link-default"

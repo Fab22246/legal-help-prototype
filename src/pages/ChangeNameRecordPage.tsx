@@ -34,7 +34,7 @@ export function ChangeNameRecordPage() {
           The Barbados Judicial System provides a process for applying to change your name.
         </p>
         <p className="page__text">To apply, you need:</p>
-        <ul>
+        <ul className="govbb-list govbb-list--bullet">
           <li>an application for the change of name</li>
           <li>a sworn affidavit that supports the application</li>
           <li>your birth certificate</li>
@@ -59,7 +59,7 @@ export function ChangeNameRecordPage() {
           A correction fixes a mistake in the information recorded on a birth certificate.
         </p>
         <p className="page__text">To ask for a correction, you need:</p>
-        <ul>
+        <ul className="govbb-list govbb-list--bullet">
           <li>the birth certificate that has the error</li>
           <li>identification for the person asking for the correction</li>
           <li>a sworn affidavit explaining the correction</li>
@@ -89,7 +89,7 @@ export function ChangeNameRecordPage() {
       <section className="stack--tight">
         <h2 className="card-group__title">When to speak to a lawyer</h2>
         <p className="page__text">You may need to speak to a lawyer if:</p>
-        <ul>
+        <ul className="govbb-list govbb-list--bullet">
           <li>there is a dispute about the name or record</li>
           <li>you are worried about fraud or false information</li>
           <li>a court matter is involved</li>
@@ -99,7 +99,7 @@ export function ChangeNameRecordPage() {
 
       <section className="stack--tight">
         <h2 className="card-group__title">Official pages</h2>
-        <ul>
+        <ul className="govbb-list govbb-list--bullet">
           <li>
             <a
               className="govbb-link-default"

@@ -21,8 +21,14 @@ export function RelevantLawSources({ explanation, sources = [] }: RelevantLawSou
       <h2 className="card-group__title">Relevant law and official sources</h2>
       <DetailsAccordion title="Law that may be relevant">
         {explanation ? <p className="page__text">{explanation}</p> : null}
-        {sources.length > 0 ? (
-          <ul>
+        {sources.length === 1 ? (
+          <p className="page__text">
+            <a className="govbb-link-default" href={sources[0].href}>
+              {sources[0].label}
+            </a>
+          </p>
+        ) : sources.length >= 2 ? (
+          <ul className="govbb-list govbb-list--bullet">
             {sources.map((s) => (
               <li key={s.href}>
                 <a className="govbb-link-default" href={s.href}>

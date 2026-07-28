@@ -39,7 +39,7 @@ export function RentingHomePage() {
           It helps to read the agreement and check what it says before you agree to rent. You can
           check:
         </p>
-        <ul>
+        <ul className="govbb-list govbb-list--bullet">
           <li>the landlord&rsquo;s and tenant&rsquo;s names</li>
           <li>the address of the home</li>
           <li>when the tenancy starts</li>
@@ -60,7 +60,7 @@ export function RentingHomePage() {
       <section className="stack--tight">
         <h2 className="card-group__title">Before signing</h2>
         <p className="page__text">Before you sign, you can:</p>
-        <ul>
+        <ul className="govbb-list govbb-list--bullet">
           <li>ask about any wording you do not understand</li>
           <li>check that any changes you agreed with the landlord appear in the agreement</li>
           <li>check the condition of the home</li>
@@ -90,7 +90,7 @@ export function RentingHomePage() {
       <section className="stack--tight">
         <h2 className="card-group__title">When to speak to a lawyer</h2>
         <p className="page__text">You may need to speak to a lawyer if:</p>
-        <ul>
+        <ul className="govbb-list govbb-list--bullet">
           <li>you disagree about rent, a deposit, repairs or damage</li>
           <li>you are being asked to leave</li>
           <li>you do not understand a notice or court document</li>

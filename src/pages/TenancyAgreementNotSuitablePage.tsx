@@ -36,7 +36,7 @@ export function TenancyAgreementNotSuitablePage() {
           This builder is for a new agreement to rent a home in Barbados before the tenancy starts.
         </p>
         <p className="page__text">It cannot help with:</p>
-        <ul>
+        <ul className="govbb-list govbb-list--bullet">
           <li>a room shared with the landlord</li>
           <li>business premises or land only</li>
           <li>a home that will not be used only as a private home</li>
@@ -51,22 +51,26 @@ export function TenancyAgreementNotSuitablePage() {
       </section>
 
       <section className="stack--tight">
-        <p className="page__text">
-          <Link className="govbb-link-default" to="/prepare-for-lawyer">
-            Prepare information before speaking to a lawyer
-          </Link>
-        </p>
-        <p className="page__text">
-          <Link className="govbb-link-default" to="/renting-home">
-            Understand renting a home
-          </Link>
-        </p>
-        <p className="page__text">
-          <Link className="govbb-link-default" to="/">
-            Back to what you need help with
-          </Link>
-        </p>
+        <h2 className="card-group__title">What you can do next</h2>
+        <ul className="govbb-list govbb-list--bullet">
+          <li>
+            <Link className="govbb-link-default" to="/prepare-for-lawyer">
+              Prepare information before speaking to a lawyer
+            </Link>
+          </li>
+          <li>
+            <Link className="govbb-link-default" to="/renting-home">
+              Understand renting a home
+            </Link>
+          </li>
+        </ul>
       </section>
+
+      <p className="page__text">
+        <Link className="govbb-link-default" to="/">
+          Back to what you need help with
+        </Link>
+      </p>
     </div>
   )
 }

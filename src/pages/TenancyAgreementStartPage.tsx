@@ -42,7 +42,7 @@ export function TenancyAgreementStartPage() {
       <section className="stack--tight">
         <h2 className="card-group__title">What you can do</h2>
         <p className="page__text">You can:</p>
-        <ul>
+        <ul className="govbb-list govbb-list--bullet">
           <li>record who the agreement is between</li>
           <li>describe the home being rented</li>
           <li>record the rent, deposit and bills</li>
@@ -54,7 +54,7 @@ export function TenancyAgreementStartPage() {
       <section className="stack--tight">
         <h2 className="card-group__title">Before you start</h2>
         <p className="page__text">You will need:</p>
-        <ul>
+        <ul className="govbb-list govbb-list--bullet">
           <li>the landlord&rsquo;s and tenant&rsquo;s full names</li>
           <li>the address of the home</li>
           <li>the agreed start date</li>

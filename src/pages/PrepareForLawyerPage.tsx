@@ -30,7 +30,7 @@ export function PrepareForLawyerPage() {
       <section className="stack--tight">
         <h2 className="card-group__title">Write down what happened</h2>
         <p className="page__text">Make notes about your problem. It can help to write down:</p>
-        <ul>
+        <ul className="govbb-list govbb-list--bullet">
           <li>what happened</li>
           <li>important dates</li>
           <li>who was involved</li>
@@ -45,7 +45,7 @@ export function PrepareForLawyerPage() {
         <p className="page__text">
           Collect any documents that relate to your problem. These may include:
         </p>
-        <ul>
+        <ul className="govbb-list govbb-list--bullet">
           <li>agreements or contracts</li>
           <li>letters, emails or messages</li>
           <li>notices or court documents</li>
@@ -63,7 +63,7 @@ export function PrepareForLawyerPage() {
       <section className="stack--tight">
         <h2 className="card-group__title">Write down your questions</h2>
         <p className="page__text">Think about what you want to ask. You could ask:</p>
-        <ul>
+        <ul className="govbb-list govbb-list--bullet">
           <li>What are my options?</li>
           <li>What information do you need from me?</li>
           <li>Is there anything I need to do by a particular date?</li>
@@ -88,7 +88,7 @@ export function PrepareForLawyerPage() {
       <section className="stack--tight">
         <h2 className="card-group__title">What this prototype cannot do</h2>
         <p className="page__text">This prototype:</p>
-        <ul>
+        <ul className="govbb-list govbb-list--bullet">
           <li>does not look at your situation and explain your options</li>
           <li>does not tell you what to do</li>
           <li>does not contact or recommend a lawyer</li>

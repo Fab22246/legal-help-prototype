@@ -56,9 +56,9 @@ export const groupOrder: RouteGroup[] = [
   'Wills, estates and property',
   'Renting and housing',
   'Documents and records',
-  'Legal help and support',
   'Business and agreements',
   'Family and relationships',
+  'Legal help and support',
 ]
 
 // Every topic route is a placeholder for now (status: planned). routeType holds

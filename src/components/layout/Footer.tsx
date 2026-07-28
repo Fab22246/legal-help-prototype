@@ -8,7 +8,7 @@ export function Footer() {
       <div className="govbb-footer__inner app-container">
         <div className="govbb-footer__end">
           <p className="govbb-footer__copy">
-            <strong>This is a personal prototype.</strong> It is not a live government service.
+            <strong>This is a prototype.</strong> It is not a live government service.
           </p>
           <p className="govbb-footer__copy">{LEGAL_BOUNDARY}</p>
         </div>

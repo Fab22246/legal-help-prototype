@@ -6,8 +6,8 @@ export function StatusBanner() {
     <div className="govbb-status-banner govbb-status-banner--alpha" role="status">
       <div className="app-container">
         <p>
-          <strong>Prototype.</strong> This is a personal side-project, not a live government service.
-          It does not give legal advice.
+          <strong>Prototype.</strong> This is not a live government service. It does not give legal
+          advice.
         </p>
       </div>
     </div>

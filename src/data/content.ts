@@ -7,7 +7,7 @@ export const HOME_INTRO =
 
 // Prototype / unofficial-service notice shown on every page.
 export const PROTOTYPE_NOTICE =
-  'This is a personal prototype. It is not an official government service and does not give legal advice.'
+  'This is a prototype. It is not an official government service and does not give legal advice.'
 
 // Placeholder body sentence used on every not-yet-built route.
 export const PLACEHOLDER_SENTENCE =

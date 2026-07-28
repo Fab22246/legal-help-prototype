@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { BackLink } from '../navigation/BackLink'
-import { PrototypeNotice } from '../PrototypeNotice'
+import { Notice } from '../Notice'
 
 interface SupportPagePatternProps {
   title: string
@@ -12,6 +12,9 @@ interface SupportPagePatternProps {
   checklistTitle?: string
   /** Future contact or support information. */
   support?: ReactNode
+  /** Show the page-level legal-advice boundary notice (default true). Global
+   *  prototype / not-live status is handled separately by the app shell. */
+  showLegalAdviceBoundary?: boolean
   backTo?: string
   backLabel?: string
 }
@@ -25,6 +28,7 @@ export function SupportPagePattern({
   checklist,
   checklistTitle = 'What to prepare',
   support,
+  showLegalAdviceBoundary = true,
   backTo = '/',
   backLabel = 'Back',
 }: SupportPagePatternProps) {
@@ -36,7 +40,7 @@ export function SupportPagePattern({
         {intro}
       </div>
 
-      <PrototypeNotice />
+      {showLegalAdviceBoundary ? <Notice kind="legal-advice" /> : null}
 
       {children}
 

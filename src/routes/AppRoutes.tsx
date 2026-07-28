@@ -6,6 +6,7 @@ import { PlaceholderPage } from '../components/PlaceholderPage'
 import { SigningWitnessingCertifiedCopiesPage } from '../pages/SigningWitnessingCertifiedCopiesPage'
 import { ChangeNameRecordPage } from '../pages/ChangeNameRecordPage'
 import { RentingHomePage } from '../pages/RentingHomePage'
+import { PrepareForLawyerPage } from '../pages/PrepareForLawyerPage'
 import { routes } from '../data/routes'
 
 // Built routes render their own page; every other route still renders the
@@ -14,6 +15,7 @@ const BUILT_ROUTES: Record<string, ReactNode> = {
   '/signing-witnessing-certified-copies': <SigningWitnessingCertifiedCopiesPage />,
   '/change-name-record': <ChangeNameRecordPage />,
   '/renting-home': <RentingHomePage />,
+  '/prepare-for-lawyer': <PrepareForLawyerPage />,
 }
 
 export function AppRoutes() {

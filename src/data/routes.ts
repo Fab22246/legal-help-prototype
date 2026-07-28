@@ -111,11 +111,15 @@ export const routes: RouteMeta[] = [
     path: '/renting-home',
     group: 'Renting and housing',
     description:
-      'Understand what a tenancy agreement covers, what to check before you rent, and how a draft agreement builder could work.',
+      'Understand renting a home and what to check before signing a tenancy agreement.',
     routeType: 'guidance',
-    status: 'planned',
+    status: 'needsLegalReview',
     legalRisk: 'medium',
     showOnHome: true,
+    needsLegalAdviceBoundary: true,
+    needsDraftWarning: false,
+    needsLegalReview: true,
+    showRelevantLaw: true,
   },
   {
     title: 'Understand signing, witnessing and certified copies',

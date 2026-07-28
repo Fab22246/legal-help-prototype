@@ -25,7 +25,7 @@ export function RelevantLawSources({ explanation, sources = [] }: RelevantLawSou
           <ul>
             {sources.map((s) => (
               <li key={s.href}>
-                <a className="govbb-link-default" href={s.href} target="_blank" rel="noopener noreferrer">
+                <a className="govbb-link-default" href={s.href}>
                   {s.label}
                 </a>
               </li>

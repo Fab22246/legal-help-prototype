@@ -74,6 +74,18 @@ export function PrepareForLawyerPage() {
       </section>
 
       <section className="stack--tight">
+        <h2 className="card-group__title">If you are worried about the cost of a lawyer</h2>
+        <p className="page__text">
+          You can find out how to ask Community Legal Services about legal aid.
+        </p>
+        <p className="page__text">
+          <Link className="govbb-link-default" to="/legal-aid">
+            Ask about legal aid
+          </Link>
+        </p>
+      </section>
+
+      <section className="stack--tight">
         <h2 className="card-group__title">What this prototype cannot do</h2>
         <p className="page__text">This prototype:</p>
         <ul>

@@ -75,6 +75,19 @@ export function RentingHomePage() {
       </section>
 
       <section className="stack--tight">
+        <h2 className="card-group__title">Prepare a draft agreement</h2>
+        <p className="page__text">
+          You can use a builder to record what the landlord and tenant have agreed and prepare a
+          draft agreement to check together before signing.
+        </p>
+        <p className="page__text">
+          <Link className="govbb-link-default" to="/renting-home/agreement">
+            Prepare a draft tenancy agreement
+          </Link>
+        </p>
+      </section>
+
+      <section className="stack--tight">
         <h2 className="card-group__title">When to speak to a lawyer</h2>
         <p className="page__text">You may need to speak to a lawyer if:</p>
         <ul>

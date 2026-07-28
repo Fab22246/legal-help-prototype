@@ -126,6 +126,58 @@ export const routes: RouteMeta[] = [
     showRelevantLaw: true,
   },
   {
+    // Tenancy-agreement builder start page. Subordinate route (no home card).
+    // The "Important" section on the page itself carries the legal-advice and
+    // unreviewed-draft boundaries so the scope page does not repeat them.
+    title: 'Prepare a draft tenancy agreement',
+    path: '/renting-home/agreement',
+    group: 'Renting and housing',
+    description:
+      'Prepare a draft agreement for renting a home in Barbados. Discussion, information gathering and a draft only — the agreement is not signed, sent or registered.',
+    routeType: 'builder',
+    status: 'needsLegalReview',
+    legalRisk: 'high',
+    showOnHome: false,
+    needsLegalAdviceBoundary: false,
+    needsDraftWarning: false,
+    needsLegalReview: true,
+    showRelevantLaw: false,
+  },
+  {
+    // Scope check for the tenancy-agreement builder. Same builder journey as
+    // the start page — notices are not repeated here. Includes an inline
+    // privacy explanation about tab-scoped sessionStorage.
+    title: 'Check if this builder is suitable',
+    path: '/renting-home/agreement/scope',
+    group: 'Renting and housing',
+    description: 'Check if the tenancy-agreement builder is suitable for this agreement.',
+    routeType: 'builder',
+    status: 'needsLegalReview',
+    legalRisk: 'high',
+    showOnHome: false,
+    needsLegalAdviceBoundary: false,
+    needsDraftWarning: false,
+    needsLegalReview: true,
+    showRelevantLaw: false,
+  },
+  {
+    // Safe exit for scope answers outside the builder's help. Shows a
+    // legal-advice boundary notice and signposts to prepare-for-lawyer.
+    title: 'This builder cannot help with this agreement',
+    path: '/renting-home/agreement/not-suitable',
+    group: 'Renting and housing',
+    description:
+      'The tenancy-agreement builder cannot help with this arrangement. Signposts to next steps.',
+    routeType: 'builder',
+    status: 'needsLegalReview',
+    legalRisk: 'high',
+    showOnHome: false,
+    needsLegalAdviceBoundary: true,
+    needsDraftWarning: false,
+    needsLegalReview: true,
+    showRelevantLaw: false,
+  },
+  {
     title: 'Understand signing, witnessing and certified copies',
     path: '/signing-witnessing-certified-copies',
     group: 'Documents and records',

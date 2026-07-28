@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react'
 import { BackLink } from '../../navigation/BackLink'
-import { PrototypeNotice } from '../../PrototypeNotice'
 import { Notice } from '../../Notice'
 
 interface DraftOutputPagePatternProps {
@@ -32,7 +31,6 @@ export function DraftOutputPagePattern({
         {intro}
       </div>
 
-      <PrototypeNotice />
       <Notice kind="draft-not-reviewed" />
       <Notice kind="legal-review-needed" />
 

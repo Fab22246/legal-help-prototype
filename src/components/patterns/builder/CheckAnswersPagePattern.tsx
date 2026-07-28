@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react'
 import { BackLink } from '../../navigation/BackLink'
-import { PrototypeNotice } from '../../PrototypeNotice'
 import { CheckAnswersSummary, type SummarySection } from '../../CheckAnswersSummary'
 
 interface CheckAnswersPagePatternProps {
@@ -31,8 +30,6 @@ export function CheckAnswersPagePattern({
       <div className="page__header">
         <h1 className="page__title">{title}</h1>
       </div>
-
-      <PrototypeNotice />
 
       <CheckAnswersSummary sections={sections} />
 

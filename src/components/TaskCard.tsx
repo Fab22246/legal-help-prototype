@@ -6,14 +6,16 @@ interface TaskCardProps {
   to: string
 }
 
-// A single task card. The whole card is one link for a large, keyboard-friendly
-// target. Rendered as a list item inside <CardGroup>.
+// A single task row on the home page. The whole row is one link so the click
+// target covers title and description. Rendered as a list item inside
+// <CardGroup>. Row height follows content; short descriptions do not force a
+// fixed height on neighbours.
 export function TaskCard({ title, description, to }: TaskCardProps) {
   return (
     <li>
-      <Link className="task-card" to={to}>
-        <h3 className="task-card__title">{title}</h3>
-        <p className="task-card__desc">{description}</p>
+      <Link className="task-item" to={to}>
+        <h3 className="task-item__title">{title}</h3>
+        <p className="task-item__desc">{description}</p>
       </Link>
     </li>
   )

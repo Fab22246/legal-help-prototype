@@ -14,11 +14,10 @@ export type RouteStatus =
 export type LegalRisk = 'low' | 'medium' | 'high'
 
 export type RouteGroup =
-  | 'Wills, estates and property'
-  | 'Renting and housing'
-  | 'Documents and records'
+  | 'Wills and estates'
+  | 'Homes, land and renting'
+  | 'Documents, records and agreements'
   | 'Legal help and support'
-  | 'Business and agreements'
   | 'Family and relationships'
 
 export interface RouteMeta {
@@ -53,10 +52,9 @@ export interface RouteMeta {
 
 // Order in which groups render on the home page.
 export const groupOrder: RouteGroup[] = [
-  'Wills, estates and property',
-  'Renting and housing',
-  'Documents and records',
-  'Business and agreements',
+  'Wills and estates',
+  'Homes, land and renting',
+  'Documents, records and agreements',
   'Family and relationships',
   'Legal help and support',
 ]
@@ -67,7 +65,7 @@ export const routes: RouteMeta[] = [
   {
     title: 'Plan what happens to my money and property',
     path: '/plan-money-property',
-    group: 'Wills, estates and property',
+    group: 'Wills and estates',
     description:
       'Understand ways to prepare information about money, property and people who may need to be considered.',
     routeType: 'guidance',
@@ -78,7 +76,7 @@ export const routes: RouteMeta[] = [
   {
     title: 'Prepare a simple will',
     path: '/simple-will',
-    group: 'Wills, estates and property',
+    group: 'Wills and estates',
     description: 'Prepare information for a simple will if your situation is straightforward.',
     routeType: 'builder',
     status: 'planned',
@@ -86,9 +84,20 @@ export const routes: RouteMeta[] = [
     showOnHome: true,
   },
   {
+    title: 'Find out what may be needed after someone dies',
+    path: '/after-death',
+    group: 'Wills and estates',
+    description:
+      'Check what information may be needed before asking about probate, letters of administration or estate matters.',
+    routeType: 'checker',
+    status: 'planned',
+    legalRisk: 'high',
+    showOnHome: true,
+  },
+  {
     title: 'Give land or a home while I am alive',
     path: '/give-property',
-    group: 'Wills, estates and property',
+    group: 'Homes, land and renting',
     description: 'Understand what to check before giving land or a home to someone.',
     routeType: 'guidance',
     status: 'needsLegalReview',
@@ -100,20 +109,9 @@ export const routes: RouteMeta[] = [
     showRelevantLaw: true,
   },
   {
-    title: 'Find out what may be needed after someone dies',
-    path: '/after-death',
-    group: 'Wills, estates and property',
-    description:
-      'Check what information may be needed before asking about probate, letters of administration or estate matters.',
-    routeType: 'checker',
-    status: 'planned',
-    legalRisk: 'high',
-    showOnHome: true,
-  },
-  {
     title: 'Renting a home',
     path: '/renting-home',
-    group: 'Renting and housing',
+    group: 'Homes, land and renting',
     description:
       'Understand renting a home and what to check before signing a tenancy agreement.',
     routeType: 'guidance',
@@ -131,7 +129,7 @@ export const routes: RouteMeta[] = [
     // unreviewed-draft boundaries so the scope page does not repeat them.
     title: 'Prepare a draft tenancy agreement',
     path: '/renting-home/agreement',
-    group: 'Renting and housing',
+    group: 'Homes, land and renting',
     description:
       'Prepare a draft agreement for renting a home in Barbados. Discussion, information gathering and a draft only — the agreement is not signed, sent or registered.',
     routeType: 'builder',
@@ -149,7 +147,7 @@ export const routes: RouteMeta[] = [
     // privacy explanation about tab-scoped sessionStorage.
     title: 'Check if this builder is suitable',
     path: '/renting-home/agreement/scope',
-    group: 'Renting and housing',
+    group: 'Homes, land and renting',
     description: 'Check if the tenancy-agreement builder is suitable for this agreement.',
     routeType: 'builder',
     status: 'needsLegalReview',
@@ -165,7 +163,7 @@ export const routes: RouteMeta[] = [
     // legal-advice boundary notice and signposts to prepare-for-lawyer.
     title: 'This builder cannot help with this agreement',
     path: '/renting-home/agreement/not-suitable',
-    group: 'Renting and housing',
+    group: 'Homes, land and renting',
     description:
       'The tenancy-agreement builder cannot help with this arrangement. Signposts to next steps.',
     routeType: 'builder',
@@ -180,7 +178,7 @@ export const routes: RouteMeta[] = [
   {
     title: 'Understand signing, witnessing and certified copies',
     path: '/signing-witnessing-certified-copies',
-    group: 'Documents and records',
+    group: 'Documents, records and agreements',
     description:
       'Learn what common legal document terms mean before you sign, witness, certify or notarise a document.',
     routeType: 'guidance',
@@ -195,7 +193,7 @@ export const routes: RouteMeta[] = [
   {
     title: 'Change a name or update a record',
     path: '/change-name-record',
-    group: 'Documents and records',
+    group: 'Documents, records and agreements',
     description: 'Find out where to start if you need to change a name or update a personal record.',
     routeType: 'guidance',
     status: 'needsLegalReview',
@@ -247,7 +245,7 @@ export const routes: RouteMeta[] = [
   {
     title: 'Prepare a draft confidentiality agreement',
     path: '/confidentiality-agreement',
-    group: 'Business and agreements',
+    group: 'Documents, records and agreements',
     description:
       'Prepare draft confidentiality wording for review before sharing business or sensitive information.',
     routeType: 'builder',

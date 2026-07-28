@@ -49,8 +49,7 @@ body {
 
 /* Shared teal focus ring for custom interactive elements. */
 a:focus-visible,
-button:focus-visible,
-.task-card:focus-visible {
+button:focus-visible {
   outline: 3px solid var(--color-teal-40);
   outline-offset: 2px;
 }
@@ -132,52 +131,69 @@ button:focus-visible,
   margin: 0;
 }
 
-/* Card groups on the home page. */
-.card-group {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-s);
-  margin-top: var(--spacing-m);
-}
+/* Home-page task groups. `.card-group__title` is reused by content pages as an
+   H2 style and is kept in this file for that reason. `.task-category` is the
+   home-page category wrapper; `.task-list` is a bordered container of
+   stacked, full-width clickable task rows (`.task-item`). Row height follows
+   its own content, so a short description does not force a tall neighbour. */
 .card-group__title {
   font-size: var(--font-size-h3);
   line-height: var(--line-height-h3);
   font-weight: var(--font-weight-bold);
   margin: 0;
 }
-.card-grid {
+
+.category-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-m);
+  margin-top: var(--spacing-m);
+}
+
+.task-category {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s);
+}
+
+.task-list {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--spacing-s);
-}
-@media (min-width: 40rem) {
-  .card-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-.task-card {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xxs);
-  height: 100%;
-  padding: var(--spacing-m);
   border: 1px solid var(--color-grey-00);
   border-radius: 4px;
   background: var(--color-white-00);
+}
+.task-list > li + li {
+  border-top: 1px solid var(--color-grey-00);
+}
+
+.task-item {
+  display: block;
+  padding: var(--spacing-s) var(--spacing-m);
   text-decoration: none;
   color: var(--color-black-00);
-  transition: border-color 0.15s, box-shadow 0.15s;
+  transition: background-color 0.15s;
 }
-.task-card:hover {
-  border-color: var(--color-teal-00);
-  box-shadow: var(--shadow-form-hover);
+@media (min-width: 40rem) {
+  .task-item {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    column-gap: var(--spacing-m);
+    align-items: start;
+  }
 }
-.task-card__title {
-  margin: 0;
+.task-item:hover {
+  background: var(--color-teal-10);
+}
+.task-item:focus-visible {
+  outline: 3px solid var(--color-teal-40);
+  outline-offset: -3px;
+}
+.task-item__title {
+  margin: 0 0 var(--spacing-xxs);
   font-size: var(--font-size-h4);
   line-height: var(--line-height-h4);
   font-weight: var(--font-weight-bold);
@@ -185,10 +201,15 @@ button:focus-visible,
   text-decoration: underline;
   text-underline-offset: 2px;
 }
-.task-card:hover .task-card__title {
+@media (min-width: 40rem) {
+  .task-item__title {
+    margin-bottom: 0;
+  }
+}
+.task-item:hover .task-item__title {
   text-decoration: none;
 }
-.task-card__desc {
+.task-item__desc {
   margin: 0;
   color: var(--color-mid-grey-00);
   font-size: var(--font-size-caption);

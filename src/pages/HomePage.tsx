@@ -15,22 +15,24 @@ export function HomePage() {
 
       <PrototypeNotice />
 
-      {groupOrder.map((group) => {
-        const cards = routes.filter((route) => route.showOnHome && route.group === group)
-        if (cards.length === 0) return null
-        return (
-          <CardGroup key={group} title={group}>
-            {cards.map((route) => (
-              <TaskCard
-                key={route.path}
-                title={route.title}
-                description={route.description}
-                to={route.path}
-              />
-            ))}
-          </CardGroup>
-        )
-      })}
+      <div className="category-grid">
+        {groupOrder.map((group) => {
+          const cards = routes.filter((route) => route.showOnHome && route.group === group)
+          if (cards.length === 0) return null
+          return (
+            <CardGroup key={group} title={group}>
+              {cards.map((route) => (
+                <TaskCard
+                  key={route.path}
+                  title={route.title}
+                  description={route.description}
+                  to={route.path}
+                />
+              ))}
+            </CardGroup>
+          )
+        })}
+      </div>
     </div>
   )
 }

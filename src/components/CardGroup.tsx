@@ -5,12 +5,13 @@ interface CardGroupProps {
   children: ReactNode
 }
 
-// A titled group of task cards on the home page. Children are <TaskCard> items.
+// A titled category of task links on the home page. Children are <TaskCard>
+// items rendered as full-width rows inside a bordered task-list container.
 export function CardGroup({ title, children }: CardGroupProps) {
   return (
-    <section className="card-group">
+    <section className="task-category">
       <h2 className="card-group__title">{title}</h2>
-      <ul className="card-grid">{children}</ul>
+      <ul className="task-list">{children}</ul>
     </section>
   )
 }

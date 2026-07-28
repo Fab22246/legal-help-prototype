@@ -8,6 +8,7 @@ import { ChangeNameRecordPage } from '../pages/ChangeNameRecordPage'
 import { RentingHomePage } from '../pages/RentingHomePage'
 import { PrepareForLawyerPage } from '../pages/PrepareForLawyerPage'
 import { LegalAidPage } from '../pages/LegalAidPage'
+import { GivePropertyPage } from '../pages/GivePropertyPage'
 import { routes } from '../data/routes'
 
 // Built routes render their own page; every other route still renders the
@@ -18,6 +19,7 @@ const BUILT_ROUTES: Record<string, ReactNode> = {
   '/renting-home': <RentingHomePage />,
   '/prepare-for-lawyer': <PrepareForLawyerPage />,
   '/legal-aid': <LegalAidPage />,
+  '/give-property': <GivePropertyPage />,
 }
 
 export function AppRoutes() {

@@ -17,7 +17,6 @@ export function ChangeNameRecordPage() {
   return (
     <GuidancePagePattern
       title="Change a name or update a record"
-      showLegalAdviceBoundary={notices.legalAdviceBoundary}
       intro={
         <p className="page__text">
           Use this page to find out where to start if you want to change your name, correct a mistake
@@ -46,7 +45,7 @@ export function ChangeNameRecordPage() {
           swear or affirm it in front of a person who is allowed to take oaths.
         </p>
         <p className="page__text">
-          The cost of a change of name is BDS $200. You cannot pay through this prototype.
+          The cost of a change of name is BDS $200. You cannot pay here.
         </p>
       </section>
 
@@ -83,7 +82,7 @@ export function ChangeNameRecordPage() {
           This may include your identification and records held by banks, employers or other service
           providers.
         </p>
-        <p className="page__text">This prototype does not update any record for you.</p>
+        <p className="page__text">You cannot update records here.</p>
       </section>
 
       <section className="stack--tight">

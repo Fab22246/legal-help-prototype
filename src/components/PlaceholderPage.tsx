@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react'
 import { BackLink } from './navigation/BackLink'
-import { PrototypeNotice } from './PrototypeNotice'
 import { PLACEHOLDER_SENTENCE } from '../data/content'
 import type { RouteMeta } from '../data/routes'
 
@@ -10,7 +9,8 @@ interface PlaceholderPageProps {
 }
 
 // Placeholder rendered for every planned route (and unknown paths). Title +
-// one planned-status sentence + prototype notice + back link. No legal content.
+// one planned-status sentence + back link. The global StatusBanner in the app
+// shell carries the prototype / not-live / legal-advice boundary.
 export function PlaceholderPage({ meta, notFound = false }: PlaceholderPageProps) {
   const headingRef = useRef<HTMLHeadingElement>(null)
 
@@ -21,7 +21,7 @@ export function PlaceholderPage({ meta, notFound = false }: PlaceholderPageProps
 
   const title = notFound ? 'Page not found' : (meta?.title ?? 'Page')
   const sentence = notFound
-    ? 'This page does not exist in the prototype.'
+    ? 'This page does not exist.'
     : PLACEHOLDER_SENTENCE
 
   return (
@@ -33,7 +33,6 @@ export function PlaceholderPage({ meta, notFound = false }: PlaceholderPageProps
         </h1>
         <p className="page__text">{sentence}</p>
       </div>
-      <PrototypeNotice />
     </div>
   )
 }

@@ -17,8 +17,8 @@ export function DeleteAnswersAction() {
       <section className="stack--tight warning-notice" aria-label="Confirm delete">
         <h2 className="card-group__title">Are you sure?</h2>
         <p className="page__text">
-          Your tenancy-builder answers will be removed. This cannot be undone. Other pages in this
-          prototype are not affected.
+          Your answers for the tenancy agreement will be removed. This cannot be undone. Information
+          in other parts of the site will not be removed.
         </p>
         <div className="govbb-btn-group">
           <button

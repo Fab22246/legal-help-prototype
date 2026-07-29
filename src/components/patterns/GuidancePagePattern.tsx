@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react'
 import { BackLink } from '../navigation/BackLink'
-import { Notice } from '../Notice'
 import { RelevantLawSources, type LawSource } from '../RelevantLawSources'
 
 interface GuidancePagePatternProps {
@@ -12,9 +11,6 @@ interface GuidancePagePatternProps {
   whatNext?: ReactNode
   /** "What this prototype cannot do" content. */
   whatPrototypeCannotDo?: ReactNode
-  /** Show the page-level legal-advice boundary notice (default true). Global
-   *  prototype / not-live status is handled separately by the app shell. */
-  showLegalAdviceBoundary?: boolean
   /** Show the relevant-law section. */
   showRelevantLaw?: boolean
   lawExplanation?: string
@@ -23,15 +19,15 @@ interface GuidancePagePatternProps {
   backLabel?: string
 }
 
-// Structural pattern for a guidance route. Scaffold only — no legal content and
-// it must never promise a legal result. Pages populate the slots later.
+// Structural pattern for a guidance route. Scaffold only — no legal content
+// and it must never promise a legal result. The global StatusBanner in the
+// app shell carries the prototype / not-live / legal-advice boundary.
 export function GuidancePagePattern({
   title,
   intro,
   children,
   whatNext,
   whatPrototypeCannotDo,
-  showLegalAdviceBoundary = true,
   showRelevantLaw = false,
   lawExplanation,
   lawSources,
@@ -46,8 +42,6 @@ export function GuidancePagePattern({
         {intro}
       </div>
 
-      {showLegalAdviceBoundary ? <Notice kind="legal-advice" /> : null}
-
       {children}
 
       {whatNext ? (
@@ -59,7 +53,7 @@ export function GuidancePagePattern({
 
       {whatPrototypeCannotDo ? (
         <section className="stack--tight">
-          <h2 className="card-group__title">What this prototype cannot do</h2>
+          <h2 className="card-group__title">What you cannot do here</h2>
           {whatPrototypeCannotDo}
         </section>
       ) : null}

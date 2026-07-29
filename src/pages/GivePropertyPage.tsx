@@ -18,7 +18,6 @@ export function GivePropertyPage() {
   return (
     <GuidancePagePattern
       title="Give land or a home while I am alive"
-      showLegalAdviceBoundary={notices.legalAdviceBoundary}
       intro={
         <>
           <p className="page__text">

@@ -1,7 +1,5 @@
 import type { ReactNode } from 'react'
 import { BackLink } from '../navigation/BackLink'
-import { PrototypeNotice } from '../PrototypeNotice'
-import { Notice } from '../Notice'
 
 interface CheckerPagePatternProps {
   title: string
@@ -16,7 +14,9 @@ interface CheckerPagePatternProps {
 
 // Structural pattern for a checker route. Scaffold only — it must not implement
 // a working questionnaire or make a legal decision. It supports asking simple
-// questions and returning cautious signposting in a later phase.
+// questions and returning cautious signposting in a later phase. The global
+// StatusBanner in the app shell carries the prototype / not-live / legal-advice
+// boundary.
 export function CheckerPagePattern({
   title,
   intro,
@@ -32,9 +32,6 @@ export function CheckerPagePattern({
         <h1 className="page__title">{title}</h1>
         {intro}
       </div>
-
-      <PrototypeNotice />
-      <Notice kind="legal-advice" />
 
       {children}
 

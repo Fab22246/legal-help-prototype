@@ -1,6 +1,5 @@
 import { CardGroup } from '../components/CardGroup'
 import { TaskCard } from '../components/TaskCard'
-import { PrototypeNotice } from '../components/PrototypeNotice'
 import { HOME_INTRO, SERVICE_NAME } from '../data/content'
 import { groupOrder, routes } from '../data/routes'
 
@@ -12,8 +11,6 @@ export function HomePage() {
         <h1 className="page__title">{SERVICE_NAME}</h1>
         <p className="page__intro">{HOME_INTRO}</p>
       </div>
-
-      <PrototypeNotice />
 
       <div className="category-grid">
         {groupOrder.map((group) => {

@@ -19,7 +19,6 @@ export function LegalAidPage() {
   return (
     <SupportPagePattern
       title="Ask about legal aid"
-      showLegalAdviceBoundary={notices.legalAdviceBoundary}
       intro={
         <>
           <p className="page__text">Use this page to find out about legal aid and how to ask about it.</p>
@@ -47,8 +46,7 @@ export function LegalAidPage() {
       <section className="stack--tight">
         <h2 className="card-group__title">Who decides</h2>
         <p className="page__text">
-          Community Legal Services looks at your situation and decides whether it can help you. This
-          prototype does not decide.
+          Community Legal Services looks at your situation and decides whether it can help you.
         </p>
         <p className="page__text">Contacting the office does not mean legal aid will be provided.</p>
       </section>

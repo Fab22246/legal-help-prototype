@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react'
 import { BackLink } from '../navigation/BackLink'
-import { Notice } from '../Notice'
 
 interface SupportPagePatternProps {
   title: string
@@ -12,15 +11,13 @@ interface SupportPagePatternProps {
   checklistTitle?: string
   /** Future contact or support information. */
   support?: ReactNode
-  /** Show the page-level legal-advice boundary notice (default true). Global
-   *  prototype / not-live status is handled separately by the app shell. */
-  showLegalAdviceBoundary?: boolean
   backTo?: string
   backLabel?: string
 }
 
 // Structural pattern for a support route (signposting + preparation). Scaffold
-// only — it must not make an eligibility decision.
+// only — it must not make an eligibility decision. The global StatusBanner in
+// the app shell carries the prototype / not-live / legal-advice boundary.
 export function SupportPagePattern({
   title,
   intro,
@@ -28,7 +25,6 @@ export function SupportPagePattern({
   checklist,
   checklistTitle = 'What to prepare',
   support,
-  showLegalAdviceBoundary = true,
   backTo = '/',
   backLabel = 'Back',
 }: SupportPagePatternProps) {
@@ -39,8 +35,6 @@ export function SupportPagePattern({
         <h1 className="page__title">{title}</h1>
         {intro}
       </div>
-
-      {showLegalAdviceBoundary ? <Notice kind="legal-advice" /> : null}
 
       {children}
 

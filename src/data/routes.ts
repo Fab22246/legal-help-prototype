@@ -145,10 +145,10 @@ export const routes: RouteMeta[] = [
     // Scope check for the tenancy-agreement builder. Same builder journey as
     // the start page — notices are not repeated here. Includes an inline
     // privacy explanation about tab-scoped sessionStorage.
-    title: 'Check if this builder is suitable',
+    title: 'Check if you can prepare an agreement here',
     path: '/renting-home/agreement/scope',
     group: 'Homes, land and renting',
-    description: 'Check if the tenancy-agreement builder is suitable for this agreement.',
+    description: 'Answer questions to check whether you can prepare a draft tenancy agreement here.',
     routeType: 'builder',
     status: 'needsLegalReview',
     legalRisk: 'high',
@@ -240,11 +240,11 @@ export const routes: RouteMeta[] = [
   {
     // Safe exit for scope answers outside the builder's help. Shows a
     // legal-advice boundary notice and signposts to prepare-for-lawyer.
-    title: 'This builder cannot help with this agreement',
+    title: 'You cannot prepare this agreement here',
     path: '/renting-home/agreement/not-suitable',
     group: 'Homes, land and renting',
     description:
-      'The tenancy-agreement builder cannot help with this arrangement. Signposts to next steps.',
+      'Find out what to do when you cannot prepare the agreement here.',
     routeType: 'builder',
     status: 'needsLegalReview',
     legalRisk: 'high',

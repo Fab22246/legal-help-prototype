@@ -2,21 +2,14 @@ import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { BackLink } from '../components/navigation/BackLink'
 import { ButtonLink } from '../components/navigation/ButtonLink'
-import { Notice } from '../components/Notice'
-import { getRouteByPath, getRouteNotices } from '../data/routes'
-
-const ROUTE_PATH = '/renting-home/agreement'
 
 // Start page for the tenancy-agreement builder. Not a form — orients the
 // landlord and tenant to what the builder does, what they will need, and what
-// it does not do. The "Important" section carries the legal-advice and
-// unreviewed-draft boundaries so the scope page does not repeat them.
+// it does not do. The "Important" section carries the draft-not-reviewed and
+// signing/sending/registration boundaries. The global StatusBanner carries
+// the prototype / not-live / general legal-advice boundary.
 export function TenancyAgreementStartPage() {
   const headingRef = useRef<HTMLHeadingElement>(null)
-  const route = getRouteByPath(ROUTE_PATH)
-  const notices = route
-    ? getRouteNotices(route)
-    : { legalAdviceBoundary: false, draftWarning: false, legalReviewNeeded: true, relevantLaw: false }
 
   useEffect(() => {
     headingRef.current?.focus()
@@ -30,14 +23,12 @@ export function TenancyAgreementStartPage() {
           Prepare a draft tenancy agreement
         </h1>
         <p className="page__text">
-          Use this builder to prepare a draft agreement for renting a home in Barbados.
+          Answer questions to prepare a draft agreement for renting a home in Barbados.
         </p>
         <p className="page__text">
-          The landlord and tenant should discuss the terms before using the builder.
+          The landlords and tenants should discuss the terms before answering the questions.
         </p>
       </div>
-
-      {notices.legalAdviceBoundary ? <Notice kind="legal-advice" /> : null}
 
       <section className="stack--tight">
         <h2 className="card-group__title">What you can do</h2>

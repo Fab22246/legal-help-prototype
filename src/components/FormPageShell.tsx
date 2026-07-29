@@ -1,6 +1,5 @@
 import type { FormEvent, ReactNode } from 'react'
 import { BackLink } from './navigation/BackLink'
-import { PrototypeNotice } from './PrototypeNotice'
 
 interface FormPageShellProps {
   title: string
@@ -13,9 +12,9 @@ interface FormPageShellProps {
   afterForm?: ReactNode
 }
 
-// Reusable shell for future question pages: back link, title, prototype notice,
-// a form with a continue button, and an optional after-form slot. No builder
-// logic or session storage yet — structure only.
+// Reusable shell for future question pages: back link, title, a form with a
+// continue button, and an optional after-form slot. The global StatusBanner
+// in the app shell carries the prototype / not-live / legal-advice boundary.
 export function FormPageShell({
   title,
   intro,
@@ -38,7 +37,6 @@ export function FormPageShell({
         <h1 className="page__title">{title}</h1>
         {intro}
       </div>
-      <PrototypeNotice />
       <form className="govbb-form stack" onSubmit={handleSubmit} noValidate>
         {children}
         <div className="govbb-btn-group">

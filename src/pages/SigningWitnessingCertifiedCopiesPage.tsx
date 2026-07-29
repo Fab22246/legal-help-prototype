@@ -16,7 +16,6 @@ export function SigningWitnessingCertifiedCopiesPage() {
   return (
     <GuidancePagePattern
       title="Understand signing, witnessing and certified copies"
-      showLegalAdviceBoundary={notices.legalAdviceBoundary}
       intro={
         <>
           <p className="page__text">

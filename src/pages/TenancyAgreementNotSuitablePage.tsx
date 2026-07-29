@@ -1,20 +1,14 @@
 import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { BackLink } from '../components/navigation/BackLink'
-import { Notice } from '../components/Notice'
-import { getRouteByPath, getRouteNotices } from '../data/routes'
-
-const ROUTE_PATH = '/renting-home/agreement/not-suitable'
 
 // Safe-exit page for the tenancy-agreement builder. Reached when scope answers
 // fall outside what the builder can help with. Does not describe the user as
-// eligible or ineligible; does not classify the arrangement legally.
+// eligible or ineligible; does not classify the arrangement legally. The
+// global StatusBanner carries the prototype / not-live / general legal-advice
+// boundary.
 export function TenancyAgreementNotSuitablePage() {
   const headingRef = useRef<HTMLHeadingElement>(null)
-  const route = getRouteByPath(ROUTE_PATH)
-  const notices = route
-    ? getRouteNotices(route)
-    : { legalAdviceBoundary: true, draftWarning: false, legalReviewNeeded: true, relevantLaw: false }
 
   useEffect(() => {
     headingRef.current?.focus()
@@ -25,17 +19,15 @@ export function TenancyAgreementNotSuitablePage() {
       <BackLink to="/renting-home/agreement/scope">Back</BackLink>
       <div className="page__header">
         <h1 className="page__title" tabIndex={-1} ref={headingRef}>
-          This builder cannot help with this agreement
+          You cannot prepare this agreement here
         </h1>
       </div>
 
-      {notices.legalAdviceBoundary ? <Notice kind="legal-advice" /> : null}
-
       <section className="stack--tight">
         <p className="page__text">
-          This builder is for a new agreement to rent a home in Barbados before the tenancy starts.
+          You can prepare an agreement here only for a new tenancy in Barbados before it starts.
         </p>
-        <p className="page__text">It cannot help with:</p>
+        <p className="page__text">You cannot use these questions for:</p>
         <ul className="govbb-list govbb-list--bullet">
           <li>a room shared with the landlord</li>
           <li>business premises or land only</li>

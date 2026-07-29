@@ -176,7 +176,7 @@ export function TenancyAgreementScopePage() {
         </div>
         <StorageWarning />
         <p className="page__text">
-          Your new answers mean this builder cannot help with the agreement.
+          Your new answers mean you cannot prepare this agreement here.
         </p>
         <p className="page__text">
           If you continue, we will save your new answers and delete the landlord, agent or manager,
@@ -229,11 +229,11 @@ export function TenancyAgreementScopePage() {
       <BackLink to="/renting-home/agreement">Back</BackLink>
       <div className="page__header">
         <h1 className="page__title" tabIndex={-1} ref={headingRef}>
-          Check if this builder is suitable
+          Check if you can prepare an agreement here
         </h1>
         <p className="page__text">
-          This builder helps you prepare a draft agreement for renting a home in Barbados. It does
-          not give legal advice.
+          Answer these questions to check whether you can prepare a draft agreement for renting a
+          home in Barbados.
         </p>
       </div>
 

@@ -1,23 +1,14 @@
 import { Link } from 'react-router-dom'
 import { SupportPagePattern } from '../components/patterns/SupportPagePattern'
-import { getRouteByPath, getRouteNotices } from '../data/routes'
-
-const ROUTE_PATH = '/prepare-for-lawyer'
 
 // Support page: helps someone organise useful information, dates, documents and
 // questions before speaking to a lawyer. Plain-language preparation only — it
 // must not give legal advice, assess the case, find or recommend a lawyer, book
 // an appointment, or collect, store or send any information.
 export function PrepareForLawyerPage() {
-  const route = getRouteByPath(ROUTE_PATH)
-  const notices = route
-    ? getRouteNotices(route)
-    : { legalAdviceBoundary: true, draftWarning: false, legalReviewNeeded: false, relevantLaw: false }
-
   return (
     <SupportPagePattern
       title="Prepare information before speaking to a lawyer"
-      showLegalAdviceBoundary={notices.legalAdviceBoundary}
       intro={
         <>
           <p className="page__text">Use this page to get ready before you speak to a lawyer.</p>
@@ -86,14 +77,14 @@ export function PrepareForLawyerPage() {
       </section>
 
       <section className="stack--tight">
-        <h2 className="card-group__title">What this prototype cannot do</h2>
-        <p className="page__text">This prototype:</p>
+        <h2 className="card-group__title">What you cannot do here</h2>
+        <p className="page__text">You cannot:</p>
         <ul className="govbb-list govbb-list--bullet">
-          <li>does not look at your situation and explain your options</li>
-          <li>does not tell you what to do</li>
-          <li>does not contact or recommend a lawyer</li>
-          <li>does not book an appointment</li>
-          <li>does not store or send your information</li>
+          <li>have your situation reviewed</li>
+          <li>be told what to do</li>
+          <li>contact a lawyer</li>
+          <li>book an appointment</li>
+          <li>save or send your information</li>
         </ul>
       </section>
 

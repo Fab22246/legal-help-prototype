@@ -18,7 +18,6 @@ export function RentingHomePage() {
   return (
     <GuidancePagePattern
       title="Renting a home"
-      showLegalAdviceBoundary={notices.legalAdviceBoundary}
       intro={
         <>
           <p className="page__text">
@@ -77,8 +76,8 @@ export function RentingHomePage() {
       <section className="stack--tight">
         <h2 className="card-group__title">Prepare a draft agreement</h2>
         <p className="page__text">
-          You can use a builder to record what the landlord and tenant have agreed and prepare a
-          draft agreement to check together before signing.
+          You can record what the landlords and tenants have agreed and prepare a draft agreement
+          to check together before signing.
         </p>
         <p className="page__text">
           <Link className="govbb-link-default" to="/renting-home/agreement">

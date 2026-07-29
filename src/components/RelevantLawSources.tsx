@@ -39,7 +39,7 @@ export function RelevantLawSources({ explanation, sources = [] }: RelevantLawSou
           </ul>
         ) : null}
         <p className="page__text">
-          This prototype does not explain every rule or decide how the law applies to you.
+          These sources do not explain every rule or decide how the law applies to you.
         </p>
       </DetailsAccordion>
     </section>

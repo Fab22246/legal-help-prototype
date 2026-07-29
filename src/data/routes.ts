@@ -40,8 +40,6 @@ export interface RouteMeta {
 
   // Optional per-route overrides for page-notice needs. When omitted, sensible
   // defaults are derived from routeType via getRouteNotices().
-  /** Show the "does not give legal advice" boundary notice on the page. */
-  needsLegalAdviceBoundary?: boolean
   /** Show the "draft wording has not been legally reviewed" warning. */
   needsDraftWarning?: boolean
   /** Show the "needs legal review before testing/publication" warning. */
@@ -103,7 +101,6 @@ export const routes: RouteMeta[] = [
     status: 'needsLegalReview',
     legalRisk: 'high',
     showOnHome: true,
-    needsLegalAdviceBoundary: true,
     needsDraftWarning: false,
     needsLegalReview: true,
     showRelevantLaw: true,
@@ -118,15 +115,14 @@ export const routes: RouteMeta[] = [
     status: 'needsLegalReview',
     legalRisk: 'medium',
     showOnHome: true,
-    needsLegalAdviceBoundary: true,
     needsDraftWarning: false,
     needsLegalReview: true,
     showRelevantLaw: true,
   },
   {
     // Tenancy-agreement builder start page. Subordinate route (no home card).
-    // The "Important" section on the page itself carries the legal-advice and
-    // unreviewed-draft boundaries so the scope page does not repeat them.
+    // The "Important" section on the page itself carries the draft-not-reviewed
+    // and signing/sending/registration boundaries.
     title: 'Prepare a draft tenancy agreement',
     path: '/renting-home/agreement',
     group: 'Homes, land and renting',
@@ -136,7 +132,6 @@ export const routes: RouteMeta[] = [
     status: 'needsLegalReview',
     legalRisk: 'high',
     showOnHome: false,
-    needsLegalAdviceBoundary: false,
     needsDraftWarning: false,
     needsLegalReview: true,
     showRelevantLaw: false,
@@ -153,7 +148,6 @@ export const routes: RouteMeta[] = [
     status: 'needsLegalReview',
     legalRisk: 'high',
     showOnHome: false,
-    needsLegalAdviceBoundary: false,
     needsDraftWarning: false,
     needsLegalReview: true,
     showRelevantLaw: false,
@@ -169,7 +163,6 @@ export const routes: RouteMeta[] = [
     status: 'needsLegalReview',
     legalRisk: 'high',
     showOnHome: false,
-    needsLegalAdviceBoundary: false,
     needsDraftWarning: false,
     needsLegalReview: true,
     showRelevantLaw: false,
@@ -185,7 +178,6 @@ export const routes: RouteMeta[] = [
     status: 'needsLegalReview',
     legalRisk: 'high',
     showOnHome: false,
-    needsLegalAdviceBoundary: false,
     needsDraftWarning: false,
     needsLegalReview: true,
     showRelevantLaw: false,
@@ -201,7 +193,6 @@ export const routes: RouteMeta[] = [
     status: 'needsLegalReview',
     legalRisk: 'high',
     showOnHome: false,
-    needsLegalAdviceBoundary: false,
     needsDraftWarning: false,
     needsLegalReview: true,
     showRelevantLaw: false,
@@ -217,7 +208,6 @@ export const routes: RouteMeta[] = [
     status: 'needsLegalReview',
     legalRisk: 'high',
     showOnHome: false,
-    needsLegalAdviceBoundary: false,
     needsDraftWarning: false,
     needsLegalReview: true,
     showRelevantLaw: false,
@@ -232,14 +222,13 @@ export const routes: RouteMeta[] = [
     status: 'needsLegalReview',
     legalRisk: 'high',
     showOnHome: false,
-    needsLegalAdviceBoundary: false,
     needsDraftWarning: false,
     needsLegalReview: true,
     showRelevantLaw: false,
   },
   {
-    // Safe exit for scope answers outside the builder's help. Shows a
-    // legal-advice boundary notice and signposts to prepare-for-lawyer.
+    // Safe exit for scope answers outside the builder's help. Signposts to
+    // prepare-for-lawyer.
     title: 'You cannot prepare this agreement here',
     path: '/renting-home/agreement/not-suitable',
     group: 'Homes, land and renting',
@@ -249,7 +238,6 @@ export const routes: RouteMeta[] = [
     status: 'needsLegalReview',
     legalRisk: 'high',
     showOnHome: false,
-    needsLegalAdviceBoundary: true,
     needsDraftWarning: false,
     needsLegalReview: true,
     showRelevantLaw: false,
@@ -264,7 +252,6 @@ export const routes: RouteMeta[] = [
     status: 'needsLegalReview',
     legalRisk: 'medium',
     showOnHome: true,
-    needsLegalAdviceBoundary: true,
     needsDraftWarning: false,
     needsLegalReview: true,
     showRelevantLaw: true,
@@ -278,7 +265,6 @@ export const routes: RouteMeta[] = [
     status: 'needsLegalReview',
     legalRisk: 'medium',
     showOnHome: true,
-    needsLegalAdviceBoundary: true,
     needsDraftWarning: false,
     needsLegalReview: true,
     showRelevantLaw: true,
@@ -292,7 +278,6 @@ export const routes: RouteMeta[] = [
     status: 'readyForContentReview',
     legalRisk: 'low',
     showOnHome: true,
-    needsLegalAdviceBoundary: true,
     needsDraftWarning: false,
     needsLegalReview: false,
     showRelevantLaw: false,
@@ -306,7 +291,6 @@ export const routes: RouteMeta[] = [
     status: 'needsLegalReview',
     legalRisk: 'medium',
     showOnHome: true,
-    needsLegalAdviceBoundary: true,
     needsDraftWarning: false,
     needsLegalReview: true,
     showRelevantLaw: true,
@@ -362,7 +346,6 @@ export function getRouteByPath(path: string): RouteMeta | undefined {
 
 // Resolved set of page-notice needs for a route.
 export interface RouteNotices {
-  legalAdviceBoundary: boolean
   draftWarning: boolean
   legalReviewNeeded: boolean
   relevantLaw: boolean
@@ -372,11 +355,11 @@ export interface RouteNotices {
 // optional metadata flags. Keeps notice decisions in the data layer, not in
 // presentation components.
 const NOTICE_DEFAULTS: Record<RouteType, RouteNotices> = {
-  guidance: { legalAdviceBoundary: true, draftWarning: false, legalReviewNeeded: true, relevantLaw: true },
-  builder: { legalAdviceBoundary: true, draftWarning: true, legalReviewNeeded: true, relevantLaw: true },
-  checker: { legalAdviceBoundary: true, draftWarning: false, legalReviewNeeded: true, relevantLaw: true },
-  support: { legalAdviceBoundary: true, draftWarning: false, legalReviewNeeded: false, relevantLaw: false },
-  placeholder: { legalAdviceBoundary: true, draftWarning: false, legalReviewNeeded: false, relevantLaw: false },
+  guidance: { draftWarning: false, legalReviewNeeded: true, relevantLaw: true },
+  builder: { draftWarning: true, legalReviewNeeded: true, relevantLaw: true },
+  checker: { draftWarning: false, legalReviewNeeded: true, relevantLaw: true },
+  support: { draftWarning: false, legalReviewNeeded: false, relevantLaw: false },
+  placeholder: { draftWarning: false, legalReviewNeeded: false, relevantLaw: false },
 }
 
 // Returns the effective notices for a route: explicit metadata flags win,
@@ -384,7 +367,6 @@ const NOTICE_DEFAULTS: Record<RouteType, RouteNotices> = {
 export function getRouteNotices(route: RouteMeta): RouteNotices {
   const defaults = NOTICE_DEFAULTS[route.routeType]
   return {
-    legalAdviceBoundary: route.needsLegalAdviceBoundary ?? defaults.legalAdviceBoundary,
     draftWarning: route.needsDraftWarning ?? defaults.draftWarning,
     legalReviewNeeded: route.needsLegalReview ?? defaults.legalReviewNeeded,
     relevantLaw: route.showRelevantLaw ?? defaults.relevantLaw,

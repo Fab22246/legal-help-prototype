@@ -12,7 +12,7 @@ export function ChangeNameRecordPage() {
   const route = getRouteByPath(ROUTE_PATH)
   const notices = route
     ? getRouteNotices(route)
-    : { legalAdviceBoundary: true, draftWarning: false, legalReviewNeeded: true, relevantLaw: true }
+    : { draftWarning: false, legalReviewNeeded: true, relevantLaw: true }
 
   return (
     <GuidancePagePattern

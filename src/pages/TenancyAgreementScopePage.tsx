@@ -83,14 +83,17 @@ export function TenancyAgreementScopePage() {
     clearFromLandlordsOnwards,
     clearHomeIdentifiers,
   } = useTenancyBuilder()
-  const scope = state.scope ?? {}
 
-  // Snapshot the previously saved scope at mount so Cancel from the "delete
-  // downstream" confirmation can restore it. Also snapshot the what-is-rented
-  // value so we can detect a compatible change between the two suitable
-  // property types.
-  const savedScopeSnapshot = useRef<ScopeAnswers | undefined>(state.scope).current
-  const previousWhatIsRented = useRef(scope.whatIsRented).current
+  // Radio selections stay in this local draft until the user selects Continue.
+  // state.scope only changes on the suitable / no-downstream / confirmed-delete
+  // paths inside handleSubmit and the holding view. This preserves the last
+  // confirmed scope if the user leaves the page without submitting.
+  const [draft, setDraft] = useState<ScopeAnswers>(() => state.scope ?? {})
+
+  // Property-type at mount (i.e. the previously confirmed value) is used to
+  // decide whether a suitable property-type change should clear the
+  // now-incompatible home identifier field.
+  const previousWhatIsRented = useRef(state.scope?.whatIsRented).current
   const hasDownstreamData = useMemo(() => {
     return !!(
       state.landlords?.length ||
@@ -131,10 +134,10 @@ export function TenancyAgreementScopePage() {
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const next: Errors = {}
-    if (!scope.forRentingHomeBarbados) next.q1 = ERROR_Q1
-    if (!scope.whatIsRented) next.q2 = ERROR_Q2
-    if (!scope.privateHomeOnly) next.q3 = ERROR_Q3
-    if (!scope.agreementSituation) next.q4 = ERROR_Q4
+    if (!draft.forRentingHomeBarbados) next.q1 = ERROR_Q1
+    if (!draft.whatIsRented) next.q2 = ERROR_Q2
+    if (!draft.privateHomeOnly) next.q3 = ERROR_Q3
+    if (!draft.agreementSituation) next.q4 = ERROR_Q4
     setErrors(next)
 
     if (Object.keys(next).length > 0) {
@@ -142,33 +145,36 @@ export function TenancyAgreementScopePage() {
       return
     }
 
-    if (isSuitable(scope)) {
+    if (isSuitable(draft)) {
       // Property-type change (still suitable) — clear only the incompatible
       // home identifier field, preserve everything else.
       if (
         previousWhatIsRented &&
-        scope.whatIsRented &&
-        previousWhatIsRented !== scope.whatIsRented &&
+        draft.whatIsRented &&
+        previousWhatIsRented !== draft.whatIsRented &&
         state.home
       ) {
-        clearHomeIdentifiers(scope.whatIsRented)
+        clearHomeIdentifiers(draft.whatIsRented)
       }
+      setScope(draft)
       navigate('/renting-home/agreement/landlords')
       return
     }
 
-    // Unsuitable outcome. If there is downstream data, warn before clearing.
+    // Unsuitable outcome. If there is downstream data, hold the draft locally
+    // and show the deletion-warning view; state.scope is not written until the
+    // user confirms deletion.
     if (hasDownstreamData) {
       setConfirmingUnsuitable(true)
       return
     }
+    setScope(draft)
     navigate('/renting-home/agreement/not-suitable')
   }
 
   if (confirmingUnsuitable) {
     return (
       <div className="page">
-        <BackLink to="/renting-home/agreement/scope">Back</BackLink>
         <div className="page__header">
           <h1 className="page__title" tabIndex={-1} ref={headingRef}>
             This will delete your other answers
@@ -188,9 +194,9 @@ export function TenancyAgreementScopePage() {
             type="button"
             className="govbb-btn"
             onClick={() => {
-              // The newly selected scope answers are already in state (radios
-              // committed on click). Confirming persists them and clears the
-              // downstream stages and drafts.
+              // Commit the held unsuitable draft, then clear the downstream
+              // stages and drafts before routing to the safe exit.
+              setScope(draft)
               clearFromLandlordsOnwards()
               setConfirmingUnsuitable(false)
               navigate('/renting-home/agreement/not-suitable')
@@ -202,17 +208,10 @@ export function TenancyAgreementScopePage() {
             type="button"
             className="govbb-btn--secondary"
             onClick={() => {
-              // Restore the form (and state) to the previously saved scope so
-              // the discarded unsuitable selections do not appear as though
-              // they were saved. Downstream answers are untouched.
-              if (savedScopeSnapshot) {
-                setScope({
-                  forRentingHomeBarbados: savedScopeSnapshot.forRentingHomeBarbados,
-                  whatIsRented: savedScopeSnapshot.whatIsRented,
-                  privateHomeOnly: savedScopeSnapshot.privateHomeOnly,
-                  agreementSituation: savedScopeSnapshot.agreementSituation,
-                })
-              }
+              // Discard the local unsuitable draft and reset the form to the
+              // previously confirmed scope. state.scope was never written, so
+              // downstream answers are already untouched.
+              setDraft(state.scope ?? {})
               setConfirmingUnsuitable(false)
             }}
           >
@@ -245,32 +244,32 @@ export function TenancyAgreementScopePage() {
           name={Q1}
           legend="Is the agreement for renting a home in Barbados?"
           options={YES_NO_OPTIONS}
-          value={scope.forRentingHomeBarbados}
-          onChange={(v) => setScope({ forRentingHomeBarbados: v as YesNo })}
+          value={draft.forRentingHomeBarbados}
+          onChange={(v) => setDraft((d) => ({ ...d, forRentingHomeBarbados: v as YesNo }))}
           error={errors.q1}
         />
         <RadioGroup
           name={Q2}
           legend="What will be rented?"
           options={WHAT_IS_RENTED_OPTIONS}
-          value={scope.whatIsRented}
-          onChange={(v) => setScope({ whatIsRented: v as WhatIsRented })}
+          value={draft.whatIsRented}
+          onChange={(v) => setDraft((d) => ({ ...d, whatIsRented: v as WhatIsRented }))}
           error={errors.q2}
         />
         <RadioGroup
           name={Q3}
           legend="Will the home be used only as a private home?"
           options={YES_NO_OPTIONS}
-          value={scope.privateHomeOnly}
-          onChange={(v) => setScope({ privateHomeOnly: v as YesNo })}
+          value={draft.privateHomeOnly}
+          onChange={(v) => setDraft((d) => ({ ...d, privateHomeOnly: v as YesNo }))}
           error={errors.q3}
         />
         <RadioGroup
           name={Q4}
           legend="What is happening with the agreement?"
           options={AGREEMENT_SITUATION_OPTIONS}
-          value={scope.agreementSituation}
-          onChange={(v) => setScope({ agreementSituation: v as AgreementSituation })}
+          value={draft.agreementSituation}
+          onChange={(v) => setDraft((d) => ({ ...d, agreementSituation: v as AgreementSituation }))}
           error={errors.q4}
         />
         <div className="prototype-notice" role="note">

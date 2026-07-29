@@ -1,35 +1,28 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { FormEvent } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { BackLink } from '../components/navigation/BackLink'
 import { RadioGroup } from '../components/forms/RadioGroup'
 import { ErrorSummary, type ErrorSummaryItem } from '../components/forms/ErrorSummary'
+import { StorageWarning } from '../components/tenancy/StorageWarning'
+import { DeleteAnswersAction } from '../components/tenancy/DeleteAnswersAction'
 import {
   useTenancyBuilder,
   type AgreementSituation,
+  type ScopeAnswers,
   type WhatIsRented,
   type YesNo,
 } from '../state/tenancyBuilderContext'
 
-// Field-name constants — used for the radio input `name`, for the id of the
-// first radio in each group (which is the anchor target for its error-summary
-// link), and for keying inline error messages.
 const Q1 = 'q1-renting-home-barbados'
 const Q2 = 'q2-what-rented'
 const Q3 = 'q3-private-home-only'
 const Q4 = 'q4-agreement-situation'
 
-// Each question's first radio value — pairs with the RadioGroup id scheme
-// (`${name}-${value}`) to build the anchor id used by the error summary.
-const Q1_FIRST: YesNo = 'yes'
-const Q2_FIRST: WhatIsRented = 'house-apartment'
-const Q3_FIRST: YesNo = 'yes'
-const Q4_FIRST: AgreementSituation = 'preparing-new'
-
-const Q1_ANCHOR = `${Q1}-${Q1_FIRST}`
-const Q2_ANCHOR = `${Q2}-${Q2_FIRST}`
-const Q3_ANCHOR = `${Q3}-${Q3_FIRST}`
-const Q4_ANCHOR = `${Q4}-${Q4_FIRST}`
+const Q1_ANCHOR = `${Q1}-yes`
+const Q2_ANCHOR = `${Q2}-house-apartment`
+const Q3_ANCHOR = `${Q3}-yes`
+const Q4_ANCHOR = `${Q4}-preparing-new`
 
 const YES_NO_OPTIONS = [
   { value: 'yes', label: 'Yes' },
@@ -71,37 +64,54 @@ interface Errors {
   q4?: string
 }
 
-type View = 'form' | 'suitable'
+function isSuitable(answers: ScopeAnswers | undefined): boolean {
+  if (!answers) return false
+  return (
+    answers.forRentingHomeBarbados === 'yes' &&
+    (answers.whatIsRented === 'house-apartment' ||
+      answers.whatIsRented === 'self-contained-part') &&
+    answers.privateHomeOnly === 'yes' &&
+    answers.agreementSituation === 'preparing-new'
+  )
+}
 
-// Scope check for the tenancy-agreement builder. Four required radio questions;
-// suitable combinations show an in-page holding state, everything else routes
-// to the safe exit. Errors show only after Continue is pressed.
 export function TenancyAgreementScopePage() {
   const navigate = useNavigate()
-  const { state, setScope } = useTenancyBuilder()
+  const {
+    state,
+    setScope,
+    clearFromLandlordsOnwards,
+    clearHomeIdentifiers,
+  } = useTenancyBuilder()
   const scope = state.scope ?? {}
 
-  const [view, setView] = useState<View>('form')
+  // Snapshot the previously saved scope at mount so Cancel from the "delete
+  // downstream" confirmation can restore it. Also snapshot the what-is-rented
+  // value so we can detect a compatible change between the two suitable
+  // property types.
+  const savedScopeSnapshot = useRef<ScopeAnswers | undefined>(state.scope).current
+  const previousWhatIsRented = useRef(scope.whatIsRented).current
+  const hasDownstreamData = useMemo(() => {
+    return !!(
+      state.landlords?.length ||
+      state.agent ||
+      state.tenants?.length ||
+      state.home ||
+      state.dates
+    )
+  }, [state.landlords, state.agent, state.tenants, state.home, state.dates])
+
   const [errors, setErrors] = useState<Errors>({})
+  const [focusErrorSummary, setFocusErrorSummary] = useState(false)
+  const [confirmingUnsuitable, setConfirmingUnsuitable] = useState(false)
 
   const headingRef = useRef<HTMLHeadingElement>(null)
-  const holdingHeadingRef = useRef<HTMLHeadingElement>(null)
   const errorSummaryRef = useRef<HTMLDivElement>(null)
 
-  // Focus the H1 when the page mounts (route navigation) and when the user
-  // returns to the form view from the holding state.
   useEffect(() => {
-    if (view === 'form') {
-      headingRef.current?.focus()
-    } else {
-      holdingHeadingRef.current?.focus()
-    }
-  }, [view])
+    headingRef.current?.focus()
+  }, [confirmingUnsuitable])
 
-  // Errors are only shown after Continue is pressed. When the error set
-  // becomes non-empty (or changes while still non-empty), move focus to the
-  // error summary so keyboard users hear the alert and can act on it.
-  const [focusErrorSummary, setFocusErrorSummary] = useState(false)
   useEffect(() => {
     if (focusErrorSummary) {
       errorSummaryRef.current?.focus()
@@ -118,16 +128,6 @@ export function TenancyAgreementScopePage() {
     return items
   }, [errors])
 
-  function isSuitable(answers: typeof scope): boolean {
-    return (
-      answers.forRentingHomeBarbados === 'yes' &&
-      (answers.whatIsRented === 'house-apartment' ||
-        answers.whatIsRented === 'self-contained-part') &&
-      answers.privateHomeOnly === 'yes' &&
-      answers.agreementSituation === 'preparing-new'
-    )
-  }
-
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const next: Errors = {}
@@ -138,58 +138,88 @@ export function TenancyAgreementScopePage() {
     setErrors(next)
 
     if (Object.keys(next).length > 0) {
-      // Move focus to the error summary on failed validation. The actual
-      // focus() call runs from the effect above once React has committed the
-      // rendered ErrorSummary — a raw call here would fire before the ref
-      // resolves.
       setFocusErrorSummary(true)
       return
     }
 
     if (isSuitable(scope)) {
-      setView('suitable')
-    } else {
-      navigate('/renting-home/agreement/not-suitable')
+      // Property-type change (still suitable) — clear only the incompatible
+      // home identifier field, preserve everything else.
+      if (
+        previousWhatIsRented &&
+        scope.whatIsRented &&
+        previousWhatIsRented !== scope.whatIsRented &&
+        state.home
+      ) {
+        clearHomeIdentifiers(scope.whatIsRented)
+      }
+      navigate('/renting-home/agreement/landlords')
+      return
     }
+
+    // Unsuitable outcome. If there is downstream data, warn before clearing.
+    if (hasDownstreamData) {
+      setConfirmingUnsuitable(true)
+      return
+    }
+    navigate('/renting-home/agreement/not-suitable')
   }
 
-  if (view === 'suitable') {
+  if (confirmingUnsuitable) {
     return (
       <div className="page">
-        <BackLink to="/renting-home/agreement">Back</BackLink>
+        <BackLink to="/renting-home/agreement/scope">Back</BackLink>
         <div className="page__header">
-          <h1 className="page__title" tabIndex={-1} ref={holdingHeadingRef}>
-            Check if this builder is suitable
+          <h1 className="page__title" tabIndex={-1} ref={headingRef}>
+            This will delete your other answers
           </h1>
         </div>
-
-        <section className="stack--tight prototype-notice" role="note" aria-label="Prototype holding state">
-          <h2 className="card-group__title">You can use this builder</h2>
-          <p className="page__text">
-            This agreement is within the scope of the tenancy-agreement builder.
-          </p>
-          <p className="page__text">
-            The questions about the landlord, tenant, home and agreed terms will be added in the next
-            build stage.
-          </p>
-        </section>
-
-        <section className="stack--tight">
-          <p className="page__text">
-            <button
-              type="button"
-              className="govbb-btn--link"
-              onClick={() => setView('form')}
-            >
-              Change these answers
-            </button>
-          </p>
-          <p className="page__text">
-            <Link className="govbb-link-default" to="/renting-home">
-              Understand renting a home
-            </Link>
-          </p>
-        </section>
+        <StorageWarning />
+        <p className="page__text">
+          Your new answers mean this builder cannot help with the agreement.
+        </p>
+        <p className="page__text">
+          If you continue, we will save your new answers and delete the landlord, agent or manager,
+          tenant, home and date information you entered.
+        </p>
+        <p className="page__text">You can cancel to keep your saved answers.</p>
+        <div className="govbb-btn-group">
+          <button
+            type="button"
+            className="govbb-btn"
+            onClick={() => {
+              // The newly selected scope answers are already in state (radios
+              // committed on click). Confirming persists them and clears the
+              // downstream stages and drafts.
+              clearFromLandlordsOnwards()
+              setConfirmingUnsuitable(false)
+              navigate('/renting-home/agreement/not-suitable')
+            }}
+          >
+            Continue and delete the answers
+          </button>
+          <button
+            type="button"
+            className="govbb-btn--secondary"
+            onClick={() => {
+              // Restore the form (and state) to the previously saved scope so
+              // the discarded unsuitable selections do not appear as though
+              // they were saved. Downstream answers are untouched.
+              if (savedScopeSnapshot) {
+                setScope({
+                  forRentingHomeBarbados: savedScopeSnapshot.forRentingHomeBarbados,
+                  whatIsRented: savedScopeSnapshot.whatIsRented,
+                  privateHomeOnly: savedScopeSnapshot.privateHomeOnly,
+                  agreementSituation: savedScopeSnapshot.agreementSituation,
+                })
+              }
+              setConfirmingUnsuitable(false)
+            }}
+          >
+            Cancel
+          </button>
+        </div>
+        <DeleteAnswersAction />
       </div>
     )
   }
@@ -207,6 +237,7 @@ export function TenancyAgreementScopePage() {
         </p>
       </div>
 
+      <StorageWarning />
       <ErrorSummary items={summaryItems} ref={errorSummaryRef} />
 
       <form className="govbb-form stack" onSubmit={handleSubmit} noValidate>
@@ -218,7 +249,6 @@ export function TenancyAgreementScopePage() {
           onChange={(v) => setScope({ forRentingHomeBarbados: v as YesNo })}
           error={errors.q1}
         />
-
         <RadioGroup
           name={Q2}
           legend="What will be rented?"
@@ -227,7 +257,6 @@ export function TenancyAgreementScopePage() {
           onChange={(v) => setScope({ whatIsRented: v as WhatIsRented })}
           error={errors.q2}
         />
-
         <RadioGroup
           name={Q3}
           legend="Will the home be used only as a private home?"
@@ -236,7 +265,6 @@ export function TenancyAgreementScopePage() {
           onChange={(v) => setScope({ privateHomeOnly: v as YesNo })}
           error={errors.q3}
         />
-
         <RadioGroup
           name={Q4}
           legend="What is happening with the agreement?"
@@ -245,20 +273,19 @@ export function TenancyAgreementScopePage() {
           onChange={(v) => setScope({ agreementSituation: v as AgreementSituation })}
           error={errors.q4}
         />
-
         <div className="prototype-notice" role="note">
           <p>
             Your answers are kept in this browser tab while you prepare the draft. They are not sent
             to GovTech.
           </p>
         </div>
-
         <div className="govbb-btn-group">
           <button type="submit" className="govbb-btn">
             Continue
           </button>
         </div>
       </form>
+      <DeleteAnswersAction />
     </div>
   )
 }

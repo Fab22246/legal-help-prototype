@@ -159,6 +159,85 @@ export const routes: RouteMeta[] = [
     showRelevantLaw: false,
   },
   {
+    // Landlord details — subordinate builder route with internal add / edit /
+    // list views. Reached from the scope suitable outcome.
+    title: 'Landlord details',
+    path: '/renting-home/agreement/landlords',
+    group: 'Homes, land and renting',
+    description: 'Add every landlord who will be named in the agreement.',
+    routeType: 'builder',
+    status: 'needsLegalReview',
+    legalRisk: 'high',
+    showOnHome: false,
+    needsLegalAdviceBoundary: false,
+    needsDraftWarning: false,
+    needsLegalReview: true,
+    showRelevantLaw: false,
+  },
+  {
+    // Optional agent or manager stage.
+    title: 'Agent or manager',
+    path: '/renting-home/agreement/agent',
+    group: 'Homes, land and renting',
+    description:
+      'Answer whether someone will manage the tenancy for the landlord or landlords.',
+    routeType: 'builder',
+    status: 'needsLegalReview',
+    legalRisk: 'high',
+    showOnHome: false,
+    needsLegalAdviceBoundary: false,
+    needsDraftWarning: false,
+    needsLegalReview: true,
+    showRelevantLaw: false,
+  },
+  {
+    // Tenant details — subordinate builder route with internal add / edit /
+    // list views.
+    title: 'Tenant details',
+    path: '/renting-home/agreement/tenants',
+    group: 'Homes, land and renting',
+    description: 'Add every tenant who will be named in the agreement.',
+    routeType: 'builder',
+    status: 'needsLegalReview',
+    legalRisk: 'high',
+    showOnHome: false,
+    needsLegalAdviceBoundary: false,
+    needsDraftWarning: false,
+    needsLegalReview: true,
+    showRelevantLaw: false,
+  },
+  {
+    // Details about the home being rented — Barbados address plus (for a
+    // self-contained part) an identifying detail.
+    title: 'Home being rented',
+    path: '/renting-home/agreement/home',
+    group: 'Homes, land and renting',
+    description: 'Enter the address of the home being rented.',
+    routeType: 'builder',
+    status: 'needsLegalReview',
+    legalRisk: 'high',
+    showOnHome: false,
+    needsLegalAdviceBoundary: false,
+    needsDraftWarning: false,
+    needsLegalReview: true,
+    showRelevantLaw: false,
+  },
+  {
+    // Tenancy dates and, after saving, a controlled-slice holding view.
+    title: 'Tenancy dates',
+    path: '/renting-home/agreement/dates',
+    group: 'Homes, land and renting',
+    description: 'Enter the tenancy start date and any agreed end date.',
+    routeType: 'builder',
+    status: 'needsLegalReview',
+    legalRisk: 'high',
+    showOnHome: false,
+    needsLegalAdviceBoundary: false,
+    needsDraftWarning: false,
+    needsLegalReview: true,
+    showRelevantLaw: false,
+  },
+  {
     // Safe exit for scope answers outside the builder's help. Shows a
     // legal-advice boundary notice and signposts to prepare-for-lawyer.
     title: 'This builder cannot help with this agreement',

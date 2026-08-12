@@ -296,11 +296,10 @@ export function TenancyAgreementAdditionalTermsPage() {
           </h1>
         </div>
         <StorageWarning />
-        <p className="page__text">
-          You have completed the tenancy questions in this version of the prototype.
-        </p>
         <p className="page__text">You can go back to check or change your answers.</p>
-        <p className="page__text">No tenancy agreement has been created.</p>
+        <p className="page__text">
+          Your answers have not been used to create a tenancy agreement.
+        </p>
         <DeleteAnswersAction />
       </div>
     )

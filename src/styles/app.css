@@ -220,6 +220,14 @@ button:focus-visible {
 /* Footer uses the design-system govbb-footer component (no custom styling
    needed) — see Footer.tsx. No coat of arms / official crest. */
 
+/* Prominent tenancy-builder button on the Renting a home page. Allow its long
+   label to wrap and stay within the content width on narrow screens. Scoped to
+   this one button — no global .govbb-btn override. */
+.renting-builder-cta .govbb-btn {
+  white-space: normal;
+  max-width: 100%;
+}
+
 /* Generic vertical stack used by form/placeholder shells. */
 .stack {
   display: flex;

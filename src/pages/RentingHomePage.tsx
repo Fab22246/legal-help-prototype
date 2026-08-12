@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { GuidancePagePattern } from '../components/patterns/GuidancePagePattern'
 import { RelevantLawSources } from '../components/RelevantLawSources'
+import { ButtonLink } from '../components/navigation/ButtonLink'
 import { getRouteByPath, getRouteNotices } from '../data/routes'
 
 const ROUTE_PATH = '/renting-home'
@@ -32,6 +33,17 @@ export function RentingHomePage() {
         </>
       }
     >
+      <section className="stack--tight">
+        <h2 className="card-group__title">Prepare a draft agreement</h2>
+        <p className="page__text">
+          You can record what the landlords and tenants have agreed and prepare a draft agreement
+          to check together before signing.
+        </p>
+        <div className="govbb-btn-group renting-builder-cta">
+          <ButtonLink to="/renting-home/agreement">Prepare a draft tenancy agreement</ButtonLink>
+        </div>
+      </section>
+
       <section className="stack--tight">
         <h2 className="card-group__title">What to check before agreeing to rent</h2>
         <p className="page__text">
@@ -70,19 +82,6 @@ export function RentingHomePage() {
         <p className="page__text">
           If there is no written agreement, you may need legal advice if you are not sure what was
           agreed.
-        </p>
-      </section>
-
-      <section className="stack--tight">
-        <h2 className="card-group__title">Prepare a draft agreement</h2>
-        <p className="page__text">
-          You can record what the landlords and tenants have agreed and prepare a draft agreement
-          to check together before signing.
-        </p>
-        <p className="page__text">
-          <Link className="govbb-link-default" to="/renting-home/agreement">
-            Prepare a draft tenancy agreement
-          </Link>
         </p>
       </section>
 

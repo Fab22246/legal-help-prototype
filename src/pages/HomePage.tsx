@@ -12,6 +12,14 @@ export function HomePage() {
         <p className="page__intro">{HOME_INTRO}</p>
       </div>
 
+      <CardGroup title="Prepare a draft document">
+        <TaskCard
+          title="Prepare a draft tenancy agreement"
+          description="Answer questions to prepare a draft agreement for landlords and tenants to check before signing."
+          to="/renting-home/agreement"
+        />
+      </CardGroup>
+
       <div className="category-grid">
         {groupOrder.map((group) => {
           const cards = routes.filter((route) => route.showOnHome && route.group === group)

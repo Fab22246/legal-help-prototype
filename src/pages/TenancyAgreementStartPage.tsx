@@ -26,6 +26,10 @@ export function TenancyAgreementStartPage() {
           Answer questions to prepare a draft agreement for renting a home in Barbados.
         </p>
         <p className="page__text">
+          A draft agreement is an unsigned version for the landlords and tenants to check before
+          signing.
+        </p>
+        <p className="page__text">
           The landlords and tenants should discuss the terms before answering the questions.
         </p>
       </div>
@@ -38,7 +42,7 @@ export function TenancyAgreementStartPage() {
           <li>describe the home being rented</li>
           <li>record the rent, deposit and bills</li>
           <li>add agreed responsibilities and restrictions</li>
-          <li>check the information before creating a draft</li>
+          <li>check the information before creating a draft agreement</li>
         </ul>
       </section>
 

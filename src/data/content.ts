@@ -3,7 +3,7 @@
 export const SERVICE_NAME = 'Prepare for common legal tasks'
 
 export const HOME_INTRO =
-  'Get general legal information and check what to do next. For some tasks, you can prepare information or draft wording.'
+  'Get general legal information and check what to do next. For some tasks, you can prepare information or draft documents to review.'
 
 // Placeholder body sentence used on every not-yet-built route.
 export const PLACEHOLDER_SENTENCE =

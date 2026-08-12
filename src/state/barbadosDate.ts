@@ -51,6 +51,49 @@ export function parseYmd(fields: { day: string; month: string; year: string }): 
   return { year: y, month: m, day: d }
 }
 
+const MONTH_NAMES = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+]
+
+/** Ordinal suffix for a day of the month (1st, 2nd, 3rd, 4th, 11th, 21st, …). */
+function ordinalSuffix(day: number): string {
+  const withinCentury = day % 100
+  if (withinCentury >= 11 && withinCentury <= 13) return 'th'
+  switch (day % 10) {
+    case 1:
+      return 'st'
+    case 2:
+      return 'nd'
+    case 3:
+      return 'rd'
+    default:
+      return 'th'
+  }
+}
+
+/**
+ * Format day/month/year input for display following the GovTech Barbados
+ * content standard, for example "August 31st, 2027". Returns null when the
+ * input is not a real date, so callers can decide what to show instead of
+ * exposing partial or invalid values.
+ */
+export function formatBarbadosDate(fields: { day: string; month: string; year: string }): string | null {
+  const ymd = parseYmd(fields)
+  if (!ymd) return null
+  return `${MONTH_NAMES[ymd.month - 1]} ${ymd.day}${ordinalSuffix(ymd.day)}, ${ymd.year}`
+}
+
 /** Compare two Ymd values. Returns negative / zero / positive like `<=>`. */
 export function compareYmd(a: Ymd, b: Ymd): number {
   if (a.year !== b.year) return a.year - b.year

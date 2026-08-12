@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { FormEvent } from 'react'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { BackLink } from '../components/navigation/BackLink'
 import { ErrorSummary, type ErrorSummaryItem } from '../components/forms/ErrorSummary'
 import { CheckboxGroup } from '../components/forms/CheckboxGroup'
@@ -17,9 +17,7 @@ import {
   type PaymentStage,
   type RentRecipient,
 } from '../state/tenancyBuilderContext'
-import { STAGES, hasCompletedPayment } from '../state/tenancyBuilderStageStatus'
-
-type View = 'form' | 'holding'
+import { STAGES } from '../state/tenancyBuilderStageStatus'
 
 interface Errors {
   methods?: string
@@ -50,14 +48,13 @@ export function TenancyAgreementPaymentPage() {
   const [recipient, setRecipient] = useState<RentRecipient | undefined>(state.payment?.recipient)
   const [errors, setErrors] = useState<Errors>({})
   const [focusErrorSummary, setFocusErrorSummary] = useState(false)
-  const [view, setView] = useState<View>(() => (hasCompletedPayment(state) ? 'holding' : 'form'))
 
   const headingRef = useRef<HTMLHeadingElement>(null)
   const errorSummaryRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     headingRef.current?.focus()
-  }, [view])
+  }, [])
 
   useEffect(() => {
     if (focusErrorSummary) {
@@ -112,42 +109,7 @@ export function TenancyAgreementPaymentPage() {
     const payment: PaymentStage = { methods: orderedMethods, recipient: finalRecipient }
     if (methods.includes('other')) payment.otherMethod = otherMethod.trim()
     savePayment(payment)
-    setView('holding')
-  }
-
-  if (view === 'holding') {
-    return (
-      <div className="page">
-        <div className="page__header">
-          <h1 className="page__title" tabIndex={-1} ref={headingRef}>
-            You have completed this part
-          </h1>
-        </div>
-        <StorageWarning />
-        <p className="page__text">
-          You have added the rent and payment details. The remaining questions have not been built
-          yet. No draft agreement has been created.
-        </p>
-        <div className="govbb-btn-group">
-          <button
-            type="button"
-            className="govbb-btn--secondary"
-            onClick={() => navigate('/renting-home/agreement/rent')}
-          >
-            Change rent details
-          </button>
-          <button type="button" className="govbb-btn--secondary" onClick={() => setView('form')}>
-            Change payment details
-          </button>
-        </div>
-        <p className="page__text">
-          <Link className="govbb-link-default" to="/renting-home">
-            Return to renting guidance
-          </Link>
-        </p>
-        <DeleteAnswersAction />
-      </div>
-    )
+    navigate('/renting-home/agreement/deposit')
   }
 
   return (

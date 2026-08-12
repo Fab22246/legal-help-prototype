@@ -32,9 +32,11 @@ const YES_NO_OPTIONS = [
 // Parsing runs in UTC to reject invalid Gregorian dates (e.g. 31 February);
 // comparisons are performed on Ymd tuples to keep them timezone-agnostic.
 
+type View = 'form' | 'confirm-remove-end' | 'confirm-add-end'
+
 export function TenancyAgreementDatesPage() {
   const navigate = useNavigate()
-  const { state, saveDates, setHasAgreedEndDate } = useTenancyBuilder()
+  const { state, saveDates, saveDatesClearEnding } = useTenancyBuilder()
   const gate = useStageGate('dates')
 
   const [startDate, setStartDate] = useState<DateFields>(
@@ -46,13 +48,14 @@ export function TenancyAgreementDatesPage() {
   )
   const [errors, setErrors] = useState<Errors>({})
   const [focusErrorSummary, setFocusErrorSummary] = useState(false)
+  const [view, setView] = useState<View>('form')
 
   const headingRef = useRef<HTMLHeadingElement>(null)
   const errorSummaryRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     headingRef.current?.focus()
-  }, [])
+  }, [view])
 
   useEffect(() => {
     if (focusErrorSummary) {
@@ -100,6 +103,19 @@ export function TenancyAgreementDatesPage() {
       setFocusErrorSummary(true)
       return
     }
+    // Changing whether an agreed end date exists changes the meaning of the
+    // later Ending question, so confirm before discarding any ending answer.
+    const savedHasEnd = state.dates?.hasAgreedEndDate
+    if (state.ending) {
+      if (savedHasEnd === 'yes' && hasEnd === 'no') {
+        setView('confirm-remove-end')
+        return
+      }
+      if (savedHasEnd === 'no' && hasEnd === 'yes') {
+        setView('confirm-add-end')
+        return
+      }
+    }
     // Save.
     if (hasEnd === 'no') {
       saveDates({ startDate, hasAgreedEndDate: 'no' })
@@ -107,6 +123,89 @@ export function TenancyAgreementDatesPage() {
       saveDates({ startDate, hasAgreedEndDate: 'yes', endDate })
     }
     navigate('/renting-home/agreement/rent')
+  }
+
+  if (view === 'confirm-remove-end') {
+    return (
+      <div className="page">
+        <div className="page__header">
+          <h1 className="page__title" tabIndex={-1} ref={headingRef}>
+            Delete the ending information?
+          </h1>
+        </div>
+        <StorageWarning />
+        <p className="page__text">
+          Removing the tenancy end date will delete what you entered about ending the tenancy. Your
+          other answers will not be affected.
+        </p>
+        <div className="govbb-btn-group">
+          <button
+            type="button"
+            className="govbb-btn"
+            onClick={() => {
+              saveDatesClearEnding({ startDate, hasAgreedEndDate: 'no' })
+              navigate('/renting-home/agreement/rent')
+            }}
+          >
+            Remove end date
+          </button>
+          <button
+            type="button"
+            className="govbb-btn--secondary"
+            onClick={() => {
+              // Restore the saved end-date branch so the form reflects it.
+              setHasEnd('yes')
+              setEndDate(state.dates?.endDate ?? { day: '', month: '', year: '' })
+              setView('form')
+            }}
+          >
+            Cancel
+          </button>
+        </div>
+        <DeleteAnswersAction />
+      </div>
+    )
+  }
+
+  if (view === 'confirm-add-end') {
+    return (
+      <div className="page">
+        <div className="page__header">
+          <h1 className="page__title" tabIndex={-1} ref={headingRef}>
+            Delete the ending information?
+          </h1>
+        </div>
+        <StorageWarning />
+        <p className="page__text">
+          Adding a tenancy end date will delete what you entered about ending the tenancy. Your
+          other answers will not be affected.
+        </p>
+        <div className="govbb-btn-group">
+          <button
+            type="button"
+            className="govbb-btn"
+            onClick={() => {
+              saveDatesClearEnding({ startDate, hasAgreedEndDate: 'yes', endDate })
+              navigate('/renting-home/agreement/rent')
+            }}
+          >
+            Add end date
+          </button>
+          <button
+            type="button"
+            className="govbb-btn--secondary"
+            onClick={() => {
+              // Restore the saved no-end-date branch.
+              setHasEnd('no')
+              setView('form')
+            }}
+          >
+            Cancel
+          </button>
+        </div>
+        <DeleteAnswersAction />
+      </div>
+    )
   }
 
   return (
@@ -132,15 +231,7 @@ export function TenancyAgreementDatesPage() {
           legend="Have all the landlords and tenants agreed when the tenancy will end?"
           options={YES_NO_OPTIONS}
           value={hasEnd}
-          onChange={(v) => {
-            const next = v as YesNo
-            setHasEnd(next)
-            if (next === 'no' && state.dates?.endDate) {
-              // Clear only a previously saved end date; preserve everything else.
-              setHasAgreedEndDate('no')
-              setEndDate({ day: '', month: '', year: '' })
-            }
-          }}
+          onChange={(v) => setHasEnd(v as YesNo)}
           error={errors.hasAgreedEndDate}
         />
         {hasEnd === 'yes' ? (

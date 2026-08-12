@@ -12,6 +12,17 @@ export type StageKey =
   | 'dates'
   | 'rent'
   | 'payment'
+  | 'deposit'
+  | 'deposit-terms'
+  | 'bills'
+  | 'occupants'
+  | 'items'
+  | 'repairs'
+  | 'access'
+  | 'pets-smoking'
+  | 'using-home'
+  | 'ending'
+  | 'additional-terms'
 
 export interface StageInfo {
   key: StageKey
@@ -71,6 +82,72 @@ export const STAGES: Record<StageKey, StageInfo> = {
     path: '/renting-home/agreement/payment',
     label: 'payment details',
     actionLabel: 'payment details',
+  },
+  deposit: {
+    key: 'deposit',
+    path: '/renting-home/agreement/deposit',
+    label: 'deposit details',
+    actionLabel: 'deposit details',
+  },
+  'deposit-terms': {
+    key: 'deposit-terms',
+    path: '/renting-home/agreement/deposit-terms',
+    label: 'what happens to the deposit',
+    actionLabel: 'what happens to the deposit',
+  },
+  bills: {
+    key: 'bills',
+    path: '/renting-home/agreement/bills',
+    label: 'bills and services',
+    actionLabel: 'bills and services',
+  },
+  occupants: {
+    key: 'occupants',
+    path: '/renting-home/agreement/occupants',
+    label: 'other people living in the home',
+    actionLabel: 'other people living in the home',
+  },
+  items: {
+    key: 'items',
+    path: '/renting-home/agreement/included-items',
+    label: 'furniture and other items',
+    actionLabel: 'furniture and other items',
+  },
+  repairs: {
+    key: 'repairs',
+    path: '/renting-home/agreement/repairs',
+    label: 'repairs',
+    actionLabel: 'repairs',
+  },
+  access: {
+    key: 'access',
+    path: '/renting-home/agreement/access',
+    label: 'access to the home',
+    actionLabel: 'access to the home',
+  },
+  'pets-smoking': {
+    key: 'pets-smoking',
+    path: '/renting-home/agreement/pets-smoking',
+    label: 'pets and smoking',
+    actionLabel: 'pets and smoking',
+  },
+  'using-home': {
+    key: 'using-home',
+    path: '/renting-home/agreement/using-home',
+    label: 'using the home',
+    actionLabel: 'using the home',
+  },
+  ending: {
+    key: 'ending',
+    path: '/renting-home/agreement/ending',
+    label: 'ending the tenancy',
+    actionLabel: 'ending the tenancy',
+  },
+  'additional-terms': {
+    key: 'additional-terms',
+    path: '/renting-home/agreement/additional-terms',
+    label: 'other agreed points',
+    actionLabel: 'other agreed points',
   },
 }
 
@@ -148,6 +225,89 @@ export function hasCompletedPayment(state: TenancyBuilderState): boolean {
   return true
 }
 
+export function hasCompletedDeposit(state: TenancyBuilderState): boolean {
+  const d = state.deposit
+  if (!d) return false
+  if (d.willBePaid === 'no') return true
+  if (!d.amount) return false
+  const amount = parseRentAmount(d.amount)
+  if (amount === null || amount <= 0) return false
+  if (!d.paymentDate || !parseYmd(d.paymentDate)) return false
+  if (!d.recipient) return false
+  return true
+}
+
+// Deposit terms only apply when a deposit will be paid; otherwise the stage is
+// skipped and treated as complete.
+export function hasCompletedDepositTerms(state: TenancyBuilderState): boolean {
+  if (state.deposit?.willBePaid !== 'yes') return true
+  const dt = state.depositTerms
+  if (!dt) return false
+  if (dt.agreed === 'not-yet') return true
+  return !!dt.wording && dt.wording.length > 0
+}
+
+export function hasCompletedBills(state: TenancyBuilderState): boolean {
+  const b = state.bills
+  if (!b) return false
+  if (b.agreed === 'not-yet') return true
+  return b.records.length >= 1
+}
+
+export function hasCompletedOccupants(state: TenancyBuilderState): boolean {
+  const o = state.occupants
+  if (!o) return false
+  if (o.willLive === 'no') return true
+  return o.records.length >= 1
+}
+
+export function hasCompletedItems(state: TenancyBuilderState): boolean {
+  const i = state.items
+  if (!i) return false
+  if (i.willProvide === 'no') return true
+  return i.records.length >= 1
+}
+
+export function hasCompletedRepairs(state: TenancyBuilderState): boolean {
+  const r = state.repairs
+  if (!r) return false
+  // Repair arrangements wording is required only when everyone has agreed them.
+  if (r.agreed === 'yes' && !(r.arrangements && r.arrangements.length > 0)) return false
+  // A first repair contact and its instructions are always required.
+  if (!r.contact) return false
+  if (!(r.contactInstructions && r.contactInstructions.length > 0)) return false
+  return true
+}
+
+export function hasCompletedAccess(state: TenancyBuilderState): boolean {
+  const a = state.access
+  if (!a) return false
+  if (a.agreed === 'not-yet') return true
+  return !!a.wording && a.wording.length > 0
+}
+
+export function hasCompletedPetsSmoking(state: TenancyBuilderState): boolean {
+  return !!state.petsSmoking
+}
+
+export function hasCompletedUsingHome(state: TenancyBuilderState): boolean {
+  return !!state.usingHome
+}
+
+export function hasCompletedEnding(state: TenancyBuilderState): boolean {
+  const e = state.ending
+  if (!e) return false
+  if (e.agreed === 'not-yet') return true
+  return !!e.wording && e.wording.length > 0
+}
+
+export function hasCompletedAdditionalTerms(state: TenancyBuilderState): boolean {
+  const a = state.additionalTerms
+  if (!a) return false
+  if (a.agreed === 'no') return true
+  return a.records.length >= 1
+}
+
 // The earliest missing (or blocking) stage the user needs to complete before
 // they can view the requested stage. Returns undefined if the requested stage
 // is reachable given the current state.
@@ -164,6 +324,17 @@ export function findEarliestMissing(
     'dates',
     'rent',
     'payment',
+    'deposit',
+    'deposit-terms',
+    'bills',
+    'occupants',
+    'items',
+    'repairs',
+    'access',
+    'pets-smoking',
+    'using-home',
+    'ending',
+    'additional-terms',
   ]
   const requestedIndex = order.indexOf(requested)
   const gates: { key: StageKey; ok: (s: TenancyBuilderState) => boolean }[] = [
@@ -175,6 +346,17 @@ export function findEarliestMissing(
     { key: 'dates', ok: hasCompletedDates },
     { key: 'rent', ok: hasCompletedRent },
     { key: 'payment', ok: hasCompletedPayment },
+    { key: 'deposit', ok: hasCompletedDeposit },
+    { key: 'deposit-terms', ok: hasCompletedDepositTerms },
+    { key: 'bills', ok: hasCompletedBills },
+    { key: 'occupants', ok: hasCompletedOccupants },
+    { key: 'items', ok: hasCompletedItems },
+    { key: 'repairs', ok: hasCompletedRepairs },
+    { key: 'access', ok: hasCompletedAccess },
+    { key: 'pets-smoking', ok: hasCompletedPetsSmoking },
+    { key: 'using-home', ok: hasCompletedUsingHome },
+    { key: 'ending', ok: hasCompletedEnding },
+    { key: 'additional-terms', ok: hasCompletedAdditionalTerms },
   ]
   for (const gate of gates) {
     const gateIndex = order.indexOf(gate.key)

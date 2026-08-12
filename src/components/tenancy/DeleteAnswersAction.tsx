@@ -47,7 +47,7 @@ export function DeleteAnswersAction() {
     <p className="page__text">
       <button
         type="button"
-        className="govbb-btn--link"
+        className="govbb-btn--link delete-answers-action"
         onClick={() => setConfirming(true)}
       >
         Delete my answers and start again

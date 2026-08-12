@@ -19,6 +19,17 @@ import { TenancyAgreementHomePage } from '../pages/TenancyAgreementHomePage'
 import { TenancyAgreementDatesPage } from '../pages/TenancyAgreementDatesPage'
 import { TenancyAgreementRentPage } from '../pages/TenancyAgreementRentPage'
 import { TenancyAgreementPaymentPage } from '../pages/TenancyAgreementPaymentPage'
+import { TenancyAgreementDepositPage } from '../pages/TenancyAgreementDepositPage'
+import { TenancyAgreementDepositTermsPage } from '../pages/TenancyAgreementDepositTermsPage'
+import { TenancyAgreementBillsPage } from '../pages/TenancyAgreementBillsPage'
+import { TenancyAgreementOccupantsPage } from '../pages/TenancyAgreementOccupantsPage'
+import { TenancyAgreementItemsPage } from '../pages/TenancyAgreementItemsPage'
+import { TenancyAgreementRepairsPage } from '../pages/TenancyAgreementRepairsPage'
+import { TenancyAgreementAccessPage } from '../pages/TenancyAgreementAccessPage'
+import { TenancyAgreementPetsSmokingPage } from '../pages/TenancyAgreementPetsSmokingPage'
+import { TenancyAgreementUsingHomePage } from '../pages/TenancyAgreementUsingHomePage'
+import { TenancyAgreementEndingPage } from '../pages/TenancyAgreementEndingPage'
+import { TenancyAgreementAdditionalTermsPage } from '../pages/TenancyAgreementAdditionalTermsPage'
 import { routes } from '../data/routes'
 
 // Built routes render their own page; every other route still renders the
@@ -40,6 +51,17 @@ const BUILT_ROUTES: Record<string, ReactNode> = {
   '/renting-home/agreement/dates': <TenancyAgreementDatesPage />,
   '/renting-home/agreement/rent': <TenancyAgreementRentPage />,
   '/renting-home/agreement/payment': <TenancyAgreementPaymentPage />,
+  '/renting-home/agreement/deposit': <TenancyAgreementDepositPage />,
+  '/renting-home/agreement/deposit-terms': <TenancyAgreementDepositTermsPage />,
+  '/renting-home/agreement/bills': <TenancyAgreementBillsPage />,
+  '/renting-home/agreement/occupants': <TenancyAgreementOccupantsPage />,
+  '/renting-home/agreement/included-items': <TenancyAgreementItemsPage />,
+  '/renting-home/agreement/repairs': <TenancyAgreementRepairsPage />,
+  '/renting-home/agreement/access': <TenancyAgreementAccessPage />,
+  '/renting-home/agreement/pets-smoking': <TenancyAgreementPetsSmokingPage />,
+  '/renting-home/agreement/using-home': <TenancyAgreementUsingHomePage />,
+  '/renting-home/agreement/ending': <TenancyAgreementEndingPage />,
+  '/renting-home/agreement/additional-terms': <TenancyAgreementAdditionalTermsPage />,
 }
 
 export function AppRoutes() {

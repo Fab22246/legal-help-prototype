@@ -207,6 +207,31 @@ export function TenancyAgreementLandlordsPage() {
         </div>
         <StorageWarning />
         <p className="page__text">This landlord will be removed from the agreement.</p>
+        {(() => {
+          const items: string[] = []
+          if (
+            state.deposit?.recipient?.kind === 'landlord' &&
+            state.deposit.recipient.landlordId === pendingRemoveId
+          ) {
+            items.push('who will receive the deposit')
+          }
+          if (
+            state.repairs?.contact?.kind === 'landlord' &&
+            state.repairs.contact.landlordId === pendingRemoveId
+          ) {
+            items.push('who should be contacted first about repairs and the contact instructions')
+          }
+          return items.length > 0 ? (
+            <>
+              <p className="page__text">The following information will also be deleted:</p>
+              <ul className="govbb-list govbb-list--bullet">
+                {items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </>
+          ) : null
+        })()}
         <div className="govbb-btn-group">
           <button
             type="button"

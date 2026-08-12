@@ -228,6 +228,32 @@ button:focus-visible {
   max-width: 100%;
 }
 
+/* Inset text: a bordered aside for notes that are not questions (for example,
+   "this will be shown as something to agree before the document is signed"). */
+.inset-text {
+  border-left: var(--spacing-xxs) solid var(--color-grey-00);
+  padding: var(--spacing-s) var(--spacing-m);
+}
+.inset-text p {
+  margin: 0;
+}
+
+/* Allow the shared "Delete my answers and start again" link-button to wrap on
+   narrow screens so it does not overflow at 320px. Scoped to this action only —
+   the global .govbb-btn white-space is unchanged. */
+.delete-answers-action {
+  white-space: normal;
+  text-align: left;
+  max-width: 100%;
+}
+
+/* User-entered agreed points are shown verbatim in summary cards. A very long
+   unbroken string (e.g. a pasted URL) must break rather than force horizontal
+   overflow at 320px. Scoped to this content only. */
+.agreed-point-text {
+  overflow-wrap: anywhere;
+}
+
 /* Generic vertical stack used by form/placeholder shells. */
 .stack {
   display: flex;

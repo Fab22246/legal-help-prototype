@@ -212,13 +212,23 @@ export function TenancyAgreementAgentPage() {
           Changing your answer to No will delete the agent or manager details you saved. Your
           landlord and tenant details will not change.
         </p>
-        {state.payment?.recipient === 'agent' ? (
-          <p className="page__text">
-            {(state.landlords?.length ?? 0) > 1
-              ? 'We will change the payment details to show that the landlords will receive the rent.'
-              : 'We will change the payment details to show that the landlord will receive the rent.'}
-          </p>
-        ) : null}
+        {(() => {
+          const items: string[] = []
+          if (state.payment?.recipient === 'agent') items.push('who will receive the rent')
+          if (state.deposit?.recipient?.kind === 'agent') items.push('who will receive the deposit')
+          if (state.repairs?.contact?.kind === 'agent')
+            items.push('who should be contacted first about repairs and the contact instructions')
+          return items.length > 0 ? (
+            <>
+              <p className="page__text">The following information will also be deleted:</p>
+              <ul className="govbb-list govbb-list--bullet">
+                {items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </>
+          ) : null
+        })()}
         <div className="govbb-btn-group">
           <button
             type="button"

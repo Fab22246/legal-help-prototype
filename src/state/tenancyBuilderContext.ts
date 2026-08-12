@@ -173,6 +173,210 @@ export interface PaymentStage {
   recipient?: RentRecipient
 }
 
+// -- Shared: Yes / Not yet and party references -------------------------------
+
+export type YesNotYet = 'yes' | 'not-yet'
+
+// A reference to a chosen party for a recipient/contact question: a specific
+// saved landlord, the agent, or a free-text "someone else".
+export type PartyRefKind = 'landlord' | 'agent' | 'other'
+export interface PartyRef {
+  kind: PartyRefKind
+  // Present only when kind === 'landlord'.
+  landlordId?: string
+  // Present only when kind === 'other'.
+  name?: string
+}
+
+// -- Deposit ------------------------------------------------------------------
+
+export interface DepositStage {
+  willBePaid: YesNo
+  // The following are set only when willBePaid === 'yes'.
+  amount?: string
+  paymentDate?: DateFields
+  recipient?: PartyRef
+}
+
+export interface DepositTermsStage {
+  agreed: YesNotYet
+  // Set only when agreed === 'yes'. User-supplied wording.
+  wording?: string
+}
+
+// -- Bills and services -------------------------------------------------------
+
+export type BillService =
+  | 'water'
+  | 'electricity'
+  | 'gas'
+  | 'internet'
+  | 'television'
+  | 'waste'
+  | 'gardening'
+  | 'cleaning'
+  | 'security'
+  | 'other'
+
+export type BillArrangement =
+  | 'included-in-rent'
+  | 'tenant-direct'
+  | 'tenant-pays-separately'
+  | 'landlord-pays'
+  | 'another-arrangement'
+
+export type BillAmountBasis = 'fixed' | 'as-billed' | 'another-way'
+
+export type BillFrequency =
+  | 'weekly'
+  | 'every-2-weeks'
+  | 'monthly'
+  | 'every-3-months'
+  | 'every-6-months'
+  | 'yearly'
+  | 'other'
+
+export interface BillRecord {
+  id: string
+  service: BillService
+  otherServiceName?: string
+  arrangement: BillArrangement
+  // When arrangement === 'tenant-pays-separately':
+  amountBasis?: BillAmountBasis
+  fixedAmount?: string
+  fixedFrequency?: BillFrequency
+  otherFrequency?: string
+  amountAnotherWay?: string
+  whenToPay?: string
+  // When arrangement === 'another-arrangement':
+  arrangementDescription?: string
+}
+
+export interface BillsStage {
+  agreed: YesNotYet
+  records: BillRecord[]
+}
+
+export interface BillDraft {
+  editingId?: string
+  service?: BillService
+  otherServiceName?: string
+  arrangement?: BillArrangement
+  amountBasis?: BillAmountBasis
+  fixedAmount?: string
+  fixedFrequency?: BillFrequency
+  otherFrequency?: string
+  amountAnotherWay?: string
+  whenToPay?: string
+  arrangementDescription?: string
+}
+
+// -- Other people living in the home ------------------------------------------
+
+export interface OccupantRecord {
+  id: string
+  firstName: string
+  middleNames?: string
+  lastName: string
+}
+
+export interface OccupantsStage {
+  willLive: YesNo
+  records: OccupantRecord[]
+}
+
+export interface OccupantDraft {
+  editingId?: string
+  firstName?: string
+  middleNames?: string
+  lastName?: string
+}
+
+// -- Furniture and other items ------------------------------------------------
+
+export interface ItemRecord {
+  id: string
+  item: string
+  quantity: string
+  location?: string
+  conditionChecked: YesNotYet
+  conditionDescription?: string
+}
+
+export interface ItemsStage {
+  willProvide: YesNo
+  records: ItemRecord[]
+}
+
+export interface ItemDraft {
+  editingId?: string
+  item?: string
+  quantity?: string
+  location?: string
+  conditionChecked?: YesNotYet
+  conditionDescription?: string
+}
+
+// -- Repairs ------------------------------------------------------------------
+
+export interface RepairsStage {
+  agreed: YesNotYet
+  // Set only when agreed === 'yes'. User-supplied wording.
+  arrangements?: string
+  // The first repair contact (always asked).
+  contact?: PartyRef
+  // How to contact the repair contact (required once a contact is chosen).
+  contactInstructions?: string
+}
+
+// -- Access to the home -------------------------------------------------------
+
+export interface AccessStage {
+  agreed: YesNotYet
+  wording?: string
+}
+
+// -- Permissions (pets, smoking, using the home) ------------------------------
+
+export type PermissionAnswer = 'yes' | 'written-permission' | 'no' | 'not-agreed-yet'
+
+export interface PetsSmokingStage {
+  pets: PermissionAnswer
+  smoking: PermissionAnswer
+}
+
+export interface UsingHomeStage {
+  business: PermissionAnswer
+  changes: PermissionAnswer
+  subletting: PermissionAnswer
+}
+
+// -- Ending the tenancy -------------------------------------------------------
+
+export interface EndingStage {
+  agreed: YesNotYet
+  // Set only when agreed === 'yes'. User-supplied wording. Its meaning depends
+  // on whether an agreed end date exists (ending early vs how the tenancy ends).
+  wording?: string
+}
+
+// -- Other agreed points ------------------------------------------------------
+
+export interface AdditionalTermRecord {
+  id: string
+  text: string
+}
+
+export interface AdditionalTermsStage {
+  agreed: YesNo
+  records: AdditionalTermRecord[]
+}
+
+export interface AdditionalTermDraft {
+  editingId?: string
+  text?: string
+}
+
 // -- Editing (in-progress records) --------------------------------------------
 
 // A draft party record while the user is editing. The `id` field is only
@@ -204,6 +408,10 @@ export interface EditingState {
   landlordDraft?: LandlordDraft
   tenantDraft?: TenantDraft
   agentDraft?: AgentDraft
+  billDraft?: BillDraft
+  occupantDraft?: OccupantDraft
+  itemDraft?: ItemDraft
+  additionalTermDraft?: AdditionalTermDraft
 }
 
 // -- Top-level state ----------------------------------------------------------
@@ -217,6 +425,17 @@ export interface TenancyBuilderState {
   dates?: DatesStage
   rent?: RentStage
   payment?: PaymentStage
+  deposit?: DepositStage
+  depositTerms?: DepositTermsStage
+  bills?: BillsStage
+  occupants?: OccupantsStage
+  items?: ItemsStage
+  repairs?: RepairsStage
+  access?: AccessStage
+  petsSmoking?: PetsSmokingStage
+  usingHome?: UsingHomeStage
+  ending?: EndingStage
+  additionalTerms?: AdditionalTermsStage
   editing?: EditingState
 }
 
@@ -250,6 +469,57 @@ export interface TenancyBuilderContextValue {
   // Rent and payment
   saveRent: (rent: RentStage) => void
   savePayment: (payment: PaymentStage) => void
+  // Deposit
+  saveDeposit: (deposit: DepositStage) => void
+  confirmNoDeposit: () => void
+  // Deposit terms
+  saveDepositTerms: (depositTerms: DepositTermsStage) => void
+  clearDepositTermsWording: () => void
+  // Bills and services
+  saveBillsAgreed: (agreed: YesNotYet) => void
+  clearBillsRecords: () => void
+  setBillDraft: (patch: Partial<BillDraft>) => void
+  clearBillDraft: () => void
+  saveBillDraft: () => void
+  removeBill: (id: string) => void
+  startEditingBill: (id: string) => void
+  // Other people living in the home
+  setOccupantsAnswer: (answer: YesNo) => void
+  clearOccupantsRecords: () => void
+  setOccupantDraft: (patch: Partial<OccupantDraft>) => void
+  clearOccupantDraft: () => void
+  saveOccupantDraft: () => void
+  removeOccupant: (id: string) => void
+  startEditingOccupant: (id: string) => void
+  // Furniture and other items
+  setItemsAnswer: (answer: YesNo) => void
+  clearItemsRecords: () => void
+  setItemDraft: (patch: Partial<ItemDraft>) => void
+  clearItemDraft: () => void
+  saveItemDraft: () => void
+  removeItem: (id: string) => void
+  startEditingItem: (id: string) => void
+  // Repairs
+  saveRepairs: (repairs: RepairsStage) => void
+  // Access to the home
+  saveAccess: (access: AccessStage) => void
+  // Pets and smoking
+  savePetsSmoking: (petsSmoking: PetsSmokingStage) => void
+  // Using the home
+  saveUsingHome: (usingHome: UsingHomeStage) => void
+  // Ending the tenancy
+  saveEnding: (ending: EndingStage) => void
+  // Tenancy dates with ending cleared (used when adding/removing an end date
+  // invalidates the earlier ending answer).
+  saveDatesClearEnding: (dates: DatesStage) => void
+  // Other agreed points
+  setAdditionalTermsAnswer: (answer: YesNo) => void
+  clearAdditionalTermsRecords: () => void
+  setAdditionalTermDraft: (patch: Partial<AdditionalTermDraft>) => void
+  clearAdditionalTermDraft: () => void
+  saveAdditionalTermDraft: () => void
+  removeAdditionalTerm: (id: string) => void
+  startEditingAdditionalTerm: (id: string) => void
   // Downstream clearing
   clearFromLandlordsOnwards: () => void
   clearAgent: () => void
@@ -282,6 +552,43 @@ const PARISH_VALUES: Parish[] = PARISHES.map((p) => p.value)
 const RENT_FREQUENCY_VALUES: RentFrequency[] = ['weekly', 'every-2-weeks', 'monthly', 'other']
 const PAYMENT_METHOD_VALUES: PaymentMethod[] = ['cash', 'bank-transfer', 'cheque', 'other']
 const RENT_RECIPIENT_VALUES: RentRecipient[] = ['landlord', 'agent']
+const YES_NOT_YET_VALUES: YesNotYet[] = ['yes', 'not-yet']
+const PARTY_REF_KIND_VALUES: PartyRefKind[] = ['landlord', 'agent', 'other']
+const PERMISSION_ANSWER_VALUES: PermissionAnswer[] = [
+  'yes',
+  'written-permission',
+  'no',
+  'not-agreed-yet',
+]
+const BILL_SERVICE_VALUES: BillService[] = [
+  'water',
+  'electricity',
+  'gas',
+  'internet',
+  'television',
+  'waste',
+  'gardening',
+  'cleaning',
+  'security',
+  'other',
+]
+const BILL_ARRANGEMENT_VALUES: BillArrangement[] = [
+  'included-in-rent',
+  'tenant-direct',
+  'tenant-pays-separately',
+  'landlord-pays',
+  'another-arrangement',
+]
+const BILL_AMOUNT_BASIS_VALUES: BillAmountBasis[] = ['fixed', 'as-billed', 'another-way']
+const BILL_FREQUENCY_VALUES: BillFrequency[] = [
+  'weekly',
+  'every-2-weeks',
+  'monthly',
+  'every-3-months',
+  'every-6-months',
+  'yearly',
+  'other',
+]
 
 // -- Sanitisation helpers -----------------------------------------------------
 
@@ -503,6 +810,309 @@ function sanitisePayment(raw: unknown): PaymentStage | undefined {
   return result
 }
 
+function sanitisePartyRef(raw: unknown): PartyRef | undefined {
+  if (!isPlainObject(raw)) return undefined
+  const kind = sanitiseEnum(raw.kind, PARTY_REF_KIND_VALUES)
+  if (!kind) return undefined
+  if (kind === 'landlord') {
+    const landlordId = sanitiseNonEmptyString(raw.landlordId)
+    if (!landlordId) return undefined
+    return { kind, landlordId }
+  }
+  if (kind === 'other') {
+    const name = sanitiseNonEmptyString(raw.name)
+    if (!name) return undefined
+    return { kind, name }
+  }
+  return { kind: 'agent' }
+}
+
+function sanitiseDeposit(raw: unknown): DepositStage | undefined {
+  if (!isPlainObject(raw)) return undefined
+  const willBePaid = sanitiseEnum(raw.willBePaid, YES_NO_VALUES)
+  if (!willBePaid) return undefined
+  if (willBePaid === 'no') return { willBePaid }
+  const result: DepositStage = { willBePaid }
+  const amount = sanitiseNonEmptyString(raw.amount)
+  if (amount) result.amount = amount
+  const paymentDate = sanitiseDateFields(raw.paymentDate)
+  if (paymentDate) result.paymentDate = paymentDate
+  const recipient = sanitisePartyRef(raw.recipient)
+  if (recipient) result.recipient = recipient
+  return result
+}
+
+function sanitiseDepositTerms(raw: unknown): DepositTermsStage | undefined {
+  if (!isPlainObject(raw)) return undefined
+  const agreed = sanitiseEnum(raw.agreed, YES_NOT_YET_VALUES)
+  if (!agreed) return undefined
+  const result: DepositTermsStage = { agreed }
+  const wording = sanitiseNonEmptyString(raw.wording)
+  if (wording) result.wording = wording
+  return result
+}
+
+function sanitiseBillRecord(raw: unknown): BillRecord | undefined {
+  if (!isPlainObject(raw)) return undefined
+  const id = sanitiseNonEmptyString(raw.id)
+  const service = sanitiseEnum(raw.service, BILL_SERVICE_VALUES)
+  const arrangement = sanitiseEnum(raw.arrangement, BILL_ARRANGEMENT_VALUES)
+  if (!id || !service || !arrangement) return undefined
+  const result: BillRecord = { id, service, arrangement }
+  if (service === 'other') {
+    const otherServiceName = sanitiseNonEmptyString(raw.otherServiceName)
+    if (!otherServiceName) return undefined
+    result.otherServiceName = otherServiceName
+  }
+  if (arrangement === 'tenant-pays-separately') {
+    const amountBasis = sanitiseEnum(raw.amountBasis, BILL_AMOUNT_BASIS_VALUES)
+    if (!amountBasis) return undefined
+    result.amountBasis = amountBasis
+    if (amountBasis === 'fixed') {
+      const fixedAmount = sanitiseNonEmptyString(raw.fixedAmount)
+      const fixedFrequency = sanitiseEnum(raw.fixedFrequency, BILL_FREQUENCY_VALUES)
+      if (!fixedAmount || !fixedFrequency) return undefined
+      result.fixedAmount = fixedAmount
+      result.fixedFrequency = fixedFrequency
+      if (fixedFrequency === 'other') {
+        const otherFrequency = sanitiseNonEmptyString(raw.otherFrequency)
+        if (!otherFrequency) return undefined
+        result.otherFrequency = otherFrequency
+      }
+    } else if (amountBasis === 'another-way') {
+      const amountAnotherWay = sanitiseNonEmptyString(raw.amountAnotherWay)
+      if (!amountAnotherWay) return undefined
+      result.amountAnotherWay = amountAnotherWay
+    }
+    const whenToPay = sanitiseNonEmptyString(raw.whenToPay)
+    if (!whenToPay) return undefined
+    result.whenToPay = whenToPay
+  }
+  if (arrangement === 'another-arrangement') {
+    const arrangementDescription = sanitiseNonEmptyString(raw.arrangementDescription)
+    if (!arrangementDescription) return undefined
+    result.arrangementDescription = arrangementDescription
+  }
+  return result
+}
+
+function sanitiseBills(raw: unknown): BillsStage | undefined {
+  if (!isPlainObject(raw)) return undefined
+  const agreed = sanitiseEnum(raw.agreed, YES_NOT_YET_VALUES)
+  if (!agreed) return undefined
+  const rawRecords = Array.isArray(raw.records) ? raw.records : []
+  const records = rawRecords
+    .map(sanitiseBillRecord)
+    .filter((r): r is BillRecord => r !== undefined)
+  return { agreed, records }
+}
+
+function sanitiseBillDraft(raw: unknown): BillDraft | undefined {
+  if (!isPlainObject(raw)) return undefined
+  const draft: BillDraft = {}
+  const editingId = sanitiseNonEmptyString(raw.editingId)
+  if (editingId) draft.editingId = editingId
+  const service = sanitiseEnum(raw.service, BILL_SERVICE_VALUES)
+  if (service) draft.service = service
+  const otherServiceName = sanitiseString(raw.otherServiceName)
+  if (otherServiceName !== undefined) draft.otherServiceName = otherServiceName
+  const arrangement = sanitiseEnum(raw.arrangement, BILL_ARRANGEMENT_VALUES)
+  if (arrangement) draft.arrangement = arrangement
+  const amountBasis = sanitiseEnum(raw.amountBasis, BILL_AMOUNT_BASIS_VALUES)
+  if (amountBasis) draft.amountBasis = amountBasis
+  const fixedAmount = sanitiseString(raw.fixedAmount)
+  if (fixedAmount !== undefined) draft.fixedAmount = fixedAmount
+  const fixedFrequency = sanitiseEnum(raw.fixedFrequency, BILL_FREQUENCY_VALUES)
+  if (fixedFrequency) draft.fixedFrequency = fixedFrequency
+  const otherFrequency = sanitiseString(raw.otherFrequency)
+  if (otherFrequency !== undefined) draft.otherFrequency = otherFrequency
+  const amountAnotherWay = sanitiseString(raw.amountAnotherWay)
+  if (amountAnotherWay !== undefined) draft.amountAnotherWay = amountAnotherWay
+  const whenToPay = sanitiseString(raw.whenToPay)
+  if (whenToPay !== undefined) draft.whenToPay = whenToPay
+  const arrangementDescription = sanitiseString(raw.arrangementDescription)
+  if (arrangementDescription !== undefined) draft.arrangementDescription = arrangementDescription
+  return Object.keys(draft).length > 0 ? draft : undefined
+}
+
+// Validation-only parse of a whole-number string (e.g. an item quantity).
+export function parseWholeNumber(raw: string): number | null {
+  const trimmed = raw.trim()
+  if (!/^\d+$/.test(trimmed)) return null
+  const value = Number(trimmed)
+  return Number.isFinite(value) ? value : null
+}
+
+function sanitiseOccupantRecord(raw: unknown): OccupantRecord | undefined {
+  if (!isPlainObject(raw)) return undefined
+  const id = sanitiseNonEmptyString(raw.id)
+  const firstName = sanitiseNonEmptyString(raw.firstName)
+  const lastName = sanitiseNonEmptyString(raw.lastName)
+  if (!id || !firstName || !lastName) return undefined
+  const result: OccupantRecord = { id, firstName, lastName }
+  const middleNames = sanitiseNonEmptyString(raw.middleNames)
+  if (middleNames) result.middleNames = middleNames
+  return result
+}
+
+function sanitiseOccupants(raw: unknown): OccupantsStage | undefined {
+  if (!isPlainObject(raw)) return undefined
+  const willLive = sanitiseEnum(raw.willLive, YES_NO_VALUES)
+  if (!willLive) return undefined
+  const rawRecords = Array.isArray(raw.records) ? raw.records : []
+  const records = rawRecords
+    .map(sanitiseOccupantRecord)
+    .filter((r): r is OccupantRecord => r !== undefined)
+  return { willLive, records }
+}
+
+function sanitiseOccupantDraft(raw: unknown): OccupantDraft | undefined {
+  if (!isPlainObject(raw)) return undefined
+  const draft: OccupantDraft = {}
+  const editingId = sanitiseNonEmptyString(raw.editingId)
+  if (editingId) draft.editingId = editingId
+  const firstName = sanitiseString(raw.firstName)
+  if (firstName !== undefined) draft.firstName = firstName
+  const middleNames = sanitiseString(raw.middleNames)
+  if (middleNames !== undefined) draft.middleNames = middleNames
+  const lastName = sanitiseString(raw.lastName)
+  if (lastName !== undefined) draft.lastName = lastName
+  return Object.keys(draft).length > 0 ? draft : undefined
+}
+
+function sanitiseItemRecord(raw: unknown): ItemRecord | undefined {
+  if (!isPlainObject(raw)) return undefined
+  const id = sanitiseNonEmptyString(raw.id)
+  const item = sanitiseNonEmptyString(raw.item)
+  const quantity = sanitiseNonEmptyString(raw.quantity)
+  const conditionChecked = sanitiseEnum(raw.conditionChecked, YES_NOT_YET_VALUES)
+  if (!id || !item || !quantity || !conditionChecked) return undefined
+  const q = parseWholeNumber(quantity)
+  if (q === null || q <= 0) return undefined
+  const result: ItemRecord = { id, item, quantity, conditionChecked }
+  const location = sanitiseNonEmptyString(raw.location)
+  if (location) result.location = location
+  if (conditionChecked === 'yes') {
+    const conditionDescription = sanitiseNonEmptyString(raw.conditionDescription)
+    if (!conditionDescription) return undefined
+    result.conditionDescription = conditionDescription
+  }
+  return result
+}
+
+function sanitiseItems(raw: unknown): ItemsStage | undefined {
+  if (!isPlainObject(raw)) return undefined
+  const willProvide = sanitiseEnum(raw.willProvide, YES_NO_VALUES)
+  if (!willProvide) return undefined
+  const rawRecords = Array.isArray(raw.records) ? raw.records : []
+  const records = rawRecords.map(sanitiseItemRecord).filter((r): r is ItemRecord => r !== undefined)
+  return { willProvide, records }
+}
+
+function sanitiseItemDraft(raw: unknown): ItemDraft | undefined {
+  if (!isPlainObject(raw)) return undefined
+  const draft: ItemDraft = {}
+  const editingId = sanitiseNonEmptyString(raw.editingId)
+  if (editingId) draft.editingId = editingId
+  const item = sanitiseString(raw.item)
+  if (item !== undefined) draft.item = item
+  const quantity = sanitiseString(raw.quantity)
+  if (quantity !== undefined) draft.quantity = quantity
+  const location = sanitiseString(raw.location)
+  if (location !== undefined) draft.location = location
+  const conditionChecked = sanitiseEnum(raw.conditionChecked, YES_NOT_YET_VALUES)
+  if (conditionChecked) draft.conditionChecked = conditionChecked
+  const conditionDescription = sanitiseString(raw.conditionDescription)
+  if (conditionDescription !== undefined) draft.conditionDescription = conditionDescription
+  return Object.keys(draft).length > 0 ? draft : undefined
+}
+
+function sanitiseRepairs(raw: unknown): RepairsStage | undefined {
+  if (!isPlainObject(raw)) return undefined
+  const agreed = sanitiseEnum(raw.agreed, YES_NOT_YET_VALUES)
+  if (!agreed) return undefined
+  const result: RepairsStage = { agreed }
+  if (agreed === 'yes') {
+    const arrangements = sanitiseNonEmptyString(raw.arrangements)
+    if (arrangements) result.arrangements = arrangements
+  }
+  const contact = sanitisePartyRef(raw.contact)
+  if (contact) {
+    result.contact = contact
+    const contactInstructions = sanitiseNonEmptyString(raw.contactInstructions)
+    if (contactInstructions) result.contactInstructions = contactInstructions
+  }
+  return result
+}
+
+function sanitiseAccess(raw: unknown): AccessStage | undefined {
+  if (!isPlainObject(raw)) return undefined
+  const agreed = sanitiseEnum(raw.agreed, YES_NOT_YET_VALUES)
+  if (!agreed) return undefined
+  const result: AccessStage = { agreed }
+  const wording = sanitiseNonEmptyString(raw.wording)
+  if (wording) result.wording = wording
+  return result
+}
+
+function sanitisePetsSmoking(raw: unknown): PetsSmokingStage | undefined {
+  if (!isPlainObject(raw)) return undefined
+  const pets = sanitiseEnum(raw.pets, PERMISSION_ANSWER_VALUES)
+  const smoking = sanitiseEnum(raw.smoking, PERMISSION_ANSWER_VALUES)
+  if (!pets || !smoking) return undefined
+  return { pets, smoking }
+}
+
+function sanitiseUsingHome(raw: unknown): UsingHomeStage | undefined {
+  if (!isPlainObject(raw)) return undefined
+  const business = sanitiseEnum(raw.business, PERMISSION_ANSWER_VALUES)
+  const changes = sanitiseEnum(raw.changes, PERMISSION_ANSWER_VALUES)
+  const subletting = sanitiseEnum(raw.subletting, PERMISSION_ANSWER_VALUES)
+  if (!business || !changes || !subletting) return undefined
+  return { business, changes, subletting }
+}
+
+function sanitiseEnding(raw: unknown): EndingStage | undefined {
+  if (!isPlainObject(raw)) return undefined
+  const agreed = sanitiseEnum(raw.agreed, YES_NOT_YET_VALUES)
+  if (!agreed) return undefined
+  const result: EndingStage = { agreed }
+  if (agreed === 'yes') {
+    const wording = sanitiseNonEmptyString(raw.wording)
+    if (wording) result.wording = wording
+  }
+  return result
+}
+
+function sanitiseAdditionalTermRecord(raw: unknown): AdditionalTermRecord | undefined {
+  if (!isPlainObject(raw)) return undefined
+  const id = sanitiseNonEmptyString(raw.id)
+  const text = sanitiseNonEmptyString(raw.text)
+  if (!id || !text) return undefined
+  return { id, text }
+}
+
+function sanitiseAdditionalTerms(raw: unknown): AdditionalTermsStage | undefined {
+  if (!isPlainObject(raw)) return undefined
+  const agreed = sanitiseEnum(raw.agreed, YES_NO_VALUES)
+  if (!agreed) return undefined
+  const rawRecords = Array.isArray(raw.records) ? raw.records : []
+  const records = rawRecords
+    .map(sanitiseAdditionalTermRecord)
+    .filter((r): r is AdditionalTermRecord => r !== undefined)
+  return { agreed, records }
+}
+
+function sanitiseAdditionalTermDraft(raw: unknown): AdditionalTermDraft | undefined {
+  if (!isPlainObject(raw)) return undefined
+  const draft: AdditionalTermDraft = {}
+  const editingId = sanitiseNonEmptyString(raw.editingId)
+  if (editingId) draft.editingId = editingId
+  const text = sanitiseString(raw.text)
+  if (text !== undefined) draft.text = text
+  return Object.keys(draft).length > 0 ? draft : undefined
+}
+
 // Editing drafts intentionally accept partial data — they represent
 // in-progress work that has not been validated yet.
 function sanitiseLandlordDraft(raw: unknown): LandlordDraft | undefined {
@@ -627,6 +1237,14 @@ function sanitiseEditing(raw: unknown): EditingState | undefined {
   if (td) editing.tenantDraft = td
   const ad = sanitiseAgentDraft(raw.agentDraft)
   if (ad) editing.agentDraft = ad
+  const bd = sanitiseBillDraft(raw.billDraft)
+  if (bd) editing.billDraft = bd
+  const od = sanitiseOccupantDraft(raw.occupantDraft)
+  if (od) editing.occupantDraft = od
+  const itd = sanitiseItemDraft(raw.itemDraft)
+  if (itd) editing.itemDraft = itd
+  const atd = sanitiseAdditionalTermDraft(raw.additionalTermDraft)
+  if (atd) editing.additionalTermDraft = atd
   return Object.keys(editing).length > 0 ? editing : undefined
 }
 
@@ -660,6 +1278,28 @@ export function readInitialState(): TenancyBuilderState {
   if (rent) state.rent = rent
   const payment = sanitisePayment(raw.payment)
   if (payment) state.payment = payment
+  const deposit = sanitiseDeposit(raw.deposit)
+  if (deposit) state.deposit = deposit
+  const depositTerms = sanitiseDepositTerms(raw.depositTerms)
+  if (depositTerms) state.depositTerms = depositTerms
+  const bills = sanitiseBills(raw.bills)
+  if (bills) state.bills = bills
+  const occupants = sanitiseOccupants(raw.occupants)
+  if (occupants) state.occupants = occupants
+  const items = sanitiseItems(raw.items)
+  if (items) state.items = items
+  const repairs = sanitiseRepairs(raw.repairs)
+  if (repairs) state.repairs = repairs
+  const access = sanitiseAccess(raw.access)
+  if (access) state.access = access
+  const petsSmoking = sanitisePetsSmoking(raw.petsSmoking)
+  if (petsSmoking) state.petsSmoking = petsSmoking
+  const usingHome = sanitiseUsingHome(raw.usingHome)
+  if (usingHome) state.usingHome = usingHome
+  const ending = sanitiseEnding(raw.ending)
+  if (ending) state.ending = ending
+  const additionalTerms = sanitiseAdditionalTerms(raw.additionalTerms)
+  if (additionalTerms) state.additionalTerms = additionalTerms
   const editing = sanitiseEditing(raw.editing)
   if (editing) {
     // A draft that references a record we no longer have is unrecoverable —
@@ -677,6 +1317,32 @@ export function readInitialState(): TenancyBuilderState {
       !state.tenants?.some((t) => t.id === editing.tenantDraft?.editingId)
     ) {
       delete editing.tenantDraft
+    }
+    if (
+      editing.billDraft?.editingId &&
+      !state.bills?.records.some((b) => b.id === editing.billDraft?.editingId)
+    ) {
+      delete editing.billDraft
+    }
+    if (
+      editing.occupantDraft?.editingId &&
+      !state.occupants?.records.some((o) => o.id === editing.occupantDraft?.editingId)
+    ) {
+      delete editing.occupantDraft
+    }
+    if (
+      editing.itemDraft?.editingId &&
+      !state.items?.records.some((it) => it.id === editing.itemDraft?.editingId)
+    ) {
+      delete editing.itemDraft
+    }
+    if (
+      editing.additionalTermDraft?.editingId &&
+      !state.additionalTerms?.records.some(
+        (t) => t.id === editing.additionalTermDraft?.editingId,
+      )
+    ) {
+      delete editing.additionalTermDraft
     }
     if (Object.keys(editing).length > 0) state.editing = editing
   }

@@ -17,6 +17,8 @@ import { TenancyAgreementAgentPage } from '../pages/TenancyAgreementAgentPage'
 import { TenancyAgreementTenantsPage } from '../pages/TenancyAgreementTenantsPage'
 import { TenancyAgreementHomePage } from '../pages/TenancyAgreementHomePage'
 import { TenancyAgreementDatesPage } from '../pages/TenancyAgreementDatesPage'
+import { TenancyAgreementRentPage } from '../pages/TenancyAgreementRentPage'
+import { TenancyAgreementPaymentPage } from '../pages/TenancyAgreementPaymentPage'
 import { routes } from '../data/routes'
 
 // Built routes render their own page; every other route still renders the
@@ -36,6 +38,8 @@ const BUILT_ROUTES: Record<string, ReactNode> = {
   '/renting-home/agreement/tenants': <TenancyAgreementTenantsPage />,
   '/renting-home/agreement/home': <TenancyAgreementHomePage />,
   '/renting-home/agreement/dates': <TenancyAgreementDatesPage />,
+  '/renting-home/agreement/rent': <TenancyAgreementRentPage />,
+  '/renting-home/agreement/payment': <TenancyAgreementPaymentPage />,
 }
 
 export function AppRoutes() {

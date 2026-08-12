@@ -1,8 +1,17 @@
-import type { TenancyBuilderState } from './tenancyBuilderContext'
+import { parseRentAmount, type TenancyBuilderState } from './tenancyBuilderContext'
+import { parseYmd } from './barbadosDate'
 
 // Stage identifiers used by the recovery view. Names must be stable — page
 // components reference them by string.
-export type StageKey = 'scope' | 'landlords' | 'agent' | 'tenants' | 'home' | 'dates'
+export type StageKey =
+  | 'scope'
+  | 'landlords'
+  | 'agent'
+  | 'tenants'
+  | 'home'
+  | 'dates'
+  | 'rent'
+  | 'payment'
 
 export interface StageInfo {
   key: StageKey
@@ -50,6 +59,18 @@ export const STAGES: Record<StageKey, StageInfo> = {
     path: '/renting-home/agreement/dates',
     label: 'tenancy dates',
     actionLabel: 'tenancy dates',
+  },
+  rent: {
+    key: 'rent',
+    path: '/renting-home/agreement/rent',
+    label: 'rent details',
+    actionLabel: 'rent details',
+  },
+  payment: {
+    key: 'payment',
+    path: '/renting-home/agreement/payment',
+    label: 'payment details',
+    actionLabel: 'payment details',
   },
 }
 
@@ -109,6 +130,24 @@ export function hasCompletedDates(state: TenancyBuilderState): boolean {
   return false
 }
 
+export function hasCompletedRent(state: TenancyBuilderState): boolean {
+  const r = state.rent
+  if (!r) return false
+  const amount = parseRentAmount(r.amount)
+  if (amount === null || amount <= 0) return false
+  if (!parseYmd(r.firstPaymentDue)) return false
+  if (r.frequency === 'other') return !!r.otherFrequency && r.otherFrequency.length > 0
+  return true
+}
+
+export function hasCompletedPayment(state: TenancyBuilderState): boolean {
+  const p = state.payment
+  if (!p || p.methods.length === 0) return false
+  if (p.methods.includes('other') && !p.otherMethod) return false
+  if (!p.recipient) return false
+  return true
+}
+
 // The earliest missing (or blocking) stage the user needs to complete before
 // they can view the requested stage. Returns undefined if the requested stage
 // is reachable given the current state.
@@ -116,7 +155,16 @@ export function findEarliestMissing(
   state: TenancyBuilderState,
   requested: StageKey,
 ): StageKey | undefined {
-  const order: StageKey[] = ['scope', 'landlords', 'agent', 'tenants', 'home', 'dates']
+  const order: StageKey[] = [
+    'scope',
+    'landlords',
+    'agent',
+    'tenants',
+    'home',
+    'dates',
+    'rent',
+    'payment',
+  ]
   const requestedIndex = order.indexOf(requested)
   const gates: { key: StageKey; ok: (s: TenancyBuilderState) => boolean }[] = [
     { key: 'scope', ok: isSuitableScope },
@@ -125,6 +173,8 @@ export function findEarliestMissing(
     { key: 'tenants', ok: hasCompletedTenants },
     { key: 'home', ok: hasCompletedHome },
     { key: 'dates', ok: hasCompletedDates },
+    { key: 'rent', ok: hasCompletedRent },
+    { key: 'payment', ok: hasCompletedPayment },
   ]
   for (const gate of gates) {
     const gateIndex = order.indexOf(gate.key)

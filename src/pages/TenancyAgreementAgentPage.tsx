@@ -209,8 +209,16 @@ export function TenancyAgreementAgentPage() {
         </div>
         <StorageWarning />
         <p className="page__text">
-          Changing your answer to No will delete the agent or manager details you saved. Landlords, tenants and later answers will not be changed.
+          Changing your answer to No will delete the agent or manager details you saved. Your
+          landlord and tenant details will not change.
         </p>
+        {state.payment?.recipient === 'agent' ? (
+          <p className="page__text">
+            {(state.landlords?.length ?? 0) > 1
+              ? 'We will change the payment details to show that the landlords will receive the rent.'
+              : 'We will change the payment details to show that the landlord will receive the rent.'}
+          </p>
+        ) : null}
         <div className="govbb-btn-group">
           <button
             type="button"

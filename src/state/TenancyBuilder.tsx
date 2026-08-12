@@ -9,6 +9,8 @@ import {
   type HomeStage,
   type LandlordDraft,
   type LandlordRecord,
+  type PaymentStage,
+  type RentStage,
   type ScopeAnswers,
   type TenancyBuilderContextValue,
   type TenancyBuilderState,
@@ -192,11 +194,19 @@ export function TenancyBuilderProvider({ children }: TenancyBuilderProviderProps
         // Clear any saved agent details and any in-progress edit.
         const editing = { ...(prev.editing ?? {}) }
         delete editing.agentDraft
-        return {
+        const next: TenancyBuilderState = {
           ...prev,
           agent: { hasAgent: 'no' },
           editing: Object.keys(editing).length > 0 ? editing : undefined,
         }
+        // A recipient of "the agent" is no longer valid once there is no agent.
+        // Clear only that answer; leave all other rent and payment information.
+        if (next.payment?.recipient === 'agent') {
+          const payment = { ...next.payment }
+          delete payment.recipient
+          next.payment = payment
+        }
+        return next
       }
       // 'yes' — preserve any existing saved details until the user edits/saves.
       return { ...prev, agent: { hasAgent: 'yes', details: prevAgent?.details } }
@@ -257,6 +267,14 @@ export function TenancyBuilderProvider({ children }: TenancyBuilderProviderProps
     setState((prev) => ({ ...prev, dates }))
   }, [])
 
+  const saveRent = useCallback((rent: RentStage) => {
+    setState((prev) => ({ ...prev, rent }))
+  }, [])
+
+  const savePayment = useCallback((payment: PaymentStage) => {
+    setState((prev) => ({ ...prev, payment }))
+  }, [])
+
   const setHasAgreedEndDate = useCallback((answer: YesNo) => {
     setState((prev) => {
       if (!prev.dates) return prev
@@ -277,6 +295,8 @@ export function TenancyBuilderProvider({ children }: TenancyBuilderProviderProps
       delete next.tenants
       delete next.home
       delete next.dates
+      delete next.rent
+      delete next.payment
       if (next.editing) {
         const editing = { ...next.editing }
         delete editing.landlordDraft
@@ -296,6 +316,13 @@ export function TenancyBuilderProvider({ children }: TenancyBuilderProviderProps
         const editing = { ...next.editing }
         delete editing.agentDraft
         next.editing = Object.keys(editing).length > 0 ? editing : undefined
+      }
+      // A recipient of "the agent" is no longer valid once there is no agent.
+      // Clear only that answer; leave all other rent and payment information.
+      if (next.payment?.recipient === 'agent') {
+        const payment = { ...next.payment }
+        delete payment.recipient
+        next.payment = payment
       }
       return next
     })
@@ -349,6 +376,8 @@ export function TenancyBuilderProvider({ children }: TenancyBuilderProviderProps
       saveHome,
       saveDates,
       setHasAgreedEndDate,
+      saveRent,
+      savePayment,
       clearFromLandlordsOnwards,
       clearAgent,
       clearHomeIdentifiers,
@@ -375,6 +404,8 @@ export function TenancyBuilderProvider({ children }: TenancyBuilderProviderProps
       saveHome,
       saveDates,
       setHasAgreedEndDate,
+      saveRent,
+      savePayment,
       clearFromLandlordsOnwards,
       clearAgent,
       clearHomeIdentifiers,

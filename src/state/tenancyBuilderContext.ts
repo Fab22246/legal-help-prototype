@@ -144,6 +144,35 @@ export interface DatesStage {
   endDate?: DateFields
 }
 
+// -- Rent ---------------------------------------------------------------------
+
+export type RentFrequency = 'weekly' | 'every-2-weeks' | 'monthly' | 'other'
+
+export interface RentStage {
+  // Raw amount string as entered (validated as a plain BDS number, e.g. "1200"
+  // or "1200.00"). No display formatting is applied or stored.
+  amount: string
+  frequency: RentFrequency
+  // Required only when frequency === 'other'.
+  otherFrequency?: string
+  firstPaymentDue: DateFields
+}
+
+// -- Payment ------------------------------------------------------------------
+
+export type PaymentMethod = 'cash' | 'bank-transfer' | 'cheque' | 'other'
+export type RentRecipient = 'landlord' | 'agent'
+
+export interface PaymentStage {
+  // One or more agreed methods.
+  methods: PaymentMethod[]
+  // Required only when methods includes 'other'.
+  otherMethod?: string
+  // Asked only when an agent was recorded; otherwise derived as 'landlord'.
+  // May be temporarily absent if an agent change invalidated an 'agent' value.
+  recipient?: RentRecipient
+}
+
 // -- Editing (in-progress records) --------------------------------------------
 
 // A draft party record while the user is editing. The `id` field is only
@@ -186,6 +215,8 @@ export interface TenancyBuilderState {
   tenants?: TenantRecord[]
   home?: HomeStage
   dates?: DatesStage
+  rent?: RentStage
+  payment?: PaymentStage
   editing?: EditingState
 }
 
@@ -216,6 +247,9 @@ export interface TenancyBuilderContextValue {
   // Dates
   saveDates: (dates: DatesStage) => void
   setHasAgreedEndDate: (answer: YesNo) => void
+  // Rent and payment
+  saveRent: (rent: RentStage) => void
+  savePayment: (payment: PaymentStage) => void
   // Downstream clearing
   clearFromLandlordsOnwards: () => void
   clearAgent: () => void
@@ -245,6 +279,9 @@ const AGREEMENT_SITUATION_VALUES: AgreementSituation[] = [
 ]
 const PARTY_TYPE_VALUES: PartyType[] = ['person', 'organisation']
 const PARISH_VALUES: Parish[] = PARISHES.map((p) => p.value)
+const RENT_FREQUENCY_VALUES: RentFrequency[] = ['weekly', 'every-2-weeks', 'monthly', 'other']
+const PAYMENT_METHOD_VALUES: PaymentMethod[] = ['cash', 'bank-transfer', 'cheque', 'other']
+const RENT_RECIPIENT_VALUES: RentRecipient[] = ['landlord', 'agent']
 
 // -- Sanitisation helpers -----------------------------------------------------
 
@@ -424,6 +461,48 @@ function sanitiseDates(raw: unknown): DatesStage | undefined {
   return { startDate, hasAgreedEndDate, endDate }
 }
 
+// Validation-only parse of a rent amount string. This is NOT display
+// formatting: it accepts a plain number with up to two decimal places (e.g.
+// "1200" or "1200.00") and returns the numeric value, or null if the string is
+// not a valid amount.
+export function parseRentAmount(raw: string): number | null {
+  const trimmed = raw.trim()
+  if (!/^\d+(\.\d{1,2})?$/.test(trimmed)) return null
+  const value = Number(trimmed)
+  return Number.isFinite(value) ? value : null
+}
+
+function sanitiseRent(raw: unknown): RentStage | undefined {
+  if (!isPlainObject(raw)) return undefined
+  const amount = sanitiseNonEmptyString(raw.amount)
+  const frequency = sanitiseEnum(raw.frequency, RENT_FREQUENCY_VALUES)
+  const firstPaymentDue = sanitiseDateFields(raw.firstPaymentDue)
+  if (!amount || !frequency || !firstPaymentDue) return undefined
+  const parsed = parseRentAmount(amount)
+  if (parsed === null || parsed <= 0) return undefined
+  const result: RentStage = { amount, frequency, firstPaymentDue }
+  const otherFrequency = sanitiseNonEmptyString(raw.otherFrequency)
+  if (otherFrequency) result.otherFrequency = otherFrequency
+  return result
+}
+
+function sanitisePayment(raw: unknown): PaymentStage | undefined {
+  if (!isPlainObject(raw)) return undefined
+  const rawMethods = Array.isArray(raw.methods) ? raw.methods : []
+  const seen = rawMethods
+    .map((m) => sanitiseEnum(m, PAYMENT_METHOD_VALUES))
+    .filter((m): m is PaymentMethod => m !== undefined)
+  // De-duplicate while pinning to the canonical option order.
+  const methods = PAYMENT_METHOD_VALUES.filter((m) => seen.includes(m))
+  if (methods.length === 0) return undefined
+  const result: PaymentStage = { methods }
+  const otherMethod = sanitiseNonEmptyString(raw.otherMethod)
+  if (otherMethod) result.otherMethod = otherMethod
+  const recipient = sanitiseEnum(raw.recipient, RENT_RECIPIENT_VALUES)
+  if (recipient) result.recipient = recipient
+  return result
+}
+
 // Editing drafts intentionally accept partial data — they represent
 // in-progress work that has not been validated yet.
 function sanitiseLandlordDraft(raw: unknown): LandlordDraft | undefined {
@@ -577,6 +656,10 @@ export function readInitialState(): TenancyBuilderState {
   if (home) state.home = home
   const dates = sanitiseDates(raw.dates)
   if (dates) state.dates = dates
+  const rent = sanitiseRent(raw.rent)
+  if (rent) state.rent = rent
+  const payment = sanitisePayment(raw.payment)
+  if (payment) state.payment = payment
   const editing = sanitiseEditing(raw.editing)
   if (editing) {
     // A draft that references a record we no longer have is unrecoverable —

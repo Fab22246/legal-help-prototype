@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { FormEvent } from 'react'
-import { Link, Navigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { BackLink } from '../components/navigation/BackLink'
 import { ErrorSummary, type ErrorSummaryItem } from '../components/forms/ErrorSummary'
 import { DateInput } from '../components/forms/DateInput'
@@ -16,8 +16,6 @@ import {
 } from '../state/tenancyBuilderContext'
 import { STAGES } from '../state/tenancyBuilderStageStatus'
 import { compareYmd, parseYmd, todayInBarbados } from '../state/barbadosDate'
-
-type View = 'form' | 'holding'
 
 interface Errors {
   startDate?: string
@@ -35,6 +33,7 @@ const YES_NO_OPTIONS = [
 // comparisons are performed on Ymd tuples to keep them timezone-agnostic.
 
 export function TenancyAgreementDatesPage() {
+  const navigate = useNavigate()
   const { state, saveDates, setHasAgreedEndDate } = useTenancyBuilder()
   const gate = useStageGate('dates')
 
@@ -45,13 +44,6 @@ export function TenancyAgreementDatesPage() {
   const [endDate, setEndDate] = useState<DateFields>(
     state.dates?.endDate ?? { day: '', month: '', year: '' },
   )
-  const [view, setView] = useState<View>(() => {
-    const d = state.dates
-    if (!d) return 'form'
-    if (d.hasAgreedEndDate === 'no' && d.startDate) return 'holding'
-    if (d.hasAgreedEndDate === 'yes' && d.startDate && d.endDate) return 'holding'
-    return 'form'
-  })
   const [errors, setErrors] = useState<Errors>({})
   const [focusErrorSummary, setFocusErrorSummary] = useState(false)
 
@@ -60,7 +52,7 @@ export function TenancyAgreementDatesPage() {
 
   useEffect(() => {
     headingRef.current?.focus()
-  }, [view])
+  }, [])
 
   useEffect(() => {
     if (focusErrorSummary) {
@@ -114,45 +106,7 @@ export function TenancyAgreementDatesPage() {
     } else {
       saveDates({ startDate, hasAgreedEndDate: 'yes', endDate })
     }
-    setView('holding')
-  }
-
-  if (view === 'holding') {
-    return (
-      <div className="page">
-        <div className="page__header">
-          <h1 className="page__title" tabIndex={-1} ref={headingRef}>
-            You have completed this part
-          </h1>
-        </div>
-        <StorageWarning />
-        <p className="page__text">
-          You have completed the questions about the landlords, agent or manager, tenants, home and
-          tenancy dates.
-        </p>
-        <p className="page__text">
-          Your answers are kept only in this browser tab. They are not sent to GovTech.
-        </p>
-        <p className="page__text">
-          The remaining questions have not been built yet. No draft agreement has been created.
-        </p>
-        <div className="govbb-btn-group">
-          <button
-            type="button"
-            className="govbb-btn--secondary"
-            onClick={() => setView('form')}
-          >
-            Change dates
-          </button>
-        </div>
-        <p className="page__text">
-          <Link className="govbb-link-default" to="/renting-home">
-            Return to renting guidance
-          </Link>
-        </p>
-        <DeleteAnswersAction />
-      </div>
-    )
+    navigate('/renting-home/agreement/rent')
   }
 
   return (

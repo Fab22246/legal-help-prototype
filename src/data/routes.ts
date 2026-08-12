@@ -213,11 +213,40 @@ export const routes: RouteMeta[] = [
     showRelevantLaw: false,
   },
   {
-    // Tenancy dates and, after saving, a controlled-slice holding view.
+    // Tenancy dates. On save, continues to the rent stage.
     title: 'Tenancy dates',
     path: '/renting-home/agreement/dates',
     group: 'Homes, land and renting',
     description: 'Enter the tenancy start date and any agreed end date.',
+    routeType: 'builder',
+    status: 'needsLegalReview',
+    legalRisk: 'high',
+    showOnHome: false,
+    needsDraftWarning: false,
+    needsLegalReview: true,
+    showRelevantLaw: false,
+  },
+  {
+    // Rent details — subordinate builder route. Reached after tenancy dates.
+    title: 'Rent details',
+    path: '/renting-home/agreement/rent',
+    group: 'Homes, land and renting',
+    description: 'Enter the agreed rent amount, how often it is paid and when the first payment is due.',
+    routeType: 'builder',
+    status: 'needsLegalReview',
+    legalRisk: 'high',
+    showOnHome: false,
+    needsDraftWarning: false,
+    needsLegalReview: true,
+    showRelevantLaw: false,
+  },
+  {
+    // Payment details — subordinate builder route. Reached after rent details.
+    // After saving, shows the relocated completion view.
+    title: 'Payment details',
+    path: '/renting-home/agreement/payment',
+    group: 'Homes, land and renting',
+    description: 'Enter how the agreed rent will be paid and who will receive it.',
     routeType: 'builder',
     status: 'needsLegalReview',
     legalRisk: 'high',

@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useMemo, useState } from 'react'
+import { createContext, useCallback, useContext, useMemo, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
 import { generateId } from '../generateId'
 import { computeDerived } from './routeEngine'
@@ -16,6 +16,9 @@ export interface WillStateContextValue {
   start: () => void
   // Apply a change to the answers, then normalise dependent fields.
   update: (mutator: (draft: WillAnswers) => void) => void
+  // Apply a change and return the normalised answers, so the caller can compute
+  // the next step from the updated state without waiting for a re-render.
+  applyAndGet: (mutator: (draft: WillAnswers) => void) => WillAnswers
   // Clear every answer and end the active session.
   clearAll: () => void
   // S2 safeguarding: clear substantive answers, keep only the screen marker.
@@ -32,6 +35,9 @@ export function WillStateProvider({ children }: { children: ReactNode }) {
   const [answers, setAnswers] = useState<WillAnswers>(() => createEmptyAnswers())
   const [active, setActive] = useState(false)
 
+  const answersRef = useRef(answers)
+  answersRef.current = answers
+
   const derived = useMemo(() => computeDerived(answers), [answers])
 
   const update = useCallback((mutator: (draft: WillAnswers) => void) => {
@@ -42,6 +48,15 @@ export function WillStateProvider({ children }: { children: ReactNode }) {
       draft.dateCreated = undefined
       return normalizeAnswers(draft)
     })
+  }, [])
+
+  const applyAndGet = useCallback((mutator: (draft: WillAnswers) => void) => {
+    const draft: WillAnswers = { ...answersRef.current }
+    mutator(draft)
+    draft.dateCreated = undefined
+    const next = normalizeAnswers(draft)
+    setAnswers(next)
+    return next
   }, [])
 
   const start = useCallback(() => setActive(true), [])
@@ -71,12 +86,13 @@ export function WillStateProvider({ children }: { children: ReactNode }) {
       active,
       start,
       update,
+      applyAndGet,
       clearAll,
       safeguardingClear,
       captureDateCreated,
       newId,
     }),
-    [answers, derived, active, start, update, clearAll, safeguardingClear, captureDateCreated, newId],
+    [answers, derived, active, start, update, applyAndGet, clearAll, safeguardingClear, captureDateCreated, newId],
   )
 
   return <WillStateContext.Provider value={value}>{children}</WillStateContext.Provider>

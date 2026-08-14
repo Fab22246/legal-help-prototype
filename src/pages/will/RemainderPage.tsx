@@ -132,20 +132,26 @@ export function RemainderPage({ mode, recordId }: { mode: Mode; recordId?: strin
       d.remainder = found ? d.remainder.map((b) => (b.id === id ? record : b)) : [...d.remainder, record]
     })
 
-    if (mode === 'change') {
-      // Return to the remainder list so the running total and every fallback are
-      // re-validated before the change can return to Check your answers.
-      proceed(navigate, mode, 'r2')
-      return
-    }
+    // Return to the remainder list (in both modes) so the running total and
+    // every fallback are re-validated before the change can reach Check your
+    // answers. The list's Continue performs that validation.
     resetForm()
+    clearListErrors()
     setView('list')
+  }
+
+  // Clear list-level validation so corrected errors do not linger until the next
+  // Continue when the list contents change.
+  function clearListErrors() {
+    setPctErrors({})
+    setListItems([])
   }
 
   function removeRecord(id: string) {
     applyAndGet((d) => {
       d.remainder = d.remainder.filter((b) => b.id !== id)
     })
+    clearListErrors()
     if (list.length - 1 === 0) setView('form')
   }
 
@@ -164,6 +170,7 @@ export function RemainderPage({ mode, recordId }: { mode: Mode; recordId?: strin
     applyAndGet((d) => {
       d.remainder = d.remainder.map((b) => (b.id === id ? { ...b, percentage: v } : b))
     })
+    clearListErrors()
   }
 
   function onContinue() {

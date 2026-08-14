@@ -24,6 +24,12 @@ export function stepPath(id: string): string {
   return `${WILL_BASE}/step/${id}`
 }
 
+// Path relative to WILL_BASE, used to mount the will route subtree under a
+// splat parent route.
+export function willRoutePath(fullPath: string): string {
+  return fullPath === WILL_BASE ? '' : fullPath.slice(WILL_BASE.length + 1)
+}
+
 // Existing internal routes reused by the will service.
 export const externalPaths = {
   home: '/',

@@ -11,6 +11,12 @@ function changeHref(key: string): string {
   return `${willPaths.change}?target=${encodeURIComponent(key)}`
 }
 
+// The button already shows the visible word "Change", so the accessible-name
+// suffix must not repeat it.
+function changeContext(changeName?: string): string {
+  return (changeName ?? '').replace(/^Change /, '')
+}
+
 export function CheckYourAnswersPage() {
   const active = useWillGuard()
   const { answers, derived, captureDateCreated } = useWillState()
@@ -59,7 +65,7 @@ export function CheckYourAnswersPage() {
                   <span className="govbb-summary-list__actions">
                     {item.row.changeKey ? (
                       <button type="button" className="govbb-btn--link" onClick={() => onChange(item.row)}>
-                        Change<span className="govbb-visually-hidden"> {item.row.changeName}</span>
+                        Change<span className="govbb-visually-hidden"> {changeContext(item.row.changeName)}</span>
                       </button>
                     ) : null}
                   </span>
@@ -80,7 +86,7 @@ export function CheckYourAnswersPage() {
                         className="govbb-btn--link"
                         onClick={() => item.record.changeKey && navigate(changeHref(item.record.changeKey))}
                       >
-                        Change<span className="govbb-visually-hidden"> {item.record.changeName}</span>
+                        Change<span className="govbb-visually-hidden"> {changeContext(item.record.changeName)}</span>
                       </button>
                     ) : null}
                   </span>

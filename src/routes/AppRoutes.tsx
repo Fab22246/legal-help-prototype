@@ -1,8 +1,11 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import type { ReactNode } from 'react'
 import { AppLayout } from '../components/layout/AppLayout'
 import { HomePage } from '../pages/HomePage'
 import { PlaceholderPage } from '../components/PlaceholderPage'
+import { WillStateProvider } from '../state/will/WillState'
+import { WillRoutes } from '../pages/will/WillRoutes'
+import { WILL_BASE } from '../state/will/willPaths'
 import { SigningWitnessingCertifiedCopiesPage } from '../pages/SigningWitnessingCertifiedCopiesPage'
 import { ChangeNameRecordPage } from '../pages/ChangeNameRecordPage'
 import { RentingHomePage } from '../pages/RentingHomePage'
@@ -35,6 +38,8 @@ import { routes } from '../data/routes'
 // Built routes render their own page; every other route still renders the
 // registry-driven placeholder. Added one route at a time in later phases.
 const BUILT_ROUTES: Record<string, ReactNode> = {
+  // The simple-will service entry opens the will-service journey.
+  '/simple-will': <Navigate to={WILL_BASE} replace />,
   '/signing-witnessing-certified-copies': <SigningWitnessingCertifiedCopiesPage />,
   '/change-name-record': <ChangeNameRecordPage />,
   '/renting-home': <RentingHomePage />,
@@ -69,6 +74,14 @@ export function AppRoutes() {
     <Routes>
       <Route element={<AppLayout />}>
         <Route path="/" element={<HomePage />} />
+        <Route
+          path={`${WILL_BASE}/*`}
+          element={
+            <WillStateProvider>
+              <WillRoutes />
+            </WillStateProvider>
+          }
+        />
         {routes.map((route) => (
           <Route
             key={route.path}

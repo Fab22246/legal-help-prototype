@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
-import { willPaths } from '../../state/will/willPaths'
+import { willPaths, willRoutePath } from '../../state/will/willPaths'
 import { WillStartPage, SuitabilityIntroPage } from './contentPages'
 import { WillStepPage } from './WillStepPage'
 import { WillChangePage } from './WillChangePage'
@@ -11,22 +11,22 @@ import { RouteASafekeepingPage } from './RouteASafekeepingPage'
 import { RouteBResultPage } from './RouteBResultPage'
 import { RouteCResultPage } from './RouteCResultPage'
 
-// Complete internal route tree for the will journey. Not mounted by the running
-// application.
+// Route tree for the will journey, mounted as a descendant route subtree under
+// WILL_BASE. Paths are relative to that base.
 export function WillRoutes() {
   return (
     <Routes>
-      <Route path={willPaths.start} element={<WillStartPage />} />
-      <Route path={willPaths.suitabilityIntro} element={<SuitabilityIntroPage />} />
-      <Route path={willPaths.stepPattern} element={<WillStepPage />} />
-      <Route path={willPaths.change} element={<WillChangePage />} />
-      <Route path={willPaths.checkYourAnswers} element={<CheckYourAnswersPage />} />
-      <Route path={willPaths.clearConfirm} element={<ClearConfirmationPage />} />
-      <Route path={willPaths.resultA} element={<RouteAResultPage />} />
-      <Route path={willPaths.signing} element={<RouteASigningPage />} />
-      <Route path={willPaths.safekeeping} element={<RouteASafekeepingPage />} />
-      <Route path={willPaths.resultB} element={<RouteBResultPage />} />
-      <Route path={willPaths.resultC} element={<RouteCResultPage />} />
+      <Route path={willRoutePath(willPaths.start)} element={<WillStartPage />} />
+      <Route path={willRoutePath(willPaths.suitabilityIntro)} element={<SuitabilityIntroPage />} />
+      <Route path={willRoutePath(willPaths.stepPattern)} element={<WillStepPage />} />
+      <Route path={willRoutePath(willPaths.change)} element={<WillChangePage />} />
+      <Route path={willRoutePath(willPaths.checkYourAnswers)} element={<CheckYourAnswersPage />} />
+      <Route path={willRoutePath(willPaths.clearConfirm)} element={<ClearConfirmationPage />} />
+      <Route path={willRoutePath(willPaths.resultA)} element={<RouteAResultPage />} />
+      <Route path={willRoutePath(willPaths.signing)} element={<RouteASigningPage />} />
+      <Route path={willRoutePath(willPaths.safekeeping)} element={<RouteASafekeepingPage />} />
+      <Route path={willRoutePath(willPaths.resultB)} element={<RouteBResultPage />} />
+      <Route path={willRoutePath(willPaths.resultC)} element={<RouteCResultPage />} />
     </Routes>
   )
 }

@@ -1,0 +1,28 @@
+// Route paths for the will service. Stage 1 registers none of these on the
+// public router; the constants let the foundation and output pages reference
+// destinations without hard-coded strings. Stage 2 and Stage 3 register the
+// question pages and connect the entry route.
+
+export const WILL_BASE = '/make-a-will'
+
+export const willPaths = {
+  start: WILL_BASE,
+  suitabilityIntro: `${WILL_BASE}/check-suitability`,
+  checkYourAnswers: `${WILL_BASE}/check-your-answers`,
+  // Single change-router entry: Change links pass their target key and it opens
+  // the owning edit view, then returns to Check your answers.
+  change: `${WILL_BASE}/change`,
+  clearConfirm: `${WILL_BASE}/clear-answers`,
+  resultA: `${WILL_BASE}/your-will`,
+  signing: `${WILL_BASE}/sign-and-witness`,
+  safekeeping: `${WILL_BASE}/safekeeping`,
+  resultB: `${WILL_BASE}/will-for-legal-review`,
+  resultC: `${WILL_BASE}/information-summary`,
+}
+
+// Existing internal routes reused by the will service.
+export const externalPaths = {
+  home: '/',
+  prepareForLawyer: '/prepare-for-lawyer',
+  govBarbados: 'https://www.gov.bb/',
+}

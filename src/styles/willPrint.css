@@ -1,0 +1,118 @@
+/* Print layout and styles for the generated will and summaries. On screen a
+   document is shown for review; on print only the active document is shown. */
+
+.will-doc {
+  background: #ffffff;
+  color: #000000;
+  font-family: Georgia, 'Times New Roman', serif;
+  line-height: 1.5;
+  max-width: 45rem;
+}
+
+.will-doc__title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 0 0 1rem;
+}
+
+.will-doc__notice {
+  font-weight: bold;
+  text-align: center;
+  margin: 0 0 1rem;
+}
+
+.will-doc__meta {
+  margin: 0 0 1rem;
+}
+
+.will-doc__clause {
+  margin: 0 0 1rem;
+  break-inside: avoid-page;
+}
+
+.will-doc__clause-heading {
+  font-size: 1.05rem;
+  font-weight: bold;
+  margin: 0 0 0.5rem;
+}
+
+.will-doc__line {
+  margin: 0 0 0.5rem;
+}
+
+.will-doc__signature-block {
+  margin: 1rem 0;
+  break-inside: avoid;
+}
+
+.will-doc__signature-field {
+  border-bottom: 1px solid #000000;
+  min-height: 2.2rem;
+  margin: 0.25rem 0 1rem;
+}
+
+.will-doc__record {
+  margin: 0 0 0.75rem;
+}
+
+.will-doc__running-notice {
+  display: none;
+}
+
+/* Rendered for printing but kept out of the on-screen flow. */
+.will-offscreen {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  width: 1px;
+  overflow: hidden;
+}
+
+.will-doc__row {
+  margin: 0;
+}
+
+.will-doc__row-label {
+  font-weight: bold;
+}
+
+@page {
+  margin: 20mm;
+  @bottom-right {
+    content: 'Page ' counter(page) ' of ' counter(pages);
+  }
+}
+
+@media print {
+  body.will-printing * {
+    visibility: hidden;
+  }
+
+  body.will-printing .will-doc--active,
+  body.will-printing .will-doc--active * {
+    visibility: visible;
+  }
+
+  body.will-printing .will-doc--active {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-width: none;
+  }
+
+  .will-no-print {
+    display: none !important;
+  }
+
+  body.will-printing .will-doc--active .will-doc__running-notice {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-weight: bold;
+  }
+}

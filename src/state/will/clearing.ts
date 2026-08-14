@@ -204,8 +204,35 @@ export function normalizeAnswers(input: WillAnswers): WillAnswers {
     const isMinor = answers.minorChildIds.includes(person.id)
     const isDependantAdult = answers.dependantAdultChildIds.includes(person.id)
     const isBeneficiary = beneficiaries.has(person.id)
-    const keepDob = isMinor || isBeneficiary
-    const keepUnder18 = isBeneficiary && !isMinor && !isDependantAdult
+
+    let keepDob: boolean
+    let keepUnder18: boolean
+    if (isMinor) {
+      // F2 requires the date of birth and supplies under-18 directly, so a
+      // redundant direct answer is removed.
+      keepDob = true
+      keepUnder18 = false
+    } else if (isDependantAdult) {
+      // F4 supplies "not under 18"; no beneficiary-only answer or date of birth.
+      keepDob = false
+      keepUnder18 = false
+    } else if (isBeneficiary) {
+      keepUnder18 = true
+      if (person.under18Answer === 'yes') {
+        // A date of birth is required when the beneficiary is under 18.
+        keepDob = true
+      } else if (person.under18Answer === 'no' || person.under18Answer === 'not-sure') {
+        // No date is required, so a date collected only for an earlier Yes goes.
+        keepDob = false
+      } else {
+        // No direct answer: keep an existing date of birth to derive status.
+        keepDob = true
+      }
+    } else {
+      keepDob = false
+      keepUnder18 = false
+    }
+
     if (keepDob && keepUnder18) return person
     const next = { ...person }
     if (!keepDob) next.dateOfBirth = undefined

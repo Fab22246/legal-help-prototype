@@ -50,10 +50,6 @@
   margin: 0 0 0.75rem;
 }
 
-.will-doc__running-notice {
-  display: none;
-}
-
 /* Rendered for printing but kept out of the on-screen flow. */
 .will-offscreen {
   position: absolute;
@@ -73,6 +69,22 @@
 
 @page {
   margin: 20mm;
+  @bottom-right {
+    content: 'Page ' counter(page) ' of ' counter(pages);
+  }
+}
+
+/* Route B will: a named page whose top-centre margin box repeats the notice on
+   every printed page, with extra top margin so it never overlaps the content.
+   Named pages do not inherit the default page's margin boxes, so the page
+   number is redeclared here. */
+@page will-review {
+  margin: 20mm;
+  margin-top: 30mm;
+  @top-center {
+    content: 'FOR LEGAL REVIEW. DO NOT SIGN.';
+    font-weight: bold;
+  }
   @bottom-right {
     content: 'Page ' counter(page) ' of ' counter(pages);
   }
@@ -100,21 +112,9 @@
     display: none !important;
   }
 
-  /* Route B: repeat the notice once at the top of every printed page, and keep
-     the document body clear of it so it never overlaps the title or text. */
+  /* Route B will prints under the named page so the notice appears once in the
+     top-centre margin of every page. */
   body.will-printing .will-doc--active.will-doc--review {
-    padding-top: 2.5rem;
-  }
-
-  body.will-printing .will-doc--active.will-doc--review .will-doc__running-notice {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 0.35rem 0;
-    background: #ffffff;
-    text-align: center;
-    font-weight: bold;
+    page: will-review;
   }
 }

@@ -37,9 +37,6 @@ export function WillDocumentView({
     .join(' ')
   return (
     <div id={id} className={rootClass}>
-      {document.reviewNotice ? (
-        <p className="will-doc__running-notice">{document.reviewNotice}</p>
-      ) : null}
       <h2 className="will-doc__title">{document.title}</h2>
       {document.clauses.map((clause) => (
         <section className="will-doc__clause" key={clause.number}>

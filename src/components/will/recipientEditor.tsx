@@ -87,8 +87,7 @@ function isNewPerson(value: RecipientValue): boolean {
   return value.type === 'person' && value.personChoice === 'new'
 }
 
-// Validate the recipient. `question` is the owning page's recipient question, so
-// the required-answer error follows the specification exactly.
+// Validate the recipient. `question` is the owning page's recipient question.
 export function validateRecipient(answers: WillAnswers, value: RecipientValue, question: string): RecipientErrors {
   const errors: RecipientErrors = {}
   if (!value.type) {

@@ -12,47 +12,40 @@ This is not a live government service and does not give legal advice.
 - family and relationships
 - legal help and support
 
-## Current build status
+## What is included
 
-### Built in this version
+The prototype includes:
 
-- home page and task navigation
-- guidance on signing, witnessing and certified copies
-- guidance on changing a name or updating a record
-- renting-a-home guidance
-- guidance on giving land or a home while alive
-- preparation before speaking to a lawyer
+- guidance for common legal tasks
+- a journey for preparing information for a tenancy agreement
+- a journey for preparing a will or information to take to a lawyer
+- information about signing, witnessing and keeping legal documents
+- information about preparing before speaking to a lawyer
 - information about asking for legal aid
 
-### Tenancy agreement journey in progress
+## Will journey
 
-The current tenancy journey includes:
+The will journey asks about the person’s circumstances and uses their answers to provide one of 3 outcomes:
 
-- a start page
-- suitability questions
-- a safe exit for situations the journey cannot cover
-- landlord details
-- an optional agent or manager
-- tenant details
-- details about the home
-- tenancy dates
-- browser-tab storage, recovery and answer deletion
+- a will to print, sign and have witnessed
+- a will and review summary to take to a lawyer before signing
+- an information summary to take to a lawyer, without creating will wording
 
-The later tenancy questions, check-answers stage and document output have not been built yet. No tenancy agreement is created in this version.
+The prototype does not give legal advice. The generated content has not been legally approved.
 
-### Planned areas
+## Tenancy agreement journey
 
-- planning what happens to money and property
-- preparing information for a simple will
-- finding out what may be needed after someone dies
-- preparing a confidentiality agreement
-- preparing for a relationship financial agreement
-- preparing a parenting plan
-- help choosing where to start
+The tenancy journey helps people prepare and review information for a tenancy agreement.
+
+Their answers are not used to create a tenancy agreement.
 
 ## Information entered
 
-Answers entered in the tenancy journey are kept only in the current browser tab. They are not sent to GovTech. Closing the tab removes them.
+Answers are not sent to GovTech.
+
+Will answers are held only while the journey remains open. Refreshing or closing the page clears them.
+
+Tenancy answers are kept only in the current browser tab. Closing the tab removes them.
 
 ## Development
 
@@ -76,7 +69,7 @@ Check the code with the linter:
 npm run lint
 ```
 
-Create a production build (runs `tsc --noEmit` and then `vite build`):
+Create a production build:
 
 ```bash
 npm run build

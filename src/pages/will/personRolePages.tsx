@@ -286,6 +286,7 @@ function PersonRolePage({ id, mode, recordId }: { id: string; mode: Mode; record
         <PersonChoice
           name={`${config.section}-person`}
           legend={config.title}
+          legendVisuallyHidden
           answers={answers}
           value={choice}
           onChange={setChoice}

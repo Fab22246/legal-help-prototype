@@ -102,7 +102,7 @@ export function RemainderPage({ mode, recordId }: { mode: Mode; recordId?: strin
     let fe: string | undefined
     let rre: RecipientErrors = {}
     if (!fallback) fe = requiredRadioError(fallbackQuestion)
-    if (fallback === 'to-replacement') rre = validateRecipient(answers, replacement, 'Who should receive the remainder of your estate?')
+    if (fallback === 'to-replacement') rre = validateRecipient(answers, replacement, 'Who should receive this share instead?')
 
     setRecipientErrors(re)
     setPctErr(pe)
@@ -306,6 +306,7 @@ export function RemainderPage({ mode, recordId }: { mode: Mode; recordId?: strin
       <RecipientFields
         prefix="r2-recipient"
         question="Who should receive the remainder of your estate?"
+        questionLegendVisuallyHidden
         answers={answers}
         value={recipient}
         onChange={setRecipient}
@@ -316,7 +317,7 @@ export function RemainderPage({ mode, recordId }: { mode: Mode; recordId?: strin
       {fallback === 'to-replacement' ? (
         <RecipientFields
           prefix="r2-replacement"
-          question="Who should receive the remainder of your estate?"
+          question="Who should receive this share instead?"
           answers={answers}
           value={replacement}
           onChange={setReplacement}

@@ -11,6 +11,7 @@ export function PersonChoice({
   value,
   onChange,
   error,
+  legendVisuallyHidden,
 }: {
   name: string
   legend: string
@@ -18,13 +19,14 @@ export function PersonChoice({
   value: string | undefined
   onChange: (value: string) => void
   error?: string
+  legendVisuallyHidden?: boolean
 }) {
   const options = [
     ...answers.people.map((person) => ({ value: person.id, label: personOptionLabel(answers, person.id) })),
     { value: 'new', label: 'Someone else' },
   ]
   return (
-    <RadioGroup name={name} legend={legend} options={options} value={value} onChange={onChange} error={error} />
+    <RadioGroup name={name} legend={legend} options={options} value={value} onChange={onChange} error={error} legendVisuallyHidden={legendVisuallyHidden} />
   )
 }
 
@@ -36,6 +38,7 @@ export function OrgChoice({
   value,
   onChange,
   error,
+  legendVisuallyHidden,
 }: {
   name: string
   legend: string
@@ -43,12 +46,13 @@ export function OrgChoice({
   value: string | undefined
   onChange: (value: string) => void
   error?: string
+  legendVisuallyHidden?: boolean
 }) {
   const options = [
     ...answers.organisations.map((org) => ({ value: org.id, label: findOrganisationName(answers, org.id) })),
     { value: 'new-org', label: 'Another organisation' },
   ]
   return (
-    <RadioGroup name={name} legend={legend} options={options} value={value} onChange={onChange} error={error} />
+    <RadioGroup name={name} legend={legend} options={options} value={value} onChange={onChange} error={error} legendVisuallyHidden={legendVisuallyHidden} />
   )
 }

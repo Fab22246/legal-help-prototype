@@ -122,7 +122,7 @@ export function GiftPage({ mode, recordId }: { mode: Mode; recordId?: string }) 
     let fe: string | undefined
     let rre: RecipientErrors = {}
     if (!fallback) fe = requiredRadioError(fallbackQuestion)
-    if (fallback === 'to-replacement') rre = validateRecipient(answers, replacement, 'Who do you want to receive this gift?')
+    if (fallback === 'to-replacement') rre = validateRecipient(answers, replacement, 'Who should receive this gift instead?')
 
     setKindErr(ke)
     setAmountErr(ae)
@@ -259,7 +259,7 @@ export function GiftPage({ mode, recordId }: { mode: Mode; recordId?: string }) 
       {fallback === 'to-replacement' ? (
         <RecipientFields
           prefix="gift-replacement"
-          question="Who do you want to receive this gift?"
+          question="Who should receive this gift instead?"
           answers={answers}
           value={replacement}
           onChange={setReplacement}

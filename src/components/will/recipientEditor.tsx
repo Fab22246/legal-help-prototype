@@ -94,11 +94,18 @@ export function validateRecipient(answers: WillAnswers, value: RecipientValue, q
     errors.type = requiredRadioError(question)
     return errors
   }
+
+  if (value.type === 'person' && !value.personChoice) {
+    errors.personChoice = 'Select a person.'
+    return errors
+  }
+
+  if (value.type === 'organisation' && !value.orgChoice) {
+    errors.orgChoice = 'Select an organisation.'
+    return errors
+  }
+
   if (value.type === 'person') {
-    if (!value.personChoice) {
-      errors.personChoice = requiredRadioError(question)
-      return errors
-    }
     if (isNewPerson(value)) {
       errors.firstName = nameError(value.name.firstName, 'Enter first name.')
       errors.lastName = nameError(value.name.lastName, 'Enter last name.')
@@ -112,10 +119,6 @@ export function validateRecipient(answers: WillAnswers, value: RecipientValue, q
       }
     }
   } else {
-    if (!value.orgChoice) {
-      errors.orgChoice = requiredRadioError(question)
-      return errors
-    }
     if (value.orgChoice === 'new-org') {
       errors.orgName = value.orgName.trim().length === 0 ? orgNameMissingError : undefined
     }
@@ -188,6 +191,7 @@ export function RecipientFields({
   value,
   onChange,
   errors,
+  questionLegendVisuallyHidden,
 }: {
   prefix: string
   question: string
@@ -195,6 +199,7 @@ export function RecipientFields({
   value: RecipientValue
   onChange: (value: RecipientValue) => void
   errors: RecipientErrors
+  questionLegendVisuallyHidden?: boolean
 }) {
   const personOptions = [
     ...answers.people.map((p) => ({ value: p.id, label: personOptionLabel(answers, p.id) })),
@@ -211,6 +216,7 @@ export function RecipientFields({
       <RadioGroup
         name={`${prefix}-type`}
         legend={question}
+        legendVisuallyHidden={questionLegendVisuallyHidden}
         options={[
           { value: 'person', label: 'A person' },
           { value: 'organisation', label: 'An organisation' },
@@ -224,7 +230,7 @@ export function RecipientFields({
         <>
           <RadioGroup
             name={`${prefix}-person`}
-            legend={question}
+            legend="Select a person"
             options={personOptions}
             value={value.personChoice}
             onChange={(v) => onChange({ ...value, personChoice: v })}
@@ -279,7 +285,7 @@ export function RecipientFields({
         <>
           <RadioGroup
             name={`${prefix}-org`}
-            legend={question}
+            legend="Select an organisation"
             options={orgOptions}
             value={value.orgChoice}
             onChange={(v) => onChange({ ...value, orgChoice: v })}

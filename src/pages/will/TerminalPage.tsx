@@ -17,8 +17,11 @@ const CONTENT: Record<string, TerminalConfig> = {
     ],
   },
   t3: {
-    h1: 'Speak to a lawyer before making a will',
-    paragraphs: ['A lawyer can advise you about the decisions involved in making a will and whether you can make one now.'],
+    h1: 'You may need help from a lawyer',
+    paragraphs: [
+      'Based on your answers, this service may not be suitable for you.',
+      'A lawyer can help you understand your options and decide what to do next.',
+    ],
   },
   t4: {
     h1: 'You cannot use this service to make a will',

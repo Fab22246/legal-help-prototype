@@ -12,9 +12,10 @@ interface RadioGroupProps {
   onChange?: (value: string) => void
   hint?: string
   error?: string
+  legendVisuallyHidden?: boolean
 }
 
-export function RadioGroup({ name, legend, options, value, onChange, hint, error }: RadioGroupProps) {
+export function RadioGroup({ name, legend, options, value, onChange, hint, error, legendVisuallyHidden }: RadioGroupProps) {
   const hintId = hint ? `${name}-hint` : undefined
   const errorId = error ? `${name}-error` : undefined
   const describedBy = [hintId, errorId].filter(Boolean).join(' ') || undefined
@@ -22,7 +23,7 @@ export function RadioGroup({ name, legend, options, value, onChange, hint, error
   return (
     <div className="govbb-form-group">
       <fieldset className="govbb-fieldset" aria-describedby={describedBy}>
-        <legend className="govbb-fieldset__legend">{legend}</legend>
+        <legend className={`govbb-fieldset__legend${legendVisuallyHidden ? ' govbb-visually-hidden' : ''}`}>{legend}</legend>
         {hint ? (
           <p className="govbb-hint" id={hintId}>
             {hint}

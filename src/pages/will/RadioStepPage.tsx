@@ -99,6 +99,7 @@ export function RadioStepPage({ id, mode }: { id: string; mode: 'forward' | 'cha
         <RadioGroup
           name={def.id}
           legend={def.h1}
+          legendVisuallyHidden
           hint={def.hint?.(answers)}
           options={def.options}
           value={value}

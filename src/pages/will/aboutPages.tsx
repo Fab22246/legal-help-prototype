@@ -175,6 +175,7 @@ export function A4Page({ mode }: { mode: Mode }) {
       <RadioGroup
         name="a4"
         legend="Are you a citizen of a country other than Barbados?"
+        legendVisuallyHidden
         options={YNN}
         value={value}
         onChange={setValue}

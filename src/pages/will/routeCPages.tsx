@@ -187,7 +187,7 @@ export function C3Page({ mode, recordId }: { mode: Mode; recordId?: string }) {
     let oe: string | undefined
     if (!type) te = requiredRadioError('Who do you want to include in your will?')
     if (type === 'person') {
-      if (!personChoice) ce = requiredRadioError('Who do you want to include in your will?')
+      if (!personChoice) ce = 'Select a person.'
       else if (personChoice === 'new') {
         ne = {
           firstName: nameError(name.firstName, 'Enter first name.'),
@@ -198,7 +198,7 @@ export function C3Page({ mode, recordId }: { mode: Mode; recordId?: string }) {
       }
     }
     if (type === 'organisation') {
-      if (!orgChoice) ce = requiredRadioError('Who do you want to include in your will?')
+      if (!orgChoice) ce = 'Select an organisation.'
       else if (orgChoice === 'new-org') oe = orgName.trim().length === 0 ? orgNameMissingError : undefined
     }
     const roleE = requiredTextError(roleText, requiredAnswerError(C3_ROLE_QUESTION))
@@ -328,6 +328,7 @@ export function C3Page({ mode, recordId }: { mode: Mode; recordId?: string }) {
       <RadioGroup
         name="c3-type"
         legend="Who do you want to include in your will?"
+        legendVisuallyHidden
         options={[
           { value: 'person', label: 'A person' },
           { value: 'organisation', label: 'An organisation' },
@@ -338,7 +339,7 @@ export function C3Page({ mode, recordId }: { mode: Mode; recordId?: string }) {
       />
       {type === 'person' ? (
         <>
-          <PersonChoice name="c3-person" legend="Who do you want to include in your will?" answers={answers} value={personChoice} onChange={setPersonChoice} error={choiceErr} />
+          <PersonChoice name="c3-person" legend="Select a person" answers={answers} value={personChoice} onChange={setPersonChoice} error={choiceErr} />
           {isNewPerson ? (
             <>
               <NameFields idPrefix="c3" value={name} onChange={setName} errors={nameErrors} />
@@ -349,7 +350,7 @@ export function C3Page({ mode, recordId }: { mode: Mode; recordId?: string }) {
       ) : null}
       {type === 'organisation' ? (
         <>
-          <OrgChoice name="c3-org" legend="Who do you want to include in your will?" answers={answers} value={orgChoice} onChange={setOrgChoice} error={choiceErr} />
+          <OrgChoice name="c3-org" legend="Select an organisation" answers={answers} value={orgChoice} onChange={setOrgChoice} error={choiceErr} />
           {isNewOrg ? (
             <>
               <TextInput id="c3-org-name" label="Full legal name of organisation" value={orgName} onChange={setOrgName} error={orgNameErr} />

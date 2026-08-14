@@ -58,8 +58,10 @@ export function RemainderPage({ mode, recordId }: { mode: Mode; recordId?: strin
   const [replacementErrors, setReplacementErrors] = useState<RecipientErrors>({})
   const [attempt, setAttempt] = useState(0)
 
-  // List-view validation.
+  // List-view validation. Inline percentage errors are keyed by beneficiary id
+  // so each message shows beside its own input and in the error summary.
   const [listItems, setListItems] = useState<ErrorSummaryItem[]>([])
+  const [pctErrors, setPctErrors] = useState<Record<string, string>>({})
   const [listAttempt, setListAttempt] = useState(0)
   const listSummaryRef = useRef<HTMLDivElement>(null)
 
@@ -175,6 +177,7 @@ export function RemainderPage({ mode, recordId }: { mode: Mode; recordId?: strin
     // removed) is corrected on its own record, not on a percentage field.
     const badFallback = list.find((b) => !b.fallback)
     if (badFallback) {
+      setPctErrors({})
       beginChange(badFallback.id)
       setRecipientErrors({})
       setPctErr(undefined)
@@ -183,15 +186,27 @@ export function RemainderPage({ mode, recordId }: { mode: Mode; recordId?: strin
       setAttempt((a) => a + 1)
       return
     }
+    // Recalculate percentage errors from the current values on every attempt so
+    // corrected errors do not remain. Each message shows inline and in the
+    // summary; the total error targets the first beneficiary's percentage field.
+    const fieldErrors: Record<string, string> = {}
     const items: ErrorSummaryItem[] = []
     for (const b of list) {
       const pe = percentageError(b.percentage ?? '')
-      if (pe) items.push({ fieldId: `r2-pct-${b.id}`, message: pe })
+      if (pe) {
+        fieldErrors[b.id] = pe
+        items.push({ fieldId: `r2-pct-${b.id}`, message: pe })
+      }
     }
     if (items.length === 0) {
       const total = totalPercentageHundredths(list)
-      if (total !== 10000) items.push({ fieldId: `r2-pct-${list[0].id}`, message: percentageTotalError(total) })
+      if (total !== 10000) {
+        const message = percentageTotalError(total)
+        fieldErrors[list[0].id] = message
+        items.push({ fieldId: `r2-pct-${list[0].id}`, message })
+      }
     }
+    setPctErrors(fieldErrors)
     setListItems(items)
     setListAttempt((a) => a + 1)
     if (items.length > 0) {
@@ -229,6 +244,7 @@ export function RemainderPage({ mode, recordId }: { mode: Mode; recordId?: strin
                   label="Percentage of the remainder"
                   value={b.percentage ?? ''}
                   onChange={(v) => setPercentageFor(b.id, v)}
+                  error={pctErrors[b.id]}
                 />
                 <span style={{ display: 'block' }}>
                   <button type="button" className="govbb-btn--link" onClick={() => beginChange(b.id)}>

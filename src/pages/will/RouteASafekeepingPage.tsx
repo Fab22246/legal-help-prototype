@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useWillState } from '../../state/will/WillState'
-import { useWillGuard } from '../../components/will/useWillGuard'
+import { useConfirmedOutput } from '../../components/will/useConfirmedOutput'
 import { ClearMyAnswersLink } from '../../components/will/WillPage'
 import { externalPaths } from '../../state/will/willPaths'
 
@@ -9,7 +9,7 @@ const SAFEKEEPING_LINK =
   'https://www.barbadoslawcourts.gov.bb/useful-links/for-public/services/safekeeping-of-wills-of-living-persons'
 
 export function RouteASafekeepingPage() {
-  const active = useWillGuard()
+  const ready = useConfirmedOutput('A')
   const { clearAll } = useWillState()
   const navigate = useNavigate()
   const headingRef = useRef<HTMLHeadingElement>(null)
@@ -18,7 +18,7 @@ export function RouteASafekeepingPage() {
     headingRef.current?.focus()
   }, [])
 
-  if (!active) return null
+  if (!ready) return null
 
   function finish() {
     clearAll()

@@ -1,5 +1,9 @@
+import { isUnder18, barbadosToday } from './age'
+import type { Ymd } from '../barbadosDate'
 import type {
+  Gift,
   IssueCode,
+  RemainderBeneficiary,
   ReviewPoint,
   RouteId,
   TerminalId,
@@ -15,14 +19,59 @@ function noOrNotSure(value: string | undefined): boolean {
   return value === 'no' || value === 'not-sure'
 }
 
-// True when the person is under 18, or may be, for beneficiary review purposes.
-export function personIsUnderOrMaybe(answers: WillAnswers, personId: string | undefined): boolean {
-  if (!personId) return false
-  if (answers.minorChildIds.includes(personId)) return true
-  if (answers.dependantAdultChildIds.includes(personId)) return false
+export type UnderStatus = 'under' | 'not-under' | 'maybe' | 'unknown'
+
+// Under-18 status for a person, deriving from role, then a valid date of birth,
+// then the direct answer only when nothing else supplies it.
+export function personUnderStatus(
+  answers: WillAnswers,
+  personId: string | undefined,
+  comparison: Ymd,
+): UnderStatus {
+  if (!personId) return 'unknown'
+  if (answers.minorChildIds.includes(personId)) return 'under'
+  if (answers.dependantAdultChildIds.includes(personId)) return 'not-under'
   const person = answers.people.find((record) => record.id === personId)
-  if (!person) return false
-  return person.under18Answer === 'yes' || person.under18Answer === 'not-sure'
+  if (!person) return 'unknown'
+  if (person.dateOfBirth) {
+    const derived = isUnder18(person.dateOfBirth, comparison)
+    if (derived !== null) return derived ? 'under' : 'not-under'
+  }
+  if (person.under18Answer === 'yes') return 'under'
+  if (person.under18Answer === 'not-sure') return 'maybe'
+  if (person.under18Answer === 'no') return 'not-under'
+  return 'unknown'
+}
+
+export function personIsUnderOrMaybe(
+  answers: WillAnswers,
+  personId: string | undefined,
+  comparison: Ymd = barbadosToday(),
+): boolean {
+  const status = personUnderStatus(answers, personId, comparison)
+  return status === 'under' || status === 'maybe'
+}
+
+// Active person references only, so a stale id behind an organisation selection
+// or an unused replacement never affects the route.
+function giftPrimaryPerson(gift: Gift): string | undefined {
+  return gift.recipientType === 'person' ? gift.recipientPersonId : undefined
+}
+
+function giftReplacementPerson(gift: Gift): string | undefined {
+  return gift.fallback === 'to-replacement' && gift.replacementType === 'person'
+    ? gift.replacementPersonId
+    : undefined
+}
+
+function remainderPrimaryPerson(beneficiary: RemainderBeneficiary): string | undefined {
+  return beneficiary.recipientType === 'person' ? beneficiary.recipientPersonId : undefined
+}
+
+function remainderReplacementPerson(beneficiary: RemainderBeneficiary): string | undefined {
+  return beneficiary.fallback === 'to-replacement' && beneficiary.replacementType === 'person'
+    ? beneficiary.replacementPersonId
+    : undefined
 }
 
 function computeTerminal(answers: WillAnswers): TerminalId | undefined {
@@ -50,27 +99,25 @@ function familyOrDependantIds(answers: WillAnswers): string[] {
   const ids: string[] = []
   if (answers.spousePersonId) ids.push(answers.spousePersonId)
   if (answers.partnerPersonId) ids.push(answers.partnerPersonId)
-  ids.push(...answers.minorChildIds)
-  ids.push(...answers.dependantAdultChildIds)
-  ids.push(...answers.otherDependantIds)
+  ids.push(...answers.minorChildIds, ...answers.dependantAdultChildIds, ...answers.otherDependantIds)
   return ids
 }
 
 // People who receive a primary specific gift or primary remainder share.
 function primaryBeneficiaryIds(answers: WillAnswers): Set<string> {
   const ids = new Set<string>()
-  for (const gift of answers.gifts) {
-    if (gift.recipientType === 'person' && gift.recipientPersonId) ids.add(gift.recipientPersonId)
-  }
-  for (const beneficiary of answers.remainder) {
-    if (beneficiary.recipientType === 'person' && beneficiary.recipientPersonId) {
-      ids.add(beneficiary.recipientPersonId)
-    }
-  }
+  answers.gifts.forEach((gift) => {
+    const id = giftPrimaryPerson(gift)
+    if (id) ids.add(id)
+  })
+  answers.remainder.forEach((beneficiary) => {
+    const id = remainderPrimaryPerson(beneficiary)
+    if (id) ids.add(id)
+  })
   return ids
 }
 
-export function computeReviewPoints(answers: WillAnswers): ReviewPoint[] {
+export function computeReviewPoints(answers: WillAnswers, comparison: Ymd = barbadosToday()): ReviewPoint[] {
   const points = new Set<ReviewPoint>()
 
   if (yesOrNotSure(answers.s6)) points.add('FOREIGN_ASSETS')
@@ -91,23 +138,28 @@ export function computeReviewPoints(answers: WillAnswers): ReviewPoint[] {
   const minorBeneficiary =
     answers.gifts.some(
       (gift) =>
-        personIsUnderOrMaybe(answers, gift.recipientPersonId) ||
-        personIsUnderOrMaybe(answers, gift.replacementPersonId),
+        personIsUnderOrMaybe(answers, giftPrimaryPerson(gift), comparison) ||
+        personIsUnderOrMaybe(answers, giftReplacementPerson(gift), comparison),
     ) ||
     answers.remainder.some(
       (beneficiary) =>
-        personIsUnderOrMaybe(answers, beneficiary.recipientPersonId) ||
-        personIsUnderOrMaybe(answers, beneficiary.replacementPersonId),
+        personIsUnderOrMaybe(answers, remainderPrimaryPerson(beneficiary), comparison) ||
+        personIsUnderOrMaybe(answers, remainderReplacementPerson(beneficiary), comparison),
     )
   if (minorBeneficiary) points.add('MINOR_BENEFICIARY')
 
-  if (answers.remainder.some((beneficiary) => beneficiary.fallback === 'to-children')) {
+  if (
+    answers.remainder.some(
+      (beneficiary) => beneficiary.recipientType === 'person' && beneficiary.fallback === 'to-children',
+    )
+  ) {
     points.add('BENEFICIARY_CHILDREN_FALLBACK')
   }
 
   const primaries = primaryBeneficiaryIds(answers)
-  const excluded = familyOrDependantIds(answers).some((id) => !primaries.has(id))
-  if (excluded) points.add('FAMILY_OR_DEPENDANT_NOT_INCLUDED')
+  if (familyOrDependantIds(answers).some((id) => !primaries.has(id))) {
+    points.add('FAMILY_OR_DEPENDANT_NOT_INCLUDED')
+  }
 
   return [...points]
 }
@@ -115,14 +167,23 @@ export function computeReviewPoints(answers: WillAnswers): ReviewPoint[] {
 // Recompute terminal, route, review points and issues from the current answers.
 // Route priority: terminal or safeguarding, then Route C, then Route B, then
 // Route A.
-export function computeDerived(answers: WillAnswers): WillDerived {
+export function computeDerived(answers: WillAnswers, comparison: Ymd = barbadosToday()): WillDerived {
   const terminal = computeTerminal(answers)
   const issues = computeIssues(answers)
-  const reviewPoints = computeReviewPoints(answers)
+  const reviewPoints = computeReviewPoints(answers, comparison)
 
   let route: RouteId = 'A'
   if (issues.length > 0) route = 'C'
   else if (reviewPoints.length > 0) route = 'B'
 
   return { terminal, route, reviewPoints, issues }
+}
+
+// Exposed for the clearing helpers so under-18 answers and dates of birth can be
+// pruned using the same active-reference definitions.
+export const activeReferences = {
+  giftPrimaryPerson,
+  giftReplacementPerson,
+  remainderPrimaryPerson,
+  remainderReplacementPerson,
 }

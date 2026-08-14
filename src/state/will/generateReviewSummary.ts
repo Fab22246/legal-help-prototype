@@ -6,7 +6,7 @@ import {
   fullName,
   relationshipLabel,
 } from './format'
-import { computeReviewPoints, personIsUnderOrMaybe } from './routeEngine'
+import { activeReferences, computeReviewPoints, personIsUnderOrMaybe } from './routeEngine'
 import type { ReviewPoint, WillAnswers } from './types'
 
 export interface SummaryDetail {
@@ -36,7 +36,7 @@ const HEADINGS: Record<ReviewPoint, { heading: string; text: string }> = {
   },
   MAIN_HOME_OUTSIDE_BARBADOS: {
     heading: 'Main home outside Barbados',
-    text: 'Ask which country’s law should apply to the will.',
+    text: "Ask which country's law should apply to the will.",
   },
   OTHER_CITIZENSHIP: {
     heading: 'Citizenship of another country',
@@ -68,7 +68,7 @@ const HEADINGS: Record<ReviewPoint, { heading: string; text: string }> = {
   },
   OTHER_DEPENDANT: {
     heading: 'Other person who depends on you',
-    text: 'Ask whether this person’s circumstances affect the will.',
+    text: "Ask whether this person's circumstances affect the will.",
   },
   JOINTLY_OWNED_ASSET: {
     heading: 'Jointly owned money or property',
@@ -87,16 +87,15 @@ const HEADINGS: Record<ReviewPoint, { heading: string; text: string }> = {
     text: 'Ask whether the age and trust wording are suitable for this beneficiary.',
   },
   BENEFICIARY_CHILDREN_FALLBACK: {
-    heading: 'Gift to a beneficiary’s children',
+    heading: "Gift to a beneficiary's children",
     text: 'Ask whether the fallback gift clearly covers the intended children and shares, including if any child is under 18.',
   },
   FAMILY_OR_DEPENDANT_NOT_INCLUDED: {
     heading: 'Family member or dependant receives nothing',
-    text: 'Ask how the person’s rights or needs may affect the gifts in the will.',
+    text: "Ask how the person's rights or needs may affect the gifts in the will.",
   },
 }
 
-// Order sections in the spec's table order.
 const ORDER: ReviewPoint[] = [
   'FOREIGN_ASSETS',
   'MAIN_HOME_OUTSIDE_BARBADOS',
@@ -126,20 +125,20 @@ function recipientName(
   return fullName(findPerson(answers, personId)?.name)
 }
 
-function under18Info(answers: WillAnswers, id: string | undefined): string {
-  if (!id) return ''
-  if (answers.minorChildIds.includes(id)) return 'Under 18'
-  const person = findPerson(answers, id)
-  if (person?.under18Answer === 'yes') return 'Under 18'
-  if (person?.under18Answer === 'not-sure') return 'May be under 18'
-  const dob = formatDateParts(person?.dateOfBirth)
-  return dob ? `Date of birth ${dob}` : ''
-}
-
 function detailsFor(answers: WillAnswers, code: ReviewPoint): SummaryDetail[] {
   const rows: SummaryDetail[] = []
   const spouse = findPerson(answers, answers.spousePersonId)
   const partner = findPerson(answers, answers.partnerPersonId)
+
+  const addBeneficiary = (id: string | undefined, label: string) => {
+    if (!personIsUnderOrMaybe(answers, id)) return
+    const person = findPerson(answers, id)
+    if (!person) return
+    rows.push({ label, value: fullName(person.name) })
+    const dob = formatDateParts(person.dateOfBirth)
+    if (dob) rows.push({ label: 'Date of birth', value: dob })
+    if (person.under18Answer !== undefined) rows.push({ label: 'Under 18', value: displayYesNo(person.under18Answer) })
+  }
 
   switch (code) {
     case 'FOREIGN_ASSETS':
@@ -162,11 +161,8 @@ function detailsFor(answers: WillAnswers, code: ReviewPoint): SummaryDetail[] {
       rows.push({ label: 'Lived apart continuously for 5 years or more', value: displayYesNo(answers.a10) })
       break
     case 'UNMARRIED_PARTNER':
-      if (partner) rows.push({ label: 'Partner', value: fullName(partner.name) })
-      rows.push({
-        label: 'Lived together continuously for 5 years or more',
-        value: displayYesNo(partner?.livedTogetherFiveYears),
-      })
+      if (partner) rows.push({ label: "Partner's name", value: fullName(partner.name) })
+      rows.push({ label: 'Lived together continuously for 5 years or more', value: displayYesNo(partner?.livedTogetherFiveYears) })
       break
     case 'PLANNED_MARRIAGE':
       rows.push({ label: 'Planning to get married', value: displayYesNo(answers.a13) })
@@ -175,7 +171,7 @@ function detailsFor(answers: WillAnswers, code: ReviewPoint): SummaryDetail[] {
       answers.minorChildIds.forEach((id) => {
         const person = findPerson(answers, id)
         if (!person) return
-        rows.push({ label: 'Child', value: fullName(person.name) })
+        rows.push({ label: 'Full name', value: fullName(person.name) })
         rows.push({ label: 'Date of birth', value: formatDateParts(person.dateOfBirth) })
         rows.push({ label: 'Relationship', value: relationshipLabel(answers, person) })
       })
@@ -184,7 +180,7 @@ function detailsFor(answers: WillAnswers, code: ReviewPoint): SummaryDetail[] {
       answers.dependantAdultChildIds.forEach((id) => {
         const person = findPerson(answers, id)
         if (!person) return
-        rows.push({ label: 'Child', value: fullName(person.name) })
+        rows.push({ label: 'Full name', value: fullName(person.name) })
         rows.push({ label: 'Relationship', value: relationshipLabel(answers, person) })
         rows.push({ label: 'Support provided', value: (person.supportProvided ?? '').trim() })
       })
@@ -193,7 +189,7 @@ function detailsFor(answers: WillAnswers, code: ReviewPoint): SummaryDetail[] {
       answers.otherDependantIds.forEach((id) => {
         const person = findPerson(answers, id)
         if (!person) return
-        rows.push({ label: 'Person', value: fullName(person.name) })
+        rows.push({ label: 'Full name', value: fullName(person.name) })
         rows.push({ label: 'Relationship', value: relationshipLabel(answers, person) })
         rows.push({ label: 'Support provided', value: (person.supportProvided ?? '').trim() })
       })
@@ -211,43 +207,24 @@ function detailsFor(answers: WillAnswers, code: ReviewPoint): SummaryDetail[] {
         .filter((gift) => gift.kind === 'land')
         .forEach((gift) => {
           rows.push({ label: 'Gift', value: (gift.description ?? '').trim() })
-          rows.push({
-            label: 'Recipient',
-            value: recipientName(answers, gift.recipientType, gift.recipientPersonId, gift.recipientOrgId),
-          })
+          rows.push({ label: 'Recipient', value: recipientName(answers, gift.recipientType, gift.recipientPersonId, gift.recipientOrgId) })
         })
       break
     case 'MINOR_BENEFICIARY':
       answers.gifts.forEach((gift) => {
-        ;[gift.recipientPersonId, gift.replacementPersonId].forEach((id) => {
-          if (personIsUnderOrMaybe(answers, id)) {
-            rows.push({ label: 'Beneficiary under 18', value: fullName(findPerson(answers, id)?.name) })
-            rows.push({ label: 'Age information', value: under18Info(answers, id) })
-          }
-        })
+        addBeneficiary(activeReferences.giftPrimaryPerson(gift), 'Recipient')
+        addBeneficiary(activeReferences.giftReplacementPerson(gift), 'Replacement recipient')
       })
       answers.remainder.forEach((beneficiary) => {
-        ;[beneficiary.recipientPersonId, beneficiary.replacementPersonId].forEach((id) => {
-          if (personIsUnderOrMaybe(answers, id)) {
-            rows.push({ label: 'Beneficiary under 18', value: fullName(findPerson(answers, id)?.name) })
-            rows.push({ label: 'Age information', value: under18Info(answers, id) })
-          }
-        })
+        addBeneficiary(activeReferences.remainderPrimaryPerson(beneficiary), 'Recipient')
+        addBeneficiary(activeReferences.remainderReplacementPerson(beneficiary), 'Replacement recipient')
       })
       break
     case 'BENEFICIARY_CHILDREN_FALLBACK':
       answers.remainder
-        .filter((beneficiary) => beneficiary.fallback === 'to-children')
+        .filter((beneficiary) => beneficiary.recipientType === 'person' && beneficiary.fallback === 'to-children')
         .forEach((beneficiary) => {
-          rows.push({
-            label: 'Beneficiary',
-            value: recipientName(
-              answers,
-              beneficiary.recipientType,
-              beneficiary.recipientPersonId,
-              beneficiary.recipientOrgId,
-            ),
-          })
+          rows.push({ label: 'Recipient', value: recipientName(answers, beneficiary.recipientType, beneficiary.recipientPersonId, beneficiary.recipientOrgId) })
           rows.push({ label: 'Percentage', value: `${(beneficiary.percentage ?? '').trim()}%` })
           rows.push({ label: 'What happens if the person dies before you', value: 'Give it to their children in equal shares' })
         })
@@ -262,25 +239,25 @@ function detailsFor(answers: WillAnswers, code: ReviewPoint): SummaryDetail[] {
       ].filter((id): id is string => Boolean(id))
       const primaries = new Set<string>()
       answers.gifts.forEach((gift) => {
-        if (gift.recipientType === 'person' && gift.recipientPersonId) primaries.add(gift.recipientPersonId)
+        const id = activeReferences.giftPrimaryPerson(gift)
+        if (id) primaries.add(id)
       })
       answers.remainder.forEach((beneficiary) => {
-        if (beneficiary.recipientType === 'person' && beneficiary.recipientPersonId) {
-          primaries.add(beneficiary.recipientPersonId)
-        }
+        const id = activeReferences.remainderPrimaryPerson(beneficiary)
+        if (id) primaries.add(id)
       })
       ids
         .filter((id) => !primaries.has(id))
         .forEach((id) => {
           const person = findPerson(answers, id)
           if (!person) return
-          rows.push({ label: 'Name', value: fullName(person.name) })
+          rows.push({ label: 'Full name', value: fullName(person.name) })
           rows.push({ label: 'Relationship', value: relationshipLabel(answers, person) })
         })
       break
     }
   }
-  return rows.filter((row) => row.value.length > 0)
+  return rows.filter((detail) => detail.value.length > 0)
 }
 
 export function generateReviewSummary(answers: WillAnswers): ReviewSummaryDocument {

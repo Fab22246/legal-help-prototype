@@ -1,5 +1,5 @@
-import { computeIssues } from './routeEngine'
-import type { IssueCode, WillAnswers } from './types'
+import { activeReferences, computeIssues } from './routeEngine'
+import type { Gift, IssueCode, RemainderBeneficiary, RouteCInclude, WillAnswers } from './types'
 
 // All person ids currently referenced by any role, relationship, gift,
 // remainder, guardian or Route C include.
@@ -54,6 +54,77 @@ export function isOrganisationReferenced(answers: WillAnswers, id: string): bool
   return referencedOrganisationIds(answers).has(id)
 }
 
+// People who hold an active beneficiary role (primary or an in-use replacement).
+// Under-18 answers and dates of birth collected for a beneficiary are kept only
+// while such a role remains.
+function activeBeneficiaryPersonIds(answers: WillAnswers): Set<string> {
+  const ids = new Set<string>()
+  const add = (id: string | undefined) => {
+    if (id) ids.add(id)
+  }
+  answers.gifts.forEach((gift) => {
+    add(activeReferences.giftPrimaryPerson(gift))
+    add(activeReferences.giftReplacementPerson(gift))
+  })
+  answers.remainder.forEach((beneficiary) => {
+    add(activeReferences.remainderPrimaryPerson(beneficiary))
+    add(activeReferences.remainderReplacementPerson(beneficiary))
+  })
+  return ids
+}
+
+function normalizeGift(gift: Gift): Gift {
+  const next: Gift = { ...gift }
+  if (next.kind === 'money') {
+    next.description = undefined
+  } else {
+    next.amount = undefined
+    next.currency = undefined
+  }
+  if (next.recipientType === 'person') next.recipientOrgId = undefined
+  else if (next.recipientType === 'organisation') next.recipientPersonId = undefined
+  if (next.fallback !== 'to-replacement') {
+    next.replacementType = undefined
+    next.replacementPersonId = undefined
+    next.replacementOrgId = undefined
+  } else if (next.replacementType === 'person') {
+    next.replacementOrgId = undefined
+  } else if (next.replacementType === 'organisation') {
+    next.replacementPersonId = undefined
+  }
+  return next
+}
+
+function normalizeRemainder(beneficiary: RemainderBeneficiary, totalCount: number): RemainderBeneficiary {
+  const next: RemainderBeneficiary = { ...beneficiary }
+  if (next.recipientType === 'person') {
+    next.recipientOrgId = undefined
+  } else if (next.recipientType === 'organisation') {
+    next.recipientPersonId = undefined
+    // "Give it to their children" applies only to a person.
+    if (next.fallback === 'to-children') next.fallback = undefined
+  }
+  // "Share among the others" needs another beneficiary to exist.
+  if (next.fallback === 'share-among-others' && totalCount <= 1) next.fallback = undefined
+  if (next.fallback !== 'to-replacement') {
+    next.replacementType = undefined
+    next.replacementPersonId = undefined
+    next.replacementOrgId = undefined
+  } else if (next.replacementType === 'person') {
+    next.replacementOrgId = undefined
+  } else if (next.replacementType === 'organisation') {
+    next.replacementPersonId = undefined
+  }
+  return next
+}
+
+function normalizeInclude(include: RouteCInclude): RouteCInclude {
+  const next: RouteCInclude = { ...include }
+  if (next.recipientType === 'person') next.orgId = undefined
+  else if (next.recipientType === 'organisation') next.personId = undefined
+  return next
+}
+
 // Remove shared person and organisation records no role or answer references.
 function pruneUnreferenced(answers: WillAnswers): void {
   const people = referencedPersonIds(answers)
@@ -69,8 +140,9 @@ function partnerQuestionVisible(answers: WillAnswers): boolean {
   return false
 }
 
-// Enforce every conditional-field dependency so hidden answers, and the review
-// points and issues derived only from them, do not persist. Mutates a copy.
+// Enforce every conditional and record-level dependency so hidden answers, stale
+// references and the review points and issues derived only from them do not
+// persist. Returns a normalised copy.
 export function normalizeAnswers(input: WillAnswers): WillAnswers {
   const answers: WillAnswers = { ...input }
 
@@ -116,6 +188,30 @@ export function normalizeAnswers(input: WillAnswers): WillAnswers {
 
   // Specific gifts
   if (answers.sg1 !== 'yes') answers.gifts = []
+
+  // Record-level type and fallback consistency
+  answers.gifts = answers.gifts.map(normalizeGift)
+  answers.remainder = answers.remainder.map((beneficiary) =>
+    normalizeRemainder(beneficiary, answers.remainder.length),
+  )
+  answers.cIncludes = answers.cIncludes.map(normalizeInclude)
+
+  // Under-18 answers and dates of birth are kept only where a role still needs
+  // them: a minor child (F2) keeps its date of birth; an active beneficiary
+  // keeps both; every other person has both cleared.
+  const beneficiaries = activeBeneficiaryPersonIds(answers)
+  answers.people = answers.people.map((person) => {
+    const isMinor = answers.minorChildIds.includes(person.id)
+    const isDependantAdult = answers.dependantAdultChildIds.includes(person.id)
+    const isBeneficiary = beneficiaries.has(person.id)
+    const keepDob = isMinor || isBeneficiary
+    const keepUnder18 = isBeneficiary && !isMinor && !isDependantAdult
+    if (keepDob && keepUnder18) return person
+    const next = { ...person }
+    if (!keepDob) next.dateOfBirth = undefined
+    if (!keepUnder18) next.under18Answer = undefined
+    return next
+  })
 
   // Route C issue text: keep only text for issues still active.
   const activeIssues = new Set<IssueCode>(computeIssues(answers))

@@ -16,12 +16,6 @@
   margin: 0 0 1rem;
 }
 
-.will-doc__notice {
-  font-weight: bold;
-  text-align: center;
-  margin: 0 0 1rem;
-}
-
 .will-doc__meta {
   margin: 0 0 1rem;
 }
@@ -106,12 +100,20 @@
     display: none !important;
   }
 
-  body.will-printing .will-doc--active .will-doc__running-notice {
+  /* Route B: repeat the notice once at the top of every printed page, and keep
+     the document body clear of it so it never overlaps the title or text. */
+  body.will-printing .will-doc--active.will-doc--review {
+    padding-top: 2.5rem;
+  }
+
+  body.will-printing .will-doc--active.will-doc--review .will-doc__running-notice {
     display: block;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
+    padding: 0.35rem 0;
+    background: #ffffff;
     text-align: center;
     font-weight: bold;
   }

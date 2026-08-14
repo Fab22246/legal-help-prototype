@@ -51,41 +51,42 @@ export function CheckYourAnswersPage() {
         <section className="stack--tight" key={sectionIndex}>
           <h2 className="card-group__title">{section.heading}</h2>
           <ul className="govbb-summary-list">
-            {section.rows.map((row, rowIndex) => (
-              <li className="govbb-summary-list__row" key={`r${rowIndex}`}>
-                <span className="govbb-summary-list__key">{row.label}</span>
-                <span className="govbb-summary-list__value">{row.value}</span>
-                <span className="govbb-summary-list__actions">
-                  {row.changeKey ? (
-                    <button type="button" className="govbb-btn--link" onClick={() => onChange(row)}>
-                      Change<span className="govbb-visually-hidden"> {row.changeName}</span>
-                    </button>
-                  ) : null}
-                </span>
-              </li>
-            ))}
-            {section.records.map((record, recordIndex) => (
-              <li className="govbb-summary-list__row" key={`d${recordIndex}`}>
-                <span className="govbb-summary-list__value">
-                  {record.rows.map((row, rowIndex) => (
-                    <span className="task-item__desc" style={{ display: 'block' }} key={rowIndex}>
-                      <strong>{row.label}:</strong> {row.value}
-                    </span>
-                  ))}
-                </span>
-                <span className="govbb-summary-list__actions">
-                  {record.changeKey ? (
-                    <button
-                      type="button"
-                      className="govbb-btn--link"
-                      onClick={() => record.changeKey && navigate(changeHref(record.changeKey))}
-                    >
-                      Change<span className="govbb-visually-hidden"> {record.changeName}</span>
-                    </button>
-                  ) : null}
-                </span>
-              </li>
-            ))}
+            {section.items.map((item, itemIndex) =>
+              item.kind === 'row' ? (
+                <li className="govbb-summary-list__row" key={itemIndex}>
+                  <span className="govbb-summary-list__key">{item.row.label}</span>
+                  <span className="govbb-summary-list__value">{item.row.value}</span>
+                  <span className="govbb-summary-list__actions">
+                    {item.row.changeKey ? (
+                      <button type="button" className="govbb-btn--link" onClick={() => onChange(item.row)}>
+                        Change<span className="govbb-visually-hidden"> {item.row.changeName}</span>
+                      </button>
+                    ) : null}
+                  </span>
+                </li>
+              ) : (
+                <li className="govbb-summary-list__row" key={itemIndex}>
+                  <span className="govbb-summary-list__value">
+                    {item.record.rows.map((r, rowIndex) => (
+                      <span className="task-item__desc" style={{ display: 'block' }} key={rowIndex}>
+                        <strong>{r.label}:</strong> {r.value}
+                      </span>
+                    ))}
+                  </span>
+                  <span className="govbb-summary-list__actions">
+                    {item.record.changeKey ? (
+                      <button
+                        type="button"
+                        className="govbb-btn--link"
+                        onClick={() => item.record.changeKey && navigate(changeHref(item.record.changeKey))}
+                      >
+                        Change<span className="govbb-visually-hidden"> {item.record.changeName}</span>
+                      </button>
+                    ) : null}
+                  </span>
+                </li>
+              ),
+            )}
           </ul>
           {section.heading === 'Remainder of your estate' && model.totalPercentage ? (
             <p className="page__text">

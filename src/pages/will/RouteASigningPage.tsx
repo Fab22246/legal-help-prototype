@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useWillState } from '../../state/will/WillState'
-import { useWillGuard } from '../../components/will/useWillGuard'
+import { useConfirmedOutput } from '../../components/will/useConfirmedOutput'
 import { ClearMyAnswersLink } from '../../components/will/WillPage'
 import { WillDocumentView } from '../../components/will/outputViews'
 import { printDocument } from '../../components/will/printDocument'
@@ -9,7 +9,7 @@ import { generateWill } from '../../state/will/generateWill'
 import { willPaths } from '../../state/will/willPaths'
 
 export function RouteASigningPage() {
-  const active = useWillGuard()
+  const ready = useConfirmedOutput('A')
   const { answers } = useWillState()
   const navigate = useNavigate()
   const headingRef = useRef<HTMLHeadingElement>(null)
@@ -18,7 +18,7 @@ export function RouteASigningPage() {
     headingRef.current?.focus()
   }, [])
 
-  if (!active) return null
+  if (!ready) return null
 
   const document = generateWill(answers, false)
 

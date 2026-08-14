@@ -1,7 +1,5 @@
-// Route paths for the will service. Stage 1 registers none of these on the
-// public router; the constants let the foundation and output pages reference
-// destinations without hard-coded strings. Stage 2 and Stage 3 register the
-// question pages and connect the entry route.
+// Route paths for the will service, centralised so pages reference destinations
+// without repeating string literals.
 
 export const WILL_BASE = '/make-a-will'
 

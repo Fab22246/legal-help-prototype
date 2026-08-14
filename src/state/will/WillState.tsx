@@ -38,6 +38,8 @@ export function WillStateProvider({ children }: { children: ReactNode }) {
     setAnswers((prev) => {
       const draft: WillAnswers = { ...prev }
       mutator(draft)
+      // Any substantive change invalidates a previously created output.
+      draft.dateCreated = undefined
       return normalizeAnswers(draft)
     })
   }, [])

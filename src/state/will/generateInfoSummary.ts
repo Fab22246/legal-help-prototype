@@ -14,14 +14,11 @@ export interface InfoRow {
   value: string
 }
 
-export interface InfoRecord {
-  rows: InfoRow[]
-}
+export type InfoItem = { kind: 'row'; row: InfoRow } | { kind: 'record'; rows: InfoRow[] }
 
 export interface InfoSection {
   heading: string
-  rows: InfoRow[]
-  records: InfoRecord[]
+  items: InfoItem[]
 }
 
 export interface InfoSummaryDocument {
@@ -32,6 +29,8 @@ export interface InfoSummaryDocument {
   opening: string
   sections: InfoSection[]
 }
+
+const C3_ROLE_LABEL = 'What you want this person or organisation to do or receive'
 
 const ISSUE_LABELS: Record<IssueCode, string> = {
   JOINT_WILL: 'What do you and the other person want the will to do?',
@@ -55,128 +54,124 @@ const ISSUE_ORDER: IssueCode[] = [
   'POSSIBLE_INSOLVENCY',
 ]
 
-function nonEmpty(rows: InfoRow[]): InfoRow[] {
-  return rows.filter((row) => row.value.length > 0)
+function rowItem(label: string, value: string): InfoItem {
+  return { kind: 'row', row: { label, value } }
+}
+
+function recordItem(rows: InfoRow[]): InfoItem {
+  return { kind: 'record', rows: rows.filter((row) => row.value.length > 0) }
+}
+
+function keepRows(items: InfoItem[]): InfoItem[] {
+  return items.filter((item) => (item.kind === 'row' ? item.row.value.length > 0 : item.rows.length > 0))
 }
 
 function aboutYou(answers: WillAnswers): InfoSection {
-  const rows: InfoRow[] = [
-    { label: 'Barbados is your main home', value: displayYesNo(answers.a3) },
-    { label: 'Citizen of another country', value: displayYesNo(answers.a4) },
-    ...answers.a4Countries.map((country) => ({ label: 'Country', value: country })),
-    { label: 'Already have a will', value: displayYesNo(answers.a5) },
+  const items: InfoItem[] = [
+    rowItem('Barbados is your main home', displayYesNo(answers.a3)),
+    rowItem('Citizen of another country', displayYesNo(answers.a4)),
+    ...answers.a4Countries.map((country) => rowItem('Country', country)),
+    rowItem('Already have a will', displayYesNo(answers.a5)),
   ]
-  if (answers.a5 === 'yes') rows.push({ label: 'Replace all earlier wills', value: displayYesNo(answers.a6) })
-  return { heading: 'About you', rows: nonEmpty(rows), records: [] }
+  if (answers.a5 === 'yes') items.push(rowItem('Replace all earlier wills', displayYesNo(answers.a6)))
+  return { heading: 'About you', items: keepRows(items) }
 }
 
 function marriage(answers: WillAnswers): InfoSection {
   const spouse = findPerson(answers, answers.spousePersonId)
   const partner = findPerson(answers, answers.partnerPersonId)
-  const rows: InfoRow[] = [{ label: 'Currently married', value: displayYesNo(answers.a7) }]
-  if (spouse) rows.push({ label: 'Name of the person you are married to', value: fullName(spouse.name) })
-  if (answers.a9) rows.push({ label: 'Separated', value: displayYesNo(answers.a9) })
-  if (answers.a10) rows.push({ label: 'Lived apart continuously for 5 years or more', value: displayYesNo(answers.a10) })
-  if (answers.a11) rows.push({ label: 'Live with a partner as a couple', value: displayYesNo(answers.a11) })
+  const items: InfoItem[] = [rowItem('Currently married', displayYesNo(answers.a7))]
+  if (spouse) items.push(rowItem('Name of the person you are married to', fullName(spouse.name)))
+  if (answers.a9) items.push(rowItem('Separated', displayYesNo(answers.a9)))
+  if (answers.a10) items.push(rowItem('Lived apart continuously for 5 years or more', displayYesNo(answers.a10)))
+  if (answers.a11) items.push(rowItem('Live with a partner as a couple', displayYesNo(answers.a11)))
   if (partner) {
-    rows.push({ label: "Partner's name", value: fullName(partner.name) })
-    rows.push({
-      label: 'Lived together continuously for 5 years or more',
-      value: displayYesNo(partner.livedTogetherFiveYears),
-    })
+    items.push(rowItem("Partner's name", fullName(partner.name)))
+    items.push(rowItem('Lived together continuously for 5 years or more', displayYesNo(partner.livedTogetherFiveYears)))
   }
-  rows.push({ label: 'Planning to get married', value: displayYesNo(answers.a13) })
-  return { heading: 'Marriage and relationships', rows: nonEmpty(rows), records: [] }
+  items.push(rowItem('Planning to get married', displayYesNo(answers.a13)))
+  return { heading: 'Marriage and relationships', items: keepRows(items) }
 }
 
 function dependants(answers: WillAnswers): InfoSection {
-  const rows: InfoRow[] = [{ label: 'Children under 18', value: displayYesNo(answers.f1) }]
-  const records: InfoRecord[] = []
+  const items: InfoItem[] = [rowItem('Children under 18', displayYesNo(answers.f1))]
   answers.minorChildIds.forEach((id) => {
     const person = findPerson(answers, id)
     if (!person) return
-    records.push({
-      rows: nonEmpty([
+    items.push(
+      recordItem([
         { label: 'Full name', value: fullName(person.name) },
         { label: 'Date of birth', value: formatDateParts(person.dateOfBirth) },
         { label: 'Relationship', value: relationshipLabel(answers, person) },
       ]),
-    })
+    )
   })
-  rows.push({ label: 'Adult child who depends on you because of a disability', value: displayYesNo(answers.f3) })
+  items.push(rowItem('Adult child who depends on you because of a disability', displayYesNo(answers.f3)))
   answers.dependantAdultChildIds.forEach((id) => {
     const person = findPerson(answers, id)
     if (!person) return
-    records.push({
-      rows: nonEmpty([
+    items.push(
+      recordItem([
         { label: 'Full name', value: fullName(person.name) },
         { label: 'Relationship', value: relationshipLabel(answers, person) },
         { label: 'Support provided', value: (person.supportProvided ?? '').trim() },
       ]),
-    })
+    )
   })
-  rows.push({ label: 'Anyone else depends on you for money or care', value: displayYesNo(answers.f5) })
+  items.push(rowItem('Anyone else depends on you for money or care', displayYesNo(answers.f5)))
   answers.otherDependantIds.forEach((id) => {
     const person = findPerson(answers, id)
     if (!person) return
-    records.push({
-      rows: nonEmpty([
+    items.push(
+      recordItem([
         { label: 'Full name', value: fullName(person.name) },
         { label: 'Relationship', value: relationshipLabel(answers, person) },
         { label: 'Support provided', value: (person.supportProvided ?? '').trim() },
       ]),
-    })
+    )
   })
-  return { heading: 'Children and people who depend on you', rows: nonEmpty(rows), records }
+  return { heading: 'Children and people who depend on you', items: keepRows(items) }
 }
 
 function legalAdvice(answers: WillAnswers): InfoSection {
-  const rows: InfoRow[] = []
+  const items: InfoItem[] = []
   ISSUE_ORDER.forEach((code) => {
     const value = (answers.cIssueText[code] ?? '').trim()
-    if (value.length > 0) rows.push({ label: ISSUE_LABELS[code], value })
+    if (value.length > 0) items.push(rowItem(ISSUE_LABELS[code], value))
   })
-  if (answers.cJointOtherName) {
-    rows.push({ label: "Other person's full legal name", value: fullName(answers.cJointOtherName) })
-  }
-  return { heading: 'What you need the will to do', rows, records: [] }
+  if (answers.cJointOtherName) items.push(rowItem("Other person's full legal name", fullName(answers.cJointOtherName)))
+  return { heading: 'What you need the will to do', items }
 }
 
 function includes(answers: WillAnswers): InfoSection {
-  const records: InfoRecord[] = []
-  answers.cIncludes.forEach((include) => {
+  const items: InfoItem[] = answers.cIncludes.map((include) => {
     if (include.recipientType === 'organisation') {
-      records.push({
-        rows: nonEmpty([
-          { label: 'Person or organisation', value: 'Organisation' },
-          { label: 'Full legal name', value: findOrganisationName(answers, include.orgId) },
-          { label: 'What you want them to do or receive', value: (include.roleText ?? '').trim() },
-        ]),
-      })
-    } else {
-      const person = findPerson(answers, include.personId)
-      records.push({
-        rows: nonEmpty([
-          { label: 'Person or organisation', value: 'Person' },
-          { label: 'Full legal name', value: fullName(person?.name) },
-          { label: 'Relationship to you', value: person ? relationshipLabel(answers, person) : '' },
-          { label: 'What you want them to do or receive', value: (include.roleText ?? '').trim() },
-        ]),
-      })
+      return recordItem([
+        { label: 'Person or organisation', value: 'Organisation' },
+        { label: 'Full legal name', value: findOrganisationName(answers, include.orgId) },
+        { label: C3_ROLE_LABEL, value: (include.roleText ?? '').trim() },
+      ])
     }
+    const person = findPerson(answers, include.personId)
+    return recordItem([
+      { label: 'Person or organisation', value: 'Person' },
+      { label: 'Full legal name', value: fullName(person?.name) },
+      { label: 'Relationship to you', value: person ? relationshipLabel(answers, person) : '' },
+      { label: C3_ROLE_LABEL, value: (include.roleText ?? '').trim() },
+    ])
   })
-  return { heading: 'People and organisations you want to include', rows: [], records }
+  return { heading: 'People and organisations you want to include', items }
 }
 
 function assets(answers: WillAnswers): InfoSection {
-  const records: InfoRecord[] = answers.cAssets.map((asset) => ({
-    rows: nonEmpty([
+  const items: InfoItem[] = answers.cAssets.map((asset) =>
+    recordItem([
       { label: 'Type of money or property', value: asset.type },
       { label: 'Description', value: asset.description },
       { label: 'Country', value: asset.country },
     ]),
-  }))
-  return { heading: 'Money and property to discuss', rows: [], records }
+  )
+  return { heading: 'Money and property to discuss', items }
 }
 
 export function generateInfoSummary(answers: WillAnswers): InfoSummaryDocument {
@@ -191,7 +186,7 @@ export function generateInfoSummary(answers: WillAnswers): InfoSummaryDocument {
 
   const other = (answers.cOther ?? '').trim()
   if (other.length > 0) {
-    sections.push({ heading: 'Other information', rows: [{ label: 'Other information', value: other }], records: [] })
+    sections.push({ heading: 'Other information', items: [rowItem('Other information', other)] })
   }
 
   return {

@@ -28,15 +28,17 @@ export function WillDocumentView({
   document: WillDocument
   offscreen?: boolean
 }) {
+  const rootClass = [
+    'will-doc',
+    document.reviewNotice ? 'will-doc--review' : '',
+    offscreen ? 'will-offscreen' : '',
+  ]
+    .filter(Boolean)
+    .join(' ')
   return (
-    <div id={id} className={offscreen ? 'will-doc will-offscreen' : 'will-doc'}>
+    <div id={id} className={rootClass}>
       {document.reviewNotice ? (
-        <>
-          <p className="will-doc__notice">{document.reviewNotice}</p>
-          <p className="will-doc__running-notice" aria-hidden="true">
-            {document.reviewNotice}
-          </p>
-        </>
+        <p className="will-doc__running-notice">{document.reviewNotice}</p>
       ) : null}
       <h2 className="will-doc__title">{document.title}</h2>
       {document.clauses.map((clause) => (
@@ -134,22 +136,23 @@ export function InfoSummaryView({
       {document.sections.map((section, index) => (
         <section className="will-doc__clause" key={index}>
           <h3 className="will-doc__clause-heading">{section.heading}</h3>
-          {section.rows.map((detail, rowIndex) => (
-            <p className="will-doc__row" key={rowIndex}>
-              <span className="will-doc__row-label">{detail.label}: </span>
-              {detail.value}
-            </p>
-          ))}
-          {section.records.map((record, recordIndex) => (
-            <div className="will-doc__record" key={recordIndex}>
-              {record.rows.map((detail, rowIndex) => (
-                <p className="will-doc__row" key={rowIndex}>
-                  <span className="will-doc__row-label">{detail.label}: </span>
-                  {detail.value}
-                </p>
-              ))}
-            </div>
-          ))}
+          {section.items.map((item, itemIndex) =>
+            item.kind === 'row' ? (
+              <p className="will-doc__row" key={itemIndex}>
+                <span className="will-doc__row-label">{item.row.label}: </span>
+                {item.row.value}
+              </p>
+            ) : (
+              <div className="will-doc__record" key={itemIndex}>
+                {item.rows.map((detail, rowIndex) => (
+                  <p className="will-doc__row" key={rowIndex}>
+                    <span className="will-doc__row-label">{detail.label}: </span>
+                    {detail.value}
+                  </p>
+                ))}
+              </div>
+            ),
+          )}
         </section>
       ))}
     </div>

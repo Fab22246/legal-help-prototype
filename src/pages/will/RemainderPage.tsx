@@ -95,12 +95,12 @@ export function RemainderPage({ mode, recordId }: { mode: Mode; recordId?: strin
   }
 
   function saveRecord() {
-    const re = validateRecipient(answers, recipient)
+    const re = validateRecipient(answers, recipient, 'Who should receive the remainder of your estate?')
     const pe = percentageError(percentage)
     let fe: string | undefined
     let rre: RecipientErrors = {}
     if (!fallback) fe = requiredRadioError(fallbackQuestion)
-    if (fallback === 'to-replacement') rre = validateRecipient(answers, replacement)
+    if (fallback === 'to-replacement') rre = validateRecipient(answers, replacement, 'Who should receive the remainder of your estate?')
 
     setRecipientErrors(re)
     setPctErr(pe)
@@ -131,7 +131,9 @@ export function RemainderPage({ mode, recordId }: { mode: Mode; recordId?: strin
     })
 
     if (mode === 'change') {
-      proceed(navigate, mode, changeDestination(answers, computeDerived(answers)))
+      // Return to the remainder list so the running total and every fallback are
+      // re-validated before the change can return to Check your answers.
+      proceed(navigate, mode, 'r2')
       return
     }
     resetForm()
@@ -168,11 +170,23 @@ export function RemainderPage({ mode, recordId }: { mode: Mode; recordId?: strin
       setListAttempt((a) => a + 1)
       return
     }
+    // A beneficiary whose fallback is no longer valid (for example, a
+    // share-among-others fallback cleared after the other beneficiaries were
+    // removed) is corrected on its own record, not on a percentage field.
+    const badFallback = list.find((b) => !b.fallback)
+    if (badFallback) {
+      beginChange(badFallback.id)
+      setRecipientErrors({})
+      setPctErr(undefined)
+      setReplacementErrors({})
+      setFallbackErr(invalidRemainderFallbackError)
+      setAttempt((a) => a + 1)
+      return
+    }
     const items: ErrorSummaryItem[] = []
     for (const b of list) {
       const pe = percentageError(b.percentage ?? '')
       if (pe) items.push({ fieldId: `r2-pct-${b.id}`, message: pe })
-      if (!b.fallback) items.push({ fieldId: `r2-pct-${b.id}`, message: invalidRemainderFallbackError })
     }
     if (items.length === 0) {
       const total = totalPercentageHundredths(list)
@@ -265,7 +279,6 @@ export function RemainderPage({ mode, recordId }: { mode: Mode; recordId?: strin
       errorItems={items}
       submitAttempt={attempt}
       onSubmit={saveRecord}
-      continueLabel="Save and continue"
     >
       <RecipientFields
         prefix="r2-recipient"

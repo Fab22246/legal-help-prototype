@@ -174,9 +174,9 @@ function PersonRolePage({ id, mode, recordId }: { id: string; mode: Mode; record
     if (records.length - 1 === 0) setView('form')
   }
 
-  function afterSave() {
+  function afterSave(next: WillAnswers) {
     if (mode === 'change') {
-      proceed(navigate, mode, changeDestination(answers, computeDerived(answers)))
+      proceed(navigate, mode, changeDestination(next, computeDerived(next)))
       return
     }
     beginAdd()
@@ -213,7 +213,7 @@ function PersonRolePage({ id, mode, recordId }: { id: string; mode: Mode; record
     if (ce || ne.firstName || ne.lastName || ne.middleNames || re || ae.line1 || ae.townOrCity || ae.country) return
 
     const targetId = editId ?? (choice === 'new' ? newId() : (choice as string))
-    applyAndGet((d) => {
+    const next = applyAndGet((d) => {
       const found = d.people.find((p) => p.id === targetId)
       if (isNew || editId) {
         const updated: PersonRecord = {
@@ -232,7 +232,7 @@ function PersonRolePage({ id, mode, recordId }: { id: string; mode: Mode; record
       }
       if (!d[config.roleKey].includes(targetId)) d[config.roleKey] = [...d[config.roleKey], targetId]
     })
-    afterSave()
+    afterSave(next)
   }
 
   function onContinue() {
@@ -281,7 +281,6 @@ function PersonRolePage({ id, mode, recordId }: { id: string; mode: Mode; record
       errorItems={items}
       submitAttempt={attempt}
       onSubmit={saveRecord}
-      continueLabel="Save and continue"
     >
       {!editId ? (
         <PersonChoice

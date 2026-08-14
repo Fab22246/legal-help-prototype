@@ -1,12 +1,19 @@
 import { RadioGroup } from '../forms/RadioGroup'
 import { TextInput } from '../forms/TextInput'
 import { DateInput } from '../forms/DateInput'
-import { NameFields, AddressFields, emptyAddress, emptyName } from './fieldGroups'
+import { NameFields, emptyName } from './fieldGroups'
 import type { NameErrors } from './fieldGroups'
-import { dobError, nameError, optionalNameError, orgNameMissingError, requiredTextError } from '../../state/will/validation'
+import {
+  dobError,
+  nameError,
+  optionalNameError,
+  orgNameMissingError,
+  requiredRadioError,
+  requiredTextError,
+} from '../../state/will/validation'
 import { personOptionLabel } from '../../state/will/journey'
 import { findOrganisationName } from '../../state/will/format'
-import type { Address, DateParts, Name, RecipientType, WillAnswers, YesNoNotSure } from '../../state/will/types'
+import type { DateParts, Name, RecipientType, WillAnswers, YesNoNotSure } from '../../state/will/types'
 
 export interface RecipientValue {
   type?: RecipientType
@@ -17,7 +24,8 @@ export interface RecipientValue {
   dob: DateParts
   orgChoice?: string // existing org id or 'new-org'
   orgName: string
-  orgAddress: Address
+  // The organisation address is a single optional value.
+  orgAddress: string
 }
 
 export interface RecipientErrors {
@@ -34,7 +42,7 @@ export interface RecipientErrors {
 }
 
 export function emptyRecipient(): RecipientValue {
-  return { name: emptyName(), relationship: '', dob: { day: '', month: '', year: '' }, orgName: '', orgAddress: emptyAddress() }
+  return { name: emptyName(), relationship: '', dob: { day: '', month: '', year: '' }, orgName: '', orgAddress: '' }
 }
 
 export function recipientFromRefs(
@@ -57,7 +65,7 @@ export function recipientFromRefs(
     value.orgChoice = orgId
     value.orgName = findOrganisationName(answers, orgId)
     const org = answers.organisations.find((o) => o.id === orgId)
-    value.orgAddress = org?.address ?? emptyAddress()
+    value.orgAddress = org?.address?.line1 ?? ''
   }
   return value
 }
@@ -79,15 +87,17 @@ function isNewPerson(value: RecipientValue): boolean {
   return value.type === 'person' && value.personChoice === 'new'
 }
 
-export function validateRecipient(answers: WillAnswers, value: RecipientValue): RecipientErrors {
+// Validate the recipient. `question` is the owning page's recipient question, so
+// the required-answer error follows the specification exactly.
+export function validateRecipient(answers: WillAnswers, value: RecipientValue, question: string): RecipientErrors {
   const errors: RecipientErrors = {}
   if (!value.type) {
-    errors.type = 'Select an answer to: Who do you want to receive this gift'
+    errors.type = requiredRadioError(question)
     return errors
   }
   if (value.type === 'person') {
     if (!value.personChoice) {
-      errors.personChoice = 'Select an answer to: Who do you want to receive this gift'
+      errors.personChoice = requiredRadioError(question)
       return errors
     }
     if (isNewPerson(value)) {
@@ -97,14 +107,14 @@ export function validateRecipient(answers: WillAnswers, value: RecipientValue): 
       errors.relationship = requiredTextError(value.relationship, 'Enter relationship to you.')
     }
     if (under18Asked(answers, value)) {
-      if (!value.under18) errors.under18 = 'Select an answer to: Is this person under 18'
+      if (!value.under18) errors.under18 = requiredRadioError('Is this person under 18?')
       else if (value.under18 === 'yes') {
         errors.dob = dobError(value.dob, { underMessage: 'Enter a date of birth that makes the person under 18.' })
       }
     }
   } else {
     if (!value.orgChoice) {
-      errors.orgChoice = 'Select an answer to: Who do you want to receive this gift'
+      errors.orgChoice = requiredRadioError(question)
       return errors
     }
     if (value.orgChoice === 'new-org') {
@@ -137,16 +147,9 @@ export function commitRecipient(
   if (value.type === 'organisation') {
     if (value.orgChoice === 'new-org') {
       const id = newId()
-      const trimmedAddress = value.orgAddress.line1.trim() || value.orgAddress.townOrCity.trim() || value.orgAddress.country.trim()
-        ? {
-            line1: value.orgAddress.line1.trim(),
-            line2: (value.orgAddress.line2 ?? '').trim() || undefined,
-            townOrCity: value.orgAddress.townOrCity.trim(),
-            parish: (value.orgAddress.parish ?? '').trim() || undefined,
-            country: value.orgAddress.country.trim(),
-          }
-        : undefined
-      draft.organisations = [...draft.organisations, { id, legalName: value.orgName.trim(), address: trimmedAddress }]
+      const addressText = value.orgAddress.trim()
+      const address = addressText ? { line1: addressText, townOrCity: '', country: '' } : undefined
+      draft.organisations = [...draft.organisations, { id, legalName: value.orgName.trim(), address }]
       return { type: 'organisation', orgId: id }
     }
     return { type: 'organisation', orgId: value.orgChoice }
@@ -177,8 +180,8 @@ export function commitRecipient(
   return { type: 'person', personId: id }
 }
 
-// Renders the recipient controls. `question` is the recipient question text used
-// on the type radio.
+// Renders the recipient controls. `question` is the recipient question used for
+// the type radio and the person and organisation selections.
 export function RecipientFields({
   prefix,
   question,
@@ -222,7 +225,7 @@ export function RecipientFields({
         <>
           <RadioGroup
             name={`${prefix}-person`}
-            legend="Who do you want to name?"
+            legend={question}
             options={personOptions}
             value={value.personChoice}
             onChange={(v) => onChange({ ...value, personChoice: v })}
@@ -277,7 +280,7 @@ export function RecipientFields({
         <>
           <RadioGroup
             name={`${prefix}-org`}
-            legend="Which organisation?"
+            legend={question}
             options={orgOptions}
             value={value.orgChoice}
             onChange={(v) => onChange({ ...value, orgChoice: v })}
@@ -292,11 +295,12 @@ export function RecipientFields({
                 onChange={(v) => onChange({ ...value, orgName: v })}
                 error={errors.orgName}
               />
-              <AddressFields
-                idPrefix={`${prefix}-org`}
+              <TextInput
+                id={`${prefix}-org-address`}
+                label="Address"
+                optional
                 value={value.orgAddress}
-                onChange={(orgAddress) => onChange({ ...value, orgAddress })}
-                errors={{}}
+                onChange={(v) => onChange({ ...value, orgAddress: v })}
               />
             </>
           ) : null}
@@ -310,7 +314,7 @@ export function RecipientFields({
 export function recipientErrorItems(prefix: string, errors: RecipientErrors): { fieldId: string; message: string }[] {
   const items: { fieldId: string; message: string }[] = []
   if (errors.type) items.push({ fieldId: `${prefix}-type-person`, message: errors.type })
-  if (errors.personChoice) items.push({ fieldId: `${prefix}-person-${'new'}`, message: errors.personChoice })
+  if (errors.personChoice) items.push({ fieldId: `${prefix}-person-new`, message: errors.personChoice })
   if (errors.firstName) items.push({ fieldId: `${prefix}-person-first-name`, message: errors.firstName })
   if (errors.middleNames) items.push({ fieldId: `${prefix}-person-middle-names`, message: errors.middleNames })
   if (errors.lastName) items.push({ fieldId: `${prefix}-person-last-name`, message: errors.lastName })

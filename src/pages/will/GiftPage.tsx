@@ -118,11 +118,11 @@ export function GiftPage({ mode, recordId }: { mode: Mode; recordId?: string }) 
     } else if (kind) {
       de = requiredTextError(description, 'Enter description of the gift.')
     }
-    const re = validateRecipient(answers, recipient)
+    const re = validateRecipient(answers, recipient, 'Who do you want to receive this gift?')
     let fe: string | undefined
     let rre: RecipientErrors = {}
     if (!fallback) fe = requiredRadioError(fallbackQuestion)
-    if (fallback === 'to-replacement') rre = validateRecipient(answers, replacement)
+    if (fallback === 'to-replacement') rre = validateRecipient(answers, replacement, 'Who do you want to receive this gift?')
 
     setKindErr(ke)
     setAmountErr(ae)
@@ -136,7 +136,7 @@ export function GiftPage({ mode, recordId }: { mode: Mode; recordId?: string }) 
     if (ke || ae || ce || de || recipientHasError(re) || fe || (fallback === 'to-replacement' && recipientHasError(rre))) return
 
     const id = idRef.current
-    applyAndGet((d) => {
+    const next = applyAndGet((d) => {
       const primary = commitRecipient(d, answers, recipient, newId)
       const gift: Gift = {
         id,
@@ -160,7 +160,7 @@ export function GiftPage({ mode, recordId }: { mode: Mode; recordId?: string }) 
     })
 
     if (mode === 'change') {
-      proceed(navigate, mode, changeDestination(answers, computeDerived(answers)))
+      proceed(navigate, mode, changeDestination(next, computeDerived(next)))
       return
     }
     resetForm()
@@ -234,7 +234,6 @@ export function GiftPage({ mode, recordId }: { mode: Mode; recordId?: string }) 
       errorItems={items}
       submitAttempt={attempt}
       onSubmit={saveRecord}
-      continueLabel="Save and continue"
     >
       <RadioGroup name="gift-kind" legend="What do you want to give?" options={GIFT_KINDS} value={kind} onChange={setKind} error={kindErr} />
       {kind === 'money' ? (

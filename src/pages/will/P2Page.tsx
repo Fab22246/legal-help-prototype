@@ -35,14 +35,14 @@ export function P2Page({ mode, recordId }: { mode: Mode; recordId?: string }) {
     setAttempt((a) => a + 1)
     if (e) return
     const id = idRef.current
-    applyAndGet((d) => {
+    const next = applyAndGet((d) => {
       const found = d.jointAssets.some((r) => r.id === id)
       d.jointAssets = found
         ? d.jointAssets.map((r) => (r.id === id ? { ...r, description: description.trim() } : r))
         : [...d.jointAssets, { id, description: description.trim() }]
     })
     if (mode === 'change') {
-      proceed(navigate, mode, changeDestination(answers, computeDerived(answers)))
+      proceed(navigate, mode, changeDestination(next, computeDerived(next)))
       return
     }
     idRef.current = newId()
@@ -96,7 +96,6 @@ export function P2Page({ mode, recordId }: { mode: Mode; recordId?: string }) {
       errorItems={items}
       submitAttempt={attempt}
       onSubmit={saveRecord}
-      continueLabel="Save and continue"
     >
       <TextInput
         id="p2-description"

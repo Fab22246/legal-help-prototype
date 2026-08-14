@@ -7,7 +7,7 @@ import type { ErrorSummaryItem } from '../../components/forms/ErrorSummary'
 import { WillFormPage } from '../../components/will/WillFormPage'
 import { RepeatableRecordList } from '../../components/will/RepeatableRecordList'
 import { useWillGuard } from '../../components/will/useWillGuard'
-import { NameFields, AddressFields, emptyAddress, emptyName } from '../../components/will/fieldGroups'
+import { NameFields, emptyName } from '../../components/will/fieldGroups'
 import type { NameErrors } from '../../components/will/fieldGroups'
 import { PersonChoice, OrgChoice } from '../../components/will/recipientControls'
 import { proceed } from '../../components/will/nav'
@@ -20,9 +20,10 @@ import {
   optionalNameError,
   orgNameMissingError,
   requiredAnswerError,
+  requiredRadioError,
   requiredTextError,
 } from '../../state/will/validation'
-import type { Address, IssueCode, Name, RecipientType } from '../../state/will/types'
+import type { IssueCode, Name, RecipientType } from '../../state/will/types'
 
 type Mode = 'forward' | 'change'
 
@@ -143,7 +144,7 @@ export function C3Page({ mode, recordId }: { mode: Mode; recordId?: string }) {
   const [name, setName] = useState<Name>(existingPerson?.name ?? emptyName())
   const [relationship, setRelationship] = useState(existingPerson?.relationship ?? '')
   const [orgName, setOrgName] = useState(existingOrg?.legalName ?? '')
-  const [orgAddress, setOrgAddress] = useState<Address>(existingOrg?.address ?? emptyAddress())
+  const [orgAddress, setOrgAddress] = useState<string>(existingOrg?.address?.line1 ?? '')
   const [roleText, setRoleText] = useState(editing?.roleText ?? '')
 
   const [typeErr, setTypeErr] = useState<string | undefined>()
@@ -168,7 +169,7 @@ export function C3Page({ mode, recordId }: { mode: Mode; recordId?: string }) {
     setName(emptyName())
     setRelationship('')
     setOrgName('')
-    setOrgAddress(emptyAddress())
+    setOrgAddress('')
     setRoleText('')
     setTypeErr(undefined)
     setChoiceErr(undefined)
@@ -184,9 +185,9 @@ export function C3Page({ mode, recordId }: { mode: Mode; recordId?: string }) {
     let ne: NameErrors = {}
     let re: string | undefined
     let oe: string | undefined
-    if (!type) te = 'Select an answer to: Who do you want to include in your will'
+    if (!type) te = requiredRadioError('Who do you want to include in your will?')
     if (type === 'person') {
-      if (!personChoice) ce = 'Select an answer to: Who do you want to include in your will'
+      if (!personChoice) ce = requiredRadioError('Who do you want to include in your will?')
       else if (personChoice === 'new') {
         ne = {
           firstName: nameError(name.firstName, 'Enter first name.'),
@@ -197,7 +198,7 @@ export function C3Page({ mode, recordId }: { mode: Mode; recordId?: string }) {
       }
     }
     if (type === 'organisation') {
-      if (!orgChoice) ce = 'Select an answer to: Who do you want to include in your will'
+      if (!orgChoice) ce = requiredRadioError('Who do you want to include in your will?')
       else if (orgChoice === 'new-org') oe = orgName.trim().length === 0 ? orgNameMissingError : undefined
     }
     const roleE = requiredTextError(roleText, requiredAnswerError(C3_ROLE_QUESTION))
@@ -212,7 +213,7 @@ export function C3Page({ mode, recordId }: { mode: Mode; recordId?: string }) {
     if (te || ce || ne.firstName || ne.lastName || ne.middleNames || re || oe || roleE) return
 
     const id = idRef.current
-    applyAndGet((d) => {
+    const next = applyAndGet((d) => {
       let personId: string | undefined
       let orgId: string | undefined
       if (type === 'person') {
@@ -225,9 +226,8 @@ export function C3Page({ mode, recordId }: { mode: Mode; recordId?: string }) {
       } else {
         if (orgChoice === 'new-org') {
           orgId = newId()
-          const addr = orgAddress.line1.trim() || orgAddress.townOrCity.trim() || orgAddress.country.trim()
-            ? { line1: orgAddress.line1.trim(), line2: (orgAddress.line2 ?? '').trim() || undefined, townOrCity: orgAddress.townOrCity.trim(), parish: (orgAddress.parish ?? '').trim() || undefined, country: orgAddress.country.trim() }
-            : undefined
+          const addressText = orgAddress.trim()
+          const addr = addressText ? { line1: addressText, townOrCity: '', country: '' } : undefined
           d.organisations = [...d.organisations, { id: orgId, legalName: orgName.trim(), address: addr }]
         } else {
           orgId = orgChoice
@@ -239,7 +239,7 @@ export function C3Page({ mode, recordId }: { mode: Mode; recordId?: string }) {
     })
 
     if (mode === 'change') {
-      proceed(navigate, mode, changeDestination(answers, computeDerived(answers)))
+      proceed(navigate, mode, changeDestination(next, computeDerived(next)))
       return
     }
     resetForm()
@@ -265,7 +265,7 @@ export function C3Page({ mode, recordId }: { mode: Mode; recordId?: string }) {
     setName(p?.name ?? emptyName())
     setRelationship(p?.relationship ?? '')
     setOrgName(o?.legalName ?? '')
-    setOrgAddress(o?.address ?? emptyAddress())
+    setOrgAddress(o?.address?.line1 ?? '')
     setRoleText(rec.roleText ?? '')
     setView('form')
   }
@@ -323,7 +323,6 @@ export function C3Page({ mode, recordId }: { mode: Mode; recordId?: string }) {
       errorItems={items}
       submitAttempt={attempt}
       onSubmit={saveRecord}
-      continueLabel="Save and continue"
       intro="Include any person or organisation you want to receive something, and anyone you want to carry out the will or care for your children."
     >
       <RadioGroup
@@ -339,7 +338,7 @@ export function C3Page({ mode, recordId }: { mode: Mode; recordId?: string }) {
       />
       {type === 'person' ? (
         <>
-          <PersonChoice name="c3-person" legend="Who do you want to name?" answers={answers} value={personChoice} onChange={setPersonChoice} error={choiceErr} />
+          <PersonChoice name="c3-person" legend="Who do you want to include in your will?" answers={answers} value={personChoice} onChange={setPersonChoice} error={choiceErr} />
           {isNewPerson ? (
             <>
               <NameFields idPrefix="c3" value={name} onChange={setName} errors={nameErrors} />
@@ -350,11 +349,11 @@ export function C3Page({ mode, recordId }: { mode: Mode; recordId?: string }) {
       ) : null}
       {type === 'organisation' ? (
         <>
-          <OrgChoice name="c3-org" legend="Which organisation?" answers={answers} value={orgChoice} onChange={setOrgChoice} error={choiceErr} />
+          <OrgChoice name="c3-org" legend="Who do you want to include in your will?" answers={answers} value={orgChoice} onChange={setOrgChoice} error={choiceErr} />
           {isNewOrg ? (
             <>
               <TextInput id="c3-org-name" label="Full legal name of organisation" value={orgName} onChange={setOrgName} error={orgNameErr} />
-              <AddressFields idPrefix="c3-org" value={orgAddress} onChange={setOrgAddress} errors={{}} />
+              <TextInput id="c3-org-address" label="Address" optional value={orgAddress} onChange={setOrgAddress} />
             </>
           ) : null}
         </>
@@ -382,7 +381,11 @@ export function C4Page({ mode, recordId }: { mode: Mode; recordId?: string }) {
 
   const list = answers.cAssets
   const editing = recordId ? list.find((r) => r.id === recordId) : undefined
-  const [view, setView] = useState<'list' | 'form'>(recordId || list.length === 0 ? 'form' : 'list')
+  // Prepopulated records from P2 are shown as a list, not a blank new-record
+  // form, so the user sees them before continuing.
+  const [view, setView] = useState<'list' | 'form'>(
+    recordId || (list.length === 0 && answers.jointAssets.length === 0) ? 'form' : 'list',
+  )
   const idRef = useRef<string>(recordId ?? newId())
   const [type, setType] = useState(editing?.type ?? '')
   const [description, setDescription] = useState(editing?.description ?? '')
@@ -405,13 +408,13 @@ export function C4Page({ mode, recordId }: { mode: Mode; recordId?: string }) {
     setAttempt((a) => a + 1)
     if (te || de || ce) return
     const id = idRef.current
-    applyAndGet((d) => {
+    const next = applyAndGet((d) => {
       const record = { id, type: type.trim(), description: description.trim(), country: country.trim() }
       const found = d.cAssets.some((r) => r.id === id)
       d.cAssets = found ? d.cAssets.map((r) => (r.id === id ? record : r)) : [...d.cAssets, record]
     })
     if (mode === 'change') {
-      proceed(navigate, mode, changeDestination(answers, computeDerived(answers)))
+      proceed(navigate, mode, changeDestination(next, computeDerived(next)))
       return
     }
     idRef.current = newId()
@@ -492,7 +495,6 @@ export function C4Page({ mode, recordId }: { mode: Mode; recordId?: string }) {
       errorItems={items}
       submitAttempt={attempt}
       onSubmit={saveRecord}
-      continueLabel="Save and continue"
     >
       <p className="govbb-hint">Do not enter account numbers, passwords or document numbers.</p>
       <TextInput id="c4-type" label="Type of money or property" value={type} onChange={setType} error={typeErr} />

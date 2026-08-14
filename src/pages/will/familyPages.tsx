@@ -99,14 +99,13 @@ export function F2Page({ mode, recordId }: { mode: Mode; recordId?: string }) {
     const id = idRef.current
     const rel = relationship === 'Other' ? otherDesc.trim() : (relationship as string)
     const record: PersonRecord = { id, name: trimmedName(name), dateOfBirth: dob, relationship: rel }
-    applyAndGet((d) => {
+    const next = applyAndGet((d) => {
       const found = d.people.some((p) => p.id === id)
       d.people = found ? d.people.map((p) => (p.id === id ? { ...p, ...record } : p)) : [...d.people, record]
       if (!d.minorChildIds.includes(id)) d.minorChildIds = [...d.minorChildIds, id]
     })
     if (mode === 'change') {
-      const na = { ...answers }
-      proceed(navigate, mode, changeDestination(na, computeDerived(na)))
+      proceed(navigate, mode, changeDestination(next, computeDerived(next)))
       return
     }
     idRef.current = newId()
@@ -180,7 +179,6 @@ export function F2Page({ mode, recordId }: { mode: Mode; recordId?: string }) {
       errorItems={items}
       submitAttempt={attempt}
       onSubmit={saveRecord}
-      continueLabel="Save and continue"
     >
       <NameFields idPrefix="f2" value={name} onChange={setName} errors={nameErrors} />
       <DateInput namePrefix="f2-dob" legend="Date of birth" value={dob} onChange={setDob} error={dobErr} />
@@ -266,7 +264,7 @@ function DependantPage({
       relationship: relationship.trim(),
       supportProvided: support.trim(),
     }
-    applyAndGet((d) => {
+    const next = applyAndGet((d) => {
       const found = d.people.some((p) => p.id === id)
       d.people = found ? d.people.map((p) => (p.id === id ? { ...p, ...record } : p)) : [...d.people, record]
       const list = idsFor(section, d)
@@ -276,7 +274,7 @@ function DependantPage({
       }
     })
     if (mode === 'change') {
-      proceed(navigate, mode, changeDestination(answers, computeDerived(answers)))
+      proceed(navigate, mode, changeDestination(next, computeDerived(next)))
       return
     }
     idRef.current = newId()
@@ -345,7 +343,6 @@ function DependantPage({
       errorItems={items}
       submitAttempt={attempt}
       onSubmit={saveRecord}
-      continueLabel="Save and continue"
     >
       <NameFields idPrefix={section} value={name} onChange={setName} errors={nameErrors} />
       <TextInput

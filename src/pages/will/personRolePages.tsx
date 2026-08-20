@@ -109,8 +109,11 @@ function PersonRolePage({ id, mode, recordId }: { id: string; mode: Mode; record
   const [editId, setEditId] = useState<string | undefined>(recordId)
 
   // Person choice: an existing person id or 'new'. When editing a record the
-  // choice is fixed to that person.
-  const [choice, setChoice] = useState<string | undefined>(editingExisting ? editingExisting.id : undefined)
+  // choice is fixed to that person. With no existing people to reuse, there is
+  // nothing to choose between, so default straight to adding a new person.
+  const [choice, setChoice] = useState<string | undefined>(
+    editingExisting ? editingExisting.id : answers.people.length === 0 ? 'new' : undefined,
+  )
   const [name, setName] = useState<Name>(editingExisting?.name ?? emptyName())
   const [relationship, setRelationship] = useState(editingExisting?.relationship ?? '')
   const [address, setAddress] = useState<Address>(editingExisting?.address ?? emptyAddress())
@@ -142,7 +145,7 @@ function PersonRolePage({ id, mode, recordId }: { id: string; mode: Mode; record
 
   function beginAdd() {
     setEditId(undefined)
-    setChoice(undefined)
+    setChoice(answers.people.length === 0 ? 'new' : undefined)
     setName(emptyName())
     setRelationship('')
     setAddress(emptyAddress())
@@ -282,7 +285,9 @@ function PersonRolePage({ id, mode, recordId }: { id: string; mode: Mode; record
       submitAttempt={attempt}
       onSubmit={saveRecord}
     >
-      {!editId ? (
+      {editId ? (
+        <p className="page__text">{personOptionLabel(answers, editId)}</p>
+      ) : answers.people.length > 0 ? (
         <PersonChoice
           name={`${config.section}-person`}
           legend={config.title}
@@ -292,9 +297,7 @@ function PersonRolePage({ id, mode, recordId }: { id: string; mode: Mode; record
           onChange={setChoice}
           error={choiceErr}
         />
-      ) : (
-        <p className="page__text">{personOptionLabel(answers, editId)}</p>
-      )}
+      ) : null}
       {isNew || editId ? (
         <NameFields idPrefix={config.section} value={name} onChange={setName} errors={nameErrors} />
       ) : null}

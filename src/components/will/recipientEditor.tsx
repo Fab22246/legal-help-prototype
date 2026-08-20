@@ -70,21 +70,28 @@ export function recipientFromRefs(
   return value
 }
 
+// True when the recipient is a newly entered person — either "Someone else" was
+// chosen, or there is no existing person to reuse, so entry is the only option.
+function personIsNew(answers: WillAnswers, value: RecipientValue): boolean {
+  return value.type === 'person' && (value.personChoice === 'new' || answers.people.length === 0)
+}
+
+// True when the recipient is a newly entered organisation, by the same reasoning.
+function orgIsNew(answers: WillAnswers, value: RecipientValue): boolean {
+  return value.type === 'organisation' && (value.orgChoice === 'new-org' || answers.organisations.length === 0)
+}
+
 // Whether the under-18 question must be asked for the chosen person.
 export function under18Asked(answers: WillAnswers, value: RecipientValue): boolean {
   if (value.type !== 'person') return false
+  if (personIsNew(answers, value)) return true
   if (!value.personChoice) return false
-  if (value.personChoice === 'new') return true
   const id = value.personChoice
   if (answers.minorChildIds.includes(id)) return false
   if (answers.dependantAdultChildIds.includes(id)) return false
   const person = answers.people.find((p) => p.id === id)
   if (person?.dateOfBirth && (person.dateOfBirth.day || person.dateOfBirth.month || person.dateOfBirth.year)) return false
   return true
-}
-
-function isNewPerson(value: RecipientValue): boolean {
-  return value.type === 'person' && value.personChoice === 'new'
 }
 
 // Validate the recipient. `question` is the owning page's recipient question.
@@ -95,18 +102,18 @@ export function validateRecipient(answers: WillAnswers, value: RecipientValue, q
     return errors
   }
 
-  if (value.type === 'person' && !value.personChoice) {
+  if (value.type === 'person' && answers.people.length > 0 && !value.personChoice) {
     errors.personChoice = 'Select a person.'
     return errors
   }
 
-  if (value.type === 'organisation' && !value.orgChoice) {
+  if (value.type === 'organisation' && answers.organisations.length > 0 && !value.orgChoice) {
     errors.orgChoice = 'Select an organisation.'
     return errors
   }
 
   if (value.type === 'person') {
-    if (isNewPerson(value)) {
+    if (personIsNew(answers, value)) {
       errors.firstName = nameError(value.name.firstName, 'Enter first name.')
       errors.lastName = nameError(value.name.lastName, 'Enter last name.')
       errors.middleNames = optionalNameError(value.name.middleNames ?? '')
@@ -119,7 +126,7 @@ export function validateRecipient(answers: WillAnswers, value: RecipientValue, q
       }
     }
   } else {
-    if (value.orgChoice === 'new-org') {
+    if (orgIsNew(answers, value)) {
       errors.orgName = value.orgName.trim().length === 0 ? orgNameMissingError : undefined
     }
   }
@@ -147,7 +154,7 @@ export function commitRecipient(
   newId: () => string,
 ): { type: RecipientType; personId?: string; orgId?: string } {
   if (value.type === 'organisation') {
-    if (value.orgChoice === 'new-org') {
+    if (orgIsNew(answers, value)) {
       const id = newId()
       const addressText = value.orgAddress.trim()
       const address = addressText ? { line1: addressText, townOrCity: '', country: '' } : undefined
@@ -158,7 +165,7 @@ export function commitRecipient(
   }
 
   const asked = under18Asked(answers, value)
-  if (value.personChoice === 'new') {
+  if (personIsNew(answers, value)) {
     const id = newId()
     const record = {
       id,
@@ -228,15 +235,17 @@ export function RecipientFields({
 
       {value.type === 'person' ? (
         <>
-          <RadioGroup
-            name={`${prefix}-person`}
-            legend="Select a person"
-            options={personOptions}
-            value={value.personChoice}
-            onChange={(v) => onChange({ ...value, personChoice: v })}
-            error={errors.personChoice}
-          />
-          {value.personChoice === 'new' ? (
+          {answers.people.length > 0 ? (
+            <RadioGroup
+              name={`${prefix}-person`}
+              legend="Select a person"
+              options={personOptions}
+              value={value.personChoice}
+              onChange={(v) => onChange({ ...value, personChoice: v })}
+              error={errors.personChoice}
+            />
+          ) : null}
+          {personIsNew(answers, value) ? (
             <>
               <NameFields
                 idPrefix={`${prefix}-person`}
@@ -283,15 +292,17 @@ export function RecipientFields({
 
       {value.type === 'organisation' ? (
         <>
-          <RadioGroup
-            name={`${prefix}-org`}
-            legend="Select an organisation"
-            options={orgOptions}
-            value={value.orgChoice}
-            onChange={(v) => onChange({ ...value, orgChoice: v })}
-            error={errors.orgChoice}
-          />
-          {value.orgChoice === 'new-org' ? (
+          {answers.organisations.length > 0 ? (
+            <RadioGroup
+              name={`${prefix}-org`}
+              legend="Select an organisation"
+              options={orgOptions}
+              value={value.orgChoice}
+              onChange={(v) => onChange({ ...value, orgChoice: v })}
+              error={errors.orgChoice}
+            />
+          ) : null}
+          {orgIsNew(answers, value) ? (
             <>
               <TextInput
                 id={`${prefix}-org-name`}

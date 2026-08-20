@@ -158,8 +158,12 @@ export function C3Page({ mode, recordId }: { mode: Mode; recordId?: string }) {
 
   if (!active) return null
 
-  const isNewPerson = type === 'person' && personChoice === 'new'
-  const isNewOrg = type === 'organisation' && orgChoice === 'new-org'
+  const hasPeople = answers.people.length > 0
+  const hasOrgs = answers.organisations.length > 0
+  // With nothing to reuse, entry is the only option, so treat it as "new" and
+  // skip the lone chooser radio.
+  const isNewPerson = type === 'person' && (personChoice === 'new' || !hasPeople)
+  const isNewOrg = type === 'organisation' && (orgChoice === 'new-org' || !hasOrgs)
 
   function resetForm() {
     idRef.current = newId()
@@ -187,8 +191,8 @@ export function C3Page({ mode, recordId }: { mode: Mode; recordId?: string }) {
     let oe: string | undefined
     if (!type) te = requiredRadioError('Who do you want to include in your will?')
     if (type === 'person') {
-      if (!personChoice) ce = 'Select a person.'
-      else if (personChoice === 'new') {
+      if (hasPeople && !personChoice) ce = 'Select a person.'
+      else if (isNewPerson) {
         ne = {
           firstName: nameError(name.firstName, 'Enter first name.'),
           lastName: nameError(name.lastName, 'Enter last name.'),
@@ -198,8 +202,8 @@ export function C3Page({ mode, recordId }: { mode: Mode; recordId?: string }) {
       }
     }
     if (type === 'organisation') {
-      if (!orgChoice) ce = 'Select an organisation.'
-      else if (orgChoice === 'new-org') oe = orgName.trim().length === 0 ? orgNameMissingError : undefined
+      if (hasOrgs && !orgChoice) ce = 'Select an organisation.'
+      else if (isNewOrg) oe = orgName.trim().length === 0 ? orgNameMissingError : undefined
     }
     const roleE = requiredTextError(roleText, requiredAnswerError(C3_ROLE_QUESTION))
 
@@ -217,14 +221,14 @@ export function C3Page({ mode, recordId }: { mode: Mode; recordId?: string }) {
       let personId: string | undefined
       let orgId: string | undefined
       if (type === 'person') {
-        if (personChoice === 'new') {
+        if (isNewPerson) {
           personId = newId()
           d.people = [...d.people, { id: personId, name: { firstName: name.firstName.trim(), middleNames: (name.middleNames ?? '').trim() || undefined, lastName: name.lastName.trim() }, relationship: relationship.trim() }]
         } else {
           personId = personChoice
         }
       } else {
-        if (orgChoice === 'new-org') {
+        if (isNewOrg) {
           orgId = newId()
           const addressText = orgAddress.trim()
           const addr = addressText ? { line1: addressText, townOrCity: '', country: '' } : undefined
@@ -339,7 +343,9 @@ export function C3Page({ mode, recordId }: { mode: Mode; recordId?: string }) {
       />
       {type === 'person' ? (
         <>
-          <PersonChoice name="c3-person" legend="Select a person" answers={answers} value={personChoice} onChange={setPersonChoice} error={choiceErr} />
+          {hasPeople ? (
+            <PersonChoice name="c3-person" legend="Select a person" answers={answers} value={personChoice} onChange={setPersonChoice} error={choiceErr} />
+          ) : null}
           {isNewPerson ? (
             <>
               <NameFields idPrefix="c3" value={name} onChange={setName} errors={nameErrors} />
@@ -350,7 +356,9 @@ export function C3Page({ mode, recordId }: { mode: Mode; recordId?: string }) {
       ) : null}
       {type === 'organisation' ? (
         <>
-          <OrgChoice name="c3-org" legend="Select an organisation" answers={answers} value={orgChoice} onChange={setOrgChoice} error={choiceErr} />
+          {hasOrgs ? (
+            <OrgChoice name="c3-org" legend="Select an organisation" answers={answers} value={orgChoice} onChange={setOrgChoice} error={choiceErr} />
+          ) : null}
           {isNewOrg ? (
             <>
               <TextInput id="c3-org-name" label="Full legal name of organisation" value={orgName} onChange={setOrgName} error={orgNameErr} />
